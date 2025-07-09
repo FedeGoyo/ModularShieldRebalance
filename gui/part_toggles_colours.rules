@@ -1,0 +1,99 @@
+Kebechet_Modular_Colours
+{
+	ToggleID = "Kebechet_ToggleID_Colours"
+	Style = Popout
+	ShowInEditor = true
+	SortOrder = 3
+	Choices
+	[
+		{
+			ChoiceID = "cid_Kebechet_Colours_Purple"
+			Mode = 0
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_Colours_Purple"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorPurple.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		{
+			ChoiceID = "cid_Kebechet_Colours_Blue"
+			Mode = 1
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_Colours_Blue"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorBlue.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "cid_Kebechet_Colours_Orange"
+			Mode = 2
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_Colours_Orange"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorOrange.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "cid_Kebechet_Colours_Red"
+			Mode = 3
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_Colours_Red"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorRed.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "cid_Kebechet_Colours_Yellow"
+			Mode = 4
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_Colours_Yellow"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorYellow.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		{
+			ChoiceID = "cid_Kebechet_Colours_Green"
+			Mode = 5
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_Colours_Green"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorGreen.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+	]
+}

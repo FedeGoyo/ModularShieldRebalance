@@ -1,0 +1,212 @@
+OVERCLOCK : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/OVERCLOCK	{}
+
+Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
+{
+/*
+	NameKey = "Parts/KebechetGenLargeModularShield"
+	DescriptionKey = "Parts/KebechetGenLargeModularShieldDesc"
+	ID = swefpifh.Kebechet_GenLarge_ModularShield
+	IconNameKey = "Parts/KebechetGenLargeModularShieldIcon"
+*/
+	ID = cosmoteer.shield_gen_large
+	OtherIDs = [swefpifh.Kebechet_GenLarge_ModularShield]
+	IsBuildable = true
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [96, 96]
+	}
+	
+	Components : ^/0/Components, <purple/purple.rules>/Components, <blue/blue.rules>/Components, <green/green.rules>/Components, <orange/orange.rules>/Components, <red/red.rules>/Components, <yellow/yellow.rules>/Components
+	{
+		// --------------------------------- START TOGGLES
+		
+		// -----------------------------------------------
+		// COLOURS TOGGLES -------------------------------
+		// -----------------------------------------------
+
+		Kebechet_GEN_Large_ToggleColours
+		{
+			Type = UIToggle
+			ToggleID = "Kebechet_ToggleID_Colours"
+			Default = 0
+			AlwaysAllowInBuildMode = true
+			RequiresCommand = false
+		}
+
+		// -----------------------------------------------
+		// ANGLE TOGGLES ---------------------------------
+		// -----------------------------------------------
+
+		Kebechet_GEN_Large_ToggleAngle
+		{
+			Type = UIToggle
+			ToggleID = "Kebechet_ToggleID_GENL_Angle"
+			Default = 1
+			AlwaysAllowInBuildMode = true
+			RequiresCommand = false
+		}
+
+		Kebechet_GEN_Large_ToggleAngle_A160FrontArc
+		{
+			Type = ModeToggle
+			Mode = Kebechet_GEN_Large_ToggleAngle
+			OnMode = 1
+		}
+
+		Kebechet_GEN_Large_ToggleAngle_A160LeftArc : Kebechet_GEN_Large_ToggleAngle_A160FrontArc	{ OnMode = 0 }
+		Kebechet_GEN_Large_ToggleAngle_A160RightArc : Kebechet_GEN_Large_ToggleAngle_A160FrontArc	{ OnMode = 2 }
+		
+		// -----------------------------------------------
+		// DISPLAY TOGGLES -------------------------------
+		// -----------------------------------------------
+		
+		Kebechet_GEN_Large_ToggleDisplay
+		{
+			Type = UIToggle
+			ToggleID = "Kebechet_ToggleID_Display"
+			Default = 0
+			AlwaysAllowInBuildMode = true
+			RequiresCommand = false
+		}
+
+		Kebechet_GEN_Large_ToggleDisplay_On
+		{
+			Type = ModeToggle
+			Mode = Kebechet_GEN_Large_ToggleDisplay
+			OnMode = 0
+		}
+
+		Kebechet_GEN_Large_ToggleDisplay_Off : Kebechet_GEN_Large_ToggleDisplay_On	{ OnMode = 1 }
+		
+		// -----------------------------------------------
+		// PROXY -----------------------------------------
+		// -----------------------------------------------
+		
+		Kebechet_GEN_Large_ColoursProxy
+		{
+			Type = ToggleProxy
+			ComponentID = Kebechet_GEN_Large_ColoursSet
+		}
+		Kebechet_GEN_Large_ColoursSet
+		{
+			Type = MultiToggle
+			Toggles = [Kebechet_GEN_Large_ToggleColours_Purple, Kebechet_GEN_Large_ToggleColours_Blue, Kebechet_GEN_Large_ToggleColours_Orange, Kebechet_GEN_Large_ToggleColours_Red, Kebechet_GEN_Large_ToggleColours_Yellow, Kebechet_GEN_Large_ToggleColours_Green]
+			Mode = Any
+		}
+		
+		Kebechet_GEN_Large_AngleProxy
+		{
+			Type = ToggleProxy
+			ComponentID = Kebechet_GEN_Large_AngleSet
+		}
+		Kebechet_GEN_Large_AngleSet
+		{
+			Type = MultiToggle
+			Toggles = [Kebechet_GEN_Large_ToggleAngle_A160FrontArc, Kebechet_GEN_Large_ToggleAngle_A160LeftArc, Kebechet_GEN_Large_ToggleAngle_A160RightArc]
+			Mode = Any
+		}
+		
+		Kebechet_GEN_Large_DisplayProxy
+		{
+			Type = ToggleProxy
+			ComponentID = Kebechet_GEN_Large_DisplaySet
+		}
+		Kebechet_GEN_Large_DisplaySet
+		{
+			Type = MultiToggle
+			Toggles = [Kebechet_GEN_Large_ToggleDisplay_Off, Kebechet_GEN_Large_ToggleDisplay_On]
+			Mode = Any
+		}
+
+		// --------------------------------- END TOGGLES
+
+		ProgressBar	// Remove or change color
+		{
+			Type = ProgressBar
+			OperationalToggle = IsOperational
+			ShowProgressFor = BatteryStorage
+			LowColor = [0, 0, 255]
+			HighColor = [0, 0, 255]
+			FullColor = [0, 0, 255]
+			Height = 10
+		}
+
+		IsOperationalProxy
+		{
+			Type = MultiToggle
+			Toggles = [ProxyBatteryStorage]
+			Mode = All
+		}
+		
+		ProxyBatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 0
+			ToggleOnResources = 1
+			DrainOnFtlJump = true
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// ARCSHIELD ORIGINAL - START //////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		ArcShield : ^/0/ArcShield
+		{
+			OperationalToggle = IsOperationalProxy
+		}
+
+		EmitterEffect : ^/0/EmitterEffect
+		{
+			OperationalToggle = IsOperationalProxy
+		}
+		
+		// Proxy to OverloadEffect and OverclockOverloadEffect???
+		
+		
+		Overclock_ArcShieldProxy
+		{
+			Type = TriggerProxy
+			ComponentID = GENL_ArcShield
+			ProxyToggle = IsOperationalOverclocked
+		}
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	}
+	
+	Stats	// Make it inherit? Exactly same as Small Shield
+	{
+		ShieldHP = (&~/Part/Components/BatteryStorage/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
+		ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0
+		ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue)
+		ShieldDist = (&~/Part/Components/ArcShield/Radius) - (&~/Part/Components/ArcShield/Location/1)
+		PowerUsageContinuous = (&~/Part/Components/PowerDrain/FromQuantity) / (&~/Part/Components/PowerDrain/Interval) / 1000
+		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxResources) / 1000
+
+		RecPower = (&PowerUsageContinuous) + 0.5
+		RecCrew = (&RecPower) * 4
+	}
+
+	StatsByCategory
+	[
+		{
+			NameKey = "StatCategories/Overclocked"
+			Stats
+			{
+//				ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/ARC_FACTOR)
+				ShieldHP = (&~/Part/Stats/ShieldHP) / (&~/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
+				EMPResistPercentage = (&~/OVERCLOCK/EMP_RESIST) * 100
+				HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND)
+				HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
+			}
+		}
+	]
+}

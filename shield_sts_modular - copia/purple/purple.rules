@@ -1,0 +1,660 @@
+Components
+{
+	// -------------------------------------------------------------------------------------------------------------------------
+	// TOGGLE START ------------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+	
+	ToggleColours_Purple
+	{
+		Type = ModeToggle
+		Mode = ToggleColours
+		OnMode = 0
+	}
+	
+	Toggle_Purple_On
+	{
+		Type = MultiToggle
+		Toggles = [ToggleColours_Purple, ToggleDisplay_On, Rotation0]
+		Mode = All
+	}
+	
+	Toggle_Purple_On1 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, Rotation1, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_On2 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, Rotation2, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_On3 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, Rotation3, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_On4 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, Rotation4, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_On5 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, Rotation5, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_On6 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, Rotation6, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_On7 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, Rotation7, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_On8 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, Rotation8, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_On9 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, Rotation9, ColoursProxy, DisplayProxy] }
+	
+	Toggle_Purple_Off :		Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, Rotation0, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_Off1 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, Rotation1, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_Off2 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, Rotation2, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_Off3 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, Rotation3, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_Off4 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, Rotation4, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_Off5 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, Rotation5, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_Off6 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, Rotation6, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_Off7 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, Rotation7, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_Off8 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, Rotation8, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_Off9 :	Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, Rotation9, ColoursProxy, DisplayProxy] }
+
+	// -------------------------------------------------------------------------------------------------------------------------
+	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	ToggleComponents_Purple_On
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_On
+		IncludeInBlueprints = false
+		Components = 
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront0, &<../shield_sts_modular.rules>/Part/Components/ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/1/ShieldMediaEffects/0
+					{
+						Radius = &../../Radius
+						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+					: &../^/1/ShieldMediaEffects/1 {}
+				]
+				HitMediaEffects
+				[
+					: &../^/1/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Purple/HitMediaEffects, ^/0/ArcSprite	{}
+					}
+					: &../^/1/HitMediaEffects/1 {}
+				]
+			}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight0, ArcShield_InnerFront	{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack0, ArcShield_InnerFront	{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft0, ArcShield_InnerFront	{}
+			
+			OverloadEffect_InnerFront :	<../stats.rules>/Stats/OverloadEffect_InnerFront, &<../shield_sts_modular.rules>/Part/Components/OverloadEffect
+			{
+				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_InnerFront/Radius } ]
+			}
+			OverloadEffect_InnerRight :	<../stats.rules>/Stats/OverloadEffect_InnerRight, OverloadEffect_InnerFront	{}
+			OverloadEffect_InnerBack :	<../stats.rules>/Stats/OverloadEffect_InnerBack, OverloadEffect_InnerFront	{}
+			OverloadEffect_InnerLeft :	<../stats.rules>/Stats/OverloadEffect_InnerLeft, OverloadEffect_InnerFront	{}
+			
+			OverclockEffect_InnerFront :	<../stats.rules>/Stats/OverclockEffect_InnerFront, &<../shield_sts_modular.rules>/Part/Components/OverclockEffect
+			{
+				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_InnerFront/Radius } ]
+			}
+			OverclockEffect_InnerRight :	<../stats.rules>/Stats/OverclockEffect_InnerRight, OverclockEffect_InnerFront	{}
+			OverclockEffect_InnerBack :		<../stats.rules>/Stats/OverclockEffect_InnerBack, OverclockEffect_InnerFront	{}
+			OverclockEffect_InnerLeft :		<../stats.rules>/Stats/OverclockEffect_InnerLeft, OverclockEffect_InnerFront	{}
+			
+			OverclockOverloadEffect_InnerFront :	<../stats.rules>/Stats/OverclockOverloadEffect_InnerFront, &<../shield_sts_modular.rules>/Part/Components/OverclockOverloadEffect
+			{
+				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_InnerFront/Radius } ]
+			}
+			OverclockOverloadEffect_InnerRight :	<../stats.rules>/Stats/OverclockOverloadEffect_InnerRight, OverclockOverloadEffect_InnerFront	{}
+			OverclockOverloadEffect_InnerBack :		<../stats.rules>/Stats/OverclockOverloadEffect_InnerBack, OverclockOverloadEffect_InnerFront	{}
+			OverclockOverloadEffect_InnerLeft :		<../stats.rules>/Stats/OverclockOverloadEffect_InnerLeft, OverclockOverloadEffect_InnerFront	{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight0, ArcShield_InnerFront
+			{
+				Radius = &<../stats.rules>/Stats/RadiusOuter
+				ShieldMediaEffects
+				[
+					: &../^/1/ShieldMediaEffects/0 { Radius = &../../Radius }
+					: &../^/1/ShieldMediaEffects/1	{}
+				]
+			}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight0, ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft0, ArcShield_OuterFrontRight	{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft0, ArcShield_OuterFrontRight	{}
+			
+			OverclockEffect_OuterFrontRight :	<../stats.rules>/Stats/OverclockEffect_OuterFrontRight, OverclockEffect_InnerFront
+			{
+				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_OuterFrontRight/Radius } ]
+			}
+			OverclockEffect_OuterBackRight :	<../stats.rules>/Stats/OverclockEffect_OuterBackRight, OverclockEffect_OuterFrontRight	{}
+			OverclockEffect_OuterBackLeft :		<../stats.rules>/Stats/OverclockEffect_OuterBackLeft, OverclockEffect_OuterFrontRight	{}
+			OverclockEffect_OuterFrontLeft :	<../stats.rules>/Stats/OverclockEffect_OuterFrontLeft, OverclockEffect_OuterFrontRight	{}
+			
+			OverclockOverloadEffect_OuterFrontRight :	<../stats.rules>/Stats/OverclockOverloadEffect_OuterFrontRight, OverclockOverloadEffect_InnerFront
+			{
+				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_OuterFrontRight/Radius } ]
+			}
+			OverclockOverloadEffect_OuterBackRight :	<../stats.rules>/Stats/OverclockOverloadEffect_OuterBackRight, OverclockOverloadEffect_InnerFront	{}
+			OverclockOverloadEffect_OuterBackLeft :		<../stats.rules>/Stats/OverclockOverloadEffect_OuterBackLeft, OverclockOverloadEffect_InnerFront	{}
+			OverclockOverloadEffect_OuterFrontLeft :	<../stats.rules>/Stats/OverclockOverloadEffect_OuterFrontLeft, OverclockOverloadEffect_InnerFront	{}
+			
+			// Always
+			STS_EmitterEffect : &<../shield_sts_modular.rules>/Part/Components/EmitterEffect
+			{
+				OperationalToggle = IsOperational
+				MediaEffects
+				[
+					: &../^/0/MediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+					: &../^/0/MediaEffects/1	{}
+				]
+			}
+		}
+	}
+	
+	ToggleComponents_Purple_On1
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_On1
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_On/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront1, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight1, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack1, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft1, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight1, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight1, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft1, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft1, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_On2
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_On2
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_On/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront2, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight2, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack2, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft2, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight2, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight2, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft2, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft2, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_On3
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_On3
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_On/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront3, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight3, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack3, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft3, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight3, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight3, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft3, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft3, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_On4
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_On4
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_On/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront4, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight4, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack4, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft4, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight4, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight4, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft4, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft4, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_On5
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_On5
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_On/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront5, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight5, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack5, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft5, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight5, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight5, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft5, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft5, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_On6
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_On6
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_On/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront6, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight6, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack6, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft6, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight6, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight6, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft6, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft6, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_On7
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_On7
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_On/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront7, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight7, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack7, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft7, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight7, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight7, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft7, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft7, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_On8
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_On8
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_On/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront8, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight8, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack8, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft8, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight8, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight8, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft8, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft8, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_On9
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_On9
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_On/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront9, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight9, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack9, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft9, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight9, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight9, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft9, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft9, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_Off
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_Off
+		IncludeInBlueprints = false
+		Components =
+		{
+			// Inner
+			ArcShield_InnerFront :	&../../ToggleComponents_Purple_On/Components/ArcShield_InnerFront
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1 {}
+				]
+			}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight0, ArcShield_InnerFront	{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack0, ArcShield_InnerFront	{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft0, ArcShield_InnerFront	{}
+					
+			// Outer (when overclocked)
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight0, ArcShield_InnerFront
+			{
+				Radius = &<../stats.rules>/Stats/RadiusOuter
+				ShieldMediaEffects
+				[
+					: &../^/1/ShieldMediaEffects/0	{ Radius = &../../Radius }
+					: &../^/1/ShieldMediaEffects/1	{}
+				]
+			}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight0, ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft0, ArcShield_OuterFrontRight	{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft0, ArcShield_OuterFrontRight	{}
+		}
+	}
+	
+	ToggleComponents_Purple_Off1
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_Off1
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_Off/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront1, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight1, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack1, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft1, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight1, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight1, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft1, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft1, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_Off2
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_Off2
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_Off/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront2, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight2, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack2, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft2, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight2, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight2, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft2, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft2, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_Off3
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_Off3
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_Off/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront3, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight3, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack3, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft3, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight3, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight3, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft3, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft3, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_Off4
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_Off4
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_Off/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront4, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight4, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack4, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft4, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight4, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight4, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft4, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft4, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_Off5
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_Off5
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_Off/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront5, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight5, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack5, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft5, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight5, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight5, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft5, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft5, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_Off6
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_Off6
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_Off/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront6, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight6, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack6, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft6, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight6, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight6, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft6, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft6, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_Off7
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_Off7
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_Off/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront7, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight7, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack7, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft7, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight7, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight7, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft7, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft7, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_Off8
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_Off8
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_Off/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront8, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight8, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack8, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft8, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight8, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight8, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft8, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft8, ArcShield_OuterFrontRight			{}
+		}
+	}
+	
+	ToggleComponents_Purple_Off9
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Purple_Off9
+		IncludeInBlueprints = false
+		Components : &../ToggleComponents_Purple_Off/Components
+		{
+			// Inner
+			ArcShield_InnerFront :	<../stats.rules>/Stats/ArcShield_InnerFront9, ^/0/ArcShield_InnerFront	{}
+			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight9, ArcShield_InnerFront		{}
+			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack9, ArcShield_InnerFront		{}
+			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft9, ArcShield_InnerFront		{}
+			
+			// Outer
+			ArcShield_OuterFrontRight :	<../stats.rules>/Stats/ArcShield_OuterFrontRight9, ^/0/ArcShield_OuterFrontRight	{}
+			ArcShield_OuterBackRight :	<../stats.rules>/Stats/ArcShield_OuterBackRight9, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterBackLeft :	<../stats.rules>/Stats/ArcShield_OuterBackLeft9, ArcShield_OuterFrontRight			{}
+			ArcShield_OuterFrontLeft :	<../stats.rules>/Stats/ArcShield_OuterFrontLeft9, ArcShield_OuterFrontRight			{}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------------------------------
+	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+	
+	K_STS_Graphics_Purple
+	{
+		Type = ToggledComponents
+		Toggle = ToggleColours_Purple
+		IncludeInBlueprints = false
+		Components = 
+		{
+			K_Graphics : &<../shield_sts_modular.rules>/Part/Components/Graphics
+			{				
+				OperationalDoodad
+				{
+					Layer = "weapons"
+					Offset = [0, 0]
+					DamageLevels
+					[
+						{
+							AnimationFiles
+							[
+								"doodads_lightning1.png"
+								"doodads_lightning2.png"
+								"doodads_lightning3.png"
+								"doodads_lightning4.png"
+								"doodads_lightning5.png"
+								"doodads_lightning6.png"
+								"doodads_lightning7.png"
+								"doodads_lightning8.png"
+							]
+							Size = [1, 1]
+							AnimationInterval = 0.1
+						}
+						{
+							AnimationFiles
+							[
+								"doodads_lightning1.png"
+								"doodads_lightning2.png"
+								"doodads_lightning3.png"
+								"doodads_lightning4.png"
+								"doodads_lightning5.png"
+								"doodads_lightning6.png"
+								"doodads_lightning7.png"
+								"doodads_lightning8.png"
+							]
+							Size = [1, 1]
+							AnimationInterval = 0.1
+						}
+						{
+							AnimationFiles
+							[
+								"doodads_lightning1.png"
+								"doodads_lightning2.png"
+								"doodads_lightning3.png"
+								"doodads_lightning4.png"
+								"doodads_lightning5.png"
+								"doodads_lightning6.png"
+								"doodads_lightning7.png"
+								"doodads_lightning8.png"
+							]
+							Size = [1, 1]
+							AnimationInterval = 0.1
+						}
+					]
+				}
+				
+				OperationalLighting
+				{
+					Layer = "lights_add"
+					DamageLevels
+					[
+						{
+							File = "lights.png"
+							Size = [2, 2]
+						}
+					]
+				}
+				
+				OperationalRoofLighting
+				{
+					Layer = "roof_lights_fancy"
+					DamageLevels
+					[
+						{
+							File = "./Data/ships/common/light_blob.png"
+							Size = [3, 3]
+							Z = 1
+							VertexColor = [195*1.5, 60*1.5, 255*1.5, 100]
+						}
+					]
+				}
+			}
+		}
+	}
+}

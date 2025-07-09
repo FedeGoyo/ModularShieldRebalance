@@ -1,0 +1,1867 @@
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/KebechetSTSmodularShield"
+	IconNameKey = "Parts/KebechetSTSmodularShieldIcon"
+	DescriptionKey = "Parts/KebechetSTSmodularShieldDesc"
+	ID = swefpifh.Kebechet_STS_modularShield
+	EditorGroup = "Defenses"
+	Resources
+	[
+		[steel, 20]
+		[coil2, 20]
+	]
+	AIValueFactor = 5
+	Size = [2, 2]
+	PhysicalRect = [0, 0, 2, 2] // For backwards compatibility with old shield generators.
+	SaveRect = &PhysicalRect
+	SelectionPriority = 1
+	SelectionTypeID = "shield_gen_sts"
+	SelectionTypeByRotation = false
+	MaxHealth = 5000
+	TypeCategories = [defense, uses_power]
+	ReceivableBuffs : ^/0/ReceivableBuffs [ModularShieldBonus]
+	PenetrationRectType = Normal
+	// ExplosiveDamageAbsorption = 50%
+	IsRotateable = false
+	IgnoreRotationForMirroredSelection = true
+	IsFlippable = false
+
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [64, 64]
+	}
+	Components : ^/0/Components
+	{
+
+		// --------------------------------- START TOGGLES
+		
+		// -----------------------------------------------
+		// COLOURS TOGGLES -------------------------------
+		// -----------------------------------------------
+
+		Kebechet_STS_ToggleColours
+		{
+			Type = UIToggle
+			ToggleID = "Kebechet_ToggleID_Colours"
+			Default = 0
+			AlwaysAllowInBuildMode = true
+			RequiresCommand = false
+		}
+
+		Kebechet_STS_ToggleColours_Purple
+		{
+			Type = ModeToggle
+			Mode = Kebechet_STS_ToggleColours
+			OnMode = 0
+		}
+
+		Kebechet_STS_ToggleColours_Blue : Kebechet_STS_ToggleColours_Purple		{ OnMode = 1 }
+		Kebechet_STS_ToggleColours_Orange : Kebechet_STS_ToggleColours_Purple	{ OnMode = 2 }
+		Kebechet_STS_ToggleColours_Red  : Kebechet_STS_ToggleColours_Purple		{ OnMode = 3 }
+		Kebechet_STS_ToggleColours_Yellow : Kebechet_STS_ToggleColours_Purple	{ OnMode = 4 }
+		Kebechet_STS_ToggleColours_Green : Kebechet_STS_ToggleColours_Purple	{ OnMode = 5 }
+
+		// -----------------------------------------------
+		// DISPLAY TOGGLES -------------------------------
+		// -----------------------------------------------
+		
+		Kebechet_STS_ToggleDisplay
+		{
+			Type = UIToggle
+			ToggleID = "Kebechet_ToggleID_Display"
+			Default = 0
+			AlwaysAllowInBuildMode = true
+			RequiresCommand = false
+		}
+
+		Kebechet_STS_ToggleDisplay_On
+		{
+			Type = ModeToggle
+			Mode = Kebechet_STS_ToggleDisplay
+			OnMode = 0
+		}
+
+		Kebechet_STS_ToggleDisplay_Off : Kebechet_STS_ToggleDisplay_On	{ OnMode = 1 }
+		
+		// -----------------------------------------------
+		// PROXY -----------------------------------------
+		// -----------------------------------------------
+		
+		Kebechet_STS_ColoursProxy
+		{
+			Type = ToggleProxy
+			ComponentID = Kebechet_STS_ColoursSet
+		}
+			Kebechet_STS_ColoursSet
+			{
+				Type = MultiToggle
+				Toggles = [Kebechet_STS_ToggleColours_Purple, Kebechet_STS_ToggleColours_Blue, Kebechet_STS_ToggleColours_Orange, Kebechet_STS_ToggleColours_Red, Kebechet_STS_ToggleColours_Yellow, Kebechet_STS_ToggleColours_Green]
+				Mode = Any
+			}
+
+		Kebechet_STS_DisplayProxy
+		{
+			Type = ToggleProxy
+			ComponentID = Kebechet_STS_DisplaySet
+		}
+			Kebechet_STS_DisplaySet
+			{
+				Type = MultiToggle
+				Toggles = [Kebechet_STS_ToggleDisplay_Off, Kebechet_STS_ToggleDisplay_On]
+				Mode = Any
+			}
+		
+		// -----------------------------------------------
+		// MULTI TOGGLES --------------------------------- // Kebechet_STS_ColoursProxy, Kebechet_STS_DisplayProxy
+		// -----------------------------------------------
+
+		// ---------------- PURPLE -----------------------
+		
+		K_STS_Purple_360XS_On
+		{
+			Type = MultiToggle
+			Toggles = [Kebechet_STS_ToggleColours_Purple, Kebechet_STS_ToggleDisplay_On] 
+			Mode = All
+		}
+		K_STS_Purple_360XS_Off : K_STS_Purple_360XS_On	{ Toggles = [Kebechet_STS_ToggleColours_Purple, Kebechet_STS_ToggleDisplay_Off, Kebechet_STS_ColoursProxy, Kebechet_STS_DisplayProxy] }
+		// ---------------- BLUE ---------------------	
+		K_STS_Blue_360XS_On : K_STS_Purple_360XS_On		{ Toggles = [Kebechet_STS_ToggleColours_Blue, Kebechet_STS_ToggleDisplay_On, Kebechet_STS_ColoursProxy, Kebechet_STS_DisplayProxy]  }
+		K_STS_Blue_360XS_Off : K_STS_Purple_360XS_On	{ Toggles = [Kebechet_STS_ToggleColours_Blue,  Kebechet_STS_ToggleDisplay_Off, Kebechet_STS_ColoursProxy, Kebechet_STS_DisplayProxy] }
+		// ---------------- Orange ---------------------
+		K_STS_Orange_360XS_On : K_STS_Purple_360XS_On	{ Toggles = [Kebechet_STS_ToggleColours_Orange, Kebechet_STS_ToggleDisplay_On, Kebechet_STS_ColoursProxy, Kebechet_STS_DisplayProxy]  }
+		K_STS_Orange_360XS_Off : K_STS_Purple_360XS_On	{ Toggles = [Kebechet_STS_ToggleColours_Orange, Kebechet_STS_ToggleDisplay_Off, Kebechet_STS_ColoursProxy, Kebechet_STS_DisplayProxy] }
+		// ---------------- Red ---------------------
+		K_STS_Red_360XS_On : K_STS_Purple_360XS_On		{ Toggles = [Kebechet_STS_ToggleColours_Red, Kebechet_STS_ToggleDisplay_On, Kebechet_STS_ColoursProxy, Kebechet_STS_DisplayProxy] }
+		K_STS_Red_360XS_Off : K_STS_Purple_360XS_On		{ Toggles = [Kebechet_STS_ToggleColours_Red, Kebechet_STS_ToggleDisplay_Off, Kebechet_STS_ColoursProxy, Kebechet_STS_DisplayProxy] }
+		// ---------------- Yellow ---------------------
+		K_STS_Yellow_360XS_On : K_STS_Purple_360XS_On	{ Toggles = [Kebechet_STS_ToggleColours_Yellow, Kebechet_STS_ToggleDisplay_On, Kebechet_STS_ColoursProxy, Kebechet_STS_DisplayProxy] }
+		K_STS_Yellow_360XS_Off : K_STS_Purple_360XS_On	{ Toggles = [Kebechet_STS_ToggleColours_Yellow, Kebechet_STS_ToggleDisplay_Off, Kebechet_STS_ColoursProxy, Kebechet_STS_DisplayProxy] }
+		// ---------------- Green ---------------------
+		K_STS_Green_360XS_On : K_STS_Purple_360XS_On	{ Toggles = [Kebechet_STS_ToggleColours_Green, Kebechet_STS_ToggleDisplay_On, Kebechet_STS_ColoursProxy, Kebechet_STS_DisplayProxy] }
+		K_STS_Green_360XS_Off : K_STS_Purple_360XS_On	{ Toggles = [Kebechet_STS_ToggleColours_Green, Kebechet_STS_ToggleDisplay_Off, Kebechet_STS_ColoursProxy, Kebechet_STS_DisplayProxy] }
+
+		// --------------------------------- END TOGGLES
+		
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, BatteryStorage] // ModularCombinedBatteryStorage // CombinedBatteryStorage
+			Mode = All
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		CommandConsumer
+		{
+			Type = CommandConsumer
+			OperationalToggle = PowerToggle
+			CommandPoints = 4
+		}
+
+		// Starts Normal Batteries
+
+		ProgressBar
+		{
+			Type = ProgressBar
+			OperationalToggle = IsOperational
+			ShowProgressFor = CombinedBatteryStorage
+			LowColor = [0, 0, 255]
+			HighColor = [0, 0, 255]
+			FullColor = [0, 0, 255]
+			Height = 10
+		}
+		CombinedBatteryStorage
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [FrontBatteryStorage, RightBatteryStorage, BackBatteryStorage, LeftBatteryStorage]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			AddMode = DistributeProportionallyByAvailable
+		}
+		BatteryConsumer
+		{
+			Type = ResourceConsumer
+			ResourceType = battery
+			Storage = CombinedBatteryStorage
+			DefaultPriority = &/PRIORITIES/Defense_Supply
+			ResupplyThreshold = 500
+			OperationalToggle = PowerToggle
+		}
+				
+		FrontIsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, FrontBatteryStorage]
+			Mode = All
+		}
+		FrontBatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 2000
+			ToggleOnResources = 1001
+			DrainOnFtlJump = true
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		CombinedFrontBatteryStorage
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [FrontBatteryStorage, ModularBatteryStorageProxy] //CentralBatteryStorage
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		FrontPowerDrain
+		{
+			Type = ResourceConverter
+			OperationalToggle = FrontIsOperational
+			FromStorage = FrontBatteryStorage
+			FromQuantity = 38
+			MinFromQuantityForConversion = 1
+			Interval = 1
+		}
+
+		RightIsOperational : FrontIsOperational		{ Toggles = [PowerToggle, RightBatteryStorage] }
+		RightBatteryStorage : FrontBatteryStorage	{}
+		CombinedRightBatteryStorage : CombinedFrontBatteryStorage	{ ResourceStorages = [RightBatteryStorage, ModularBatteryStorageProxy] }
+		RightPowerDrain : FrontPowerDrain			{ FromStorage = RightBatteryStorage }
+
+		BackIsOperational : FrontIsOperational		{ Toggles = [PowerToggle, BackBatteryStorage] }
+		BackBatteryStorage : FrontBatteryStorage	{}
+		CombinedBackBatteryStorage : CombinedFrontBatteryStorage	{ ResourceStorages = [BackBatteryStorage, ModularBatteryStorageProxy] }
+		BackPowerDrain : FrontPowerDrain			{ FromStorage = BackBatteryStorage }
+
+		LeftIsOperational : FrontIsOperational		{ Toggles = [PowerToggle, LeftBatteryStorage] }
+		LeftBatteryStorage : FrontBatteryStorage	{}
+		CombinedLeftBatteryStorage : CombinedFrontBatteryStorage	{ ResourceStorages = [LeftBatteryStorage, ModularBatteryStorageProxy] }
+		LeftPowerDrain : FrontPowerDrain			{ FromStorage = LeftBatteryStorage }
+
+		// Ends Normal Batteries
+
+		// Start Modular Battery
+
+		BuffProviderTop
+		{
+			Type = AreaBuffProvider
+			BuffType = ModularShieldCapacity
+			BuffArea = [0, -1, 2, 1]
+			OperationalToggle = IsOperational
+			Criteria
+			{
+				Left = 0
+				Right = 2
+			}
+		}
+		BuffProviderRight : BuffProviderTop
+		{
+			BuffArea = [2, 0, 1, 2]
+			Criteria
+			{
+				Rot = 1
+				Left = 2
+				Right = 3
+				Bottom = 2 // With this it also worked
+			}
+		}
+		BuffProviderBottom : BuffProviderTop
+		{
+			BuffArea = [0, 2, 2, 1]
+			Criteria
+			{
+				Rot = 2
+				Right = 2
+				Bottom = 3
+			}
+		}
+		BuffProviderLeft : BuffProviderTop
+		{
+			BuffArea = [-1, 0, 1, 2]
+			Criteria
+			{
+				Rot = 3
+				Right = 0
+				Bottom = 2
+			}
+		}
+		
+		CentralBatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 0
+			DrainOnFtlJump = true
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		ModularBatteryStorageProxy
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
+			ResourceType = battery
+			ToggleOnResources = 0
+			IsDrainable = false
+			ResourceStorages = [CentralBatteryStorage]
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProviderTop, BuffProviderRight, BuffProviderLeft, BuffProviderBottom]
+				ComponentID = BatteryStorage
+			}
+			AddMode = PrioritizeLeastResources
+			RemoveMode = PrioritizeLeastResources
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		IsModularToggle
+		{
+			Type = BuffToggle
+			BuffType = ModularShieldBonus
+		}
+		IsModularOperational
+		{
+			Type = MultiToggle
+			Toggles = [IsOperational, IsModularToggle]
+			Mode = All
+		}
+		ProgressBarModular : ProgressBar
+		{
+			ShowProgressFor = ModularBatteryStorageProxy
+			OperationalToggle = IsModularOperational
+		}
+		BatteryStorage // ModularCombinedBatteryStorage, named only BatteryStorage for easier compatibility with energy mods
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [FrontBatteryStorage, RightBatteryStorage, BackBatteryStorage, LeftBatteryStorage, ModularBatteryStorageProxy]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			ToggleOnResources = 7001
+		}
+		BatteryConsumer2 : BatteryConsumer	{ Storage = ModularBatteryStorageProxy }	// If I use ModularCombinedBatteryStorage so that all batteries (including ModularBatteryStorageProxy) are in the same consumer, the ModularBatteryStorageProxy never receives energy, no idea why.
+
+		// Ends Modular Batteries
+/*
+		// Old Energy Distribution System
+		// Front-Right Distribution
+		FrontRightIsOperational
+		{
+			Type = MultiToggle
+			Toggles = [FrontIsOperational, RightIsOperational]
+			Mode = All
+		}
+		FrontRightCombinedBatteryStorage
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [FrontBatteryStorage, RightBatteryStorage]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			OperationalToggle = FrontRightIsOperational
+			AddMode = PrioritizeLeastResources
+			RemoveMode = PrioritizeMostResources
+		}
+		FrontRightBatteryStorageRequest
+		{
+			Type = ResourceConverter
+			FromStorage = FrontRightCombinedBatteryStorage
+			ToStorage = FrontRightCombinedBatteryStorage
+			FromQuantity = 10
+			ToQuantity = 10
+			Interval = .1
+		}
+		// Right-Back Distribution
+		RightBackIsOperational : FrontRightIsOperational	{ Toggles = [RightIsOperational, BackIsOperational] }
+		RightBackCombinedBatteryStorage : FrontRightCombinedBatteryStorage	{ ResourceStorages = [RightBatteryStorage, BackBatteryStorage] }
+		RightBackBatteryStorageRequest : FrontRightBatteryStorageRequest
+		{
+			OperationalToggle = RightBackIsOperational
+			FromStorage = RightBackCombinedBatteryStorage
+			ToStorage = RightBackCombinedBatteryStorage
+		}
+		// Back-Left Distribution
+		BackLeftIsOperational : FrontRightIsOperational	{ Toggles = [BackIsOperational, LeftIsOperational] }
+		BackLeftCombinedBatteryStorage : FrontRightCombinedBatteryStorage	{ ResourceStorages = [BackBatteryStorage, LeftBatteryStorage] }
+		BackLeftBatteryStorageRequest : FrontRightBatteryStorageRequest
+		{
+			OperationalToggle = BackLeftIsOperational
+			FromStorage = BackLeftCombinedBatteryStorage
+			ToStorage = BackLeftCombinedBatteryStorage
+		}
+		// Left-Front Distribution
+		LeftFrontIsOperational : FrontRightIsOperational	{ Toggles = [LeftIsOperational, FrontIsOperational] }
+		LeftFrontCombinedBatteryStorage : FrontRightCombinedBatteryStorage	{ ResourceStorages = [LeftBatteryStorage, FrontBatteryStorage] }
+		LeftFrontBatteryStorageRequest : FrontRightBatteryStorageRequest
+		{
+			OperationalToggle = LeftFrontIsOperational
+			FromStorage = LeftFrontCombinedBatteryStorage
+			ToStorage = LeftFrontCombinedBatteryStorage
+		}
+*/
+		
+		IsOperationalProxy
+		{
+			Type = MultiToggle
+			Toggles = [ProxyBatteryStorage]
+			Mode = All
+		}
+		
+		ProxyBatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 0
+			ToggleOnResources = 1
+			DrainOnFtlJump = true
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// ARCSHIELD ORIGINAL - START //////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		ArcShield
+		{
+			Type = ArcShield
+			Radius = 7
+			Arc = 90d
+			OperationalToggle = IsOperationalProxy // IsOperational
+			PenetrationResistance = [ { BaseValue= 8.33; BuffType=ModularShieldBonus; BuffMode=Add; }, 0]
+			DrainResourcesFrom = ProxyBatteryStorage
+			ResourceDrainPerDamage = .4
+			Rotation = -90d
+			Location = [1, 1]
+
+//			BlueprintArcSprite : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ArcShield/BlueprintArcSprite	{}
+//			BlueprintArcSpriteSegments = 64
+
+			CoverageArcSprite : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ArcShield/CoverageArcSprite	{}
+			CoverageArcSpriteSegments = 64
+
+			ShieldMediaEffects
+			[
+				: <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ArcShield/ShieldMediaEffects/0
+				{
+					Radius = &~/Part/Components/ArcShield/Radius
+					Arc = &~/Part/Components/ArcShield/Arc
+				}
+				: <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ArcShield/ShieldMediaEffects/1	{}
+			]
+
+			HitMediaEffects = &<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ArcShield/HitMediaEffects
+		}
+
+		EmitterEffect
+		{
+			Type = ContinuousEffects
+			ChainedTo = ArcShield
+			FactorMediaEffectsIntensityWith = CombinedBatteryStorage
+			MaxMediaEffectsZoom = 12
+			Location = [1.8, 0]
+			OperationalToggle = IsOperationalProxy
+			ParentToShip = true
+			MediaEffects
+			[
+				: <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/EmitterEffect/MediaEffects/0
+				{
+					Radius = 1.8
+					Arc = 360d
+				}
+				: <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/EmitterEffect/MediaEffects/1	{}
+			]
+		}
+
+		ShieldOperationEffects_Front : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ShieldOperationEffects
+		{
+			Location = [&~/Part/Components/ArcShield/Radius, 0]
+			Toggle = FrontIsOperational
+		}
+		ShieldOperationEffects_Right : ShieldOperationEffects_Front	{ Toggle = RightIsOperational }
+		ShieldOperationEffects_Back : ShieldOperationEffects_Front	{ Toggle = BackIsOperational }
+		ShieldOperationEffects_Left : ShieldOperationEffects_Front	{ Toggle = LeftIsOperational }
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+/*
+		Heretion explanation:
+			Purple On:
+				ArcShield Front: inherits from Base (changes Rotation, Operational, Storage, Shield effects and Hit effects).
+				EmitterEffect: inherit from Base (changes Operational and Media effects).
+			Colors On: inherits from Purple On Components.
+				ArcShield Front: from Purple On (changes Shield effects and Hit effects).
+				EmitterEffect: from Purple On (changes Media effects).
+			Everything Off:
+				ArcShield Front: inherits from its On version Components (changes Shield effect and Hit effects).
+				
+			ArcShield Others: inherits from their Front version (changes Rotation, Operational and Storage).
+			ShieldOperationEffects works as normal even though it is chained to ArcShield instead of these new shields.
+*/
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD PURPLE START --------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STS_ToggleComponents_Purple_360XS_On
+		{
+			Type = ToggledComponents
+			Toggle = K_STS_Purple_360XS_On
+			IncludeInBlueprints = true
+			Components = 
+			{
+				STS_ArcShield_B360_Front : ~/Stats/ArcShield_Front, &~/Part/Components/ArcShield
+				{
+					BlueprintArcSprite : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ArcShield/BlueprintArcSprite	{}
+					BlueprintArcSpriteSegments = 64
+					ShieldMediaEffects
+					[
+						: &../^/1/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/1/ShieldMediaEffects/1 {}
+					]
+					HitMediaEffects
+					[
+						: &../^/1/HitMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Purple/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/1/HitMediaEffects/1 {}
+					]
+				}
+
+				STS_ArcShield_B360_Right : ~/Stats/ArcShield_Right, STS_ArcShield_B360_Front	{}
+				
+				STS_ArcShield_B360_Back : ~/Stats/ArcShield_Back, STS_ArcShield_B360_Front	{}
+				
+				STS_ArcShield_B360_Left : ~/Stats/ArcShield_Left, STS_ArcShield_B360_Front	{}
+				
+				STS_EmitterEffect : &~/Part/Components/EmitterEffect
+				{
+					OperationalToggle = IsOperational
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/MediaEffects/1	{}
+					]
+				}
+			}
+		}
+
+		K_STS_ToggleComponents_Purple_360XS_Off
+		{
+			Type = ToggledComponents
+			Toggle = K_STS_Purple_360XS_Off
+			IncludeInBlueprints = false
+			Components =
+			{
+				STS_ArcShield_B360_Front : &../../K_STS_ToggleComponents_Purple_360XS_On/Components/STS_ArcShield_B360_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+
+				STS_ArcShield_B360_Right : ~/Stats/ArcShield_Right, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Back : ~/Stats/ArcShield_Back, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Left : ~/Stats/ArcShield_Left, STS_ArcShield_B360_Front	{}
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD PURPLE END ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD BLUE START ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+
+		K_STS_ToggleComponents_Blue_360XS_On
+		{
+			Type = ToggledComponents
+			Toggle = K_STS_Blue_360XS_On
+			IncludeInBlueprints = false
+			Components : &../K_STS_ToggleComponents_Purple_360XS_On/Components
+			{
+				STS_ArcShield_B360_Front : ^/0/STS_ArcShield_B360_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Blue/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1	{}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Blue/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1 {}
+					]
+				}
+
+				STS_ArcShield_B360_Right : ~/Stats/ArcShield_Right, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Back : ~/Stats/ArcShield_Back, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Left : ~/Stats/ArcShield_Left, STS_ArcShield_B360_Front	{}
+
+				STS_EmitterEffect : ^/0/STS_EmitterEffect
+				{
+					OperationalToggle = IsOperational
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Blue/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/MediaEffects/1	{}
+					]
+				}
+			}
+		}
+	
+		K_STS_ToggleComponents_Blue_360XS_Off
+		{
+			Type = ToggledComponents
+			Toggle = K_STS_Blue_360XS_Off
+			IncludeInBlueprints = false
+			Components =
+			{
+				STS_ArcShield_B360_Front : &../../K_STS_ToggleComponents_Blue_360XS_On/Components/STS_ArcShield_B360_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Blue/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+
+				STS_ArcShield_B360_Right : ~/Stats/ArcShield_Right, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Back : ~/Stats/ArcShield_Back, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Left : ~/Stats/ArcShield_Left, STS_ArcShield_B360_Front	{}
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD BLUE END ------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD ORANGE START --------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+
+		K_STS_ToggleComponents_Orange_360XS_On
+		{
+			Type = ToggledComponents
+			Toggle = K_STS_Orange_360XS_On
+			//IncludeInOrangeprints = true
+			Components : &../K_STS_ToggleComponents_Purple_360XS_On/Components
+			{
+				STS_ArcShield_B360_Front : ^/0/STS_ArcShield_B360_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Orange/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Orange/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1 {}
+					]
+				}
+
+				STS_ArcShield_B360_Right : ~/Stats/ArcShield_Right, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Back : ~/Stats/ArcShield_Back, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Left : ~/Stats/ArcShield_Left, STS_ArcShield_B360_Front	{}
+
+				STS_EmitterEffect : ^/0/STS_EmitterEffect
+				{
+					OperationalToggle = IsOperational
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Orange/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/MediaEffects/1	{}
+					]
+				}
+			}
+		}
+
+		K_STS_ToggleComponents_Orange_360XS_Off
+		{
+			Type = ToggledComponents
+			Toggle = K_STS_Orange_360XS_Off
+			//IncludeInOrangeprints = true
+			Components =
+			{
+				STS_ArcShield_B360_Front : &../../K_STS_ToggleComponents_Orange_360XS_On/Components/STS_ArcShield_B360_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Orange/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1	{}
+					]
+				}
+
+				STS_ArcShield_B360_Right : ~/Stats/ArcShield_Right, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Back : ~/Stats/ArcShield_Back, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Left : ~/Stats/ArcShield_Left, STS_ArcShield_B360_Front	{}
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD ORANGE END ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD RED START -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+
+		K_STS_ToggleComponents_Red_360XS_On
+		{
+			Type = ToggledComponents
+			Toggle = K_STS_Red_360XS_On
+			//IncludeInRedprints = true
+			Components : &../K_STS_ToggleComponents_Purple_360XS_On/Components
+			{
+				STS_ArcShield_B360_Front : ^/0/STS_ArcShield_B360_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Red/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/1
+						{
+							ArcSprite : &<../stats.rules>/Color/Red/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1 {}
+					]
+				}
+
+				STS_ArcShield_B360_Right : ~/Stats/ArcShield_Right, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Back : ~/Stats/ArcShield_Back, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Left : ~/Stats/ArcShield_Left, STS_ArcShield_B360_Front	{}
+
+				STS_EmitterEffect : ^/0/STS_EmitterEffect
+				{
+					OperationalToggle = IsOperational
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Red/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/MediaEffects/1	{}
+					]
+				}
+			}
+		}
+
+		K_STS_ToggleComponents_Red_360XS_Off
+		{
+			Type = ToggledComponents
+			Toggle = K_STS_Red_360XS_Off
+			//IncludeInRedprints = true
+			Components =
+			{
+				STS_ArcShield_B360_Front : &../../K_STS_ToggleComponents_Red_360XS_On/Components/STS_ArcShield_B360_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Red/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/0 {}
+					]
+				}
+
+				STS_ArcShield_B360_Right : ~/Stats/ArcShield_Right, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Back : ~/Stats/ArcShield_Back, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Left : ~/Stats/ArcShield_Left, STS_ArcShield_B360_Front	{}
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD RED END -------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD YELLOW START --------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+
+		K_STS_ToggleComponents_Yellow_360XS_On
+		{
+			Type = ToggledComponents
+			Toggle = K_STS_Yellow_360XS_On
+			//IncludeInYellowprints = true
+			Components : &../K_STS_ToggleComponents_Purple_360XS_On/Components
+			{
+				STS_ArcShield_B360_Front : ^/0/STS_ArcShield_B360_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Yellow/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Yellow/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1 {}
+					]
+				}
+
+				STS_ArcShield_B360_Right : ~/Stats/ArcShield_Right, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Back : ~/Stats/ArcShield_Back, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Left : ~/Stats/ArcShield_Left, STS_ArcShield_B360_Front	{}
+
+				STS_EmitterEffect : ^/0/STS_EmitterEffect
+				{
+					OperationalToggle = IsOperational
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Yellow/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/MediaEffects/1	{}
+					]
+				}
+			}
+		}
+
+		K_STS_ToggleComponents_Yellow_360XS_Off
+		{
+			Type = ToggledComponents
+			Toggle = K_STS_Yellow_360XS_Off
+			//IncludeInYellowprints = true
+			Components
+			{
+				STS_ArcShield_B360_Front : &../../K_STS_ToggleComponents_Yellow_360XS_On/Components/STS_ArcShield_B360_Front 
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Yellow/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+
+				STS_ArcShield_B360_Right : ~/Stats/ArcShield_Right, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Back : ~/Stats/ArcShield_Back, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Left : ~/Stats/ArcShield_Left, STS_ArcShield_B360_Front	{}
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD YELLOW END ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD GREEN START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+
+		K_STS_ToggleComponents_Green_360XS_On
+		{
+			Type = ToggledComponents
+			Toggle = K_STS_Green_360XS_On
+			//IncludeInGreenprints = true
+			Components : &../K_STS_ToggleComponents_Purple_360XS_On/Components
+			{
+				STS_ArcShield_B360_Front : ^/0/STS_ArcShield_B360_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Green/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Green/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/0 {}
+					]
+				}
+
+				STS_ArcShield_B360_Right : ~/Stats/ArcShield_Right, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Back : ~/Stats/ArcShield_Back, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Left : ~/Stats/ArcShield_Left, STS_ArcShield_B360_Front	{}
+
+				STS_EmitterEffect : ^/0/STS_EmitterEffect
+				{
+					OperationalToggle = IsOperational
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Green/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/MediaEffects/1	{}
+					]
+				}
+			}
+		}
+
+		K_STS_ToggleComponents_Green_360XS_Off
+		{
+			Type = ToggledComponents
+			Toggle = K_STS_Green_360XS_Off
+			//IncludeInGreenprints = true
+			Components =
+			{
+				STS_ArcShield_B360_Front : &../../K_STS_ToggleComponents_Green_360XS_On/Components/STS_ArcShield_B360_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Green/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+
+				STS_ArcShield_B360_Right : ~/Stats/ArcShield_Right, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Back : ~/Stats/ArcShield_Back, STS_ArcShield_B360_Front	{}
+
+				STS_ArcShield_B360_Left : ~/Stats/ArcShield_Left, STS_ArcShield_B360_Front	{}
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD GREEN END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		Shield_Doodad_Graphics
+		{
+			Type = Graphics
+			Location = [1, 1]
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				//Offset = [0, 0]
+				DamageLevels
+				[
+					{
+						File = "doodad_axe.png"
+						NormalsFile = "doodad_axe_normals.png"
+						Size = [2, 2]
+						RotSpeed = &<../stats.rules>/StatsCommon/DoodadAxe_RotSpeed_0DMG
+					}
+					{
+						File = "doodad_axe_33.png"
+						NormalsFile = "doodad_axe_normals_33.png"
+						Size = [2, 2]
+						RotSpeed = &<../stats.rules>/StatsCommon/DoodadAxe_RotSpeed_33DMG
+					}
+					{
+						File = "doodad_axe_66.png"
+						NormalsFile = "doodad_axe_normals_66.png"
+						Size = [2, 2]
+						RotSpeed = &<../stats.rules>/StatsCommon/DoodadAxe_RotSpeed_66DMG
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "doodads_high"
+				DamageLevels
+				[
+					{
+						File = "doodad_axe.png"
+						NormalsFile = "doodad_axe_normals.png"
+						Size = [2, 2]
+					}
+					{
+						File = "doodad_axe_33.png"
+						NormalsFile = "doodad_axe_normals_33.png"
+						Size = [2, 2]
+					}
+					{
+						File = "doodad_axe_66.png"
+						NormalsFile = "doodad_axe_normals_66.png"
+						Size = [2, 2]
+					}
+				]
+			}
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [1, 1]
+			OperationalToggle = IsOperational
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [2, 2]
+					}
+					{
+						File = "floor_33.png"
+						Size = [2, 2]
+					}
+					{
+						File = "floor_66.png"
+						Size = [2, 2]
+					}
+				]
+			}
+			
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [2, 2]
+					}
+					{
+						File = "walls_33.png"
+						Size = [2, 2]
+					}
+					{
+						File = "walls_66.png"
+						Size = [2, 2]
+					}
+				]
+			}
+			
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						NormalsFile = "roof_normals.png"
+						Size = [2, 2]
+					}
+					{
+						File = "roof_33.png"
+						NormalsFile = "roof_normals_33.png"
+						Size = [2, 2]
+					}
+					{
+						File = "roof_66.png"
+						NormalsFile = "roof_normals_66.png"
+						Size = [2, 2]
+					}
+				]
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS PURPLE START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STS_Graphics_Purple
+		{
+			Type = ToggledComponents
+			Toggle = Kebechet_STS_ToggleColours_Purple
+			IncludeInBlueprints = false
+			Components = 
+			{
+				K_Graphics_Purple : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"purple/doodads_lightning1.png"
+									"purple/doodads_lightning2.png"
+									"purple/doodads_lightning3.png"
+									"purple/doodads_lightning4.png"
+									"purple/doodads_lightning5.png"
+									"purple/doodads_lightning6.png"
+									"purple/doodads_lightning7.png"
+									"purple/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"purple/doodads_lightning1.png"
+									"purple/doodads_lightning2.png"
+									"purple/doodads_lightning3.png"
+									"purple/doodads_lightning4.png"
+									"purple/doodads_lightning5.png"
+									"purple/doodads_lightning6.png"
+									"purple/doodads_lightning7.png"
+									"purple/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"purple/doodads_lightning1.png"
+									"purple/doodads_lightning2.png"
+									"purple/doodads_lightning3.png"
+									"purple/doodads_lightning4.png"
+									"purple/doodads_lightning5.png"
+									"purple/doodads_lightning6.png"
+									"purple/doodads_lightning7.png"
+									"purple/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "purple/lights.png"
+								Size = [2, 2]
+							}
+						]
+					}
+					
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1
+								VertexColor = [195*1.5, 60*1.5, 255*1.5, 100]
+							}
+						]
+					}
+				}
+			}
+		}
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS PURPLE END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS BLUE START -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STS_Graphics_Blue
+		{
+			Type = ToggledComponents
+			Toggle = Kebechet_STS_ToggleColours_Blue
+			IncludeInBlueprints = false
+			Components = 
+			{
+				K_Graphics_Blue : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"blue/doodads_lightning1.png"
+									"blue/doodads_lightning2.png"
+									"blue/doodads_lightning3.png"
+									"blue/doodads_lightning4.png"
+									"blue/doodads_lightning5.png"
+									"blue/doodads_lightning6.png"
+									"blue/doodads_lightning7.png"
+									"blue/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"blue/doodads_lightning1.png"
+									"blue/doodads_lightning2.png"
+									"blue/doodads_lightning3.png"
+									"blue/doodads_lightning4.png"
+									"blue/doodads_lightning5.png"
+									"blue/doodads_lightning6.png"
+									"blue/doodads_lightning7.png"
+									"blue/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"blue/doodads_lightning1.png"
+									"blue/doodads_lightning2.png"
+									"blue/doodads_lightning3.png"
+									"blue/doodads_lightning4.png"
+									"blue/doodads_lightning5.png"
+									"blue/doodads_lightning6.png"
+									"blue/doodads_lightning7.png"
+									"blue/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "blue/lights.png"
+								Size = [2, 2]
+							}
+						]
+					}
+					
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1
+								VertexColor = [0, 0, 255*1.5, 100]
+							}
+						]
+					}
+				}
+			}
+		}
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS BLUE END -------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS ORANGE START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STS_Graphics_Orange
+		{
+			Type = ToggledComponents
+			Toggle = Kebechet_STS_ToggleColours_Orange
+			//IncludeInorangeprints = true
+			Components = 
+			{
+				K_Graphics_Orange : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"orange/doodads_lightning1.png"
+									"orange/doodads_lightning2.png"
+									"orange/doodads_lightning3.png"
+									"orange/doodads_lightning4.png"
+									"orange/doodads_lightning5.png"
+									"orange/doodads_lightning6.png"
+									"orange/doodads_lightning7.png"
+									"orange/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"orange/doodads_lightning1.png"
+									"orange/doodads_lightning2.png"
+									"orange/doodads_lightning3.png"
+									"orange/doodads_lightning4.png"
+									"orange/doodads_lightning5.png"
+									"orange/doodads_lightning6.png"
+									"orange/doodads_lightning7.png"
+									"orange/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"orange/doodads_lightning1.png"
+									"orange/doodads_lightning2.png"
+									"orange/doodads_lightning3.png"
+									"orange/doodads_lightning4.png"
+									"orange/doodads_lightning5.png"
+									"orange/doodads_lightning6.png"
+									"orange/doodads_lightning7.png"
+									"orange/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "orange/lights.png"
+								Size = [2, 2]
+							}
+						]
+					}
+					
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1
+								VertexColor = [255*1.5, 150*1.5, 0, 100]
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS ORANGE END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS RED START ------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STS_Graphics_Red
+		{
+			Type = ToggledComponents
+			Toggle = Kebechet_STS_ToggleColours_Red
+			//IncludeInredprints = true
+			Components = 
+			{
+				K_Graphics_Red : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"red/doodads_lightning1.png"
+									"red/doodads_lightning2.png"
+									"red/doodads_lightning3.png"
+									"red/doodads_lightning4.png"
+									"red/doodads_lightning5.png"
+									"red/doodads_lightning6.png"
+									"red/doodads_lightning7.png"
+									"red/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"red/doodads_lightning1.png"
+									"red/doodads_lightning2.png"
+									"red/doodads_lightning3.png"
+									"red/doodads_lightning4.png"
+									"red/doodads_lightning5.png"
+									"red/doodads_lightning6.png"
+									"red/doodads_lightning7.png"
+									"red/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"red/doodads_lightning1.png"
+									"red/doodads_lightning2.png"
+									"red/doodads_lightning3.png"
+									"red/doodads_lightning4.png"
+									"red/doodads_lightning5.png"
+									"red/doodads_lightning6.png"
+									"red/doodads_lightning7.png"
+									"red/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "red/lights.png"
+								Size = [2, 2]
+							}
+						]
+					}
+					
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1
+								VertexColor = [255*1.5, 0, 0, 100]
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS RED END --------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS YELLOW START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STS_Graphics_Yellow
+		{
+			Type = ToggledComponents
+			Toggle = Kebechet_STS_ToggleColours_Yellow
+			//IncludeInYellowprints = true
+			Components = 
+			{
+				K_Graphics_Yellow : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"Yellow/doodads_lightning1.png"
+									"Yellow/doodads_lightning2.png"
+									"Yellow/doodads_lightning3.png"
+									"Yellow/doodads_lightning4.png"
+									"Yellow/doodads_lightning5.png"
+									"Yellow/doodads_lightning6.png"
+									"Yellow/doodads_lightning7.png"
+									"Yellow/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"Yellow/doodads_lightning1.png"
+									"Yellow/doodads_lightning2.png"
+									"Yellow/doodads_lightning3.png"
+									"Yellow/doodads_lightning4.png"
+									"Yellow/doodads_lightning5.png"
+									"Yellow/doodads_lightning6.png"
+									"Yellow/doodads_lightning7.png"
+									"Yellow/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"Yellow/doodads_lightning1.png"
+									"Yellow/doodads_lightning2.png"
+									"Yellow/doodads_lightning3.png"
+									"Yellow/doodads_lightning4.png"
+									"Yellow/doodads_lightning5.png"
+									"Yellow/doodads_lightning6.png"
+									"Yellow/doodads_lightning7.png"
+									"Yellow/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "Yellow/lights.png"
+								Size = [2, 2]
+							}
+						]
+					}
+					
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1
+								VertexColor = [255*1.5, 255*1.5, 0, 100]
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS YELLOW END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS GREEN START ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STS_Graphics_Green
+		{
+			Type = ToggledComponents
+			Toggle = Kebechet_STS_ToggleColours_Green
+			//IncludeInGreenprints = true
+			Components = 
+			{
+				K_Graphics_Green : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"green/doodads_lightning1.png"
+									"green/doodads_lightning2.png"
+									"green/doodads_lightning3.png"
+									"green/doodads_lightning4.png"
+									"green/doodads_lightning5.png"
+									"green/doodads_lightning6.png"
+									"green/doodads_lightning7.png"
+									"green/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"green/doodads_lightning1.png"
+									"green/doodads_lightning2.png"
+									"green/doodads_lightning3.png"
+									"green/doodads_lightning4.png"
+									"green/doodads_lightning5.png"
+									"green/doodads_lightning6.png"
+									"green/doodads_lightning7.png"
+									"green/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"green/doodads_lightning1.png"
+									"green/doodads_lightning2.png"
+									"green/doodads_lightning3.png"
+									"green/doodads_lightning4.png"
+									"green/doodads_lightning5.png"
+									"green/doodads_lightning6.png"
+									"green/doodads_lightning7.png"
+									"green/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "green/lights.png"
+								Size = [2, 2]
+							}
+						]
+					}
+					
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1
+								VertexColor = [0, 255*1.5, 0, 100]
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS GREEN END ------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		BatterySprites
+		{
+			Type = ResourceSprites
+			Location = [1, 1]
+			ResourceStorage = CombinedBatteryStorage
+			Layer = "doodads_low"
+			ResourceLevels
+			[
+				{
+					File = "batteries1.png"
+					Size = [2, 2]
+				}
+				{
+					File = "batteries2.png"
+					Size = [2, 2]
+				}
+				{
+					File = "batteries3.png"
+					Size = [2, 2]
+				}
+				{
+					File = "batteries4.png"
+					Size = [2, 2]
+				}
+				{
+					File = "batteries5.png"
+					Size = [2, 2]
+				}
+				{
+					File = "batteries6.png"
+					Size = [2, 2]
+				}
+				{
+					File = "batteries7.png"
+					Size = [2, 2]
+				}
+				{
+					File = "batteries8.png"
+					Size = [2, 2]
+				}
+			]
+		}
+				
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/PowerOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/PowerOff
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/MedPartDestroyed
+			Location = [1, 1]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [1, 1]
+			Layer = "indicators"
+			Indicators
+			[
+				// Turned off.
+				{
+					Toggle = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1, 1]
+					}
+				}
+
+				// Out of power.
+				{
+					Toggle = BatteryStorage // ModularCombinedBatteryStorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1, 1]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [2, 2]
+		}
+	}
+
+	Stats
+	{
+		ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0/BaseValue
+		ShieldDist = (&~/Part/Components/ArcShield/Radius) - (&~/Part/Components/ArcShield/Location/1)
+		ShieldSegments = 4
+		ShieldHPSegment = (&~/Part/Components/FrontBatteryStorage/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage)
+		PowerUsageContinuous = (&~/Part/Components/FrontPowerDrain/FromQuantity) / (&~/Part/Components/FrontPowerDrain/Interval) / 1000 * (&ShieldSegments)
+		SegmentCapacity = (&~/Part/Components/FrontBatteryStorage/MaxResources) / 1000
+		PowerCapacity = (&SegmentCapacity) * (&ShieldSegments)
+
+		RecPower = (&PowerUsageContinuous) + 0.5
+		RecCrew = (&RecPower) * 4
+	}
+	
+	StatsNotesKey = "Stats/BubbleNotes"
+}
+
+Stats 
+{
+	// Front ArcShield is base and so it doesn't appear here
+	ArcShield_Front
+	{
+		Rotation = -90d
+		OperationalToggle = FrontIsOperational
+		DrainResourcesFrom = CombinedFrontBatteryStorage
+	}
+	ArcShield_Right
+	{
+		Rotation = 0d
+		OperationalToggle = RightIsOperational
+		DrainResourcesFrom = CombinedRightBatteryStorage
+	}
+	ArcShield_Back
+	{
+		Rotation = 90d
+		OperationalToggle = BackIsOperational
+		DrainResourcesFrom = CombinedBackBatteryStorage
+	}
+	ArcShield_Left
+	{
+		Rotation = 180d
+		OperationalToggle = LeftIsOperational
+		DrainResourcesFrom = CombinedLeftBatteryStorage
+	}
+}

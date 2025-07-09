@@ -1,0 +1,27 @@
+PartStats
+[
+	{
+		ID = ShieldSegments
+		FormatKey = "Stats/ShieldSegmentsFmt"
+	}
+	{
+		ID = ShieldRings
+		FormatKey = "Stats/ShieldRingsFmT"
+	}
+	{
+		ID = ShieldDistRings
+		FormatKey = "Stats/ShieldDistRingsFmT"
+	}
+	{
+		ID = ShieldHPSegment
+		FormatKey = "Stats/ShieldHPSegmentFmT"
+	}
+	{
+		ID = ShieldLength
+		FormatKey = "Stats/ShieldLengthFmT"
+	}
+	{
+		ID = ShieldRegen
+		FormatKey = "Stats/ShieldRegenFmT"
+	}
+]

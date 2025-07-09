@@ -1,0 +1,454 @@
+Components
+{
+	// -------------------------------------------------------------------------------------------------------------------------
+	// TOGGLE RED START --------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+	
+	Kebechet_GEN_Small_ToggleColours_Red :		<../purple/purple.rules>/Components/Kebechet_GEN_Small_ToggleColours_Purple		{ OnMode = 3 }
+	
+	K_GEN_Small_Red_A90FrontArc_On :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Red, Kebechet_GEN_Small_ToggleAngle_A90FrontArc, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+	K_GEN_Small_Red_A90FrontLine_On :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Red, Kebechet_GEN_Small_ToggleAngle_A90FrontLine, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+	K_GEN_Small_Red_A22LeftLine_On :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Red, Kebechet_GEN_Small_ToggleAngle_A22LeftLine, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+	K_GEN_Small_Red_A22RightLine_On :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Red, Kebechet_GEN_Small_ToggleAngle_A22RightLine, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+	K_GEN_Small_Red_A90LeftArc_On :		<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Red, Kebechet_GEN_Small_ToggleAngle_A90LeftArc, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+	K_GEN_Small_Red_A90RightArc_On :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Red, Kebechet_GEN_Small_ToggleAngle_A90RightArc, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+	
+	K_GEN_Small_Red_A90FrontArc_Off :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Red, Kebechet_GEN_Small_ToggleAngle_A90FrontArc, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+	K_GEN_Small_Red_A90FrontLine_Off :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Red, Kebechet_GEN_Small_ToggleAngle_A90FrontLine, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+	K_GEN_Small_Red_A22LeftLine_Off :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Red, Kebechet_GEN_Small_ToggleAngle_A22LeftLine, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+	K_GEN_Small_Red_A22RightLine_Off :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Red, Kebechet_GEN_Small_ToggleAngle_A22RightLine, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+	K_GEN_Small_Red_A90LeftArc_Off :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Red, Kebechet_GEN_Small_ToggleAngle_A90LeftArc, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+	K_GEN_Small_Red_A90RightArc_Off :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Red, Kebechet_GEN_Small_ToggleAngle_A90RightArc, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+
+	// -------------------------------------------------------------------------------------------------------------------------
+	// ARCSHIELD RED START -----------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	K_GENS_ToggleComponents_Red_A90FrontArc_On
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Small_Red_A90FrontArc_On
+		IncludeInRedprints = false
+		Components : &<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components
+		{
+			GENS_ArcShield : ^/0/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Red/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1 {}
+				]
+				HitMediaEffects
+				[
+					: &../^/0/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Red/HitMediaEffects, ^/0/ArcSprite	{}
+					}
+					: &../^/0/HitMediaEffects/1 {}
+				]
+			}
+			GENS_EmitterEffect : ^/0/GENS_EmitterEffect
+			{
+				MediaEffects
+				[
+					: &../^/0/MediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Red/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+					: &../^/0/MediaEffects/1	{}
+				]
+			}
+			
+			// Already thorugh Components, but just in case
+			GENS_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components/GENS_OverclockEffect			{}
+			GENS_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components/GENS_OverloadEffect			{}
+			GENS_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components/GENS_OverclockOverloadEffect	{}
+		}
+	}
+
+	K_GENS_ToggleComponents_Red_A90FrontLine_On
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Small_Red_A90FrontLine_On
+		IncludeInRedprints = false
+		Components : &../K_GENS_ToggleComponents_Red_A90FrontArc_On/Components
+		{
+			GENS_ArcShield : &<../stats.rules>/Angle/FrontLine90/ArcShield, ^/0/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0 {}
+					: &../^/1/ShieldMediaEffects/1 {}
+				]
+				HitMediaEffects
+				[
+					: &<../stats.rules>/Angle/FrontLine90/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
+					: &../^/1/HitMediaEffects/1 {}
+				]
+			}
+			GENS_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontLine_On/Components/GENS_OverclockEffect			{}
+			GENS_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontLine_On/Components/GENS_OverloadEffect			{}
+			GENS_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontLine_On/Components/GENS_OverclockOverloadEffect	{}
+		}
+	}
+
+	K_GENS_ToggleComponents_Red_A22LeftLine_On
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Small_Red_A22LeftLine_On
+		IncludeInRedprints = false
+		Components : &../K_GENS_ToggleComponents_Red_A90FrontArc_On/Components
+		{
+			GENS_ArcShield : &<../stats.rules>/Angle/LeftLine22/ArcShield, ^/0/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0 {}
+					: &../^/1/ShieldMediaEffects/1 {}
+				]
+				HitMediaEffects
+				[
+					: &<../stats.rules>/Angle/LeftLine22/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
+					: &../^/1/HitMediaEffects/1 {}
+				]
+			}
+			GENS_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22LeftLine_On/Components/GENS_OverclockEffect			{}
+			GENS_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22LeftLine_On/Components/GENS_OverloadEffect			{}
+			GENS_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22LeftLine_On/Components/GENS_OverclockOverloadEffect	{}
+		}
+	}
+
+	K_GENS_ToggleComponents_Red_A22RightLine_On
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Small_Red_A22RightLine_On
+		IncludeInRedprints = false
+		Components : &../K_GENS_ToggleComponents_Red_A90FrontArc_On/Components
+		{
+			GENS_ArcShield : &<../stats.rules>/Angle/RightLine22/ArcShield, ^/0/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0 {}
+					: &../^/1/ShieldMediaEffects/1 {}
+				]
+				HitMediaEffects
+				[
+					: &<../stats.rules>/Angle/RightLine22/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
+					: &../^/1/HitMediaEffects/1 {}
+				]
+			}
+			GENS_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22RightLine_On/Components/GENS_OverclockEffect			{}
+			GENS_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22RightLine_On/Components/GENS_OverloadEffect			{}
+			GENS_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22RightLine_On/Components/GENS_OverclockOverloadEffect	{}
+		}
+	}
+
+	K_GENS_ToggleComponents_Red_A90LeftArc_On
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Small_Red_A90LeftArc_On
+		IncludeInRedprints = false
+		Components : &../K_GENS_ToggleComponents_Red_A90FrontArc_On/Components
+		{
+			GENS_ArcShield : &<../stats.rules>/Angle/LeftArc90/ArcShield, ^/0/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0 {}
+					: &../^/1/ShieldMediaEffects/1 {}
+				]
+				HitMediaEffects
+				[
+					: &<../stats.rules>/Angle/LeftArc90/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
+					: &../^/1/HitMediaEffects/1 {}
+				]
+			}
+			GENS_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90LeftArc_On/Components/GENS_OverclockEffect			{}
+			GENS_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90LeftArc_On/Components/GENS_OverloadEffect			{}
+			GENS_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90LeftArc_On/Components/GENS_OverclockOverloadEffect	{}
+		}
+	}
+
+	K_GENS_ToggleComponents_Red_A90RightArc_On
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Small_Red_A90RightArc_On
+		IncludeInRedprints = false
+		Components : &../K_GENS_ToggleComponents_Red_A90FrontArc_On/Components
+		{
+			GENS_ArcShield : &<../stats.rules>/Angle/RightArc90/ArcShield, ^/0/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0 {}
+					: &../^/1/ShieldMediaEffects/1 {}
+				]
+				HitMediaEffects
+				[
+					: &<../stats.rules>/Angle/RightArc90/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
+					: &../^/1/HitMediaEffects/1 {}
+				]
+			}
+			GENS_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90RightArc_On/Components/GENS_OverclockEffect			{}
+			GENS_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90RightArc_On/Components/GENS_OverloadEffect			{}
+			GENS_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90RightArc_On/Components/GENS_OverclockOverloadEffect	{}
+		}
+	}
+
+
+	K_GENS_ToggleComponents_Red_A90FrontArc_Off
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Small_Red_A90FrontArc_Off
+		IncludeInRedprints = false
+		Components =
+		{
+			GENS_ArcShield : &../../K_GENS_ToggleComponents_Red_A90FrontArc_On/Components/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Red/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+				]
+			}
+		}
+	}
+
+	K_GENS_ToggleComponents_Red_A90FrontLine_Off
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Small_Red_A90FrontLine_Off
+		IncludeInRedprints = false
+		Components =
+		{
+			GENS_ArcShield : &../../K_GENS_ToggleComponents_Red_A90FrontLine_On/Components/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Red/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+				]
+			}
+		}
+	}
+
+	K_GENS_ToggleComponents_Red_A22LeftLine_Off
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Small_Red_A22LeftLine_Off
+		IncludeInRedprints = false
+		Components =
+		{
+			GENS_ArcShield : &../../K_GENS_ToggleComponents_Red_A22LeftLine_On/Components/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Red/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+				]
+			}
+		}
+	}
+
+	K_GENS_ToggleComponents_Red_A22RightLine_Off
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Small_Red_A22RightLine_Off
+		IncludeInRedprints = false
+		Components =
+		{
+			GENS_ArcShield : &../../K_GENS_ToggleComponents_Red_A22RightLine_On/Components/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Red/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+				]
+			}
+		}
+	}
+
+	K_GENS_ToggleComponents_Red_A90LeftArc_Off
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Small_Red_A90LeftArc_Off
+		IncludeInRedprints = false
+		Components =
+		{
+			GENS_ArcShield : &../../K_GENS_ToggleComponents_Red_A90LeftArc_On/Components/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Red/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+				]
+			}
+		}
+	}
+
+	K_GENS_ToggleComponents_Red_A90RightArc_Off
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Small_Red_A90RightArc_Off
+		IncludeInRedprints = false
+		Components =
+		{
+			GENS_ArcShield : &../../K_GENS_ToggleComponents_Red_A90RightArc_On/Components/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Red/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+				]
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------------------------------
+	// GRAPHICS RED START ------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	K_GENS_Graphics_Red
+	{
+		Type = ToggledComponents
+		Toggle = Kebechet_GEN_Small_ToggleColours_Red
+		IncludeInRedprints = false
+		Components = 
+		{
+			K_Graphics : &<../shield_gen_small_modular.rules>/Part/Components/Graphics
+			{
+				OperationalDoodad : ^/0/OperationalDoodad
+				{
+					DamageLevels
+					[
+						: &../^/0/DamageLevels/0
+						{
+							AnimationFiles
+							[
+								"doodads_on1.png"
+								"doodads_on2.png"
+								"doodads_on3.png"
+								"doodads_on4.png"
+								"doodads_on5.png"
+								"doodads_on6.png"
+								"doodads_on7.png"
+								"doodads_on8.png"
+							]
+						}
+						: &../^/0/DamageLevels/1
+						{
+							AnimationFiles
+							[
+								"doodads_on1_33.png"
+								"doodads_on2_33.png"
+								"doodads_on3_33.png"
+								"doodads_on4_33.png"
+								"doodads_on5_33.png"
+								"doodads_on6_33.png"
+								"doodads_on7_33.png"
+								"doodads_on8_33.png"
+							]
+						}
+						: &../^/0/DamageLevels/2
+						{
+							AnimationFiles
+							[
+								"doodads_on1_66.png"
+								"doodads_on2_66.png"
+								"doodads_on3_66.png"
+								"doodads_on4_66.png"
+								"doodads_on5_66.png"
+								"doodads_on6_66.png"
+								"doodads_on7_66.png"
+								"doodads_on8_66.png"
+							]
+						}
+					]
+				}
+				OperationalLighting
+				{
+					Layer = "lights_add"
+					DamageLevels
+					[
+						{
+							File = "lights.png"
+							Size = [2, 3]
+						}
+					]
+				}
+				OperationalRoofDoodad
+				{
+					Layer = "roof_doodads"
+					DamageLevels
+					[
+						{
+							File = "roof_glows.png"
+							Size = [2, 3]
+						}
+						{
+							File = "roof_glows_33.png"
+							Size = [2, 3]
+						}
+						{
+							File = "roof_glows_66.png"
+							Size = [2, 3]
+						}
+					]
+				}
+			}
+			
+			K_BatterySprites : &<../shield_gen_small_modular.rules>/Part/Components/BatterySprites
+			{
+				ResourceLevels
+				[
+					{
+						File = "batteries1.png"
+						Size = [2, 1]
+					}
+					{
+						File = "batteries2.png"
+						Size = [2, 1]
+					}
+					{
+						File = "batteries3.png"
+						Size = [2, 1]
+					}
+					{
+						File = "batteries4.png"
+						Size = [2, 1]
+					}
+					{
+						File = "batteries5.png"
+						Size = [2, 1]
+					}
+					{
+						File = "batteries6.png"
+						Size = [2, 1]
+					}
+				]
+			}
+		}
+	}
+}

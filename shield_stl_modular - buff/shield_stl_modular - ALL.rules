@@ -1,0 +1,4287 @@
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/KebechetSTLmodularShield"
+	IconNameKey = "Parts/KebechetSTLmodularShieldIcon"
+	DescriptionKey = "Parts/KebechetSTLmodularShieldDesc"
+	ID = swefpifh.Kebechet_STL_modularShield
+	EditorGroup = "Defenses"
+	Resources
+	[
+		[steel, 120]
+		[diamond, 3]
+		[processor, 4] 
+	]
+	AIValueFactor = 5
+	Size = [4, 4]
+	PhysicalRect = [0, 0, 4, 4] // For backwards compatibility with old shield generators.
+	SaveRect = &PhysicalRect
+	SelectionPriority = 1
+	SelectionTypeID = "shield_gen_stl"
+	SelectionTypeByRotation = false
+	MaxHealth = 10000
+	TypeCategories = [defense, uses_power]
+	ReceivableBuffs : ^/0/ReceivableBuffs [ModularShieldResistanceBonus, ModularShieldRadiusBonus]
+	PenetrationRectType = Normal
+	AllowedDoorLocations
+	[
+		[1, -1] // Haut
+		[2, -1]
+		
+		[1, 4] // Bas
+		[2, 4]
+		
+		[-1, 1] // Gauche
+		[-1, 2]
+		
+		[4, 1] // Droite
+		[4, 2]
+	]
+	
+	IsRotateable = false
+	IgnoreRotationForMirroredSelection = true
+	IsFlippable = false
+	
+	ForceManhattanPathInPart = true
+	BlockedTravelCells
+	[
+		[1, 1]
+		[1, 2]
+		[2, 1]
+		[2, 2]
+	]
+
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [64, 64]
+	}
+	Components : ^/0/Components
+	{
+
+		// --------------------------------- START TOGGLES
+		
+		// -----------------------------------------------
+		// COLOURS TOGGLES -------------------------------
+		// -----------------------------------------------
+
+		ToggleColours
+		{
+			Type = UIToggle
+			ToggleID = "Kebechet_ToggleID_Colours"
+			Default = 0
+			AlwaysAllowInBuildMode = true
+			RequiresCommand = false
+		}
+
+		ToggleColours_Purple
+		{
+			Type = ModeToggle
+			Mode = ToggleColours
+			OnMode = 0
+		}
+
+		ToggleColours_Blue : ToggleColours_Purple	{ OnMode = 1 }
+		ToggleColours_Orange : ToggleColours_Purple	{ OnMode = 2 }
+		ToggleColours_Red : ToggleColours_Purple	{ OnMode = 3 }
+		ToggleColours_Yellow : ToggleColours_Purple	{ OnMode = 4 }
+		ToggleColours_Green : ToggleColours_Purple	{ OnMode = 5 }
+		
+		// -----------------------------------------------
+		// DISPLAY TOGGLES -------------------------------
+		// -----------------------------------------------
+		
+		ToggleDisplay
+		{
+			Type = UIToggle
+			ToggleID = "Kebechet_ToggleID_Display"
+			Default = 0
+			AlwaysAllowInBuildMode = true
+			RequiresCommand = false
+		}
+
+		ToggleDisplay_On
+		{
+			Type = ModeToggle
+			Mode = ToggleDisplay
+			OnMode = 0
+		}
+
+		ToggleDisplay_Off : ToggleDisplay_On	{ OnMode = 1 }
+		
+		// -----------------------------------------------
+		// RADIUS BUFF TOGGLES -------------------------------
+		// -----------------------------------------------
+		
+		RadiusBuff
+		{
+			Type = BuffableValue
+			Value
+			{
+				BaseValue = 0
+				BuffType = ModularShieldRadiusBonus
+				BuffMode = Add
+			}
+		}
+		
+		ToggleRadius_0
+		{
+			Type = ThresholdToggle
+			AmountFrom = RadiusBuff
+			MinAmount = 0
+			MaxAmount = 0
+		}
+		ToggleRadius_1 : ToggleRadius_0
+		{
+			MinAmount = 1
+			MaxAmount = 1
+		}
+		ToggleRadius_2 : ToggleRadius_0
+		{
+			MinAmount = 2
+			MaxAmount = 2
+		}
+		ToggleRadius_3 : ToggleRadius_0
+		{
+			MinAmount = 3
+			MaxAmount = 3
+		}
+		ToggleRadius_4 : ToggleRadius_0
+		{
+			MinAmount = 4
+			MaxAmount = 4
+		}
+		ToggleRadius_5 : ToggleRadius_0
+		{
+			MinAmount = 5
+			MaxAmount = 5
+		}
+		ToggleRadius_6 : ToggleRadius_0
+		{
+			MinAmount = 6
+			MaxAmount = 6
+		}
+		ToggleRadius_7 : ToggleRadius_0
+		{
+			MinAmount = 7
+			MaxAmount = 7
+		}
+		
+		// -----------------------------------------------
+		// PROXY -----------------------------------------
+		// -----------------------------------------------
+		
+		ColoursProxy
+		{
+			Type = ToggleProxy
+			ComponentID = ColoursSet
+		}
+		ColoursSet
+		{
+			Type = MultiToggle
+			Toggles = [ToggleColours_Purple, ToggleColours_Blue, ToggleColours_Orange, ToggleColours_Red, ToggleColours_Yellow, ToggleColours_Green]
+			Mode = Any
+		}
+
+		DisplayProxy
+		{
+			Type = ToggleProxy
+			ComponentID = DisplaySet
+		}
+		DisplaySet
+		{
+			Type = MultiToggle
+			Toggles = [ToggleDisplay_Off, ToggleDisplay_On]
+			Mode = Any
+		}
+		
+		// -----------------------------------------------
+		// MULTI TOGGLES --------------------------------- // ColoursProxy, DisplayProxy
+		// -----------------------------------------------
+
+		// ---------------- PURPLE -----------------------
+		
+		Toggle_Purple_0_On
+		{
+			Type = MultiToggle
+			Toggles = [ToggleColours_Purple, ToggleDisplay_On, ToggleRadius_0]
+			Mode = All
+		}
+		Toggle_Purple_0_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, ToggleRadius_0, ColoursProxy, DisplayProxy] }
+		Toggle_Purple_1_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, ToggleRadius_1, ColoursProxy, DisplayProxy]  }
+		Toggle_Purple_1_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, ToggleRadius_1, ColoursProxy, DisplayProxy] }
+		Toggle_Purple_2_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, ToggleRadius_2, ColoursProxy, DisplayProxy]  }
+		Toggle_Purple_2_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, ToggleRadius_2, ColoursProxy, DisplayProxy] }
+		Toggle_Purple_3_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, ToggleRadius_3, ColoursProxy, DisplayProxy]  }
+		Toggle_Purple_3_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, ToggleRadius_3, ColoursProxy, DisplayProxy] }
+		Toggle_Purple_4_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, ToggleRadius_4, ColoursProxy, DisplayProxy]  }
+		Toggle_Purple_4_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, ToggleRadius_4, ColoursProxy, DisplayProxy] }
+		Toggle_Purple_5_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, ToggleRadius_5, ColoursProxy, DisplayProxy]  }
+		Toggle_Purple_5_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, ToggleRadius_5, ColoursProxy, DisplayProxy] }
+		Toggle_Purple_6_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, ToggleRadius_6, ColoursProxy, DisplayProxy]  }
+		Toggle_Purple_6_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, ToggleRadius_6, ColoursProxy, DisplayProxy] }
+		Toggle_Purple_7_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Purple, ToggleDisplay_On, ToggleRadius_7, ColoursProxy, DisplayProxy]  }
+		Toggle_Purple_7_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, ToggleRadius_7, ColoursProxy, DisplayProxy] }
+		// ---------------- BLUE ---------------------
+		Toggle_Blue_0_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_On, ToggleRadius_0, ColoursProxy, DisplayProxy]  }
+		Toggle_Blue_0_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_Off, ToggleRadius_0, ColoursProxy, DisplayProxy] }
+		Toggle_Blue_1_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_On, ToggleRadius_1, ColoursProxy, DisplayProxy]  }
+		Toggle_Blue_1_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_Off, ToggleRadius_1, ColoursProxy, DisplayProxy] }
+		Toggle_Blue_2_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_On, ToggleRadius_2, ColoursProxy, DisplayProxy]  }
+		Toggle_Blue_2_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_Off, ToggleRadius_2, ColoursProxy, DisplayProxy] }
+		Toggle_Blue_3_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_On, ToggleRadius_3, ColoursProxy, DisplayProxy]  }
+		Toggle_Blue_3_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_Off, ToggleRadius_3, ColoursProxy, DisplayProxy] }
+		Toggle_Blue_4_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_On, ToggleRadius_4, ColoursProxy, DisplayProxy]  }
+		Toggle_Blue_4_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_Off, ToggleRadius_4, ColoursProxy, DisplayProxy] }
+		Toggle_Blue_5_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_On, ToggleRadius_5, ColoursProxy, DisplayProxy]  }
+		Toggle_Blue_5_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_Off, ToggleRadius_5, ColoursProxy, DisplayProxy] }
+		Toggle_Blue_6_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_On, ToggleRadius_6, ColoursProxy, DisplayProxy]  }
+		Toggle_Blue_6_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_Off, ToggleRadius_6, ColoursProxy, DisplayProxy] }
+		Toggle_Blue_7_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_On, ToggleRadius_7, ColoursProxy, DisplayProxy]  }
+		Toggle_Blue_7_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Blue, ToggleDisplay_Off, ToggleRadius_7, ColoursProxy, DisplayProxy] }
+		// ---------------- Orange ---------------------
+		Toggle_Orange_0_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Orange, ToggleDisplay_On, ToggleRadius_0, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_0_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Orange, ToggleDisplay_Off, ToggleRadius_0, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_1_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Orange, ToggleDisplay_On, ToggleRadius_1, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_1_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Orange, ToggleDisplay_Off, ToggleRadius_1, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_2_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Orange, ToggleDisplay_On, ToggleRadius_2, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_2_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Orange, ToggleDisplay_Off, ToggleRadius_2, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_3_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Orange, ToggleDisplay_On, ToggleRadius_3, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_3_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Orange, ToggleDisplay_Off, ToggleRadius_3, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_4_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Orange, ToggleDisplay_On, ToggleRadius_4, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_4_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Orange, ToggleDisplay_Off, ToggleRadius_4, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_5_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Orange, ToggleDisplay_On, ToggleRadius_5, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_5_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Orange, ToggleDisplay_Off, ToggleRadius_5, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_6_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Orange, ToggleDisplay_On, ToggleRadius_6, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_6_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Orange, ToggleDisplay_Off, ToggleRadius_6, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_7_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Orange, ToggleDisplay_On, ToggleRadius_7, ColoursProxy, DisplayProxy] }
+		Toggle_Orange_7_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Orange, ToggleDisplay_Off, ToggleRadius_7, ColoursProxy, DisplayProxy] }
+		// ---------------- Red ---------------------
+		Toggle_Red_0_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_On, ToggleRadius_0, ColoursProxy, DisplayProxy]  }
+		Toggle_Red_0_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_Off, ToggleRadius_0, ColoursProxy, DisplayProxy] }
+		Toggle_Red_1_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_On, ToggleRadius_1, ColoursProxy, DisplayProxy]  }
+		Toggle_Red_1_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_Off, ToggleRadius_1, ColoursProxy, DisplayProxy] }
+		Toggle_Red_2_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_On, ToggleRadius_2, ColoursProxy, DisplayProxy]  }
+		Toggle_Red_2_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_Off, ToggleRadius_2, ColoursProxy, DisplayProxy] }
+		Toggle_Red_3_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_On, ToggleRadius_3, ColoursProxy, DisplayProxy]  }
+		Toggle_Red_3_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_Off, ToggleRadius_3, ColoursProxy, DisplayProxy] }
+		Toggle_Red_4_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_On, ToggleRadius_4, ColoursProxy, DisplayProxy]  }
+		Toggle_Red_4_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_Off, ToggleRadius_4, ColoursProxy, DisplayProxy] }
+		Toggle_Red_5_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_On, ToggleRadius_5, ColoursProxy, DisplayProxy]  }
+		Toggle_Red_5_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_Off, ToggleRadius_5, ColoursProxy, DisplayProxy] }
+		Toggle_Red_6_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_On, ToggleRadius_6, ColoursProxy, DisplayProxy]  }
+		Toggle_Red_6_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_Off, ToggleRadius_6, ColoursProxy, DisplayProxy] }
+		Toggle_Red_7_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_On, ToggleRadius_7, ColoursProxy, DisplayProxy]  }
+		Toggle_Red_7_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Red, ToggleDisplay_Off, ToggleRadius_7, ColoursProxy, DisplayProxy] }
+		// ---------------- Yellow ---------------------
+		Toggle_Yellow_0_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Yellow, ToggleDisplay_On, ToggleRadius_0, ColoursProxy, DisplayProxy]  }
+		Toggle_Yellow_0_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Yellow, ToggleDisplay_Off, ToggleRadius_0, ColoursProxy, DisplayProxy] }
+		Toggle_Yellow_1_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Yellow, ToggleDisplay_On, ToggleRadius_1, ColoursProxy, DisplayProxy]  }
+		Toggle_Yellow_1_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Yellow, ToggleDisplay_Off, ToggleRadius_1, ColoursProxy, DisplayProxy] }
+		Toggle_Yellow_2_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Yellow, ToggleDisplay_On, ToggleRadius_2, ColoursProxy, DisplayProxy]  }
+		Toggle_Yellow_2_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Yellow, ToggleDisplay_Off, ToggleRadius_2, ColoursProxy, DisplayProxy] }
+		Toggle_Yellow_3_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Yellow, ToggleDisplay_On, ToggleRadius_3, ColoursProxy, DisplayProxy]  }
+		Toggle_Yellow_3_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Yellow, ToggleDisplay_Off, ToggleRadius_3, ColoursProxy, DisplayProxy] }
+		Toggle_Yellow_4_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Yellow, ToggleDisplay_On, ToggleRadius_4, ColoursProxy, DisplayProxy]  }
+		Toggle_Yellow_4_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Yellow, ToggleDisplay_Off, ToggleRadius_4, ColoursProxy, DisplayProxy] }
+		Toggle_Yellow_5_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Yellow, ToggleDisplay_On, ToggleRadius_5, ColoursProxy, DisplayProxy]  }
+		Toggle_Yellow_5_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Yellow, ToggleDisplay_Off, ToggleRadius_5, ColoursProxy, DisplayProxy] }
+		Toggle_Yellow_6_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Yellow, ToggleDisplay_On, ToggleRadius_6, ColoursProxy, DisplayProxy]  }
+		Toggle_Yellow_6_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Yellow, ToggleDisplay_Off, ToggleRadius_6, ColoursProxy, DisplayProxy] }
+		Toggle_Yellow_7_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Yellow, ToggleDisplay_On, ToggleRadius_7, ColoursProxy, DisplayProxy]  }
+		Toggle_Yellow_7_Off : Toggle_Purple_0_On	{ Toggles = [ToggleColours_Yellow, ToggleDisplay_Off, ToggleRadius_7, ColoursProxy, DisplayProxy] }
+		// ---------------- Green ---------------------
+		Toggle_Green_0_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_On, ToggleRadius_0, ColoursProxy, DisplayProxy]  }
+		Toggle_Green_0_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_Off, ToggleRadius_0, ColoursProxy, DisplayProxy] }
+		Toggle_Green_1_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_On, ToggleRadius_1, ColoursProxy, DisplayProxy]  }
+		Toggle_Green_1_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_Off, ToggleRadius_1, ColoursProxy, DisplayProxy] }
+		Toggle_Green_2_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_On, ToggleRadius_2, ColoursProxy, DisplayProxy]  }
+		Toggle_Green_2_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_Off, ToggleRadius_2, ColoursProxy, DisplayProxy] }
+		Toggle_Green_3_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_On, ToggleRadius_3, ColoursProxy, DisplayProxy]  }
+		Toggle_Green_3_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_Off, ToggleRadius_3, ColoursProxy, DisplayProxy] }
+		Toggle_Green_4_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_On, ToggleRadius_4, ColoursProxy, DisplayProxy]  }
+		Toggle_Green_4_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_Off, ToggleRadius_4, ColoursProxy, DisplayProxy] }
+		Toggle_Green_5_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_On, ToggleRadius_5, ColoursProxy, DisplayProxy]  }
+		Toggle_Green_5_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_Off, ToggleRadius_5, ColoursProxy, DisplayProxy] }
+		Toggle_Green_6_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_On, ToggleRadius_6, ColoursProxy, DisplayProxy]  }
+		Toggle_Green_6_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_Off, ToggleRadius_6, ColoursProxy, DisplayProxy] }
+		Toggle_Green_7_On : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_On, ToggleRadius_7, ColoursProxy, DisplayProxy]  }
+		Toggle_Green_7_Off : Toggle_Purple_0_On		{ Toggles = [ToggleColours_Green, ToggleDisplay_Off, ToggleRadius_7, ColoursProxy, DisplayProxy] }
+
+		// --------------------------------- END TOGGLES
+		
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, BatteryStorage] // ModularCombinedBatteryStorage // CombinedBatteryStorage
+			Mode = All
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		CommandConsumer
+		{
+			Type = CommandConsumer
+			OperationalToggle = PowerToggle
+			CommandPoints = 8
+		}
+
+		// Starts Normal Batteries
+
+		ProgressBar
+		{
+			Type = ProgressBar
+			OperationalToggle = IsOperational
+			ShowProgressFor = CombinedBatteryStorage
+			LowColor = [0, 0, 255]
+			HighColor = [0, 0, 255]
+			FullColor = [0, 0, 255]
+			Height = 10
+		}
+		CombinedBatteryStorage
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [FrontBatteryStorage, TopRightBatteryStorage, BottomRightBatteryStorage, BackBatteryStorage, BottomLeftBatteryStorage, TopLeftBatteryStorage]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		BatteryConsumer
+		{
+			Type = ResourceConsumer
+			ResourceType = battery
+			Storage = CombinedBatteryStorage
+			DefaultPriority = &/PRIORITIES/Defense_Supply
+			ResupplyThreshold = 500
+			OperationalToggle = PowerToggle
+		}
+
+		FrontIsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, FrontBatteryStorage] //  CombinedFrontBatteryStorage
+			Mode = All
+		}
+		FrontBatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 4000
+			ToggleOnResources = 3001
+			DrainOnFtlJump = true
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		CombinedFrontBatteryStorage
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [FrontBatteryStorage, ModularBatteryStorageProxy]
+			ToggleOnResources = 3001
+			RemoveMode = InReverseOrder
+			AddMode = InOrder
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		FrontPowerDrain
+		{
+			Type = ResourceConverter
+			OperationalToggle = FrontIsOperational
+			FromStorage = FrontBatteryStorage
+			FromQuantity = 50
+			MinFromQuantityForConversion = 1
+			Interval = 2
+		}
+
+		TopRightIsOperational : FrontIsOperational			{ Toggles = [PowerToggle, TopRightBatteryStorage] }
+		TopRightBatteryStorage : FrontBatteryStorage		{}
+		CombinedTopRightBatteryStorage : CombinedFrontBatteryStorage	{ ResourceStorages = [TopRightBatteryStorage, ModularBatteryStorageProxy] }
+		TopRightPowerDrain : FrontPowerDrain				{ FromStorage = TopRightBatteryStorage }
+
+		BottomRightIsOperational : FrontIsOperational		{ Toggles = [PowerToggle, BottomRightBatteryStorage] }
+		BottomRightBatteryStorage : FrontBatteryStorage		{}
+		CombinedBottomRightBatteryStorage : CombinedFrontBatteryStorage	{ ResourceStorages = [BottomRightBatteryStorage, ModularBatteryStorageProxy] }
+		BottomRightPowerDrain : FrontPowerDrain				{ FromStorage = BottomRightBatteryStorage }
+
+		BackIsOperational : FrontIsOperational				{ Toggles = [PowerToggle, BackBatteryStorage] }
+		BackBatteryStorage : FrontBatteryStorage			{}
+		CombinedBackBatteryStorage : CombinedFrontBatteryStorage	{ ResourceStorages = [BackBatteryStorage, ModularBatteryStorageProxy] }
+		BackPowerDrain : FrontPowerDrain					{ FromStorage = BackBatteryStorage }
+
+		BottomLeftIsOperational : FrontIsOperational		{ Toggles = [PowerToggle, BottomLeftBatteryStorage] }
+		BottomLeftBatteryStorage : FrontBatteryStorage		{}
+		CombinedBottomLeftBatteryStorage : CombinedFrontBatteryStorage	{ ResourceStorages = [BottomLeftBatteryStorage, ModularBatteryStorageProxy] }
+		BottomLeftPowerDrain : FrontPowerDrain				{ FromStorage = BottomLeftBatteryStorage }
+
+		TopLeftIsOperational : FrontIsOperational			{ Toggles = [PowerToggle, TopLeftBatteryStorage] }
+		TopLeftBatteryStorage : FrontBatteryStorage			{}
+		CombinedTopLeftBatteryStorage : CombinedFrontBatteryStorage	{ ResourceStorages = [BottomLeftBatteryStorage, ModularBatteryStorageProxy] }
+		TopLeftPowerDrain : FrontPowerDrain					{ FromStorage = TopLeftBatteryStorage }
+		
+		// Ends Normal Batteries
+
+		// Start Modular Battery
+		
+/* Doesn't work		
+		BuffProviderTop : BuffProviderTopLeft
+		{
+			Type = AreaBuffProvider
+			BuffType = ModularShieldCapacity
+			BuffArea = [1, -1, 2, 1]
+			OperationalToggle = IsOperational
+			Criteria
+			{
+				Right = 3
+				Left = 1
+			}
+		}
+		BuffProviderRight : BuffProviderTopLeft
+		{
+			BuffArea = [4, 1, 1, 2]
+			Criteria
+			{
+				Rot = 1
+				Left = 4
+				Right = 5
+//				Bottom = 3 // With this it also worked
+//				Top = 1
+			}
+		}
+		BuffProviderBottom : BuffProviderTopLeft
+		{
+			BuffArea = [1, 4, 2, 1]
+			Criteria
+			{
+				Rot = 2
+				Left = 1
+				Right = 3
+				Bottom = 5
+//				Top = 4 // With this it also worked
+			}
+		}
+		BuffProviderLeft : BuffProviderTopLeft
+		{
+			BuffArea = [-1, 1, 1, 2]
+			Criteria
+			{
+				Rot = 3
+				Right = 0
+				Bottom = 3
+				Top = 1
+			}
+		}		
+*/
+		
+		BuffProviderTopLeft
+		{
+			Type = AreaBuffProvider
+			BuffType = ModularShieldCapacity
+			BuffArea = [0, -1, 2, 1]
+			OperationalToggle = IsOperational
+			Criteria
+			{
+				Right = 2
+				Left = 0 // testing
+			}
+		}
+		BuffProviderTopRight : BuffProviderTopLeft
+		{
+			BuffArea = [2, -1, 2, 1]
+			Criteria
+			{
+				Left = 2
+				Right = 4
+			}
+		}
+		BuffProviderRightTop : BuffProviderTopLeft
+		{
+			BuffArea = [4, 0, 1, 2]
+			Criteria
+			{
+				Rot = 1
+				Left = 4
+				Right = 5
+				Bottom = 2 // With this it also worked
+			}
+		}
+		BuffProviderRightBottom : BuffProviderTopLeft
+		{
+			BuffArea = [4, 2, 1, 2]
+			Criteria
+			{
+				Rot = 1
+				Left = 4
+				Right = 5
+				Bottom = 4
+				Top = 2
+			}
+		}
+		BuffProviderBottomRight : BuffProviderTopLeft
+		{
+			BuffArea = [2, 4, 2, 1]
+			Criteria
+			{
+				Rot = 2
+				Left = 2
+				Right = 4
+				Bottom = 5
+//				Top = 4 // With this it also worked
+			}
+		}
+		BuffProviderBottomLeft : BuffProviderTopLeft // works
+		{
+			BuffArea = [0, 4, 2, 1]
+			Criteria
+			{
+				Rot = 2
+				Right = 2
+				Bottom = 5
+			}
+		}
+		BuffProviderLeftBottom : BuffProviderTopLeft
+		{
+			BuffArea = [-1, 2, 1, 2]
+			Criteria
+			{
+				Rot = 3
+				Right = 0
+				Bottom = 4
+				Top = 2
+			}
+		}		
+		BuffProviderLeftTop : BuffProviderTopLeft
+		{
+			BuffArea = [-1, 0, 1, 2]
+			Criteria
+			{
+				Rot = 3
+				Right = 0
+				Bottom = 2
+			}
+		}
+		
+		CentralBatteryStorage // It isn't necesarely, but adding this makes the shield less buggy.
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 0
+			DrainOnFtlJump = true
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		ModularBatteryStorageProxy
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
+			ResourceType = battery
+			ResourceStorages = [CentralBatteryStorage]
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProviderTopLeft, BuffProviderTopRight, BuffProviderRightTop, BuffProviderRightBottom, BuffProviderBottomRight, BuffProviderBottomLeft, BuffProviderLeftBottom, BuffProviderLeftTop]
+				ComponentID = BatteryStorage
+			}
+			AddMode = PrioritizeLeastResources
+			RemoveMode = PrioritizeLeastResources
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		IsModularToggle
+		{
+			Type = BuffToggle
+			BuffType = ModularShieldResistanceBonus
+		}
+		IsModularOperational
+		{
+			Type = MultiToggle
+			Toggles = [IsOperational, IsModularToggle]
+			Mode = All
+		}
+		ProgressBarModular : ProgressBar
+		{
+			ShowProgressFor = ModularBatteryStorageProxy
+			OperationalToggle = IsModularOperational
+		}
+		BatteryStorage // ModularCombinedBatteryStorage, named only BatteryStorage for easier compatibility with energy mods
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [FrontBatteryStorage, TopRightBatteryStorage, BottomRightBatteryStorage, BackBatteryStorage, BottomLeftBatteryStorage, TopLeftBatteryStorage, ModularBatteryStorageProxy]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			ToggleOnResources = 23001
+		}
+		BatteryConsumer2 : BatteryConsumer	{ Storage = ModularBatteryStorageProxy }	// If I use ModularCombinedBatteryStorage so that all batteries (including ModularBatteryStorageProxy) are in the same consumer, the ModularBatteryStorageProxy never receives energy, no idea why.
+
+		// Ends Modular Batteries
+		
+		
+		
+		
+/*
+		// Old Energy Distribution System		
+		// Front-TopRight Distribution
+		FrontTopRightCombinedBatteryStorage
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [FrontBatteryStorage, TopRightBatteryStorage]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			AddMode = PrioritizeLeastResources
+			RemoveMode = PrioritizeMostResources
+		}
+		FrontTopRightBatteryStorageRequest
+		{
+			Type = ResourceConverter
+			FromStorage = FrontTopRightCombinedBatteryStorage
+			ToStorage = FrontTopRightCombinedBatteryStorage
+			FromQuantity = 20
+			ToQuantity = 20
+			Interval = .1
+		}
+		// TopRight-BottomRight Distribution
+		TopRightBottomRightCombinedBatteryStorage : FrontTopRightCombinedBatteryStorage	{ ResourceStorages = [TopRightBatteryStorage, BottomRightBatteryStorage] }
+		TopRightBottomRightBatteryStorageRequest : FrontTopRightBatteryStorageRequest
+		{
+			FromStorage = ToprightBottomRightCombinedBatteryStorage
+			ToStorage = ToprightBottomRightCombinedBatteryStorage
+		}
+		// BottomRight-Back Distribution
+		BottomRightBackCombinedBatteryStorage : FrontTopRightCombinedBatteryStorage	{ ResourceStorages = [BottomRightBatteryStorage, BackBatteryStorage] }
+		BottomRightBackBatteryStorageRequest : FrontTopRightBatteryStorageRequest
+		{
+			FromStorage = BottomRightBackCombinedBatteryStorage
+			ToStorage = BottomRightBackCombinedBatteryStorage
+		}
+		// Back-BottomLeft Distribution
+		BackBottomLeftCombinedBatteryStorage : FrontTopRightCombinedBatteryStorage	{ ResourceStorages = [BackBatteryStorage, BottomLeftBatteryStorage] }
+		BackBottomLeftBatteryStorageRequest : FrontTopRightBatteryStorageRequest
+		{
+			FromStorage = BackBottomLeftCombinedBatteryStorage
+			ToStorage = BackBottomLeftCombinedBatteryStorage
+		}
+		// BottomLeft-TopLeft Distribution
+		BottomLeftTopLeftCombinedBatteryStorage : FrontTopRightCombinedBatteryStorage	{ ResourceStorages = [BottomLeftBatteryStorage, TopLeftBatteryStorage] }
+		BottomLeftTopLeftBatteryStorageRequest : FrontTopRightBatteryStorageRequest
+		{
+			FromStorage = BottomLeftTopLeftCombinedBatteryStorage
+			ToStorage = BottomLeftTopLeftCombinedBatteryStorage
+		}
+		// TopLeft-Front Distribution
+		TopLeftFrontCombinedBatteryStorage : FrontTopRightCombinedBatteryStorage	{ ResourceStorages = [TopLeftBatteryStorage, FrontBatteryStorage] }
+		TopLeftFrontBatteryStorageRequest : FrontTopRightBatteryStorageRequest
+		{
+			FromStorage = TopLeftFrontCombinedBatteryStorage
+			ToStorage = TopLeftFrontCombinedBatteryStorage
+		}
+*/
+
+		IsOperationalProxy
+		{
+			Type = MultiToggle
+			Toggles = [ProxyBatteryStorage]
+			Mode = All
+		}
+		
+		ProxyBatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 0
+			ToggleOnResources = 1
+			DrainOnFtlJump = true
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// ARCSHIELD ORIGINAL - START //////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		ArcShield
+		{
+			Type = ArcShield
+			Radius = 15
+			Arc = 60d
+			OperationalToggle = IsOperationalProxy
+			PenetrationResistance = [ { BaseValue= 16.66; BuffType=ModularShieldResistanceBonus; BuffMode=Add; }, 0]
+			DrainResourcesFrom = FrontBatteryStorage
+			ResourceDrainPerDamage = .4
+			Rotation = -90d
+			Location = [2, 2]
+
+//			BlueprintArcSprite : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield/BlueprintArcSprite	{}
+//			BlueprintArcSpriteSegments = 128
+
+			CoverageArcSprite : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield/CoverageArcSprite	{}
+			CoverageArcSpriteSegments = 128
+
+			ShieldMediaEffects
+			[
+				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield/ShieldMediaEffects/0
+				{
+					Radius = &~/Part/Components/ArcShield/Radius
+					Arc = &~/Part/Components/ArcShield/Arc
+					ArcSpriteSegments = 128
+				}
+				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield/ShieldMediaEffects/1	{}
+			]
+
+			HitMediaEffects = &<./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield/HitMediaEffects
+		}
+
+		EmitterEffect
+		{
+			Type = ContinuousEffects
+			ChainedTo = ArcShield
+			FactorMediaEffectsIntensityWith = CombinedBatteryStorage
+			MaxMediaEffectsZoom = 12
+			Location = [2.4, 0]
+			OperationalToggle = IsOperationalProxy
+			ParentToShip = true
+			MediaEffects
+			[
+				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/EmitterEffect/MediaEffects/0
+				{
+					Radius = 2.4
+					Arc = 360d
+					ArcSprite : ^/0/ArcSprite	 { }
+					Bucket = Upper1
+				}
+				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/EmitterEffect/MediaEffects/1	{}
+			]
+		}
+
+		ShieldOperationEffects_Front : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ShieldOperationEffects
+		{
+			Location = [&~/Part/Components/ArcShield/Radius, 0]
+			Toggle = FrontIsOperational
+		}
+		ShieldOperationEffects_TopRight : ShieldOperationEffects_Front		{ Toggle = TopRightIsOperational }
+		ShieldOperationEffects_BottomRight : ShieldOperationEffects_Front	{ Toggle = BottomRightIsOperational }
+		ShieldOperationEffects_Back : ShieldOperationEffects_Front			{ Toggle = BackIsOperational }
+		ShieldOperationEffects_BottomLeft : ShieldOperationEffects_Front	{ Toggle = BottomLeftIsOperational }
+		ShieldOperationEffects_TopLeft : ShieldOperationEffects_Front		{ Toggle = TopLeftIsOperational }
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+/*
+		Heretion explanation:
+			Purple Radius 0 On:
+				ArcShield Front: inherits from Base (changes Rotation, Operational, Storage, Shield effects and Hit effects).
+				EmitterEffect: inherit from Base (changes Operational and Media effects).
+			Colors Radius 0 On: inherits from Purple On Components.
+				ArcShield Front: from Purple On (changes Shield effects and Hit effects).
+				EmitterEffect: from Purple On (changes Media effects).
+			Everything Radius 0 Off:
+				ArcShield Front: inherits from its On version Components (changes Shield effect and Hit effects).
+			Everything Radius #: inherits from its Radius 0 version Components.
+				ArchShield Front: inherits from its Radius 0 version Components (changes radius).
+				
+			ArcShield Others: inherits from their Front version (changes Rotation, Operational and Storage).
+			ShieldOperationEffects works as normal even though it is chained to ArcShield instead of these new shields.
+*/
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD PURPLE START --------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+
+		ToggleComponents_Purple_0_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_0_On
+			IncludeInBlueprints = true
+			Components = 
+			{
+				ArcShield_Front :~/Stats/ArcShield_Front, &~/Part/Components/ArcShield
+				{
+					Radius = &~/Stats/Radius0
+					BlueprintArcSprite : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield/BlueprintArcSprite	{}
+					BlueprintArcSpriteSegments = 128
+					ShieldMediaEffects
+					[
+						: &../^/1/ShieldMediaEffects/0
+						{
+							Radius = &../../Radius
+							ArcSprite : &<../stats.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/1/ShieldMediaEffects/1 {}
+					]
+					HitMediaEffects
+					[
+						: &../^/1/HitMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Purple/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/1/HitMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_BottomLeft: ~/Stats/ArcShield_BottomLeft, ArcShield_Front		{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				STS_EmitterEffect : &~/Part/Components/EmitterEffect
+				{
+					OperationalToggle = IsOperational
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/MediaEffects/1	{}
+					]
+				}
+			}
+		}
+
+		ToggleComponents_Purple_0_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_0_Off
+			IncludeInBlueprints = false
+			Components =
+			{
+				ArcShield_Front : &../../ToggleComponents_Purple_0_On/Components/ArcShield_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_1_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_1_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius1
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_1_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_1_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius1
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_2_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_2_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius2
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_2_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_2_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius2
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_3_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_3_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius3
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_3_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_3_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius3
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_4_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_4_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius4
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_4_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_4_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius4
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_5_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_5_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius5
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_5_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_5_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius5
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_6_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_6_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius6
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_6_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_6_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius6
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_7_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_7_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius7
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Purple_7_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_7_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius7
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD PURPLE END ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD BLUE START ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+
+		ToggleComponents_Blue_0_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_0_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Purple_0_On/Components 
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Blue/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Blue/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+				STS_EmitterEffect : ^/0/STS_EmitterEffect
+				{
+					OperationalToggle = IsOperational
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Blue/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/MediaEffects/1	{}
+					]
+				}
+			}
+		}
+
+		ToggleComponents_Blue_0_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_0_Off
+			IncludeInBlueprints = false
+			Components =
+			{ 
+				ArcShield_Front : &../../ToggleComponents_Blue_0_On/Components/ArcShield_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Blue/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_1_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_1_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius1
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_1_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_1_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius1
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_2_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_2_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius2
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_2_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_2_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius2
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_3_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_3_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius3
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_3_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_3_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius3
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_4_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_4_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius4
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_4_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_4_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius4
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_5_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_5_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius5
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_5_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_5_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius5
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+		ToggleComponents_Blue_6_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_6_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius6
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_6_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_6_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius6
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_7_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_7_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius7
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Blue_7_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_7_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Blue_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius7
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD BLUE END ------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD ORANGE START --------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Orange_0_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_0_On
+			//IncludeInOrangeprints = true
+			Components : &../ToggleComponents_Purple_0_On/Components
+			{ 
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Orange/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Orange/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+				STS_EmitterEffect : ^/0/STS_EmitterEffect
+				{
+					OperationalToggle = IsOperational
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Orange/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/MediaEffects/1	{}
+					]
+				}
+			}
+		}
+
+		ToggleComponents_Orange_0_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_0_Off
+			//IncludeInOrangeprints = true
+			Components : &../ToggleComponents_Orange_0_On/Components
+			{
+				ArcShield_Front : &../../ToggleComponents_Orange_0_On/Components/ArcShield_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Orange/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_1_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_1_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius1
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_1_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_1_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius1
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_2_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_2_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius2
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_2_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_2_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius2
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_3_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_3_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius3
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_3_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_3_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius3
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_4_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_4_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius4
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_4_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_4_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius4
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_5_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_5_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius5
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_5_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_5_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius5
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_6_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_6_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius6
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_6_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_6_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius6
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_7_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_7_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius7
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Orange_7_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_7_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Orange_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius7
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD ORANGE END ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD RED START -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Red_0_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_0_On
+			//IncludeInRedprints = true
+			Components : &../ToggleComponents_Purple_0_On/Components
+			{ 
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Red/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Red/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+				STS_EmitterEffect : ^/0/STS_EmitterEffect
+				{
+					OperationalToggle = IsOperational
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Red/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/MediaEffects/1	{}
+					]
+				}
+			}
+		}
+
+		ToggleComponents_Red_0_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_0_Off
+			//IncludeInRedprints = true
+			Components =
+			{ 
+				ArcShield_Front : &../../ToggleComponents_Red_0_On/Components/ArcShield_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Red/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_1_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_1_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius1
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_1_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_1_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius1
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_2_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_2_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius2
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_2_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_2_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius2
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_3_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_3_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius3
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_3_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_3_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius3
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_4_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_4_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius4
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_4_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_4_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius4
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_5_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_5_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius5
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_5_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_5_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius5
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_6_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_6_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius6
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_6_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_6_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius6
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_7_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_7_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius7
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Red_7_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Red_7_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Red_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius7
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD RED END -------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD YELLOW START --------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Yellow_0_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_0_On
+			//IncludeInYellowprints = true
+			Components : &../ToggleComponents_Purple_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Yellow/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Yellow/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+				STS_EmitterEffect : ^/0/STS_EmitterEffect
+				{
+					OperationalToggle = IsOperational
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Yellow/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/MediaEffects/1	{}
+					]
+				}
+			}
+		}
+
+		ToggleComponents_Yellow_0_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_0_Off
+			//IncludeInYellowprints = true
+			Components =
+			{ 
+				ArcShield_Front : &../../ToggleComponents_Yellow_0_On/Components/ArcShield_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Yellow/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_1_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_1_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius1
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_1_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_1_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius1
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_2_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_2_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius2
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_2_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_2_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius2
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_3_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_3_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius3
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_3_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_3_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius3
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_4_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_4_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius4
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_4_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_4_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius4
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_5_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_5_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius5
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_5_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_5_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius5
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_6_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_6_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius6
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_6_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_6_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius6
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_7_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_7_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius7
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Yellow_7_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Yellow_7_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Yellow_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius7
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD YELLOW END ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD GREEN START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Green_0_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_0_On
+			//IncludeInGreenprints = true
+			Components : &../ToggleComponents_Purple_0_On/Components
+			{ 
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Green/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Green/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+				STS_EmitterEffect : ^/0/STS_EmitterEffect
+				{
+					OperationalToggle = IsOperational
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Green/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/MediaEffects/1	{}
+					]
+				}
+			}
+		}
+
+		ToggleComponents_Green_0_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_0_Off
+			//IncludeInGreenprints = true
+			Components =
+			{ 
+				ArcShield_Front : &../../ToggleComponents_Green_0_On/Components/ArcShield_Front
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../stats.rules>/Color/Green/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front	{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front	{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front	{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_1_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_1_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius1
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_1_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_1_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius1
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_2_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_2_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius2
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_2_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_2_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius2
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_3_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_3_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius3
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_3_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_3_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius3
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_4_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_4_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius4
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_4_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_4_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius4
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_5_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_5_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius5
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_5_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_5_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius5
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_6_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_6_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius6
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_6_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_6_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius6
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_7_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_7_On
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_On/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius7
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		ToggleComponents_Green_7_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Green_7_Off
+			IncludeInBlueprints = false
+			Components : &../ToggleComponents_Green_0_Off/Components
+			{
+				ArcShield_Front : ^/0/ArcShield_Front
+				{
+					Radius = &~/Stats/Radius7
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0 { Radius = &../../Radius }
+						: &../^/0/ShieldMediaEffects/1 {}
+					]
+				}
+				ArcShield_TopRight : ~/Stats/ArcShield_TopRight, ArcShield_Front		{}
+				ArcShield_BottomRight : ~/Stats/ArcShield_BottomRight, ArcShield_Front	{}
+				ArcShield_Back : ~/Stats/ArcShield_Back, ArcShield_Front				{}
+				ArcShield_TopLeft : ~/Stats/ArcShield_TopLeft, ArcShield_Front			{}
+				ArcShield_BottomLeft : ~/Stats/ArcShield_BottomLeft, ArcShield_Front	{}
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD GREEN END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		Shield_Doodad_Graphics
+		{
+			Type = Graphics
+			Location = [2, 2]
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				//Offset = [0, 0]
+				DamageLevels
+				[
+					{
+						File = "doodad_axe.png"
+						NormalsFile = "doodad_axe_normals.png"
+						Size = [2, 2]
+						RotSpeed = &<../stats.rules>/StatsCommon/DoodadAxe_RotSpeed_0DMG
+					}
+					{
+						File = "doodad_axe_33.png"
+						NormalsFile = "doodad_axe_normals_33.png"
+						Size = [2, 2]
+						RotSpeed = &<../stats.rules>/StatsCommon/DoodadAxe_RotSpeed_33DMG
+					}
+					{
+						File = "doodad_axe_66.png"
+						NormalsFile = "doodad_axe_normals_66.png"
+						Size = [2, 2]
+						RotSpeed = &<../stats.rules>/StatsCommon/DoodadAxe_RotSpeed_66DMG
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "doodads_high"
+				DamageLevels
+				[
+					{
+						File = "doodad_axe.png"
+						NormalsFile = "doodad_axe_normals.png"
+						Size = [2, 2]
+					}
+					{
+						File = "doodad_axe_33.png"
+						NormalsFile = "doodad_axe_normals_33.png"
+						Size = [2, 2]
+					}
+					{
+						File = "doodad_axe_66.png"
+						NormalsFile = "doodad_axe_normals_66.png"
+						Size = [2, 2]
+					}
+				]
+			}
+		}
+		
+		Shield_Doodad_Graphics_2
+		{
+			Type = Graphics
+			Location = [2, 2]
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				//Offset = [0, 0]
+				DamageLevels
+				[
+					{
+						File = "doodad_big_axe.png"
+						NormalsFile = "doodad_big_axe_normals.png"
+						Size = [3, 3]
+						RotSpeed = &<../stats.rules>/StatsCommon/DoodadAxe2_RotSpeed_0DMG
+					}
+					{
+						File = "doodad_big_axe_33.png"
+						NormalsFile = "doodad_big_axe_normals_33.png"
+						Size = [3, 3]
+						RotSpeed = &<../stats.rules>/StatsCommon/DoodadAxe2_RotSpeed_33DMG
+					}
+					{
+						File = "doodad_big_axe_66.png"
+						NormalsFile = "doodad_big_axe_normals_66.png"
+						Size = [3, 3]
+						RotSpeed = &<../stats.rules>/StatsCommon/DoodadAxe2_RotSpeed_66DMG
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "doodads_high"
+				DamageLevels
+				[
+					{
+						File = "doodad_big_axe.png"
+						NormalsFile = "doodad_big_axe_normals.png"
+						Size = [3, 3]
+					}
+					{
+						File = "doodad_big_axe_33.png"
+						NormalsFile = "doodad_big_axe_normals_33.png"
+						Size = [3, 3]
+					}
+					{
+						File = "doodad_big_axe_66.png"
+						NormalsFile = "doodad_big_axe_normals_66.png"
+						Size = [3, 3]
+					}
+				]
+			}
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [2, 2]
+			OperationalToggle = IsOperational
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [4, 4]
+					}
+					{
+						File = "floor_33.png"
+						Size = [4, 4]
+					}
+					{
+						File = "floor_66.png"
+						Size = [4, 4]
+					}
+				]
+			}
+			
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [4, 4]
+					}
+					{
+						File = "walls_33.png"
+						Size = [4, 4]
+					}
+					{
+						File = "walls_66.png"
+						Size = [4, 4]
+					}
+				]
+			}
+			
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						NormalsFile = "roof_normals.png"
+						Size = [4, 4]
+					}
+					{
+						File = "roof_33.png"
+						NormalsFile = "roof_normals_33.png"
+						Size = [4, 4]
+					}
+					{
+						File = "roof_66.png"
+						NormalsFile = "roof_normals_66.png"
+						Size = [4, 4]
+					}
+				]
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS PURPLE START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STL_Graphics_Purple
+		{
+			Type = ToggledComponents
+			Toggle = ToggleColours_Purple
+			IncludeInBlueprints = false
+			Components = 
+			{
+				K_Graphics_Purple : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"purple/doodads_lightning1.png"
+									"purple/doodads_lightning2.png"
+									"purple/doodads_lightning3.png"
+									"purple/doodads_lightning4.png"
+									"purple/doodads_lightning5.png"
+									"purple/doodads_lightning6.png"
+									"purple/doodads_lightning7.png"
+									"purple/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"purple/doodads_lightning1.png"
+									"purple/doodads_lightning2.png"
+									"purple/doodads_lightning3.png"
+									"purple/doodads_lightning4.png"
+									"purple/doodads_lightning5.png"
+									"purple/doodads_lightning6.png"
+									"purple/doodads_lightning7.png"
+									"purple/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"purple/doodads_lightning1.png"
+									"purple/doodads_lightning2.png"
+									"purple/doodads_lightning3.png"
+									"purple/doodads_lightning4.png"
+									"purple/doodads_lightning5.png"
+									"purple/doodads_lightning6.png"
+									"purple/doodads_lightning7.png"
+									"purple/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "purple/lights.png"
+								Size = [4, 4]
+							}
+						]
+					}
+					
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1
+								VertexColor = [195*1.5, 60*1.5, 255*1.5, 100]
+							}
+						]
+					}
+				}
+			}
+		}
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS PURPLE END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS BLUE START -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STL_Graphics_Blue
+		{
+			Type = ToggledComponents
+			Toggle = ToggleColours_Blue
+			IncludeInBlueprints = false
+			Components = 
+			{
+				K_Graphics_Blue : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"blue/doodads_lightning1.png"
+									"blue/doodads_lightning2.png"
+									"blue/doodads_lightning3.png"
+									"blue/doodads_lightning4.png"
+									"blue/doodads_lightning5.png"
+									"blue/doodads_lightning6.png"
+									"blue/doodads_lightning7.png"
+									"blue/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"blue/doodads_lightning1.png"
+									"blue/doodads_lightning2.png"
+									"blue/doodads_lightning3.png"
+									"blue/doodads_lightning4.png"
+									"blue/doodads_lightning5.png"
+									"blue/doodads_lightning6.png"
+									"blue/doodads_lightning7.png"
+									"blue/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"blue/doodads_lightning1.png"
+									"blue/doodads_lightning2.png"
+									"blue/doodads_lightning3.png"
+									"blue/doodads_lightning4.png"
+									"blue/doodads_lightning5.png"
+									"blue/doodads_lightning6.png"
+									"blue/doodads_lightning7.png"
+									"blue/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "blue/lights.png"
+								Size = [4, 4]
+							}
+						]
+					}
+					
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1
+								VertexColor = [0, 0, 255*1.5, 100]
+							}
+						]
+					}
+				}
+			}
+		}
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS BLUE END -------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS ORANGE START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STL_Graphics_Orange
+		{
+			Type = ToggledComponents
+			Toggle = ToggleColours_Orange
+			//IncludeInorangeprints = true
+			Components = 
+			{
+				K_Graphics_Orange : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"orange/doodads_lightning1.png"
+									"orange/doodads_lightning2.png"
+									"orange/doodads_lightning3.png"
+									"orange/doodads_lightning4.png"
+									"orange/doodads_lightning5.png"
+									"orange/doodads_lightning6.png"
+									"orange/doodads_lightning7.png"
+									"orange/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"orange/doodads_lightning1.png"
+									"orange/doodads_lightning2.png"
+									"orange/doodads_lightning3.png"
+									"orange/doodads_lightning4.png"
+									"orange/doodads_lightning5.png"
+									"orange/doodads_lightning6.png"
+									"orange/doodads_lightning7.png"
+									"orange/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"orange/doodads_lightning1.png"
+									"orange/doodads_lightning2.png"
+									"orange/doodads_lightning3.png"
+									"orange/doodads_lightning4.png"
+									"orange/doodads_lightning5.png"
+									"orange/doodads_lightning6.png"
+									"orange/doodads_lightning7.png"
+									"orange/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "orange/lights.png"
+								Size = [4, 4]
+							}
+						]
+					}
+					
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1
+								VertexColor = [255*1.5, 150*1.5, 0, 100]
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS ORANGE END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS RED START ------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STL_Graphics_Red
+		{
+			Type = ToggledComponents
+			Toggle = ToggleColours_Red
+			//IncludeInredprints = true
+			Components = 
+			{
+				K_Graphics_Red : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"red/doodads_lightning1.png"
+									"red/doodads_lightning2.png"
+									"red/doodads_lightning3.png"
+									"red/doodads_lightning4.png"
+									"red/doodads_lightning5.png"
+									"red/doodads_lightning6.png"
+									"red/doodads_lightning7.png"
+									"red/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"red/doodads_lightning1.png"
+									"red/doodads_lightning2.png"
+									"red/doodads_lightning3.png"
+									"red/doodads_lightning4.png"
+									"red/doodads_lightning5.png"
+									"red/doodads_lightning6.png"
+									"red/doodads_lightning7.png"
+									"red/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"red/doodads_lightning1.png"
+									"red/doodads_lightning2.png"
+									"red/doodads_lightning3.png"
+									"red/doodads_lightning4.png"
+									"red/doodads_lightning5.png"
+									"red/doodads_lightning6.png"
+									"red/doodads_lightning7.png"
+									"red/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "red/lights.png"
+								Size = [4, 4]
+							}
+						]
+					}
+					
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1
+								VertexColor = [255*1.5, 0, 0, 100]
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS RED END --------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS YELLOW START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STL_Graphics_Yellow
+		{
+			Type = ToggledComponents
+			Toggle = ToggleColours_Yellow
+			//IncludeInYellowprints = true
+			Components = 
+			{
+				K_Graphics_Yellow : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"Yellow/doodads_lightning1.png"
+									"Yellow/doodads_lightning2.png"
+									"Yellow/doodads_lightning3.png"
+									"Yellow/doodads_lightning4.png"
+									"Yellow/doodads_lightning5.png"
+									"Yellow/doodads_lightning6.png"
+									"Yellow/doodads_lightning7.png"
+									"Yellow/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"Yellow/doodads_lightning1.png"
+									"Yellow/doodads_lightning2.png"
+									"Yellow/doodads_lightning3.png"
+									"Yellow/doodads_lightning4.png"
+									"Yellow/doodads_lightning5.png"
+									"Yellow/doodads_lightning6.png"
+									"Yellow/doodads_lightning7.png"
+									"Yellow/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"Yellow/doodads_lightning1.png"
+									"Yellow/doodads_lightning2.png"
+									"Yellow/doodads_lightning3.png"
+									"Yellow/doodads_lightning4.png"
+									"Yellow/doodads_lightning5.png"
+									"Yellow/doodads_lightning6.png"
+									"Yellow/doodads_lightning7.png"
+									"Yellow/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "Yellow/lights.png"
+								Size = [4, 4]
+							}
+						]
+					}
+					
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1
+								VertexColor = [255*1.5, 255*1.5, 0, 100]
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS YELLOW END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS GREEN START ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_STL_Graphics_Green
+		{
+			Type = ToggledComponents
+			Toggle = ToggleColours_Green
+			//IncludeInGreenprints = true
+			Components = 
+			{
+				K_Graphics_Green : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"green/doodads_lightning1.png"
+									"green/doodads_lightning2.png"
+									"green/doodads_lightning3.png"
+									"green/doodads_lightning4.png"
+									"green/doodads_lightning5.png"
+									"green/doodads_lightning6.png"
+									"green/doodads_lightning7.png"
+									"green/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"green/doodads_lightning1.png"
+									"green/doodads_lightning2.png"
+									"green/doodads_lightning3.png"
+									"green/doodads_lightning4.png"
+									"green/doodads_lightning5.png"
+									"green/doodads_lightning6.png"
+									"green/doodads_lightning7.png"
+									"green/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"green/doodads_lightning1.png"
+									"green/doodads_lightning2.png"
+									"green/doodads_lightning3.png"
+									"green/doodads_lightning4.png"
+									"green/doodads_lightning5.png"
+									"green/doodads_lightning6.png"
+									"green/doodads_lightning7.png"
+									"green/doodads_lightning8.png"
+								]
+								Size = [1, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "green/lights.png"
+								Size = [4, 4]
+							}
+						]
+					}
+					
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1
+								VertexColor = [0, 255*1.5, 0, 100]
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS GREEN END ------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		BatterySprites
+		{
+			Type = ResourceSprites
+			Location = [2, 2]
+			ResourceStorage = CombinedBatteryStorage
+			Layer = "doodads_low"
+			ResourceLevels
+			[
+				{
+					File = "batteries1.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries2.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries3.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries4.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries5.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries6.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries7.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries8.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries9.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries10.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries11.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries12.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries13.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries14.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries15.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries16.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries17.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries18.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries19.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries20.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries21.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries22.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries23.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries24.png"
+					Size = [4, 4]
+				}
+			]
+		}
+				
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/PowerOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/PowerOff
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/MedPartDestroyed
+			Location = [2, 2]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [2, 2]
+			Layer = "indicators"
+			Indicators
+			[
+				// Turned off.
+				{
+					Toggle = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1, 1]
+					}
+				}
+
+				// Out of power.
+				{
+					Toggle = BatteryStorage // ModularCombinedBatteryStorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1, 1]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [4, 4]
+		}
+	}
+
+	Stats
+	{
+		ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0/BaseValue
+		ShieldDist = (&~/Part/Components/ArcShield/Radius) - (&~/Part/Components/ArcShield/Location/1)
+		ShieldSegments = 6
+		ShieldHPSegment = (&~/Part/Components/FrontBatteryStorage/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage)
+		PowerUsageContinuous = (&~/Part/Components/FrontPowerDrain/FromQuantity) / (&~/Part/Components/FrontPowerDrain/Interval) / 1000 * (&ShieldSegments)
+		SegmentCapacity = (&~/Part/Components/FrontBatteryStorage/MaxResources) / 1000
+		PowerCapacity = (&SegmentCapacity) * (&ShieldSegments)
+
+		RecPower = (&PowerUsageContinuous) + 0.5
+		RecCrew = (&RecPower) * 4
+	}
+	
+	StatsNotesKey = "Stats/BubbleNotes"
+}
+
+Stats
+{
+	// Front ArcShield is base and so it doesn't appear here
+	ArcShield_Front
+	{
+		Rotation = -90d
+		OperationalToggle = FrontIsOperational
+		DrainResourcesFrom = CombinedFrontBatteryStorage
+	}
+	ArcShield_TopRight
+	{
+		Rotation = -30d
+		OperationalToggle = TopRightIsOperational
+		DrainResourcesFrom = CombinedTopRightBatteryStorage
+	}
+	ArcShield_BottomRight
+	{
+		Rotation = 30d
+		OperationalToggle = BottomRightIsOperational
+		DrainResourcesFrom = CombinedBottomRightBatteryStorage
+	}
+	ArcShield_Back
+	{
+		Rotation = 90d
+		OperationalToggle = BackIsOperational
+		DrainResourcesFrom = CombinedBackBatteryStorage
+	}
+	ArcShield_TopLeft
+	{
+		Rotation = 150d
+		OperationalToggle = TopLeftIsOperational
+		DrainResourcesFrom = CombinedTopLeftBatteryStorage
+	}
+	ArcShield_BottomLeft
+	{
+		Rotation = 210d
+		OperationalToggle = BottomLeftIsOperational
+		DrainResourcesFrom = CombinedBottomLeftBatteryStorage
+	}
+	Radius0 = 15
+	Radius1 = 16
+	Radius2 = 17
+	Radius3 = 18
+	Radius4 = 19
+	Radius5 = 20
+	Radius6 = 21
+	Radius7 = 22
+}

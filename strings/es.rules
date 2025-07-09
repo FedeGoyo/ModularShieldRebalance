@@ -1,0 +1,104 @@
+__Name = "Español"
+__DebugOnly = false
+
+
+Parts
+{
+	KebechetTINYmodularShield = "Generador de Escudo Diminuto"
+	KebechetTINYmodularShieldIcon = "Escudo Diminuto"
+	KebechetTINYmodularShieldDesc = 	"Proyecta un diminuto escudo de energía defensivo frontal por fuera de la nave que bloquea la mayoría del fuego entrante. Vulnerable a disruptores y EMP.\n"\
+										"Debido a su pequeño alcance y resistencia, ha sido reforzado para soportar impactos directos, lo que lo hace adecuado para ser utilizado en los bordes de la nave.\n\n"\
+										"Alternativamente, se puede colocar adjacente a los generadores de escudos de burbuja, lo que proporciona resistencia a la penetración adicional y salud adicional que se comparte entre todos los segmentos. Hacerlo previene a este generador proyectar su escudo de energía.\n"\
+										"El generador debe colocarse de modo que sus dos cuadriculas inferiores estén en contacto con el generador de burbuja. En los generadores de burbujas grandes, este módulo no se puede colocar en la mitad de los lados".
+
+	KebechetSTSmodularShield = "Pequeño Generador de Escudo de Burbuja"
+	KebechetSTSmodularShieldIcon = "Pequeño Escudo de Burbuja"
+	KebechetSTSmodularShieldDesc = 	"Proyecta un pequeño escudo de energía defensiva en un círculo fuera de la nave, bloqueando la mayoría de los disparos entrantes. Vulnerable a disruptores y EMP.\n\n"\
+									"El escudo de burbuja está dividido en 4 segmentos con salud y energía independientes. Los generadores de escudos diminutos adyacentes pueden proporcionar resistencia a la penetración adicional y salud global adicional.\n\n"\
+									"El escudo de energía se puede proyectar a través de la propia nave, permitiendo que el generador de escudo pequeño de burbuja se incorpore al interior protegido de la nave."
+
+	KebechetSTLmodularShield = "Grande Generador de Escudo de Burbuja"
+	KebechetSTLmodularShieldIcon = "Grande Escudo de Burbuja"
+	KebechetSTLmodularShieldDesc = 	"Proyecta un gran escudo de energía defensiva en un círculo fuera de la nave, bloqueando la mayoría de los disparos entrantes. Vulnerable a disruptores y EMP.\n\n"\
+									"El escudo de burbuja está dividido en 6 segmentos con salud y energía independientes. Los generadores de escudos diminutos adyacentes pueden proporcionar resistencia a la penetración adicional y salud global adicional.\n\n"\
+									"El escudo de energía se puede proyectar a través de la propia nave, permitiendo que el generador de escudo grande de burbuja se incorpore al interior protegido de la nave."
+}
+
+PartToggles
+{
+	btt_Kebechet_Display_On = "Visible"
+	btt_Kebechet_Display_Off = "Oculto"
+	
+	btt_Kebechet_Radius_On = "<b>Expandir Radio</b>\n"\
+							"Expande el radio de escudos burbuja modulares.\n\n"\
+							"<white>Radio:</white> <good>+1</good> <gray>metros</gray>"
+	
+	btt_Kebechet_Radius_Off = "<b>No Expandir Radio</b>\n"\
+							"No expande el radio de escudos burbuja modulares."
+	
+	btt_Kebechet_Colours_Purple = "Purpura"
+	btt_Kebechet_Colours_Blue = "Azul"
+	btt_Kebechet_Colours_Orange = "Naranja"
+	btt_Kebechet_Colours_Red = "Rojo"
+	btt_Kebechet_Colours_Yellow = "Amarillo"
+	btt_Kebechet_Colours_Green = "Verde"
+	
+	btt_Kebechet_GENS_Angle90LeftArc = "<b>Arco Izquierdo</b>\n\n"\
+										"<white>Distancia del escudo:</white> <good>6</good> <gray>metros</gray>\n"\
+										"<white>Arco del escudo:</white> <good>90º</good>\n"\
+										"<white>Arco (Sobrecargado):</white> <good>45º</good>\n"\
+										"<white>Rotación del escudo:</white> <good>-27.5º</good>"
+	btt_Kebechet_GENS_Angle90FrontArc = "<b>Arco Frontal</b>\n\n"\
+										"<white>Distancia del escudo:</white> <good>6</good> <gray>metros</gray>\n"\
+										"<white>Arco del escudo:</white> <good>90º</good>\n"\
+										"<white>Arco (Sobrecargado):</white> <good>45º</good>\n"\
+										"<white>Rotación del escudo:</white> <good>0º</good>"
+	btt_Kebechet_GENS_Angle90RightArc = "<b>Arco Derecho</b>\n\n"\
+										"<white>Distancia del escudo:</white> <good>6</good> <gray>metros</gray>\n"\
+										"<white>Arco del escudo:</white> <good>90º</good>\n"\
+										"<white>Arco (Sobrecargado):</white> <good>45º</good>\n"\
+										"<white>Rotación del escudo:</white> <good>+27.5º</good>"
+	btt_Kebechet_GENS_Angle22LeftLine = "<b>Linea Izquierda</b>\n\n"\
+										"<white>Distancia del escudo:</white> <good>5.5</good> <gray>metros</gray>\n"\
+										"<white>Longitud del escudo:</white> <good>10.6</good> <gray>metros</gray>\n"\
+										"<white>Longitud (Sobrecargado):</white> <good>10.6</good> <gray>metros</gray>\n"\
+										"<white>Ángulo del escudo:</white> <good>-19.7º</good>"
+	btt_Kebechet_GENS_Angle90FrontLine = "<b>Linea Frontral</b>\n\n"\
+										"<white>Distancia del escudo:</white> <good>5.5</good> <gray>metros</gray>\n"\
+										"<white>Longitud del escudo:</white> <good>10.6</good> <gray>metros</gray>\n"\
+										"<white>Longitud (Sobrecargado):</white> <good>10.6</good> <gray>metros</gray>\n"\
+										"<white>Ángulo del escudo:</white> <good>0º</good>"
+	btt_Kebechet_GENS_Angle22RightLine = "<b>Linea Derecha</b>\n\n"\
+										"<white>Distancia del escudo:</white> <good>5.5</good> <gray>metros</gray>\n"\
+										"<white>Longitud del escudo:</white> <good>10.6</good> <gray>metros</gray>\n"\
+										"<white>Longitud (Sobrecargado):</white> <good>10.6</good> <gray>metros</gray>\n"\
+										"<white>Ángulo del escudo:</white> <good>+19.7º</good>"
+	
+	btt_Kebechet_GENL_Angle90LeftArc = "<b>Arco Izquierdo</b>\n\n"\
+										"<white>Rotación del escudo:</white> <good>-50º</good>"
+	btt_Kebechet_GENL_Angle90FrontArc = "<b>Arco Frontal</b>\n\n"\
+										"<white>Rotación del escudo:</white> <good>0º</good>"
+	btt_Kebechet_GENL_Angle90RightArc = "<b>Arco Derecho</b>\n\n"\
+										"<white>Rotación del escudo:</white> <good>+50º</good>"
+}
+
+Stats
+{
+	ShieldHPSegmentFmt = "<white>Resistencia del escudo:</white> <good>{0:n0}</good> <gray>por segmento</gray>"
+	ShieldSegmentsFmt = "<white>Segmentos del escudo:</white> <good>{0:n0}</good>"
+	ShieldRingsFmt = "<white>Anillos del escudo:</white> <good>{0:n0}</good>"
+	ShieldDistRingsFmt = "<white>Shield Rings Distance:</white> <good>{0:n0}</good> <gray>metros</gray>"
+	ShieldLengthFmT = "<white>Longitud del escudo:</white> <good>{0:n0}</good> <gray>metros</gray>"
+	ShieldRegenFmT = "<white>Regeneración del escudo:</white> <good>{0:n0}</good> <gray>resistencia/s</gray>"
+	BubbleNotes = "<gray>NOTA: La resistencia a la penetración y el uso de energía se incrementan con cada Generador de Escudo Diminuto adicional. Además, ellos proveen un bono de salud global al escudo</gray>"
+}
+
+StarterShips
+{
+	ModelB = "El Modelo-B cede almacenamiento y tamaño en favor de un generador de escudo defensivo que puede bloquear el fuego enemigo desde todas las direcciones."
+}
+
+BuildBox
+{
+	BuffResistanceFmt = "<good>+{0:0}</good> <white>Resistencia</white>"
+}

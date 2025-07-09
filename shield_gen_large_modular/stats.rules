@@ -1,0 +1,99 @@
+Angle
+{
+	FrontArc160
+	{
+		ArcShield
+		{
+			Radius = 13
+			Arc : &<shield_gen_large_modular.rules>/Part/Components/ArcShield/Arc
+			{
+				BaseValue = 160d
+			}
+			Rotation = -90d
+			Location = [1.5, 1.5]
+		}
+		ShieldMediaEffects
+		{
+			Radius = &../ArcShield/Radius
+			Arc = &../ArcShield/Arc
+		}
+		HitMediaEffects
+		{
+			Radius = &../ArcShield/Radius
+			Arc = 20d
+		}
+	}
+	LeftArc160
+	{
+		ArcShield
+		{
+			Radius = 13
+			Arc : &<shield_gen_large_modular.rules>/Part/Components/ArcShield/Arc
+			{
+				BaseValue = 160d
+			}
+			Rotation = -140d
+			Location = [1.5, 1.5]
+		}
+		ShieldMediaEffects
+		{
+			Radius = &../ArcShield/Radius
+			Arc = &../ArcShield/Arc
+		}
+		HitMediaEffects
+		{
+			Radius = &../ArcShield/Radius
+			Arc = 20d
+		}
+	}
+	RightArc160
+	{
+		ArcShield
+		{
+			Radius = 13
+			Arc : &<shield_gen_large_modular.rules>/Part/Components/ArcShield/Arc
+			{
+				BaseValue = 160d
+			}
+			Rotation = -40d
+			Location = [1.5, 1.5]
+		}
+		ShieldMediaEffects
+		{
+			Radius = &../ArcShield/Radius
+			Arc = &../ArcShield/Arc
+		}
+		HitMediaEffects
+		{
+			Radius = &../ArcShield/Radius
+			Arc = 20d
+		}
+	}
+}
+
+/*
+		Purple 90 On:
+				ArcShield: inherits from Base (changes Operational, Shield effects and Hit effects).
+				EmitterEffect: inherit from Base (changes Operational and Media effects).
+				Overclock/Overload: inherits from Base (changes Radius, Arc and chained).
+			Purple On Angles: inherit from Purple 90 On Components.
+				ArcShield: from Purple 90 On (changes Rotation, Radius and Arc).
+				EmitterEffect: through component.
+				Overclock/Overload: from Purple 90 On (changes Radius, Arc and chained).
+			Colors 90 On: inherits from Purple 90 On Components.
+				ArcShield: from Purple 90 On (changes Shield effects and Hit effects).
+				EmitterEffect: from Purple 90 On (changes Media effects).
+				Overclock/Overload: from Purple 90 On.
+			Colors Angles On: inherits from Color 90 On Components.
+				ArcShield: from Color 90 On (changes Rotation, Radius and Arc).
+				EmitterEffect: from Color 90 On component.
+				Overclock/Overload: from Purple On Angles.
+			Everything Off:
+				ArcShield: inherits from its On version (changes Shield effect and Hit effects).
+				EmitterEffect: doesn't exist.
+				Overclock/Overload: doesn't exist
+			
+			ShieldOperationEffects works as normal even though it is chained to ArcShield and uses IsOperationalProxy instead of these new shields (it doesn't appear it inherits from Components).
+			
+			The overclocking/overdrive parts work normally in the 90LeftArc and 90RightArc, no idea why but just in case I also put the code there as with the other arcs.
+*/

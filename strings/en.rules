@@ -1,0 +1,103 @@
+__Name = "English"
+__DebugOnly = false
+
+Parts
+{
+	KebechetTINYmodularShield = "Tiny Shield Generator"
+	KebechetTINYmodularShieldIcon = "Tiny Shield"
+	KebechetTINYmodularShieldDesc = 	"Projects a tiny frontal defensive energy shield outside the ship, blocking most incoming fire. Vulnerable to Disruptors and EMPs.\n"\
+										"Due to its tiny range and strength, it has been reinforced to stand direct impacts, making it suitable to be used at the ship's edges.\n\n"\
+										"Alternatively, it can be placed adjacent to Bubble Shields Generators, providing additional penetration resistance and extra health that is shared among all the segments. Doing so prevents this generator from projecting its energy shield.\n"\
+										"The generator must be placed having both of its bottom tiles in contact with the bubble generator. In large bubble generators, this module can't be placed at the middle of the sides."
+
+	KebechetSTSmodularShield = "Small Bubble Shield Generator"
+	KebechetSTSmodularShieldIcon = "Small Bubble Shield"
+	KebechetSTSmodularShieldDesc = 	"Projects a small defensive energy shield in a circle outside the ship, blocking most incoming fire. Vulnerable to Disruptors and EMPs.\n\n"\
+									"The bubble shield is divided into 4 segments with separate health and energy. Adjacent Tiny Shield Generators can provide additional penetration resistance and extra global health.\n\n"\
+									"The energy shield can be projected through the ship itself, allowing the Small Bubble Shield Generator to be built within the ship's protected interior."
+									
+	KebechetSTLmodularShield = "Large Bubble Shield Generator"
+	KebechetSTLmodularShieldIcon = "Large Bubble Shield"
+	KebechetSTLmodularShieldDesc = 	"Projects a large defensive energy shield in a circle outside the ship, blocking most incoming fire. Vulnerable to Disruptors and EMPs.\n\n"\
+									"The bubble shield is divided into 6 segments with separate health and energy. Adjacent Tiny Shield Generators can provide additional penetration resistance and extra global health.\n\n"\
+									"The energy shield can be projected through the ship itself, allowing the Large Bubble Shield Generator to be built within the ship's protected interior."
+}
+
+PartToggles
+{
+	btt_Kebechet_Display_On = "Visible"
+	btt_Kebechet_Display_Off = "Hidden"
+	
+	btt_Kebechet_Radius_On = "<b>Expand Radius</b>\n"\
+							"Expands the radius of modular bubble shields.\n\n"\
+							"<white>Radius:</white> <good>+1</good><gray>m</gray>"
+	
+	btt_Kebechet_Radius_Off = "<b>Doesn't Expand Radius</b>\n"\
+							"Doesn't expand the radius of modular bubble shields."
+	
+	btt_Kebechet_Colours_Purple = "Purple"
+	btt_Kebechet_Colours_Blue = "Blue"
+	btt_Kebechet_Colours_Orange = "Orange"
+	btt_Kebechet_Colours_Red = "Red"
+	btt_Kebechet_Colours_Yellow = "Yellow"
+	btt_Kebechet_Colours_Green = "Green"
+	
+	btt_Kebechet_GENS_Angle90LeftArc = "<b>Left Arc</b>\n\n"\
+										"<white>Shield Distance:</white> <good>6</good> <gray>meters</gray>\n"\
+										"<white>Shield Arc:</white> <good>90º</good>\n"\
+										"<white>(Overclocked) Arc:</white> <good>45º</good>\n"\
+										"<white>Shield Rotation:</white> <good>-27.5º</good>"
+	btt_Kebechet_GENS_Angle90FrontArc = "<b>Front Arc</b>\n\n"\
+										"<white>Shield Distance:</white> <good>6</good> <gray>meters</gray>\n"\
+										"<white>Shield Arc:</white> <good>90º</good>\n"\
+										"<white>(Overclocked) Arc:</white> <good>45º</good>\n"\
+										"<white>Shield Rotation:</white> <good>0º</good>"
+	btt_Kebechet_GENS_Angle90RightArc = "<b>Right Arc</b>\n\n"\
+										"<white>Shield Distance:</white> <good>6</good> <gray>meters</gray>\n"\
+										"<white>Shield Arc:</white> <good>90º</good>\n"\
+										"<white>(Overclocked) Arc:</white> <good>45º</good>\n"\
+										"<white>Shield Rotation:</white> <good>+27.5º</good>"
+	btt_Kebechet_GENS_Angle22LeftLine = "<b>Left Line</b>\n\n"\
+										"<white>Shield Distance:</white> <good>5.5</good> <gray>meters</gray>\n"\
+										"<white>Shield Length:</white> <good>10.6</good> <gray>meters</gray>\n"\
+										"<white>(Overclocked) Length:</white> <good>5.74</good> <gray>meters</gray>\n"\
+										"<white>Shield Angle:</white> <good>-19.7º</good>"
+	btt_Kebechet_GENS_Angle90FrontLine = "<b>Front Line</b>\n\n"\
+										"<white>Shield Distance:</white> <good>5.5</good> <gray>meters</gray>\n"\
+										"<white>Shield Length:</white> <good>10.6</good> <gray>meters</gray>\n"\
+										"<white>(Overclocked) Length:</white> <good>5.74</good> <gray>meters</gray>\n"\
+										"<white>Shield Angle:</white> <good>0º</good>"
+	btt_Kebechet_GENS_Angle22RightLine = "<b>Right Line</b>\n\n"\
+										"<white>Shield Distance:</white> <good>5.5</good> <gray>meters</gray>\n"\
+										"<white>Shield Length:</white> <good>10.6</good> <gray>meters</gray>\n"\
+										"<white>(Overclocked) Length:</white> <good>5.74</good> <gray>meters</gray>\n"\
+										"<white>Shield Angle:</white> <good>+19.7º</good>"
+	
+	btt_Kebechet_GENL_Angle90LeftArc = "<b>Left Arc</b>\n\n"\
+										"<white>Shield Rotation:</white> <good>-50º</good>"
+	btt_Kebechet_GENL_Angle90FrontArc = "<b>Front Arc</b>\n\n"\
+										"<white>Shield Rotation:</white> <good>0º</good>"
+	btt_Kebechet_GENL_Angle90RightArc = "<b>Right Arc</b>\n\n"\
+										"<white>Shield Rotation:</white> <good>+50º</good>"
+}
+
+Stats
+{
+	ShieldHPSegmentFmt = "<white>Shield Strength:</white> <good>{0:n0}</good> <gray>per segment</gray>"
+	ShieldSegmentsFmt = "<white>Shield Segments:</white> <good>{0:n0}</good>"
+	ShieldRingsFmt = "<white>Shield Rings:</white> <good>{0:n0}</good>"
+	ShieldDistRingsFmt = "<white>Shield Rings Distance:</white> <good>{0:n0}</good> <gray>meters</gray>"
+	ShieldLengthFmT = "<white>Shield Length:</white> <good>{0:n0}</good> <gray>meters</gray>"
+	ShieldRegenFmT = "<white>Shield Regen:</white> <good>{0:n0}</good> <gray>strength/sec</gray>"
+	BubbleNotes = "<gray>NOTE: Penetration Resistance and Power Usage are increased with each additional Tiny Shield Generator. Also, they provide a global health bonus to the shield</gray>"
+}
+
+StarterShips
+{
+	ModelB = "The Model-B trades storage and size for a defensive bubble shield generator that can block incoming enemy fire from all directions."
+}
+
+BuildBox
+{
+	BuffResistanceFmt = "<good>+{0:0}</good> <white>Resistance</white>"
+}

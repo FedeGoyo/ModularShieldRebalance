@@ -1,0 +1,371 @@
+Components
+{
+	// -------------------------------------------------------------------------------------------------------------------------
+	// TOGGLE BLUE START -------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	Kebechet_GEN_Large_ToggleColours_Blue :		<../purple/purple.rules>/Components/Kebechet_GEN_Large_ToggleColours_Purple		{ OnMode = 1 }
+	
+	K_GEN_Large_Blue_A160FrontArc_On :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Blue, Kebechet_GEN_Large_ToggleAngle_A160FrontArc, Kebechet_GEN_Large_ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
+	K_GEN_Large_Blue_A160LeftArc_On :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Blue, Kebechet_GEN_Large_ToggleAngle_A160LeftArc, Kebechet_GEN_Large_ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
+	K_GEN_Large_Blue_A160RightArc_On :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Blue, Kebechet_GEN_Large_ToggleAngle_A160RightArc, Kebechet_GEN_Large_ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
+
+	K_GEN_Large_Blue_A160FrontArc_Off :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Blue, Kebechet_GEN_Large_ToggleAngle_A160FrontArc, Kebechet_GEN_Large_ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
+	K_GEN_Large_Blue_A160LeftArc_Off :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Blue, Kebechet_GEN_Large_ToggleAngle_A160LeftArc, Kebechet_GEN_Large_ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
+	K_GEN_Large_Blue_A160RightArc_Off :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Blue, Kebechet_GEN_Large_ToggleAngle_A160RightArc, Kebechet_GEN_Large_ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
+	
+	// -------------------------------------------------------------------------------------------------------------------------
+	// ARCSHIELD BLUE START ----------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	K_GENL_ToggleComponents_Blue_A160FrontArc_On
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Large_Blue_A160FrontArc_On
+		IncludeInBlueprints = false
+		Components : &<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components
+		{
+			GENL_ArcShield : ^/0/GENL_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Blue/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1 {}
+				]
+				HitMediaEffects
+				[
+					: &../^/0/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Blue/HitMediaEffects, ^/0/ArcSprite	{}
+					}
+					: &../^/0/HitMediaEffects/1 {}
+				]
+			}
+			GENL_EmitterEffect : ^/0/GENL_EmitterEffect
+			{
+				MediaEffects
+				[
+					: &../^/0/MediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Blue/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+					: &../^/0/MediaEffects/1	{}
+				]
+			}
+							
+			// Already thorugh Components, but just in case
+			GENL_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverclockEffect			{}
+			GENL_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverloadEffect			{}
+			GENL_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverclockOverloadEffect	{}
+		}
+	}
+
+	K_GENL_ToggleComponents_Blue_A160LeftArc_On
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Large_Blue_A160LeftArc_On
+		IncludeInBlueprints = false
+		Components : &../K_GENL_ToggleComponents_Blue_A160FrontArc_On/Components
+		{
+			GENL_ArcShield : &<../stats.rules>/Angle/LeftArc160/ArcShield, ^/0/GENL_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &<../stats.rules>/Angle/LeftArc160/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0 {}
+					: &../^/1/ShieldMediaEffects/1 {}
+				]
+				HitMediaEffects
+				[
+					: &<../stats.rules>/Angle/LeftArc160/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
+					: &../^/1/HitMediaEffects/1 {}
+				]
+			}
+			GENL_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverclockEffect			{}
+			GENL_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverloadEffect			{}
+			GENL_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverclockOverloadEffect	{}
+		}
+	}
+
+	K_GENL_ToggleComponents_Blue_A160RightArc_On
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Large_Blue_A160RightArc_On
+		IncludeInBlueprints = false
+		Components : &../K_GENL_ToggleComponents_Blue_A160FrontArc_On/Components
+		{
+			GENL_ArcShield : &<../stats.rules>/Angle/RightArc160/ArcShield, ^/0/GENL_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &<../stats.rules>/Angle/RightArc160/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0 {}
+					: &../^/1/ShieldMediaEffects/1 {}
+				]
+				HitMediaEffects
+				[
+					: &<../stats.rules>/Angle/RightArc160/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
+					: &../^/1/HitMediaEffects/1 {}
+				]
+			}
+			GENL_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverclockEffect			{}
+			GENL_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverloadEffect			{}
+			GENL_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverclockOverloadEffect	{}
+		}
+	}
+
+
+	K_GENL_ToggleComponents_Blue_A160FrontArc_Off
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Large_Blue_A160FrontArc_Off
+		IncludeInBlueprints = false
+		Components =
+		{
+			GENL_ArcShield : &../../K_GENL_ToggleComponents_Blue_A160FrontArc_On/Components/GENL_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Blue/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+				]
+			}
+		}
+	}
+
+	K_GENL_ToggleComponents_Blue_A160LeftArc_Off
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Large_Blue_A160LeftArc_Off
+		IncludeInBlueprints = false
+		Components =
+		{
+			GENL_ArcShield : &../../K_GENL_ToggleComponents_Blue_A160LeftArc_On/Components/GENL_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Blue/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+				]
+			}
+		}
+	}
+	
+	K_GENL_ToggleComponents_Blue_A160RightArc_Off
+	{
+		Type = ToggledComponents
+		Toggle = K_GEN_Large_Blue_A160RightArc_Off
+		IncludeInBlueprints = false
+		Components =
+		{
+			GENL_ArcShield : &../../K_GENL_ToggleComponents_Blue_A160RightArc_On/Components/GENL_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Blue/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1 {}
+				]
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------------------------------
+	// GRAPHICS BLUE START -----------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	K_GENL_Graphics_Blue
+	{
+		Type = ToggledComponents
+		Toggle = Kebechet_GEN_Large_ToggleColours_Blue
+		IncludeInBlueprints = false
+		Components = 
+		{
+			K_Graphics : &<../shield_gen_large_modular.rules>/Part/Components/Graphics
+			{
+				OperationalDoodad : ^/0/OperationalDoodad
+				{
+					DamageLevels
+					[
+						: &../^/0/DamageLevels/0
+						{
+							AnimationFiles
+							[
+								"doodads_on1.png"
+								"doodads_on2.png"
+								"doodads_on3.png"
+								"doodads_on4.png"
+								"doodads_on5.png"
+								"doodads_on6.png"
+								"doodads_on7.png"
+								"doodads_on8.png"
+							]
+						}
+						: &../^/0/DamageLevels/1
+						{
+							AnimationFiles
+							[
+								"doodads_on1_33.png"
+								"doodads_on2_33.png"
+								"doodads_on3_33.png"
+								"doodads_on4_33.png"
+								"doodads_on5_33.png"
+								"doodads_on6_33.png"
+								"doodads_on7_33.png"
+								"doodads_on8_33.png"
+							]
+						}
+						: &../^/0/DamageLevels/2
+						{
+							AnimationFiles
+							[
+								"doodads_on1_66.png"
+								"doodads_on2_66.png"
+								"doodads_on3_66.png"
+								"doodads_on4_66.png"
+								"doodads_on5_66.png"
+								"doodads_on6_66.png"
+								"doodads_on7_66.png"
+								"doodads_on8_66.png"
+							]
+						}
+					]
+				}
+				OperationalLighting
+				{
+					Layer = "lights_add"
+					Offset = [0, 1]
+					DamageLevels
+					[
+						{
+							File = "lights.png"
+							Size = [3, 5]
+						}
+					]
+				}
+				OperationalRoofDoodad
+				{
+					Layer = "roof_doodads"
+					Offset = [0, 1.5]
+					DamageLevels
+					[
+						{
+							File = "roof_glows.png"
+							Size = [3, 4]
+						}
+						{
+							File = "roof_glows_33.png"
+							Size = [3, 4]
+						}
+						{
+							File = "roof_glows_66.png"
+							Size = [3, 4]
+						}
+					]
+				}
+			}
+			
+			K_BatterySprites : &<../shield_gen_large_modular.rules>/Part/Components/BatterySprites
+			{
+				ResourceLevels
+				[
+					{
+						File = "batteries1.png"
+						Offset = [-0.5, -1]
+						Size = [2, 1]
+					}
+					{
+						File = "batteries2.png"
+						Offset = [0, -1]
+						Size = [3, 1]
+					}
+					{
+						File = "batteries3.png"
+						Offset = [0, -0.5]
+						Size = [3, 2]
+					}
+					{
+						File = "batteries4.png"
+						Offset = [0, -0.5]
+						Size = [3, 2]
+					}
+					{
+						File = "batteries5.png"
+						Offset = [0, -0.5]
+						Size = [3, 2]
+					}
+					{
+						File = "batteries6.png"
+						Offset = [0, -0.5]
+						Size = [3, 2]
+					}
+					{
+						File = "batteries7.png"
+						Offset = [0, -0.5]
+						Size = [3, 2]
+					}
+					{
+						File = "batteries8.png"
+						Offset = [0, -0.5]
+						Size = [3, 2]
+					}
+					{
+						File = "batteries9.png"
+						Offset = [0, -0.5]
+						Size = [3, 2]
+					}
+					{
+						File = "batteries10.png"
+						Offset = [0, -0.5]
+						Size = [3, 2]
+					}
+					{
+						File = "batteries11.png"
+						Offset = [0, -0.5]
+						Size = [3, 2]
+					}
+					{
+						File = "batteries12.png"
+						Offset = [0, -0.5]
+						Size = [3, 2]
+					}
+					{
+						File = "batteries13.png"
+						Offset = [0, -0.5]
+						Size = [3, 2]
+					}
+					{
+						File = "batteries14.png"
+						Offset = [0, -0.5]
+						Size = [3, 2]
+					}
+					{
+						File = "batteries15.png"
+						Size = [3, 3]
+					}
+					{
+						File = "batteries16.png"
+						Size = [3, 3]
+					}
+					{
+						File = "batteries17.png"
+						Size = [3, 3]
+					}
+					{
+						File = "batteries18.png"
+						Size = [3, 3]
+					}
+				]
+			}
+		}
+	}
+}

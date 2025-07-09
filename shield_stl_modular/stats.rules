@@ -1,0 +1,366 @@
+Stats 
+{
+	Rotation = 60d / 10
+	
+	// Inner
+	ArcShield_InnerFront0
+	{
+		Rotation = -90d
+		OperationalToggle = InnerFrontIsOperational
+		DrainResourcesFrom = CombinedInnerFrontBatteryStorage
+	}
+	ArcShield_InnerFront1 : ArcShield_InnerFront0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) }
+	ArcShield_InnerFront2 : ArcShield_InnerFront0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 2 }
+	ArcShield_InnerFront3 : ArcShield_InnerFront0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 3 }
+	ArcShield_InnerFront4 : ArcShield_InnerFront0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 4 }
+	ArcShield_InnerFront5 : ArcShield_InnerFront0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 5 }
+	ArcShield_InnerFront6 : ArcShield_InnerFront0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 6 }
+	ArcShield_InnerFront7 : ArcShield_InnerFront0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 7 }
+	ArcShield_InnerFront8 : ArcShield_InnerFront0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 8 }
+	ArcShield_InnerFront9 : ArcShield_InnerFront0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 9 }
+	
+	ArcShield_InnerFrontRight0
+	{
+		Rotation = -30d
+		OperationalToggle = InnerFrontRightIsOperational
+		DrainResourcesFrom = CombinedInnerFrontRightBatteryStorage
+	}
+	ArcShield_InnerFrontRight1 : ArcShield_InnerFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) }
+	ArcShield_InnerFrontRight2 : ArcShield_InnerFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 2 }
+	ArcShield_InnerFrontRight3 : ArcShield_InnerFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 3 }
+	ArcShield_InnerFrontRight4 : ArcShield_InnerFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 4 }
+	ArcShield_InnerFrontRight5 : ArcShield_InnerFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 5 }
+	ArcShield_InnerFrontRight6 : ArcShield_InnerFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 6 }
+	ArcShield_InnerFrontRight7 : ArcShield_InnerFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 7 }
+	ArcShield_InnerFrontRight8 : ArcShield_InnerFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 8 }
+	ArcShield_InnerFrontRight9 : ArcShield_InnerFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 9 }
+	
+	ArcShield_InnerBackRight0
+	{
+		Rotation = 30d
+		OperationalToggle = InnerBackRightIsOperational
+		DrainResourcesFrom = CombinedInnerBackRightBatteryStorage
+	}
+	ArcShield_InnerBackRight1 : ArcShield_InnerBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) }
+	ArcShield_InnerBackRight2 : ArcShield_InnerBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 2 }
+	ArcShield_InnerBackRight3 : ArcShield_InnerBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 3 }
+	ArcShield_InnerBackRight4 : ArcShield_InnerBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 4 }
+	ArcShield_InnerBackRight5 : ArcShield_InnerBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 5 }
+	ArcShield_InnerBackRight6 : ArcShield_InnerBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 6 }
+	ArcShield_InnerBackRight7 : ArcShield_InnerBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 7 }
+	ArcShield_InnerBackRight8 : ArcShield_InnerBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 8 }
+	ArcShield_InnerBackRight9 : ArcShield_InnerBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 9 }
+	
+	ArcShield_InnerBack0
+	{
+		Rotation = 90d
+		OperationalToggle = InnerBackIsOperational
+		DrainResourcesFrom = CombinedInnerBackBatteryStorage
+	}
+	ArcShield_InnerBack1 : ArcShield_InnerBack0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) }
+	ArcShield_InnerBack2 : ArcShield_InnerBack0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 2 }
+	ArcShield_InnerBack3 : ArcShield_InnerBack0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 3 }
+	ArcShield_InnerBack4 : ArcShield_InnerBack0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 4 }
+	ArcShield_InnerBack5 : ArcShield_InnerBack0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 5 }
+	ArcShield_InnerBack6 : ArcShield_InnerBack0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 6 }
+	ArcShield_InnerBack7 : ArcShield_InnerBack0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 7 }
+	ArcShield_InnerBack8 : ArcShield_InnerBack0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 8 }
+	ArcShield_InnerBack9 : ArcShield_InnerBack0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 9 }
+
+	ArcShield_InnerBackLeft0
+	{
+		Rotation = 150d
+		OperationalToggle = InnerBackLeftIsOperational
+		DrainResourcesFrom = CombinedInnerBackLeftBatteryStorage
+	}
+	ArcShield_InnerBackLeft1 : ArcShield_InnerBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) }
+	ArcShield_InnerBackLeft2 : ArcShield_InnerBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 2 }
+	ArcShield_InnerBackLeft3 : ArcShield_InnerBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 3 }
+	ArcShield_InnerBackLeft4 : ArcShield_InnerBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 4 }
+	ArcShield_InnerBackLeft5 : ArcShield_InnerBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 5 }
+	ArcShield_InnerBackLeft6 : ArcShield_InnerBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 6 }
+	ArcShield_InnerBackLeft7 : ArcShield_InnerBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 7 }
+	ArcShield_InnerBackLeft8 : ArcShield_InnerBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 8 }
+	ArcShield_InnerBackLeft9 : ArcShield_InnerBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 9 }
+	
+	ArcShield_InnerFrontLeft0
+	{
+		Rotation = 210d
+		OperationalToggle = InnerFrontLeftIsOperational
+		DrainResourcesFrom = CombinedInnerFrontLeftBatteryStorage
+	}
+	ArcShield_InnerFrontLeft1 : ArcShield_InnerFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) }
+	ArcShield_InnerFrontLeft2 : ArcShield_InnerFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 2 }
+	ArcShield_InnerFrontLeft3 : ArcShield_InnerFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 3 }
+	ArcShield_InnerFrontLeft4 : ArcShield_InnerFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 4 }
+	ArcShield_InnerFrontLeft5 : ArcShield_InnerFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 5 }
+	ArcShield_InnerFrontLeft6 : ArcShield_InnerFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 6 }
+	ArcShield_InnerFrontLeft7 : ArcShield_InnerFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 7 }
+	ArcShield_InnerFrontLeft8 : ArcShield_InnerFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 8 }
+	ArcShield_InnerFrontLeft9 : ArcShield_InnerFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 9 }
+	
+	BaseEffect_InnerFront
+	{
+		Shield = ArcShield_InnerFront
+		ChainedTo = ArcShield_InnerFront
+		FactorMediaEffectsIntensityWith = CombinedInnerFrontBatteryStorage
+	}
+	OverclockEffect_InnerFront : 			BaseEffect_InnerFront	{ OperationalToggle = InnerFrontOverclockEffect }
+	OverloadEffect_InnerFront :				BaseEffect_InnerFront	{ OperationalToggle = InnerFrontOverloadEffect }
+	OverclockOverloadEffect_InnerFront :	BaseEffect_InnerFront	{ OperationalToggle = InnerFrontOverclockOverloadEffect }
+	
+	BaseEffect_InnerFrontRight
+	{
+		Shield = ArcShield_InnerFrontRight
+		ChainedTo = ArcShield_InnerFrontRight
+		FactorMediaEffectsIntensityWith = CombinedInnerFrontRightBatteryStorage
+	}
+	OverclockEffect_InnerFrontRight : 			BaseEffect_InnerFrontRight	{ OperationalToggle = InnerFrontRightOverclockEffect }
+	OverloadEffect_InnerFrontRight :			BaseEffect_InnerFrontRight	{ OperationalToggle = InnerFrontRightOverloadEffect }
+	OverclockOverloadEffect_InnerFrontRight :	BaseEffect_InnerFrontRight	{ OperationalToggle = InnerFrontRightOverclockOverloadEffect }
+	
+	BaseEffect_InnerBackRight
+	{
+		Shield = ArcShield_InnerBackRight
+		ChainedTo = ArcShield_InnerBackRight
+		FactorMediaEffectsIntensityWith = CombinedInnerBackRightBatteryStorage
+	}
+	OverclockEffect_InnerBackRight : 			BaseEffect_InnerBackRight	{ OperationalToggle = InnerBackRightOverclockEffect }
+	OverloadEffect_InnerBackRight :				BaseEffect_InnerBackRight	{ OperationalToggle = InnerBackRightOverloadEffect }
+	OverclockOverloadEffect_InnerBackRight :	BaseEffect_InnerBackRight	{ OperationalToggle = InnerBackRightOverclockOverloadEffect }
+	
+	BaseEffect_InnerBack
+	{
+		Shield = ArcShield_InnerBack
+		ChainedTo = ArcShield_InnerBack
+		FactorMediaEffectsIntensityWith = CombinedInnerBackBatteryStorage
+	}
+	OverclockEffect_InnerBack : 		BaseEffect_InnerBack	{ OperationalToggle = InnerBackOverclockEffect }
+	OverloadEffect_InnerBack :			BaseEffect_InnerBack	{ OperationalToggle = InnerBackOverloadEffect }
+	OverclockOverloadEffect_InnerBack :	BaseEffect_InnerBack	{ OperationalToggle = InnerBackOverclockOverloadEffect }
+	
+	BaseEffect_InnerBackLeft
+	{
+		Shield = ArcShield_InnerBackLeft
+		ChainedTo = ArcShield_InnerBackLeft
+		FactorMediaEffectsIntensityWith = CombinedInnerBackLeftBatteryStorage
+	}
+	OverclockEffect_InnerBackLeft : 		BaseEffect_InnerBackLeft	{ OperationalToggle = InnerBackLeftOverclockEffect }
+	OverloadEffect_InnerBackLeft :			BaseEffect_InnerBackLeft	{ OperationalToggle = InnerBackLeftOverloadEffect }
+	OverclockOverloadEffect_InnerBackLeft :	BaseEffect_InnerBackLeft	{ OperationalToggle = InnerBackLeftOverclockOverloadEffect }
+	
+	BaseEffect_InnerFrontLeft
+	{
+		Shield = ArcShield_InnerFrontLeft
+		ChainedTo = ArcShield_InnerFrontLeft
+		FactorMediaEffectsIntensityWith = CombinedInnerFrontLeftBatteryStorage
+	}
+	OverclockEffect_InnerFrontLeft : 			BaseEffect_InnerFrontLeft	{ OperationalToggle = InnerFrontLeftOverclockEffect }
+	OverloadEffect_InnerFrontLeft :				BaseEffect_InnerFrontLeft	{ OperationalToggle = InnerFrontLeftOverloadEffect }
+	OverclockOverloadEffect_InnerFrontLeft :	BaseEffect_InnerFrontLeft	{ OperationalToggle = InnerFrontLeftOverclockOverloadEffect }
+
+
+	// Outer (when overclocked)
+	ArcShield_OuterFrontRight0
+	{
+		Rotation = -60d
+		OperationalToggle = OuterFrontRightIsOperational
+		DrainResourcesFrom = CombinedOuterFrontRightBatteryStorage
+	}
+	ArcShield_OuterFrontRight1 : ArcShield_OuterFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) }
+	ArcShield_OuterFrontRight2 : ArcShield_OuterFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 2 }
+	ArcShield_OuterFrontRight3 : ArcShield_OuterFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 3 }
+	ArcShield_OuterFrontRight4 : ArcShield_OuterFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 4 }
+	ArcShield_OuterFrontRight5 : ArcShield_OuterFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 5 }
+	ArcShield_OuterFrontRight6 : ArcShield_OuterFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 6 }
+	ArcShield_OuterFrontRight7 : ArcShield_OuterFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 7 }
+	ArcShield_OuterFrontRight8 : ArcShield_OuterFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 8 }
+	ArcShield_OuterFrontRight9 : ArcShield_OuterFrontRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 9 }
+	
+	ArcShield_OuterRight0
+	{
+		Rotation = 0d
+		OperationalToggle = OuterRightIsOperational
+		DrainResourcesFrom = CombinedOuterRightBatteryStorage
+	}
+	ArcShield_OuterRight1 : ArcShield_OuterRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) }
+	ArcShield_OuterRight2 : ArcShield_OuterRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 2 }
+	ArcShield_OuterRight3 : ArcShield_OuterRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 3 }
+	ArcShield_OuterRight4 : ArcShield_OuterRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 4 }
+	ArcShield_OuterRight5 : ArcShield_OuterRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 5 }
+	ArcShield_OuterRight6 : ArcShield_OuterRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 6 }
+	ArcShield_OuterRight7 : ArcShield_OuterRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 7 }
+	ArcShield_OuterRight8 : ArcShield_OuterRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 8 }
+	ArcShield_OuterRight9 : ArcShield_OuterRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 9 }
+	
+	ArcShield_OuterBackRight0
+	{
+		Rotation = 60d
+		OperationalToggle = OuterBackRightIsOperational
+		DrainResourcesFrom = CombinedOuterBackRightBatteryStorage
+	}
+	ArcShield_OuterBackRight1 : ArcShield_OuterBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) }
+	ArcShield_OuterBackRight2 : ArcShield_OuterBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 2 }
+	ArcShield_OuterBackRight3 : ArcShield_OuterBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 3 }
+	ArcShield_OuterBackRight4 : ArcShield_OuterBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 4 }
+	ArcShield_OuterBackRight5 : ArcShield_OuterBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 5 }
+	ArcShield_OuterBackRight6 : ArcShield_OuterBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 6 }
+	ArcShield_OuterBackRight7 : ArcShield_OuterBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 7 }
+	ArcShield_OuterBackRight8 : ArcShield_OuterBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 8 }
+	ArcShield_OuterBackRight9 : ArcShield_OuterBackRight0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 9 }
+	
+	ArcShield_OuterBackLeft0
+	{
+		Rotation = 120d
+		OperationalToggle = OuterBackLeftIsOperational
+		DrainResourcesFrom = CombinedOuterBackLeftBatteryStorage
+	}
+	ArcShield_OuterBackLeft1 : ArcShield_OuterBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) }
+	ArcShield_OuterBackLeft2 : ArcShield_OuterBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 2 }
+	ArcShield_OuterBackLeft3 : ArcShield_OuterBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 3 }
+	ArcShield_OuterBackLeft4 : ArcShield_OuterBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 4 }
+	ArcShield_OuterBackLeft5 : ArcShield_OuterBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 5 }
+	ArcShield_OuterBackLeft6 : ArcShield_OuterBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 6 }
+	ArcShield_OuterBackLeft7 : ArcShield_OuterBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 7 }
+	ArcShield_OuterBackLeft8 : ArcShield_OuterBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 8 }
+	ArcShield_OuterBackLeft9 : ArcShield_OuterBackLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 9 }
+	
+	ArcShield_OuterLeft0
+	{
+		Rotation = 180d	
+		OperationalToggle = OuterLeftIsOperational
+		DrainResourcesFrom = CombinedOuterLeftBatteryStorage
+	}
+	ArcShield_OuterLeft1 : ArcShield_OuterLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) }
+	ArcShield_OuterLeft2 : ArcShield_OuterLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 2 }
+	ArcShield_OuterLeft3 : ArcShield_OuterLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 3 }
+	ArcShield_OuterLeft4 : ArcShield_OuterLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 4 }
+	ArcShield_OuterLeft5 : ArcShield_OuterLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 5 }
+	ArcShield_OuterLeft6 : ArcShield_OuterLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 6 }
+	ArcShield_OuterLeft7 : ArcShield_OuterLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 7 }
+	ArcShield_OuterLeft8 : ArcShield_OuterLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 8 }
+	ArcShield_OuterLeft9 : ArcShield_OuterLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 9 }
+	
+	ArcShield_OuterFrontLeft0
+	{
+		Rotation = 240d	
+		OperationalToggle = OuterFrontLeftIsOperational
+		DrainResourcesFrom = CombinedOuterFrontLeftBatteryStorage
+	}
+	ArcShield_OuterFrontLeft1 : ArcShield_OuterFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) }
+	ArcShield_OuterFrontLeft2 : ArcShield_OuterFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 2 }
+	ArcShield_OuterFrontLeft3 : ArcShield_OuterFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 3 }
+	ArcShield_OuterFrontLeft4 : ArcShield_OuterFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 4 }
+	ArcShield_OuterFrontLeft5 : ArcShield_OuterFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 5 }
+	ArcShield_OuterFrontLeft6 : ArcShield_OuterFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 6 }
+	ArcShield_OuterFrontLeft7 : ArcShield_OuterFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 7 }
+	ArcShield_OuterFrontLeft8 : ArcShield_OuterFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 8 }
+	ArcShield_OuterFrontLeft9 : ArcShield_OuterFrontLeft0	{ Rotation = (&^/0/Rotation) + (&~/Stats/Rotation) * 9 }
+	
+	BaseEffect_OuterFrontRight
+	{
+		Shield = ArcShield_OuterFrontRight
+		ChainedTo = ArcShield_OuterFrontRight
+		FactorMediaEffectsIntensityWith = CombinedOuterFrontRightBatteryStorage
+	}
+	OverclockEffect_OuterFrontRight : 			BaseEffect_OuterFrontRight	{ OperationalToggle = OuterFrontRightOverclockEffect }
+	OverclockOverloadEffect_OuterFrontRight :	BaseEffect_OuterFrontRight	{ OperationalToggle = OuterFrontRightOverclockOverloadEffect }
+	
+	BaseEffect_OuterRight
+	{
+		Shield = ArcShield_OuterRight
+		ChainedTo = ArcShield_OuterRight
+		FactorMediaEffectsIntensityWith = CombinedOuterRightBatteryStorage
+	}
+	OverclockEffect_OuterRight : 			BaseEffect_OuterRight	{ OperationalToggle = OuterRightOverclockEffect }
+	OverclockOverloadEffect_OuterRight :	BaseEffect_OuterRight	{ OperationalToggle = OuterRightOverclockOverloadEffect }
+	
+	BaseEffect_OuterBackRight
+	{
+		Shield = ArcShield_OuterBackRight
+		ChainedTo = ArcShield_OuterBackRight
+		FactorMediaEffectsIntensityWith = CombinedOuterBackRightBatteryStorage
+	}
+	OverclockEffect_OuterBackRight : 			BaseEffect_OuterBackRight	{ OperationalToggle = OuterBackRightOverclockEffect }
+	OverclockOverloadEffect_OuterBackRight :	BaseEffect_OuterBackRight	{ OperationalToggle = OuterBackRightOverclockOverloadEffect }
+	
+	BaseEffect_OuterBackLeft
+	{
+		Shield = ArcShield_OuterBackLeft
+		ChainedTo = ArcShield_OuterBackLeft
+		FactorMediaEffectsIntensityWith = CombinedOuterBackLeftBatteryStorage
+	}
+	OverclockEffect_OuterBackLeft : 			BaseEffect_OuterBackLeft	{ OperationalToggle = OuterBackLeftOverclockEffect }
+	OverclockOverloadEffect_OuterBackLeft :		BaseEffect_OuterBackLeft	{ OperationalToggle = OuterBackLeftOverclockOverloadEffect }
+	
+	BaseEffect_OuterLeft
+	{
+		Shield = ArcShield_OuterLeft
+		ChainedTo = ArcShield_OuterLeft
+		FactorMediaEffectsIntensityWith = CombinedOuterLeftBatteryStorage
+	}
+	OverclockEffect_OuterLeft : 			BaseEffect_OuterLeft	{ OperationalToggle = OuterLeftOverclockEffect }
+	OverclockOverloadEffect_OuterLeft :		BaseEffect_OuterLeft	{ OperationalToggle = OuterLeftOverclockOverloadEffect }
+	
+	BaseEffect_OuterFrontLeft
+	{
+		Shield = ArcShield_OuterFrontLeft
+		ChainedTo = ArcShield_OuterFrontLeft
+		FactorMediaEffectsIntensityWith = CombinedOuterFrontLeftBatteryStorage
+	}
+	OverclockEffect_OuterFrontLeft : 			BaseEffect_OuterFrontLeft	{ OperationalToggle = OuterFrontLeftOverclockEffect }
+	OverclockOverloadEffect_OuterFrontLeft :	BaseEffect_OuterFrontLeft	{ OperationalToggle = OuterFrontLeftOverclockOverloadEffect }
+	
+	Radius
+	{
+		BaseValue = 15
+		Modifiers
+		[
+			{
+				Type = ScaledBuff
+				BuffType = BubbleRadiusBonus
+				Scale = 1.5
+				ModificationMode = Add
+			}
+		]
+	}
+	
+	
+	
+	
+	
+	// When overclocked
+	RadiusOverclocked = 2
+//	RadiusOuter : &<shield_stl_modular.rules>/Part/Components/ArcShield/Radius	{ BaseValue = (&^/0/BaseValue) + (&../RadiusOverclocked) }
+	RadiusOuter
+	{
+		BaseValue = (&../Radius/BaseValue) + (&../RadiusOverclocked)
+		Modifiers
+		[
+			{
+				Type = ScaledBuff
+				BuffType = BubbleRadiusBonus
+				Scale = 1.5
+				ModificationMode = Add
+			}
+		]
+	}
+}
+
+/*
+		Heretion explanation:
+			Purple Radius 0 On:
+				ArcShield Front: inherits from Base (changes Rotation, Operational, Storage, Shield effects and Hit effects).
+				EmitterEffect: inherit from Base (changes Operational and Media effects).
+			Colors Radius 0 On: inherits from Purple On Components.
+				ArcShield Front: from Purple On (changes Shield effects and Hit effects).
+				EmitterEffect: from Purple On (changes Media effects).
+			Everything Radius 0 Off:
+				ArcShield Front: inherits from its On version Components (changes Shield effect and Hit effects).
+			Everything Radius #: inherits from its Radius 0 version Components.
+				ArchShield Front: inherits from its Radius 0 version Components (changes radius).
+				
+			ArcShield Others: inherits from their Front version (changes Rotation, Operational and Storage).
+			ShieldOperationEffects works as normal even though it is chained to ArcShield instead of these new shields.
+*/
+	

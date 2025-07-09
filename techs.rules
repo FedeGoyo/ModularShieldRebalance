@@ -1,0 +1,13 @@
+Techs
+[	
+	// Tiny Shield Generator
+	{	
+		ID = swefpifh.Kebechet_TINY_modularShield
+		NameKey = &<shield_tiny_modular/shield_tiny_modular.rules>/Part/NameKey
+		DescriptionKey = &<shield_tiny_modular/shield_tiny_modular.rules>/Part/DescriptionKey
+		Icon = &<shield_tiny_modular/shield_tiny_modular.rules>/Part/EditorIcon
+		EditorGroup = &<shield_tiny_modular/shield_tiny_modular.rules>/Part/EditorGroup
+		PartsUnlocked = [ &<shield_tiny_modular/shield_tiny_modular.rules>/Part/ID ]
+		Cost = 500
+	}
+]

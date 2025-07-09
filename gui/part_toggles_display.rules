@@ -1,0 +1,40 @@
+Kebechet_Modular_Display
+{
+	ToggleID = "Kebechet_ToggleID_Display"
+	Style = CycledButton
+	ShowWithShipCommands = true
+	//MultipleModesDisplayOrder = Last
+	//SortOrder = 1
+	Choices
+	[
+		{
+			ChoiceID = "cid_Kebechet_Display_On"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_Display_On"
+			Mode = 0
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmDisplayOn.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		{
+			ChoiceID = "cid_Kebechet_Display_Off"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_Display_Off"
+			Mode = 1
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmDisplayOff.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+	]
+}

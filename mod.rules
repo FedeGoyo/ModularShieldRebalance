@@ -1,0 +1,179 @@
+ID = swefpifh.SpecialShield.enderluck
+Name = "Modular Bubble Shield Rebalance"
+Version = 1.0.6
+CompatibleGameVersions = ["0.27.1", "0.28.1"]
+ModifiesMultiplayer = true
+Author = "Enderluck"
+Logo = "logo.png"
+
+Description = 	"This is a rebalance from [Beta] Modular+++ Shields v0.62b mod and therefore requires that mod to work.\n\n"\
+				"The changelog is available in the steam workshop.\n"\
+				"Also available in Spanish."
+
+StringsFolder = "strings"
+
+Actions
+[
+	// Vainila Part Changes
+	{
+		Action = Overrides
+		OverrideIn = "<ships/terran/shield_gen_small/shield_gen_small.rules>/Part"
+		CreateIfNotExisting = true
+		Overrides	// Remove Small Shield Generator
+		{
+			ID = cosmoteer.shield_gen_small_old
+			OtherIDs = [shield_generator_nonexistent]
+			IsBuildable = false
+		}
+	}
+	// Vainila Tech Changes
+	{
+		Action = Overrides
+		OverrideIn = "<ships/terran/shield_gen_large/shield_gen_large.rules>/Part"
+		CreateIfNotExisting = true
+		Overrides	// Remove Large Shield Generator
+		{
+			ID = cosmoteer.shield_gen_large_old
+			IsBuildable = false
+		}
+	}
+	{
+		Action = Overrides
+		OverrideIn = "<modes/career/techs.rules>/Techs/15"
+		CreateIfNotExisting = true
+		Overrides	// Modify Small Shield Generator Tech, fix part unlock and icon
+		{
+			Cost = 2000	// Reduce cost considering that Tiny Shield Generator is now a Prerequisite
+			Prerequisite = [&<shield_tiny_modular/shield_tiny_modular.rules>/Part/ID]
+			PartsUnlocked = [&<shield_gen_small_modular/shield_gen_small_modular.rules>/Part/ID]
+			Icon = &<shield_gen_small_modular/shield_gen_small_modular.rules>/Part/EditorIcon
+		}
+	}
+	{
+		Action = Overrides
+		OverrideIn = "<modes/career/techs.rules>/Techs/16"
+		Overrides	// Fixed Large Shield Generator Tech, part unlock and icon
+		{
+			PartsUnlocked = [&<shield_gen_large_modular/shield_gen_large_modular.rules>/Part/ID]
+			Icon = &<shield_gen_large_modular/shield_gen_large_modular.rules>/Part/EditorIcon
+		}
+	}
+	{
+		Action = Overrides
+		OverrideIn = "<modes/career/techs.rules>/Techs/10"
+		Overrides	// Fixed Mine Launcher Tech, part unlock and icon
+		{
+			EditorIcon = "&<./Data/ships/terran/missile_launcher/mine/missile_launcher_mine.rules>/EditorIcon"
+			PartsUnlocked = [&<./Data/ships/terran/missile_launcher/missile_launcher.rules>/Part/ID]
+		}
+	}
+	{
+		Action = Overrides
+		OverrideIn = "<modes/career/techs.rules>/Techs/11"
+		Overrides	// Fixed Railgun Tech, parts unlock and icon
+		{
+			EditorIcon = "&<./Data/ships/terran/railgun_launcher/railgun_launcher.rules>/Part/EditorIcon"
+			PartsUnlocked
+			[
+				&<./Data/ships/terran/railgun_loader/railgun_loader.rules>/Part/ID
+				&<./Data/ships/terran/railgun_accelerator/railgun_accelerator.rules>/Part/ID
+				&<./Data/ships/terran/railgun_launcher/railgun_launcher.rules>/Part/ID
+			]
+		}
+	}
+	
+	// New Stuff
+	{
+		Action = Overrides
+		CreateIfNotExisting = true
+		OverrideIn = "<buffs/buffs.rules>" 
+		Overrides = &<buffs/buffs.rules>	// Add Buffs
+	}
+	{
+		Action = AddMany
+		AddTo = "<gui/game/parts/part_stats.rules>/PartStats"
+		ManyToAdd = &<part_stats.rules>/PartStats	// Add Stats
+	}
+	{
+		Action = AddMany
+		AddTo = "<modes/career/techs.rules>/Techs"
+		ManyToAdd = &<techs.rules>/Techs	// Add Techs
+	}
+	{
+		Action = AddMany
+		AddTo = "<gui/game/parts/part_toggles.rules>/PartToggles"
+		ManyToAdd	// Add Toggles
+		[
+			&<gui/part_toggles_angles.rules>/Kebechet_GENS_Modular_Angle
+			&<gui/part_toggles_angles.rules>/Kebechet_GENL_Modular_Angle
+			&<gui/part_toggles_radius.rules>/Kebechet_Modular_Radius
+		]
+	}
+	{
+		Action = AddMany
+		AddTo = "<modes/career/career.rules>/StarterShips"
+		ManyToAdd	// Add new Starter Ship
+		[
+			{
+				Ship = "starter_ship/Model-B.ship.png"
+				DescriptionKey = "StarterShips/ModelB"
+			}
+		]
+	}
+	{
+		Action = AddMany
+		AddTo = "<builtin_ships/Starter/builtins_starter.rules>/Ships"
+		ManyToAdd	// Add new Starter Ship
+		[
+			:~{ File="starter_ship/Model-B.ship.png"; }
+		]
+	}
+	
+	// Original Mod Parts Modifications
+	{
+		Action = Replace
+		Replace = "<../../../workshop/content/799600/2907845781/shield_tiny_modular/shield_tiny_modular.rules>/Part"
+		With = &<shield_tiny_modular/shield_tiny_modular.rules>/Part	// Replace and Modify Tiny Shield Generator
+	}
+	{
+		Action = Replace
+		Replace = "<../../../workshop/content/799600/2907845781/shield_gen_small_modular/shield_gen_small_modular.rules>/Part"
+		With = &<shield_gen_small_modular/shield_gen_small_modular.rules>/Part	// Replace and Modify Small Shield Generator
+	}
+	{
+		Action = Replace
+		Replace = "<../../../workshop/content/799600/2907845781/shield_gen_large_modular/shield_gen_large_modular.rules>/Part"
+		With = &<shield_gen_large_modular/shield_gen_large_modular.rules>/Part	// Replace and Modify Large Shield Generator
+	}
+	{
+		Action = Replace
+		Replace = "<../../../workshop/content/799600/2907845781/shield_sts_modular/shield_sts_modular.rules>/Part"
+		With = &<shield_sts_modular/shield_sts_modular.rules>/Part	// Replace and Modify Small Bubble Shield Generator
+	}
+	{
+		Action = Replace
+		Replace = "<../../../workshop/content/799600/2907845781/shield_stl_modular/shield_stl_modular.rules>/Part"
+		With = &<shield_stl_modular/shield_stl_modular.rules>/Part	// Replace and Modify Large Bubble Shield Generator
+	}
+	// Original Mod Tech Modifications
+	{
+		Action = Overrides
+		OverrideIn = "<../../../workshop/content/799600/2907845781/techs.rules>/Techs/0"
+		Overrides	// Modify Small Bubble Shield Generator Tech
+		{
+			Cost = 3000	// Reduce cost
+			Prerequisites = [&<shield_tiny_modular/shield_tiny_modular.rules>/Part/ID]	// Make Tiny Shield Generator the only Prerequisite
+		}
+	}
+	{
+		Action = Overrides
+		OverrideIn = "<../../../workshop/content/799600/2907845781/techs.rules>/Techs/1"
+		Overrides	// Modify Large Bubble Shield Generator Tech
+		{
+			Cost = 15000	// Reduce cost
+			Prerequisites = [&<shield_sts_modular/shield_sts_modular.rules>/Part/ID] // Make Small Bubble Shield Generator the only prerequisite
+		}
+	}
+	
+	// 	There are unused Toggles and Stats that could be removed.
+]

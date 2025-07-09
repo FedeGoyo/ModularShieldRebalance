@@ -1,0 +1,176 @@
+GenericShieldModularColours
+{
+	ToggleID = "modular_colours_shield"
+	Style = Popout
+	ShowInEditor = true
+	Choices
+	[
+		{
+			ChoiceID = "modularShield_colours_purple"
+			ButtonToolTipKey = "PartToggles/ModularShieldColoursPurple"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorPurple.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "modularShield_colours_purple_hidden"
+			ButtonToolTipKey = "PartToggles/ModularShieldColoursPurpleHidden"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorPurple_H.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		{
+			ChoiceID = "modularShield_colours_blue"
+			ButtonToolTipKey = "PartToggles/ModularShieldColoursBlue"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorBlue.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "modularShield_colours_blue_hidden"
+			ButtonToolTipKey = "PartToggles/ModularShieldColoursBlueHidden"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorBlue_H.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "modularShield_colours_orange"
+			ButtonToolTipKey = "PartToggles/ModularShieldColoursOrange"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorOrange.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "modularShield_colours_orange_hidden"
+			ButtonToolTipKey = "PartToggles/ModularShieldColoursOrangeHidden"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorOrange_H.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "modularShield_colours_red"
+			ButtonToolTipKey = "PartToggles/ModularShieldColoursRed"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorRed.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "modularShield_colours_red_hidden"
+			ButtonToolTipKey = "PartToggles/ModularShieldColoursRedHidden"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorRed_H.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "modularShield_colours_yellow"
+			ButtonToolTipKey = "PartToggles/ModularShieldColoursYellow"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorYellow.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "modularShield_colours_yellow_hidden"
+			ButtonToolTipKey = "PartToggles/ModularShieldColoursYellowHidden"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorYellow_H.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "modularShield_colours_green"
+			ButtonToolTipKey = "PartToggles/ModularShieldColoursGreen"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorGreen.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "modularShield_colours_green_hidden"
+			ButtonToolTipKey = "PartToggles/ModularShieldColoursGreenHidden"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ssmColorGreen_H.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+	]
+}

@@ -1,0 +1,1798 @@
+OVERCLOCK
+{
+	DAMAGE_DRAIN_FACTOR = 1 / 200%
+	EMP_RESIST = 33%
+	HEAT_PER_SECOND = 20	// x12
+	HEAT_PER_DAMAGE = 0.6
+}
+HEAT_TO_RESOURCE = &<./Data/statuses/heat/heat.rules>/STATUS_TO_RESOURCE_RATIO
+HEAT_TO_STATUS = &<./Data/statuses/heat/heat.rules>/RESOURCE_TO_STATUS_RATIO
+
+Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
+{
+	NameKey = "Parts/KebechetSTLmodularShield"
+	IconNameKey = "Parts/KebechetSTLmodularShieldIcon"
+	DescriptionKey = "Parts/KebechetSTLmodularShieldDesc"
+	ID = swefpifh.Kebechet_STL_modularShield
+	EditorGroup = "Defenses"
+	Resources
+	[
+		[steel, 120]
+		[diamond, 3]
+		[processor, 4] 
+	]
+	AIValueFactor = 5
+	Size = [4, 4]
+	PhysicalRect = [0, 0, 4, 4] // For backwards compatibility with old shield generators.
+	SaveRect = &PhysicalRect
+	SelectionPriority = 1
+	SelectionTypeID = "shield_gen_stl"
+	SelectionTypeByRotation = false
+	MaxHealth = 10000
+	TypeCategories = [defense, uses_power]
+	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleResistanceBonus, BubbleRadiusBonus]
+	PenetrationRectType = Normal
+	AllowedDoorLocations
+	[
+		[1, -1] // Haut
+		[2, -1]
+		
+		[1, 4] // Bas
+		[2, 4]
+		
+		[-1, 1] // Gauche
+		[-1, 2]
+		
+		[4, 1] // Droite
+		[4, 2]
+	]
+	
+	IsRotateable = false
+	IgnoreRotationForMirroredSelection = true
+	IsFlippable = false
+	
+	ForceManhattanPathInPart = true
+	BlockedTravelCells
+	[
+		[1, 1]
+		[1, 2]
+		[2, 1]
+		[2, 2]
+	]
+
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [64, 64]
+	}
+	Components : ^/0/Components, <purple/purple.rules>/Components, <blue/blue.rules>/Components, <green/green.rules>/Components, <orange/orange.rules>/Components, <red/red.rules>/Components, <yellow/yellow.rules>/Components
+	{
+
+		// --------------------------------- START TOGGLES
+		
+		// -----------------------------------------------
+		// COLOURS TOGGLES -------------------------------
+		// -----------------------------------------------
+
+		ToggleColours
+		{
+			Type = UIToggle
+			ToggleID = "Kebechet_ToggleID_Colours"
+			Default = 0
+			AlwaysAllowInBuildMode = true
+			RequiresCommand = false
+		}
+
+		// -----------------------------------------------
+		// DISPLAY TOGGLES -------------------------------
+		// -----------------------------------------------
+		
+		ToggleDisplay
+		{
+			Type = UIToggle
+			ToggleID = "Kebechet_ToggleID_Display"
+			Default = 0
+			AlwaysAllowInBuildMode = true
+			RequiresCommand = false
+		}
+
+		ToggleDisplay_On
+		{
+			Type = ModeToggle
+			Mode = ToggleDisplay
+			OnMode = 0
+		}
+
+		ToggleDisplay_Off : ToggleDisplay_On	{ OnMode = 1 }
+
+		// -----------------------------------------------
+		// PROXY -----------------------------------------
+		// -----------------------------------------------
+		
+		ColoursProxy
+		{
+			Type = ToggleProxy
+			ComponentID = ColoursSet
+		}
+		ColoursSet
+		{
+			Type = MultiToggle
+			Toggles = [ToggleColours_Purple, ToggleColours_Blue, ToggleColours_Orange, ToggleColours_Red, ToggleColours_Yellow, ToggleColours_Green]
+			Mode = Any
+		}
+
+		DisplayProxy
+		{
+			Type = ToggleProxy
+			ComponentID = DisplaySet
+		}
+		DisplaySet
+		{
+			Type = MultiToggle
+			Toggles = [ToggleDisplay_Off, ToggleDisplay_On]
+			Mode = Any
+		}
+
+		// --------------------------------- END TOGGLES
+		
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, BatteryStorage, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL] // ModularCombinedBatteryStorage // CombinedBatteryStorage
+			Mode = All
+		}
+
+		IsOperationalNonOverclocked
+		{
+			Type = MultiToggle
+			Toggles = [ IsOperational, { Toggle=IsOverclocked; Invert=true } ]
+			Mode = All
+		}
+
+		CommandConsumptionToggle
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, ScorchedToggle]
+			Mode = All
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		ScorchedToggle
+		{
+			Type = StatusToggle
+			StatusType = cosmoteer.scorched
+			MinStatusValue = 1
+			Invert = true
+		}
+
+		CommandConsumer
+		{
+			Type = CommandConsumer
+			OperationalToggle = CommandConsumptionToggle
+			CommandPoints = 8
+		}
+
+		// Starts Normal Batteries
+
+		BatteryStorage // Used for Drain effects
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [OuterFrontRightBatteryStorage, OuterRightBatteryStorage, OuterBackRightBatteryStorage, OuterBackLeftBatteryStorage, OuterLeftBatteryStorage, OuterFrontLeftBatteryStorage, InnerFrontBatteryStorage, InnerFrontRightBatteryStorage, InnerBackRightBatteryStorage, InnerBackBatteryStorage, InnerBackLeftBatteryStorage, InnerFrontLeftBatteryStorage, ModularBatteryStorage]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			AddMode = PrioritizeLeastResources
+			RemoveMode = DistributeProportionallyByAvailable
+			ToggleOnResources = 7001
+			DrainResistance
+			{
+				BaseValue = 0
+				Modifiers
+				[
+					{
+						Type = BuffRemap
+						BuffType = Overclock
+						ModificationMode = Add
+						RemapFrom = [0, 1]
+						RemapTo = [0, (&~/OVERCLOCK/EMP_RESIST)]
+					}
+					{
+						Type = Status
+						StatusType = cosmoteer.shield_overload
+						ModificationMode = Subtract
+					}
+				]
+			}
+		}
+
+		CombinedBatteryStorage
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [OuterFrontRightBatteryStorage, OuterRightBatteryStorage, OuterBackRightBatteryStorage, OuterBackLeftBatteryStorage, OuterLeftBatteryStorage, OuterFrontLeftBatteryStorage, InnerFrontBatteryStorage, InnerFrontRightBatteryStorage, InnerBackRightBatteryStorage, InnerBackBatteryStorage, InnerBackLeftBatteryStorage, InnerFrontLeftBatteryStorage]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			AddMode = PrioritizeLeastResources // DistributeProportionallyByAvailable
+		}
+		BatteryConsumer
+		{
+			Type = ResourceConsumer
+			ResourceType = battery
+			Storage = CombinedBatteryStorage
+			DefaultPriority = &/PRIORITIES/Defense_Supply
+			ResupplyThreshold = 500
+			OperationalToggle = PowerToggle
+		}
+		
+		BatteryConsumer2 : BatteryConsumer	{ Storage = ModularBatteryStorage }	// If I use ModularCombinedBatteryStorage so that all batteries (including ModularBatteryStorage) are in the same consumer, the ModularBatteryStorage never receives energy, no idea why.
+		
+		
+		ProgressBarSegments
+		{
+			Type = ProgressBar
+			OperationalToggle = IsOperationalNonOverclocked
+			ShowProgressFor = CombinedBatteryStorage
+			LowColor = [0, 0, 255]
+			HighColor = [0, 0, 255]
+			FullColor = [0, 0, 255]
+			Height = 10
+		}
+		ProgressBarOuter
+		{
+			Type = ProgressBar
+			OperationalToggle = IsOperationalOverclocked
+			ShowProgressFor = CombinedBatteryStorageOuter
+			LowColor = [0, 0, 255]
+			HighColor = [0, 0, 255]
+			FullColor = [0, 0, 255]
+			Height = 10
+		}
+		ProgressBarInner
+		{
+			Type = ProgressBar
+			OperationalToggle = IsOperationalOverclocked
+			ShowProgressFor = CombinedBatteryStorageInner
+			LowColor = [0, 0, 255]
+			HighColor = [0, 0, 255]
+			FullColor = [0, 0, 255]
+			Height = 10
+		}
+
+		CombinedBatteryStorageOuter
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [OuterFrontRightBatteryStorage, OuterRightBatteryStorage, OuterBackRightBatteryStorage, OuterBackLeftBatteryStorage, OuterLeftBatteryStorage, OuterFrontLeftBatteryStorage]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			AddMode = PrioritizeLeastResources // DistributeProportionallyByAvailable
+		}
+		CombinedBatteryStorageInner
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [InnerFrontBatteryStorage, InnerFrontRightBatteryStorage, InnerBackRightBatteryStorage, InnerBackBatteryStorage, InnerBackLeftBatteryStorage, InnerFrontLeftBatteryStorage]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			AddMode = PrioritizeLeastResources // DistributeProportionallyByAvailable
+		}
+		
+		
+		// Inner (when overclocked)
+		
+		InnerFrontIsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, InnerFrontBatteryStorageProxy, ScorchedToggle, IsOperational]
+			Mode = All
+		}
+		InnerFrontOverclockEffect :			InnerFrontIsOperational	{ Toggles = [InnerFrontIsOperational, OverclockedEffectToggle] }
+		InnerFrontOverloadEffect :			InnerFrontIsOperational	{ Toggles = [InnerFrontIsOperational, IsOperationalOverloaded] }
+		InnerFrontOverclockOverloadEffect :	InnerFrontIsOperational	{ Toggles = [InnerFrontIsOperational, IsOperationalOverclockedOverloaded] }
+		InnerFrontBatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 2000
+			ToggleOnResources = 2000
+			DrainOnFtlJump = true
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		InnerFrontBatteryStorageProxy
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			IsDrainable = true
+			ToggleOnResources = 1000
+			ResourceStorages = [InnerFrontBatteryStorage, OuterFrontRightBatteryStorageProxy]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			RemoveMode = DistributeProportionallyByAvailable		
+		}
+		CombinedInnerFrontBatteryStorage
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOverclocked
+			IsDrainable = true
+			ResourceType = battery
+			ResourceStorages = [InnerFrontBatteryStorageProxy, ModularInnerBatteryStorage]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			RemoveMode = PrioritizeMostResources // DistributeProportionallyByAvailable
+		}
+		InnerFrontIsOperationalOnly
+		{
+			Type = MultiToggle
+			Toggles = [InnerFrontIsOperational, { Toggle = OuterFrontRightIsOperational, invert = true }]
+			Mode = Any
+		}
+		InnerFrontPowerDrain
+		{
+			Type = ResourceConverter
+			OperationalToggle = InnerFrontIsOperationalOnly
+			FromStorage = InnerFrontBatteryStorage
+			FromQuantity = (&../InnerFrontPowerDrainProxy/FromQuantity) / 2
+			MinFromQuantityForConversion = 1
+			Interval = 1
+		}
+		InnerFrontIsOperationalCombined :	InnerFrontIsOperationalOnly			{ Toggles = [InnerFrontIsOperational, OuterFrontRightIsOperational] }
+		InnerFrontPowerDrainProxy :			InnerFrontPowerDrain
+		{
+			OperationalToggle = InnerFrontIsOperationalCombined
+			FromStorage = InnerFrontBatteryStorageProxy
+			FromQuantity = 50
+		}
+		
+		InnerFrontRightIsOperational : 				InnerFrontIsOperational				{ Toggles = [PowerToggle, InnerFrontRightBatteryStorageProxy, ScorchedToggle, IsOperational] }
+		InnerFrontRightOverloadEffect :				InnerFrontIsOperational				{ Toggles = [InnerFrontRightIsOperational, IsOperationalOverloaded] }
+		InnerFrontRightOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerFrontRightIsOperational, OverclockedEffectToggle] }
+		InnerFrontRightOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerFrontRightIsOperational, IsOperationalOverclockedOverloaded] }
+		InnerFrontRightBatteryStorage : 			InnerFrontBatteryStorage			{}
+		InnerFrontRightBatteryStorageProxy :		InnerFrontBatteryStorageProxy		{ ResourceStorages = [InnerFrontRightBatteryStorage, OuterRightBatteryStorageProxy] }
+		CombinedInnerFrontRightBatteryStorage :		CombinedInnerFrontBatteryStorage	{ ResourceStorages = [InnerFrontRightBatteryStorageProxy, ModularInnerBatteryStorage] }
+		InnerFrontRightIsOperationalOnly :			InnerFrontIsOperationalOnly			{ Toggles = [InnerFrontRightIsOperational, { Toggle = OuterRightIsOperational, invert = true }] }
+		InnerFrontRightPowerDrain : 				InnerFrontPowerDrain
+		{
+			OperationalToggle = InnerFrontRightIsOperationalOnly
+			FromStorage = InnerFrontRightBatteryStorage
+		}
+		InnerFrontRightIsOperationalCombined :		InnerFrontIsOperationalOnly			{ Toggles = [InnerFrontRightIsOperational, OuterRightIsOperational] }
+		InnerFrontRightPowerDrainProxy :			InnerFrontPowerDrainProxy
+		{
+			OperationalToggle = InnerFrontRightIsOperationalCombined
+			FromStorage = InnerFrontRightBatteryStorageProxy
+		}
+		
+		InnerBackRightIsOperational : 			InnerFrontIsOperational				{ Toggles = [PowerToggle, InnerBackRightBatteryStorageProxy, ScorchedToggle, IsOperational] }
+		InnerBackRightOverloadEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackRightIsOperational, IsOperationalOverloaded] }
+		InnerBackRightOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackRightIsOperational, OverclockedEffectToggle] }
+		InnerBackRightOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerBackRightIsOperational, IsOperationalOverclockedOverloaded] }
+		InnerBackRightBatteryStorage : 			InnerFrontBatteryStorage			{}
+		InnerBackRightBatteryStorageProxy :		InnerFrontBatteryStorageProxy		{ ResourceStorages = [InnerBackRightBatteryStorage, OuterBackRightBatteryStorageProxy] }
+		CombinedInnerBackRightBatteryStorage :	CombinedInnerFrontBatteryStorage	{ ResourceStorages = [InnerBackRightBatteryStorageProxy, ModularInnerBatteryStorage] }
+		InnerBackRightIsOperationalOnly :		InnerFrontIsOperationalOnly			{ Toggles = [InnerBackRightIsOperational, { Toggle = OuterBackRightIsOperational, invert = true }] }
+		InnerBackRightPowerDrain : 				InnerFrontPowerDrain
+		{
+			OperationalToggle = InnerBackRightIsOperationalOnly
+			FromStorage = InnerBackRightBatteryStorage
+		}
+		InnerBackRightIsOperationalCombined :		InnerFrontIsOperationalOnly			{ Toggles = [InnerBackRightIsOperational, OuterBackRightIsOperational] }
+		InnerBackRightPowerDrainProxy :			InnerFrontPowerDrainProxy
+		{
+			OperationalToggle = InnerBackRightIsOperationalCombined
+			FromStorage = InnerBackRightBatteryStorageProxy
+		}
+		
+		InnerBackIsOperational : 			InnerFrontIsOperational				{ Toggles = [PowerToggle, InnerBackBatteryStorageProxy, ScorchedToggle, IsOperational] }
+		InnerBackOverloadEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackIsOperational, IsOperationalOverloaded] }
+		InnerBackOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackIsOperational, OverclockedEffectToggle] }
+		InnerBackOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerBackIsOperational, IsOperationalOverclockedOverloaded] }
+		InnerBackBatteryStorage : 			InnerFrontBatteryStorage			{}
+		InnerBackBatteryStorageProxy :		InnerFrontBatteryStorageProxy		{ ResourceStorages = [InnerBackBatteryStorage, OuterBackLeftBatteryStorageProxy] }
+		CombinedInnerBackBatteryStorage :	CombinedInnerFrontBatteryStorage	{ ResourceStorages = [InnerBackBatteryStorageProxy, ModularInnerBatteryStorage] }
+		InnerBackIsOperationalOnly :		InnerFrontIsOperationalOnly			{ Toggles = [InnerBackIsOperational, { Toggle = OuterBackLeftIsOperational, invert = true }] }
+		InnerBackPowerDrain : 				InnerFrontPowerDrain
+		{
+			OperationalToggle = InnerBackIsOperationalOnly
+			FromStorage = InnerBackBatteryStorage
+		}
+		InnerBackIsOperationalCombined :	InnerFrontIsOperationalOnly			{ Toggles = [InnerBackIsOperational, OuterBackLeftIsOperational] }
+		InnerBackPowerDrainProxy :			InnerFrontPowerDrainProxy
+		{
+			OperationalToggle = InnerBackIsOperationalCombined
+			FromStorage = InnerBackBatteryStorageProxy
+		}
+		
+		InnerBackLeftIsOperational : 			InnerFrontIsOperational				{ Toggles = [PowerToggle, InnerBackLeftBatteryStorageProxy, ScorchedToggle, IsOperational] }
+		InnerBackLeftOverloadEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackLeftIsOperational, IsOperationalOverloaded] }
+		InnerBackLeftOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackLeftIsOperational, OverclockedEffectToggle] }
+		InnerBackLeftOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerBackLeftIsOperational, IsOperationalOverclockedOverloaded] }
+		InnerBackLeftBatteryStorage : 			InnerFrontBatteryStorage			{}
+		InnerBackLeftBatteryStorageProxy :		InnerFrontBatteryStorageProxy		{ ResourceStorages = [InnerBackLeftBatteryStorage, OuterLeftBatteryStorageProxy] }
+		CombinedInnerBackLeftBatteryStorage :	CombinedInnerFrontBatteryStorage	{ ResourceStorages = [InnerBackLeftBatteryStorageProxy, ModularInnerBatteryStorage] }
+		InnerBackLeftIsOperationalOnly :		InnerFrontIsOperationalOnly			{ Toggles = [InnerBackLeftIsOperational, { Toggle = OuterLeftIsOperational, invert = true }] }
+		InnerBackLeftPowerDrain : 				InnerFrontPowerDrain
+		{
+			OperationalToggle = InnerBackLeftIsOperationalOnly
+			FromStorage = InnerBackLeftBatteryStorage
+		}
+		InnerBackLeftIsOperationalCombined :	InnerFrontIsOperationalOnly			{ Toggles = [InnerBackLeftIsOperational, OuterLeftIsOperational] }
+		InnerBackLeftPowerDrainProxy :			InnerFrontPowerDrainProxy
+		{
+			OperationalToggle = InnerBackLeftIsOperationalCombined
+			FromStorage = InnerBackLeftBatteryStorageProxy
+		}
+		
+		InnerFrontLeftIsOperational : 			InnerFrontIsOperational				{ Toggles = [PowerToggle, InnerFrontLeftBatteryStorageProxy, ScorchedToggle, IsOperational] }
+		InnerFrontLeftOverloadEffect :			InnerFrontIsOperational				{ Toggles = [InnerFrontLeftIsOperational, IsOperationalOverloaded] }
+		InnerFrontLeftOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerFrontLeftIsOperational, OverclockedEffectToggle] }
+		InnerFrontLeftOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerFrontLeftIsOperational, IsOperationalOverclockedOverloaded] }
+		InnerFrontLeftBatteryStorage : 			InnerFrontBatteryStorage			{}
+		InnerFrontLeftBatteryStorageProxy :		InnerFrontBatteryStorageProxy		{ ResourceStorages = [InnerFrontLeftBatteryStorage, OuterFrontLeftBatteryStorageProxy] }
+		CombinedInnerFrontLeftBatteryStorage :	CombinedInnerFrontBatteryStorage	{ ResourceStorages = [InnerFrontLeftBatteryStorageProxy, ModularInnerBatteryStorage] }
+		InnerFrontLeftIsOperationalOnly :		InnerFrontIsOperationalOnly			{ Toggles = [InnerFrontLeftIsOperational, { Toggle = OuterLeftIsOperational, invert = true }] }
+		InnerFrontLeftPowerDrain : 				InnerFrontPowerDrain
+		{
+			OperationalToggle = InnerFrontLeftIsOperationalOnly
+			FromStorage = InnerFrontLeftBatteryStorage
+		}
+		InnerFrontLeftIsOperationalCombined :	InnerFrontIsOperationalOnly			{ Toggles = [InnerFrontLeftIsOperational, OuterFrontLeftIsOperational] }
+		InnerFrontLeftPowerDrainProxy :			InnerFrontPowerDrainProxy
+		{
+			OperationalToggle = InnerFrontLeftIsOperationalCombined
+			FromStorage = InnerFrontLeftBatteryStorageProxy
+		}
+		
+		// Outer (when overclocked)
+		
+		OuterFrontRightIsOperational : 				InnerFrontIsOperational				{ Toggles = [PowerToggle, OuterFrontRightBatteryStorage, ScorchedToggle, IsOperationalOverclocked] }
+		OuterFrontRightOverclockEffect :			InnerFrontIsOperational				{ Toggles = [OuterFrontRightIsOperational, OverclockedEffectToggle] }
+		OuterFrontRightOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [OuterFrontRightIsOperational, IsOperationalOverclockedOverloaded] }
+		OuterFrontRightBatteryStorage : 			InnerFrontBatteryStorage			{}
+		CombinedOuterFrontRightBatteryStorage :		CombinedInnerFrontBatteryStorage	{ ResourceStorages = [OuterFrontRightBatteryStorage, ModularOuterBatteryStorage] }
+		OuterFrontRightPowerDrain : 				InnerFrontPowerDrain
+		{
+			OperationalToggle = OuterFrontRightIsOperational
+			FromStorage = OuterFrontRightBatteryStorage
+		}
+		OuterFrontRightBatteryStorageProxy
+		{
+			Type = ResourceStorageProxy
+			ResourceType = battery
+			ComponentID = OuterFrontRightBatteryStorage
+			OperationalToggle = { Toggle=IsOverclocked; Invert=true }
+		}
+		
+		OuterRightIsOperational : 			InnerFrontIsOperational				{ Toggles = [PowerToggle, OuterRightBatteryStorage, ScorchedToggle, IsOperationalOverclocked] }
+		OuterRightOverclockEffect :			InnerFrontIsOperational				{ Toggles = [OuterRightIsOperational, OverclockedEffectToggle] }
+		OuterRightOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [OuterRightIsOperational, IsOperationalOverclockedOverloaded] }
+		OuterRightBatteryStorage : 			InnerFrontBatteryStorage			{}
+		CombinedOuterRightBatteryStorage :	CombinedInnerFrontBatteryStorage	{ ResourceStorages = [OuterRightBatteryStorage, ModularOuterBatteryStorage] }
+		OuterRightPowerDrain : 				InnerFrontPowerDrain
+		{
+			OperationalToggle = OuterRightIsOperational
+			FromStorage = OuterRightBatteryStorage
+		}
+		OuterRightBatteryStorageProxy :		OuterFrontRightBatteryStorageProxy	{ ComponentID = OuterRightBatteryStorage}
+		
+		OuterBackRightIsOperational : 				InnerFrontIsOperational				{ Toggles = [PowerToggle, OuterBackRightBatteryStorage, ScorchedToggle, IsOperationalOverclocked] }
+		OuterBackRightOverclockEffect :				InnerFrontIsOperational				{ Toggles = [OuterBackRightIsOperational, OverclockedEffectToggle] }
+		OuterBackRightOverclockOverloadEffect :		InnerFrontIsOperational				{ Toggles = [OuterBackRightIsOperational, IsOperationalOverclockedOverloaded] }
+		OuterBackRightBatteryStorage : 				InnerFrontBatteryStorage			{}
+		CombinedOuterBackRightBatteryStorage :		CombinedInnerFrontBatteryStorage	{ ResourceStorages = [OuterBackRightBatteryStorage, ModularOuterBatteryStorage] }
+		OuterBackRightPowerDrain : 					InnerFrontPowerDrain
+		{
+			OperationalToggle = OuterBackRightIsOperational
+			FromStorage = OuterBackRightBatteryStorage
+		}
+		OuterBackRightBatteryStorageProxy :			OuterFrontRightBatteryStorageProxy	{ ComponentID = OuterBackRightBatteryStorage}
+		
+		OuterBackLeftIsOperational : 				InnerFrontIsOperational				{ Toggles = [PowerToggle, OuterBackLeftBatteryStorage, ScorchedToggle, IsOperationalOverclocked] }
+		OuterBackLeftOverclockEffect :				InnerFrontIsOperational				{ Toggles = [OuterBackLeftIsOperational, OverclockedEffectToggle] }
+		OuterBackLeftOverclockOverloadEffect :		InnerFrontIsOperational				{ Toggles = [OuterBackLeftIsOperational, IsOperationalOverclockedOverloaded] }
+		OuterBackLeftBatteryStorage : 				InnerFrontBatteryStorage			{}
+		CombinedOuterBackLeftBatteryStorage :		CombinedInnerFrontBatteryStorage	{ ResourceStorages = [OuterBackLeftBatteryStorage, ModularOuterBatteryStorage] }
+		OuterBackLeftPowerDrain : 					InnerFrontPowerDrain
+		{
+			OperationalToggle = OuterBackLeftIsOperational
+			FromStorage = OuterBackLeftBatteryStorage
+		}
+		OuterBackLeftBatteryStorageProxy :			OuterFrontRightBatteryStorageProxy	{ ComponentID = OuterBackLeftBatteryStorage}
+		
+		OuterLeftIsOperational : 				InnerFrontIsOperational				{ Toggles = [PowerToggle, OuterLeftBatteryStorage, ScorchedToggle, IsOperationalOverclocked] }
+		OuterLeftOverclockEffect :				InnerFrontIsOperational				{ Toggles = [OuterLeftIsOperational, OverclockedEffectToggle] }
+		OuterLeftOverclockOverloadEffect :		InnerFrontIsOperational				{ Toggles = [OuterLeftIsOperational, IsOperationalOverclockedOverloaded] }
+		OuterLeftBatteryStorage : 				InnerFrontBatteryStorage			{}
+		CombinedOuterLeftBatteryStorage :		CombinedInnerFrontBatteryStorage	{ ResourceStorages = [OuterLeftBatteryStorage, ModularOuterBatteryStorage] }
+		OuterLeftPowerDrain : 					InnerFrontPowerDrain
+		{
+			OperationalToggle = OuterLeftIsOperational
+			FromStorage = OuterLeftBatteryStorage
+		}
+		OuterLeftBatteryStorageProxy :			OuterFrontRightBatteryStorageProxy	{ ComponentID = OuterLeftBatteryStorage}
+		
+		OuterFrontLeftIsOperational : 				InnerFrontIsOperational				{ Toggles = [PowerToggle, OuterFrontLeftBatteryStorage, ScorchedToggle, IsOperationalOverclocked] }
+		OuterFrontLeftOverclockEffect :				InnerFrontIsOperational				{ Toggles = [OuterFrontLeftIsOperational, OverclockedEffectToggle] }
+		OuterFrontLeftOverclockOverloadEffect :		InnerFrontIsOperational				{ Toggles = [OuterFrontLeftIsOperational, IsOperationalOverclockedOverloaded] }
+		OuterFrontLeftBatteryStorage : 				InnerFrontBatteryStorage			{}
+		CombinedOuterFrontLeftBatteryStorage :		CombinedInnerFrontBatteryStorage	{ ResourceStorages = [OuterFrontLeftBatteryStorage, ModularOuterBatteryStorage] }
+		OuterFrontLeftPowerDrain : 					InnerFrontPowerDrain
+		{
+			OperationalToggle = OuterFrontLeftIsOperational
+			FromStorage = OuterFrontLeftBatteryStorage
+		}
+		OuterFrontLeftBatteryStorageProxy :			OuterFrontRightBatteryStorageProxy	{ ComponentID = OuterFrontLeftBatteryStorage}
+		
+		// Ends Normal Batteries
+
+		// Start Modular Battery
+		
+/* Doesn't work		
+		BuffProviderTop : BuffProviderFrontLeft
+		{
+			Type = AreaBuffProvider
+			BuffType = BubbleCapacity
+			BuffArea = [1, -1, 2, 1]
+			OperationalToggle = IsOperational
+			Criteria
+			{
+				Right = 3
+				Left = 1
+			}
+		}
+		BuffProviderRight : BuffProviderFrontLeft
+		{
+			BuffArea = [4, 1, 1, 2]
+			Criteria
+			{
+				Rot = 1
+				Left = 4
+				Right = 5
+//				Bottom = 3 // With this it also worked
+//				Top = 1
+			}
+		}
+		BuffProviderBottom : BuffProviderFrontLeft
+		{
+			BuffArea = [1, 4, 2, 1]
+			Criteria
+			{
+				Rot = 2
+				Left = 1
+				Right = 3
+				Bottom = 5
+//				Top = 4 // With this it also worked
+			}
+		}
+		BuffProviderLeft : BuffProviderFrontLeft
+		{
+			BuffArea = [-1, 1, 1, 2]
+			Criteria
+			{
+				Rot = 3
+				Right = 0
+				Bottom = 3
+				Top = 1
+			}
+		}		
+*/
+		
+		BuffProviderFrontLeft
+		{
+			Type = AreaBuffProvider
+			BuffType = BubbleCapacity
+			BuffArea = [0, -1, 2, 1]
+			OperationalToggle = IsOperational
+			Criteria
+			{
+				Right = 2
+				Left = 0 // testing
+			}
+		}
+		BuffProviderFrontRight : BuffProviderFrontLeft
+		{
+			BuffArea = [2, -1, 2, 1]
+			Criteria
+			{
+				Left = 2
+				Right = 4
+			}
+		}
+		BuffProviderRightTop : BuffProviderFrontLeft
+		{
+			BuffArea = [4, 0, 1, 2]
+			Criteria
+			{
+				Rot = 1
+				Left = 4
+				Right = 5
+				Bottom = 2 // With this it also worked
+			}
+		}
+		BuffProviderRightBottom : BuffProviderFrontLeft
+		{
+			BuffArea = [4, 2, 1, 2]
+			Criteria
+			{
+				Rot = 1
+				Left = 4
+				Right = 5
+				Bottom = 4
+				Top = 2
+			}
+		}
+		BuffProviderBackRight : BuffProviderFrontLeft
+		{
+			BuffArea = [2, 4, 2, 1]
+			Criteria
+			{
+				Rot = 2
+				Left = 2
+				Right = 4
+				Bottom = 5
+//				Top = 4 // With this it also worked
+			}
+		}
+		BuffProviderBackLeft : BuffProviderFrontLeft // works
+		{
+			BuffArea = [0, 4, 2, 1]
+			Criteria
+			{
+				Rot = 2
+				Right = 2
+				Bottom = 5
+			}
+		}
+		BuffProviderLeftBottom : BuffProviderFrontLeft
+		{
+			BuffArea = [-1, 2, 1, 2]
+			Criteria
+			{
+				Rot = 3
+				Right = 0
+				Bottom = 4
+				Top = 2
+			}
+		}		
+		BuffProviderLeftTop : BuffProviderFrontLeft
+		{
+			BuffArea = [-1, 0, 1, 2]
+			Criteria
+			{
+				Rot = 3
+				Right = 0
+				Bottom = 2
+			}
+		}
+		
+		IsModularToggle
+		{
+			Type = BuffToggle
+			BuffType = BubbleResistanceBonus
+		}
+
+		IsOperational_Modular_NotOverclocked
+		{
+			Type = MultiToggle
+			Toggles = [IsOperational, IsModularToggle, {Toggle = OverclockedEffectToggle, Invert = true} ]
+			Mode = All
+		}
+		IsOperational_Modular_Overclocked
+		{
+			Type = MultiToggle
+			Toggles = [IsOperational, IsModularToggle, OverclockedEffectToggle]
+			Mode = All
+		}
+		
+		CentralBatteryStorage // It isn't necesarely, but adding this makes the shield less buggy.
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 0
+			DrainOnFtlJump = true
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		
+		// When not overclocked
+		
+		ModularBatteryStorage	// Only for battery consumer and recharge, so that it priorizes the part with least resource instead of the battery with least resource
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
+			ResourceType = battery
+			ToggleOnResources = 0
+			IsDrainable = true
+			ResourceStorages = [CentralBatteryStorage]
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProviderFrontLeft, BuffProviderFrontRight, BuffProviderRightTop, BuffProviderRightBottom, BuffProviderBackRight, BuffProviderBackLeft, BuffProviderLeftBottom, BuffProviderLeftTop]
+				ComponentID = BatteryStorageProxy
+			}
+			AddMode = PrioritizeLeastResources
+			RemoveMode = PrioritizeLeastResources
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+
+		// Outer (when overclocked)
+		ModularOuterBatteryStorage : ModularBatteryStorage
+		{
+			OperationalToggle = IsOperationalOverclocked
+			ViaBuffs : ^/0/ViaBuffs { ComponentID = OuterBatteryStorageProxy }
+		}
+		ModularOuterBatteryStorageProxy
+		{
+			Type = ResourceStorageProxy
+			ResourceType = battery
+			ComponentID = ModularOuterBatteryStorage
+			OperationalToggle = IsOperationalNonOverclocked
+		}
+		
+		// Inner (when overclocked)
+		ModularInnerBatteryStorage : ModularBatteryStorage
+		{
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = InnerBatteryStorageProxy }
+		}
+		ModularInnerBatteryStorageProxy
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
+			ResourceType = battery
+			ToggleOnResources = 0
+			IsDrainable = true
+			ResourceStorages = [ModularOuterBatteryStorageProxy, ModularInnerBatteryStorage]
+			AddMode = PrioritizeLeastResources
+			RemoveMode = PrioritizeLeastResources
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		
+		// Ends Modular Batteries
+
+		IsOperationalProxy
+		{
+			Type = MultiToggle
+			Toggles = [ProxyBatteryStorage]
+			Mode = All
+		}
+		
+		ProxyBatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 0
+			ToggleOnResources = 1
+			DrainOnFtlJump = true
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// ARCSHIELD ORIGINAL - START //////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		ArcShield : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ArcShield
+		{
+//			Type = ArcShield
+			Radius = 15
+/*			Radius
+			{
+				BaseValue = 15
+				Modifiers
+				[
+					{
+						Type = ScaledBuff
+						BuffType = BubbleRadiusBonus
+						Scale = 1.5
+						ModificationMode = Add
+					}
+				]
+			}*/
+			Arc = 60d
+			OperationalToggle = IsOperationalProxy
+			PenetrationResistance = [ { BaseValue= 16.66; BuffType=BubbleResistanceBonus; BuffMode=Add; }, 0]
+			DrainResourcesFrom = ProxyBatteryStorage
+			ResourceDrainPerDamage
+			{
+				BaseValue = .4
+				Modifiers
+				[
+					{
+						Type = Status
+						StatusType = cosmoteer.shield_overload
+						ModificationMode = Multiply
+						BaseStatusValue = 1
+					}
+					{
+						Type = BuffRemap
+						BuffType = Overclock
+						ModificationMode = Multiply
+						RemapFrom = [0, 1]
+						RemapTo = [1, &~/OVERCLOCK/DAMAGE_DRAIN_FACTOR ]
+					}
+				]
+			}
+			Rotation = -90d
+			Location = [2, 2]
+			
+			ShieldMediaEffects
+			[
+				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield/ShieldMediaEffects/0
+				{
+					Radius = &~/Part/Components/ArcShield/Radius
+					Arc = &~/Part/Components/ArcShield/Arc
+					ArcSpriteSegments = 128
+					ArcSprite : ^/0/ArcSprite
+					{
+						_xScale = 1.5
+//						Size = [0, 1.5]
+					}
+					
+				}
+				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield/ShieldMediaEffects/1	{}
+			]
+		}
+		
+		OverclockTweenToggle
+		{
+			Type = ThresholdToggle
+			ValueFrom = OverclockStateValue
+			MinAmount = 1
+		}
+		
+		OverclockedEffectToggle
+		{
+			Type = MultiToggle
+			Toggles = [OverclockTweenToggle, IsOperationalOverclocked]
+			Mode = All
+		}
+		
+		Overclock_BlueprintArc
+		{
+			Type = ArcSprite
+			ChainedTo = ArcShield
+			Radius = (&../ArcShield/Radius) + (&<stats.rules>/Stats/RadiusOverclocked)
+			Arc = 360d
+			SpriteSegments = 256 // (&../ArcShield/BlueprintArcSpriteSegments)
+			Sprite
+			{
+				Texture
+				{
+					File = "./Data/ships/terran/shield_gen_small/shield_energy_oc.png"
+					UVMode = Wrap
+					SampleMode = Linear
+					MipLevels = 1
+				}
+				Size = [0, 1.5]
+				Color = [255, 134, 36, 127]
+			}
+		}
+		
+		OverclockEffect
+		{
+			Type = ShieldArcsMimic
+			Shield = ArcShield
+			ChainedTo = ArcShield
+			FactorMediaEffectsIntensityWith = BatteryStorage
+			MimicFadeInStartTime = false
+			OperationalToggle = OverclockedEffectToggle
+			ContinuousEffects
+			[
+				{
+					Type = ArcShield
+					Radius = &~/Part/Components/ArcShield/Radius
+					Arc = &~/Part/Components/ArcShield/Arc
+					FadeInTime = .25
+					FadeOutTime = .25
+					FadeFromScale = 1.025
+					ArcSprite
+					{
+						Texture
+						{
+							File = "./Data/ships/terran/shield_gen_small/shield_energy_oc.png"
+							UVMode = Wrap
+							SampleMode = Linear
+							MipLevels = 1
+						}
+						Shader = "./Data/ships/terran/shield_gen_small/shield.shader"
+						_waveTex
+						{
+							File = "./Data/ships/terran/shield_gen_small/shield_energy_wave.png"
+							UVMode = Wrap
+							SampleMode = Linear
+							MipLevels = max
+						}
+						_maskTex
+						{
+							File = "./Data/ships/terran/shield_gen_small/shield_mask_oc.png"
+							SampleMode = Linear
+							MipLevels = 1
+						}
+						_waveSpeed = 1
+						_waveAlpha = 1
+						_waveCurveInterval = .5
+						_waveCurveMagnitude = .35
+						_waveCurveUOffsetPerSecond = .2
+						_fullPowerColor1 = [203, 80, 33, 127]
+						_lowPowerColor1 = [255, 0, 0, 127]
+						_fullPowerColor2 = [255, 134, 36, 255]
+						_lowPowerColor2 = [255, 50, 0, 127]
+						_lowPowerThicknessExponent = .6
+						_xScale = 1.5
+						_hexDamageIntensity = 0.8
+						TargetBlendMode = Add
+						Size = [0, 1.5]
+					}
+					ArcSpriteSegments = 128
+					Bucket = Lower1
+				}
+			]
+		}
+        
+		OverloadValue
+		{
+			Type = BuffableValue
+			Value
+			{
+				BaseValue = 0
+				Modifiers
+				[
+					{
+						Type = Status
+						StatusType = cosmoteer.shield_overload
+						ModificationMode = Replace
+						BaseStatusValue = 0
+					}
+				]
+			}
+		}
+		
+		IsOverloaded
+		{
+			Type = ThresholdToggle
+			ValueFrom = OverloadValue
+			MinAmount = 0.01
+		}
+		
+		
+		IsOperationalOverloaded
+		{
+			Type = MultiToggle
+			Toggles = [ IsOperational, IsOverloaded ]
+			Mode = All
+		}
+		
+		IsOperationalOverclockedOverloaded
+		{
+			Type = MultiToggle
+			Toggles = [ IsOperational, IsOverloaded, OverclockedEffectToggle ]
+			Mode = All
+		}
+		
+		OverloadEffect
+		{
+			Type = ShieldArcsMimic
+			Shield = ArcShield
+			ChainedTo = ArcShield
+			FactorMediaEffectsIntensityWith = BatteryStorage
+			FactorRedVertexColorWith = OverloadValue
+			OperationalToggle = IsOperationalOverloaded
+			ContinuousEffects
+			[
+				{
+					Type = ArcShield
+					Radius = &~/Part/Components/ArcShield/Radius
+					Arc = &~/Part/Components/ArcShield/Arc
+					FadeInTime = 0.5
+					FadeOutTime = 0.5
+					FadeFromScale = .8
+					ArcAngleAffectsUVs = true
+					UPerNinetyDegrees = 1
+					ArcSprite
+					{
+						Texture
+						{
+							File = "./Data/ships/terran/shield_gen_small/shield_overload.png"
+							UVMode = Wrap
+							SampleMode = Linear
+							MipLevels = 1
+						}
+						Shader = "./Data/ships/terran/shield_gen_small/shield_overload.shader"
+						_noiseTex1
+						{
+							File = "./Data/statuses/fire/particles/fire_noise.png"
+							UVMode = Wrap
+							SampleMode = Linear
+							MipLevels = max
+						}
+						_noiseTex2
+						{
+							File = "./Data/statuses/fire/particles/fire_noise.png"
+							UVMode = Wrap
+							SampleMode = Linear
+							MipLevels = max
+						}
+						_baseShieldTex
+						{
+							File = "./Data/ships/terran/shield_gen_small/shield_mask.png"
+							UVMode = Wrap
+							SampleMode = Linear
+							MipLevels = 1
+						}
+						_waveSpeed = 1
+						_waveAlpha = 1
+						_waveCurveInterval = .5
+						_waveCurveMagnitude = .35
+						_waveCurveUOffsetPerSecond = .2
+						
+						_color1 = [255, 0, 255 * 0.31, 0]
+						_color2 = [255, 255 * 0.41, 0, 0]
+						_maxGreen = 0.9
+						
+						_xScale = 1.5
+						_gradientXWidth = 1.05
+						_hexDamageIntensity = 0.8
+						TargetBlendMode = Add
+						Size = [0, 1.5]
+					}
+					ArcSpriteSegments = 128
+					Bucket = Lower1
+				}
+			]
+		}
+		
+		OverclockOverloadEffect
+		{
+			Type = ShieldArcsMimic
+			Shield = ArcShield
+			ChainedTo = ArcShield
+			FactorMediaEffectsIntensityWith = BatteryStorage
+			FactorRedVertexColorWith = OverloadValue
+			OperationalToggle = IsOperationalOverclockedOverloaded
+			ContinuousEffects
+			[
+				{
+					Type = ArcShield
+					Radius = &~/Part/Components/ArcShield/Radius
+					Arc = &~/Part/Components/ArcShield/Arc
+					FadeInTime = .25
+					FadeOutTime = .25
+					FadeFromScale = 1.025
+					ArcSprite
+					{
+						Texture
+						{
+							File = "./Data/ships/terran/shield_gen_small/shield_overload_oc.png"
+							UVMode = Wrap
+							SampleMode = Linear
+							MipLevels = 1
+						}
+						Shader = "./Data/ships/terran/shield_gen_small/shield_overload.shader"
+						_noiseTex1
+						{
+							File = "./Data/statuses/fire/particles/fire_noise.png"
+							UVMode = Wrap
+							SampleMode = Linear
+							MipLevels = max
+						}
+						_noiseTex2
+						{
+							File = "./Data/statuses/fire/particles/fire_noise.png"
+							UVMode = Wrap
+							SampleMode = Linear
+							MipLevels = max
+						}
+						_baseShieldTex
+						{
+							File = "./Data/ships/terran/shield_gen_small/shield_mask_oc.png"
+							UVMode = Wrap
+							SampleMode = Linear
+							MipLevels = 1
+						}
+						_waveSpeed = 1
+						_waveAlpha = 1
+						_waveCurveInterval = .5
+						_waveCurveMagnitude = .35
+						_waveCurveUOffsetPerSecond = .2
+						
+						_color1 = [255, 0, 255 * 0.31, 0]
+						_color2 = [255, 255 * 0.41, 0, 0]
+						_maxGreen = 0.9
+						
+						_xScale = 1.5
+						_hexDamageIntensity = 0.8
+						TargetBlendMode = Add
+						Size = [0, 1.5]
+					}
+					ArcSpriteSegments = 128
+					Bucket = Lower1
+				}
+			]
+		}
+
+		InnerFrontIsOperationalOverclocked
+		{
+			Type = MultiToggle
+			Toggles = [ InnerFrontIsOperational, IsOperationalOverclocked]
+			Mode = Any
+		}
+		InnerFrontRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerFrontRightIsOperational, IsOperationalOverclocked] }
+		InnerBackRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerBackRightIsOperational, IsOperationalOverclocked] }
+		InnerBackIsOperationalOverclocked :			InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerBackIsOperational, IsOperationalOverclocked] }
+		InnerBackLeftIsOperationalOverclocked :		InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerBackLeftIsOperational, IsOperationalOverclocked] }
+		InnerFrontLeftIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerFrontLeftIsOperational, IsOperationalOverclocked] }
+
+		// Overclock / Thermal network
+		InnerFrontOverclockHeatProducer
+		{
+			Type = ResourceConverter
+			OperationalToggle = InnerFrontIsOperationalOverclocked
+			HEAT_PER_INTERVAL = ceil((&~/OVERCLOCK/HEAT_PER_SECOND) * (&Interval))
+			ToQuantity = (&HEAT_PER_INTERVAL) * (&~/HEAT_TO_RESOURCE)
+			ToStorage = &~/Part/^/0/HEAT_TARGET_STORAGE
+			Interval = 0.5
+		}
+		InnerFrontRightOverclockHeatProducer :	InnerFrontOverclockHeatProducer	{ OperationalToggle = InnerFrontRightIsOperationalOverclocked }
+		InnerBackRightOverclockHeatProducer :	InnerFrontOverclockHeatProducer	{ OperationalToggle = InnerBackRightIsOperationalOverclocked }
+		InnerBackOverclockHeatProducer :		InnerFrontOverclockHeatProducer	{ OperationalToggle = InnerBackIsOperationalOverclocked }
+		InnerBackLeftOverclockHeatProducer :	InnerFrontOverclockHeatProducer	{ OperationalToggle = InnerBackLeftIsOperationalOverclocked }
+		InnerFrontLeftOverclockHeatProducer :	InnerFrontOverclockHeatProducer	{ OperationalToggle = InnerFrontRightIsOperationalOverclocked }
+		
+		OuterFrontRightOverclockHeatProducer :	InnerFrontOverclockHeatProducer	{ OperationalToggle = OuterFrontRightIsOperational }
+		OuterRightOverclockHeatProducer :		InnerFrontOverclockHeatProducer	{ OperationalToggle = OuterRightIsOperational }
+		OuterBackRightOverclockHeatProducer :	InnerFrontOverclockHeatProducer	{ OperationalToggle = OuterBackRightIsOperational }
+		OuterBackLeftOverclockHeatProducer :	InnerFrontOverclockHeatProducer	{ OperationalToggle = OuterBackLeftIsOperational }
+		OuterLeftOverclockHeatProducer :		InnerFrontOverclockHeatProducer	{ OperationalToggle = OuterLeftIsOperational }
+		OuterFrontLeftOverclockHeatProducer :	InnerFrontOverclockHeatProducer	{ OperationalToggle = OuterFrontLeftIsOperational }
+		
+		OverclockHitHeatProducer
+		{
+			Type = ResourceChange
+			ResourceStorage = &~/Part/^/0/HEAT_TARGET_STORAGE
+			// Provides the post-resistance damage value as EffectScale
+			Trigger = Overclock_ArcShieldProxy
+			Amount
+			{
+				BaseValue = "round((&~/OVERCLOCK/HEAT_PER_DAMAGE) * (&~/HEAT_TO_RESOURCE), 0)"
+				Modifiers
+				[
+					{
+						Type = EffectScale
+						ModificationMode = Multiply
+					}
+					{
+						Type = Status
+						StatusType = cosmoteer.shield_overload
+						ModificationMode = Multiply
+						BaseStatusValue = 1
+					}
+					{
+						Type = Buff
+						BuffType = Overclock
+						ModificationMode = Multiply
+					}
+				]
+			}
+		}
+		
+		Overclock_ArcShieldProxy
+		{
+			Type = MultiTrigger
+			Triggers = [Overclock_ArcShieldInnerFrontProxy, Overclock_ArcShieldInnerFrontRightProxy, Overclock_ArcShieldInnerBackRightProxy, Overclock_ArcShieldInnerBackProxy, Overclock_ArcShieldInnerBackLeftProxy, Overclock_ArcShieldInnerFrontLeftProxy, Overclock_ArcShieldOuterFrontRightProxy, Overclock_ArcShieldOuterRightProxy, Overclock_ArcShieldOuterBackRightProxy, Overclock_ArcShieldOuterBackLeftProxy, Overclock_ArcShieldOuterLeftProxy, Overclock_ArcShieldOuterFrontLeftProxy]
+		}
+		
+		Overclock_ArcShieldInnerFrontProxy
+		{
+			Type = TriggerProxy
+			ComponentID = ArcShield_InnerFront
+			ProxyToggle = IsOperationalOverclocked
+		}
+		Overclock_ArcShieldInnerFrontRightProxy
+		{
+			Type = TriggerProxy
+			ComponentID = ArcShield_InnerFrontRight
+			ProxyToggle = IsOperationalOverclocked
+		}
+		Overclock_ArcShieldInnerBackRightProxy
+		{
+			Type = TriggerProxy
+			ComponentID = ArcShield_InnerBackRight
+			ProxyToggle = IsOperationalOverclocked
+		}
+		Overclock_ArcShieldInnerBackProxy
+		{
+			Type = TriggerProxy
+			ComponentID = ArcShield_InnerBack
+			ProxyToggle = IsOperationalOverclocked
+		}
+		Overclock_ArcShieldInnerBackLeftProxy
+		{
+			Type = TriggerProxy
+			ComponentID = ArcShield_BackLeft
+			ProxyToggle = IsOperationalOverclocked
+		}
+		Overclock_ArcShieldInnerFrontLeftProxy
+		{
+			Type = TriggerProxy
+			ComponentID = ArcShield_FrontLeft
+			ProxyToggle = IsOperationalOverclocked
+		}
+		
+		Overclock_ArcShieldOuterFrontRightProxy
+		{
+			Type = TriggerProxy
+			ComponentID = ArcShield_OuterFrontRight
+			ProxyToggle = IsOperationalOverclocked
+		}
+		Overclock_ArcShieldOuterRightProxy
+		{
+			Type = TriggerProxy
+			ComponentID = ArcShield_OuterRight
+			ProxyToggle = IsOperationalOverclocked
+		}
+		Overclock_ArcShieldOuterBackRightProxy
+		{
+			Type = TriggerProxy
+			ComponentID = ArcShield_OuterBackRight
+			ProxyToggle = IsOperationalOverclocked
+		}
+		Overclock_ArcShieldOuterBackLeftProxy
+		{
+			Type = TriggerProxy
+			ComponentID = ArcShield_OuterBackLeft
+			ProxyToggle = IsOperationalOverclocked
+		}
+		Overclock_ArcShieldOuterLeftProxy
+		{
+			Type = TriggerProxy
+			ComponentID = ArcShield_OuterLeft
+			ProxyToggle = IsOperationalOverclocked
+		}
+		Overclock_ArcShieldOuterFrontLeftProxy
+		{
+			Type = TriggerProxy
+			ComponentID = ArcShield_OuterFrontLeft
+			ProxyToggle = IsOperationalOverclocked
+		}
+		
+		OverheatEffects : ^/0/OverheatEffects
+		{
+			Location = [1, 1.5]
+		}
+		
+		BubbleHeatCollectionStorage
+		{
+			Type = ResourceStorageProxy
+			ResourceType = heat
+			ComponentID = &~/Part/^/0/HEAT_TARGET_STORAGE
+//			QuantityScale = 1 / (&~/OVERCLOCK/COLLECTED_HEAT_MULTIPLIER)
+		}
+		
+		Overclock_HeatCollectionBuffProvider
+		{
+		
+			Type = GridBuffProvider
+			BuffType = BubbleHeatCollection
+			GridDistance = 1
+			OperationalToggle = IsOperationalOverclocked
+		}
+		
+		Router
+		{
+			Type = NetworkRouter
+			RouteGenerators
+			[
+				{
+					Type = Simple
+					HEAT_INPUT = &~/Part/^/0/HEAT_NETWORK_INPUT
+					Routes
+					[
+						[&../../HEAT_INPUT, Port_TL, 0]
+						[&../../HEAT_INPUT, Port_TR, 0]
+						[&../../HEAT_INPUT, Port_RT, 0]
+						[&../../HEAT_INPUT, Port_RB, 0]
+						[&../../HEAT_INPUT, Port_BR, 0]
+						[&../../HEAT_INPUT, Port_BL, 0]
+						[&../../HEAT_INPUT, Port_LB, 0]
+						[&../../HEAT_INPUT, Port_LT, 0]
+					]
+				}
+			]
+		}
+		Port_TL : ~/Part/^/0/BASE_THERMAL_PORT
+		{
+			Location = [1, 0]
+			Direction = Up
+		}
+		Port_TR : Port_TL
+		{
+			Location = [2, 0]
+		}
+		Port_RT : Port_TL
+		{
+			Location = [3, 1]
+			Direction = Right
+		}
+		Port_RB : Port_RT
+		{
+			Location = [3, 2]
+		}
+		Port_BR : Port_TL
+		{
+			Location = [2, 3]
+			Direction = Down
+		}
+		Port_BL : Port_BR
+		{
+			Location = [1, 3]
+		}
+		Port_LB : Port_TL
+		{
+			Location = [0, 2]
+			Direction = Left
+		}
+		Port_LT : Port_LB
+		{
+			Location = [0, 1]
+		}
+
+		EmitterEffect
+		{
+			Type = ContinuousEffects
+			ChainedTo = ArcShield
+			FactorMediaEffectsIntensityWith = CombinedBatteryStorage
+			MaxMediaEffectsZoom = 12
+			Location = [2.4, 0]
+			OperationalToggle = IsOperationalProxy
+			ParentToShip = true
+			MediaEffects
+			[
+				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/EmitterEffect/MediaEffects/0
+				{
+					Radius = 2.4
+					Arc = 360d
+//					ArcSprite : ^/0/ArcSprite	 { }
+//					Bucket = Upper1
+				}
+				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/EmitterEffect/MediaEffects/1	{}
+			]
+		}
+
+		ShieldOperationEffects_InnerFront :			<./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ShieldOperationEffects
+		{
+			Location = [&~/Part/Components/ArcShield/Radius, 0]
+			Toggle = InnerFrontIsOperational
+		}
+		ShieldOperationEffects_InnerFrontRight :	ShieldOperationEffects_InnerFront	{ Toggle = InnerFrontRightIsOperational }
+		ShieldOperationEffects_InnerBackRight :		ShieldOperationEffects_InnerFront	{ Toggle = InnerBackRightIsOperational }
+		ShieldOperationEffects_InnerBack :			ShieldOperationEffects_InnerFront	{ Toggle = InnerBackIsOperational }
+		ShieldOperationEffects_InnerBackLeft :		ShieldOperationEffects_InnerFront	{ Toggle = InnerBackLeftIsOperational }
+		ShieldOperationEffects_InnerFrontLeft :		ShieldOperationEffects_InnerFront	{ Toggle = InnerFrontLeftIsOperational }
+		
+		ShieldOperationEffects_OuterFrontRight :	ShieldOperationEffects_InnerFront	{ Toggle = OuterFrontRightIsOperational }
+		ShieldOperationEffects_OuterRight :			ShieldOperationEffects_InnerFront	{ Toggle = OuterRightIsOperational }
+		ShieldOperationEffects_OuterBackRight :		ShieldOperationEffects_InnerFront	{ Toggle = OuterBackRightIsOperational }
+		ShieldOperationEffects_OuterBackLeft :		ShieldOperationEffects_InnerFront	{ Toggle = OuterBackLeftIsOperational }
+		ShieldOperationEffects_OuterLeft :			ShieldOperationEffects_InnerFront	{ Toggle = OuterLeftIsOperational }
+		ShieldOperationEffects_OuterFrontLeft :		ShieldOperationEffects_InnerFront	{ Toggle = OuterFrontLeftIsOperational }
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		Shield_Doodad_Graphics
+		{
+			Type = Graphics
+			Location = [2, 2]
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				//Offset = [0, 0]
+				DamageLevels
+				[
+					{
+						File = "doodad_axe.png"
+						NormalsFile = "doodad_axe_normals.png"
+						Size = [2, 2]
+						RotSpeed = &<../colors.rules>/StatsCommon/DoodadAxe_RotSpeed_0DMG
+					}
+					{
+						File = "doodad_axe_33.png"
+						NormalsFile = "doodad_axe_normals_33.png"
+						Size = [2, 2]
+						RotSpeed = &<../colors.rules>/StatsCommon/DoodadAxe_RotSpeed_33DMG
+					}
+					{
+						File = "doodad_axe_66.png"
+						NormalsFile = "doodad_axe_normals_66.png"
+						Size = [2, 2]
+						RotSpeed = &<../colors.rules>/StatsCommon/DoodadAxe_RotSpeed_66DMG
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "doodads_high"
+				DamageLevels
+				[
+					{
+						File = "doodad_axe.png"
+						NormalsFile = "doodad_axe_normals.png"
+						Size = [2, 2]
+					}
+					{
+						File = "doodad_axe_33.png"
+						NormalsFile = "doodad_axe_normals_33.png"
+						Size = [2, 2]
+					}
+					{
+						File = "doodad_axe_66.png"
+						NormalsFile = "doodad_axe_normals_66.png"
+						Size = [2, 2]
+					}
+				]
+			}
+		}
+		
+		Shield_Doodad_Graphics_2
+		{
+			Type = Graphics
+			Location = [2, 2]
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				//Offset = [0, 0]
+				DamageLevels
+				[
+					{
+						File = "doodad_big_axe.png"
+						NormalsFile = "doodad_big_axe_normals.png"
+						Size = [3, 3]
+						RotSpeed = &<../colors.rules>/StatsCommon/DoodadAxe2_RotSpeed_0DMG
+					}
+					{
+						File = "doodad_big_axe_33.png"
+						NormalsFile = "doodad_big_axe_normals_33.png"
+						Size = [3, 3]
+						RotSpeed = &<../colors.rules>/StatsCommon/DoodadAxe2_RotSpeed_33DMG
+					}
+					{
+						File = "doodad_big_axe_66.png"
+						NormalsFile = "doodad_big_axe_normals_66.png"
+						Size = [3, 3]
+						RotSpeed = &<../colors.rules>/StatsCommon/DoodadAxe2_RotSpeed_66DMG
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "doodads_high"
+				DamageLevels
+				[
+					{
+						File = "doodad_big_axe.png"
+						NormalsFile = "doodad_big_axe_normals.png"
+						Size = [3, 3]
+					}
+					{
+						File = "doodad_big_axe_33.png"
+						NormalsFile = "doodad_big_axe_normals_33.png"
+						Size = [3, 3]
+					}
+					{
+						File = "doodad_big_axe_66.png"
+						NormalsFile = "doodad_big_axe_normals_66.png"
+						Size = [3, 3]
+					}
+				]
+			}
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [2, 2]
+			OperationalToggle = IsOperational
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [4, 4]
+					}
+					{
+						File = "floor_33.png"
+						Size = [4, 4]
+					}
+					{
+						File = "floor_66.png"
+						Size = [4, 4]
+					}
+				]
+			}
+			
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [4, 4]
+					}
+					{
+						File = "walls_33.png"
+						Size = [4, 4]
+					}
+					{
+						File = "walls_66.png"
+						Size = [4, 4]
+					}
+				]
+			}
+			
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						NormalsFile = "roof_normals.png"
+						Size = [4, 4]
+					}
+					{
+						File = "roof_33.png"
+						NormalsFile = "roof_normals_33.png"
+						Size = [4, 4]
+					}
+					{
+						File = "roof_66.png"
+						NormalsFile = "roof_normals_66.png"
+						Size = [4, 4]
+					}
+				]
+			}
+		}
+
+		BatterySprites
+		{
+			Type = ResourceSprites
+			Location = [2, 2]
+			ResourceStorage = CombinedBatteryStorage
+			Layer = "doodads_low"
+			ResourceLevels
+			[
+				{
+					File = "batteries1.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries2.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries3.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries4.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries5.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries6.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries7.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries8.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries9.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries10.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries11.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries12.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries13.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries14.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries15.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries16.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries17.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries18.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries19.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries20.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries21.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries22.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries23.png"
+					Size = [4, 4]
+				}
+				{
+					File = "batteries24.png"
+					Size = [4, 4]
+				}
+			]
+		}
+				
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/PowerOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/PowerOff
+		}
+
+		ScorchedTrigger
+		{
+			Type = ToggleTrigger
+			Toggle = ScorchedToggle
+			TriggerWhenOn = false
+		}
+
+		ScorchedEffects
+		{
+			Type = TriggeredEffects
+			Trigger = ScorchedTrigger
+			Location = &../DestroyedEffects/Location
+			MediaEffects = &/COMMON_EFFECTS/MedPartScorched
+		}
+		
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/MedPartDestroyed
+			Location = [2, 2]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [2, 2]
+			Layer = "indicators"
+			Indicators
+			[
+				// Scorched
+				{
+					Toggle = ScorchedToggle
+					AtlasSprite = &/INDICATORS/Scorched
+					HidesIndicators = [1,2,3]
+				}
+				// Turned off.
+				{
+					Toggle = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1, 1]
+					}
+				}
+				
+				// Resetting from overclock
+				{
+					Toggle = &~/Part/^/0/OVERCLOCK_OPERATIONAL
+					AtlasSprite : /INDICATORS/OverclockReset
+					{
+						Size = [1, 1]
+					}
+					HidesIndicators = [3]
+				}
+
+				// Out of power.
+				{
+					Toggle = BatteryStorage // ModularCombinedBatteryStorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1, 1]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [4, 4]
+		}
+		
+		HeatGenerationValue
+		{
+			Type = StaticValue
+			Value = (&~/OVERCLOCK/HEAT_PER_SECOND)
+		}
+		HeatGenerationStatProvider
+		{
+			Type = StatProvider
+			Stat = HeatGeneration
+			OperationalToggle = OverclockModeToggle
+			ValueFrom = HeatGenerationValue
+		}
+	}
+
+	Stats
+	{
+		ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0/BaseValue
+		ShieldDist = (&~/Part/Components/ArcShield/Radius) - (&~/Part/Components/ArcShield/Location/1)
+		ShieldSegments = 6
+		ShieldHPSegment = (&~/Part/Components/InnerFrontBatteryStorage/MaxResources) * 2 / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
+		PowerUsageContinuous = (&~/Part/Components/InnerFrontPowerDrain/FromQuantity) * 2 / (&~/Part/Components/InnerFrontPowerDrain/Interval) / 1000 * (&ShieldSegments)
+		SegmentCapacity = (&~/Part/Components/InnerFrontBatteryStorage/MaxResources) / 1000
+		PowerCapacity = (&SegmentCapacity) * (&ShieldSegments)
+
+		RecPower = (&PowerUsageContinuous) + 0.5
+		RecCrew = (&RecPower) * 4
+	}
+	
+	StatsByCategory
+	[
+		{
+			NameKey = "StatCategories/Overclocked"
+			Stats
+			{
+				ShieldHP = (&~/Part/Components/InnerFrontBatteryStorage/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue) / (&~/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
+				ShieldRings = 2
+				ShieldDistRings = (&<stats.rules>/Stats/RadiusOverclocked)
+				EMPResistPercentage = (&~/OVERCLOCK/EMP_RESIST) * 100
+				HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND) * (&~/Part/Stats/ShieldSegments) * (&ShieldRings)
+				HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
+			}
+		}
+	]
+	
+	StatsNotesKey = "Stats/BubbleNotes"
+}

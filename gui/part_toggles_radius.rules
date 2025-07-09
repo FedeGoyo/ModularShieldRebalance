@@ -1,0 +1,40 @@
+Kebechet_Modular_Radius
+{
+	ToggleID = "Kebechet_ToggleID_Radius"
+	Style = CycledButton
+	ShowWithShipCommands = true
+	//MultipleModesDisplayOrder = Last
+	//SortOrder = 1
+	Choices
+	[
+		{
+			ChoiceID = "cid_Kebechet_Radius_Off"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_Radius_Off"
+			Mode = 0
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "kmsRadiusOff.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		{
+			ChoiceID = "cid_Kebechet_Radius_On"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_Radius_On"
+			Mode = 1
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "kmsRadiusOn.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+	]
+}

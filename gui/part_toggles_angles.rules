@@ -1,0 +1,149 @@
+Kebechet_GENS_Modular_Angle
+{
+	ToggleID = "Kebechet_ToggleID_GENS_Angle"
+	Style = Popout
+	ShowInEditor = true
+	SortOrder = 2
+	Choices
+	[
+		{
+			ChoiceID = "cid_Kebechet_GENS_Angle90LeftArc"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_GENS_Angle90LeftArc"
+			Mode = 0
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ksmAngle90LeftArc.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "cid_Kebechet_GENS_Angle90FrontArc"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_GENS_Angle90FrontArc"
+			Mode = 1
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ksmAngle90FrontArc.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "cid_Kebechet_GENS_Angle90RightArc"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_GENS_Angle90RightArc"
+			Mode = 2
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ksmAngle90RightArc.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		{
+			ChoiceID = "cid_Kebechet_GENS_Angle22LeftLine"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_GENS_Angle22LeftLine"
+			Mode = 3
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ksmAngle22LeftLine.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "cid_Kebechet_GENS_Angle90FrontLine"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_GENS_Angle90FrontLine"
+			Mode = 4
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ksmAngle90FrontLine.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "cid_Kebechet_GENS_Angle22RightLine"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_GENS_Angle22RightLine"
+			Mode = 5
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ksmAngle22RightLine.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+	]
+}
+
+Kebechet_GENL_Modular_Angle
+{
+	ToggleID = "Kebechet_ToggleID_GENL_Angle"
+	Style = Popout
+	ShowInEditor = true
+	SortOrder = 2
+	Choices
+	[
+		{
+			ChoiceID = "cid_Kebechet_GENL_Angle90LeftArc"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_GENL_Angle90LeftArc"
+			Mode = 0
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ksmAngle90LeftArc.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "cid_Kebechet_GENL_Angle90FrontArc"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_GENL_Angle90FrontArc"
+			Mode = 1
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ksmAngle90FrontArc.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "cid_Kebechet_GENL_Angle90RightArc"
+			ButtonToolTipKey = "PartToggles/btt_Kebechet_GENL_Angle90RightArc"
+			Mode = 2
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ksmAngle90RightArc.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+	]
+}
