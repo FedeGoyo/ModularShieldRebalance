@@ -2134,33 +2134,41 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 	Stats
 	{
-		ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0/BaseValue
-		ShieldDist = (&~/Part/Components/ArcShield/Radius) - (&~/Part/Components/ArcShield/Location/1)
-		ShieldSegments = 6
-		ShieldHPSegment = (&~/Part/Components/InnerFrontBatteryStorage/MaxResources) * 2 / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
-		PowerUsageContinuous = (&~/Part/Components/InnerFrontPowerDrain/FromQuantity) * 2 / (&~/Part/Components/InnerFrontPowerDrain/Interval) / 1000 * (&ShieldSegments)
-		SegmentCapacity = (&~/Part/Components/InnerFrontBatteryStorage/MaxResources) / 1000
-		PowerCapacity = (&SegmentCapacity) * (&ShieldSegments)
+		PowerCapacity = (&../StatsByCategory/0/Stats/SegmentCapacity) * (&../StatsByCategory/0/Stats/ShieldSegments)
 
-		RecPower = (&PowerUsageContinuous) + 0.5
+		RecPower = (&../StatsByCategory/0/Stats/PowerUsageContinuous) + 0.5
 		RecCrew = (&RecPower) * 4
 	}
 	
 	StatsByCategory
 	[
 		{
-			NameKey = "StatCategories/Overclocked"
+			NameKey = "StatCategories/ShieldBubbleLarge"
 			Stats
 			{
-				ShieldHP = (&~/Part/Components/InnerFrontBatteryStorage/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue) / (&~/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
-				ShieldRings = 2
-				ShieldDistRings = (&<stats.rules>/Stats/RadiusOverclocked)
-				EMPResistPercentage = (&~/OVERCLOCK/EMP_RESIST) * 100
-				HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND) * (&~/Part/Stats/ShieldSegments) * (&ShieldRings)
-				HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
+				ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0/BaseValue
+				ShieldDist = (&~/Part/Components/ArcShield/Radius) - (&~/Part/Components/ArcShield/Location/1)
+				ShieldSegments = 6
+				ShieldHPSegment = (&~/Part/Components/InnerFrontBatteryStorage/MaxResources) * 2 / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
+				PowerUsageContinuous = (&~/Part/Components/InnerFrontPowerDrain/FromQuantity) * 2 / (&~/Part/Components/InnerFrontPowerDrain/Interval) / 1000 * (&ShieldSegments)
+				SegmentCapacity = (&~/Part/Components/InnerFrontBatteryStorage/MaxResources) / 1000
 			}
 		}
 	]
+	
+	SecondaryToolTip
+	{
+		TitleKey = "StatCategories/Overclocked"
+		Stats
+		{
+			ShieldHP =  (&~/Part/StatsByCategory/0/Stats/ShieldHPSegment) / (&~/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
+			ShieldRings = 2
+			ShieldDistRings = (&<stats.rules>/Stats/RadiusOverclocked)
+			EMPResistPercentage = (&~/OVERCLOCK/EMP_RESIST) * 100
+			HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND) * (&~/Part/StatsByCategory/0/Stats/ShieldSegments) * (&ShieldRings)
+			HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
+		}
+	}
 	
 	StatsNotesKey = "Stats/BubbleNotes"
 }

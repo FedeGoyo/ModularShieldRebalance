@@ -93,6 +93,13 @@ Stats
 	BubbleNotes = "<gray>NOTA: La resistencia a la penetración y el uso de energía se incrementan con cada Generador de Escudo Diminuto adicional. Además, ellos proveen un bono de salud global al escudo</gray>"
 }
 
+StatCategories
+{
+	ShieldTiny = "Escudo Diminuto"
+	ShieldBubbleLarge = "Escudo de Bubuja Grande"
+	ShieldBubbleSmall = "Escudo de Burbuja Pequeño"
+}
+
 StarterShips
 {
 	ModelB = "El Modelo-B cede almacenamiento y tamaño en favor de un generador de escudo defensivo que puede bloquear el fuego enemigo desde todas las direcciones."

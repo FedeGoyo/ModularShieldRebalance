@@ -92,6 +92,13 @@ Stats
 	BubbleNotes = "<gray>NOTE: Penetration Resistance and Power Usage are increased with each additional Tiny Shield Generator. Also, they provide a global health bonus to the shield</gray>"
 }
 
+StatCategories
+{
+	ShieldTiny = "Tiny Shield"
+	ShieldBubbleLarge = "Large Bubble Shield"
+	ShieldBubbleSmall = "Small Bubble Shield"
+}
+
 StarterShips
 {
 	ModelB = "The Model-B trades storage and size for a defensive bubble shield generator that can block incoming enemy fire from all directions."
