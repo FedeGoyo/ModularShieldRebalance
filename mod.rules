@@ -128,6 +128,14 @@ Actions
 			:~{ File="starter_ship/Model-B.ship.png"; }
 		]
 	}
+	// Add new parts
+	{
+		Action = AddMany
+		AddTo = "<ships/terran/terran.rules>/Terran/Parts"
+		CreateIfNotExisting = false
+		IgnoreIfNotExisting = false
+		ManyToAdd = &<parts.rules>/Parts
+	}
 	
 	// Original Mod Parts Modifications
 	{

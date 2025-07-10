@@ -1,0 +1,1286 @@
+OVERCLOCK
+{
+	HEAT_PER_SECOND = 10
+	HEAT_PER_DAMAGE = 0.01
+	CAPACITY_FACTOR = 200%
+	ARC_RADIUS_FACTOR = 150%
+	POWER_DRAIN_FACTOR = 200%
+}
+HEAT_TO_RESOURCE = &<./Data/statuses/heat/heat.rules>/STATUS_TO_RESOURCE_RATIO
+HEAT_TO_STATUS = &<./Data/statuses/heat/heat.rules>/RESOURCE_TO_STATUS_RATIO
+
+Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
+{
+	NameKey = "Parts/KebechetTINYmodularShield"
+	IconNameKey = "Parts/KebechetTINYmodularShieldIcon"
+	DescriptionKey = "Parts/KebechetTINYmodularShieldDesc"
+	ID = enderluck.ModularShieldBattery
+	EditorGroup = "Defenses"
+	EditorParentParts = [ "swefpifh.Kebechet_STS_modularShield", "swefpifh.Kebechet_STL_modularShield" ] 
+	Resources
+	[
+		[steel, 14]
+		[coil, 14]
+	]
+	AIValueFactor = 5
+	Size = [2, 1]
+	PhysicalRect = [0, 0, 2, 1] // [Left, Top, Width, Height]
+	SaveRect = &PhysicalRect
+	SelectionPriority = 1
+	SelectionTypeID = "shield_gen_tiny"
+	SelectionTypeByRotation = true
+	MaxHealth = 4000
+	TypeCategories = [defense, uses_power]
+	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacity, BubbleHeatCollection]
+	PenetrationRectType = Normal
+	// ProhibitLeft = 0
+	// ProhibitRight = 0
+	// ProhibitAbove = 0
+	// ProhibitBelow = 0
+//	InitialPenetrationResistance = 0
+	AllowedDoorLocations
+	[
+		[0, 1]
+		[1, 1]
+	]
+
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [64, 64]
+	}
+	Components : ^/0/Components
+	{
+
+		// --------------------------------- START TOGGLES
+		
+		// -----------------------------------------------
+		// COLOURS TOGGLES -------------------------------
+		// -----------------------------------------------
+
+		Kebechet_TINY_ToggleColours
+		{
+			Type = UIToggle
+			ToggleID = "Kebechet_ToggleID_Colours"
+			Default = 0
+			AlwaysAllowInBuildMode = true
+			RequiresCommand = false
+		}
+
+		Kebechet_TINY_ToggleColours_Purple
+		{
+			Type = ModeToggle
+			Mode = Kebechet_TINY_ToggleColours
+			OnMode = 0
+		}
+
+		Kebechet_TINY_ToggleColours_Blue : Kebechet_TINY_ToggleColours_Purple	{ OnMode = 1 }
+		Kebechet_TINY_ToggleColours_Orange : Kebechet_TINY_ToggleColours_Purple	{ OnMode = 2 }
+		Kebechet_TINY_ToggleColours_Red : Kebechet_TINY_ToggleColours_Purple	{ OnMode = 3 }
+		Kebechet_TINY_ToggleColours_Yellow : Kebechet_TINY_ToggleColours_Purple	{ OnMode = 4 }
+		Kebechet_TINY_ToggleColours_Green : Kebechet_TINY_ToggleColours_Purple	{ OnMode = 5 }
+
+		// -----------------------------------------------
+		// PROXY -----------------------------------------
+		// -----------------------------------------------
+		
+		Kebechet_TINY_ColoursProxy
+		{
+			Type = ToggleProxy
+			ComponentID = Kebechet_TINY_ColoursSet
+		}
+		Kebechet_TINY_ColoursSet
+		{
+			Type = MultiToggle
+			Toggles = [Kebechet_TINY_ToggleColours_Purple, Kebechet_TINY_ToggleColours_Blue, Kebechet_TINY_ToggleColours_Orange, Kebechet_TINY_ToggleColours_Red, Kebechet_TINY_ToggleColours_Yellow, Kebechet_TINY_ToggleColours_Green]
+			Mode = Any
+		}
+
+		// --------------------------------- END TOGGLES
+		
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, BatteryStorage, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL ]
+			Mode = All
+		}
+
+		CommandConsumptionToggle
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, ScorchedToggle]
+			Mode = All
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		ScorchedToggle
+		{
+			Type = StatusToggle
+			StatusType = cosmoteer.scorched
+			MinStatusValue = 1
+			Invert = true
+		}
+
+		CommandConsumer
+		{
+			Type = CommandConsumer
+			OperationalToggle = CommandConsumptionToggle
+			CommandPoints = 1
+		}
+
+
+		BatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 2000
+			OperationalToggle = IsOperational
+			DrainOnFtlJump = true
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		
+		Overclock_ToggledBatteryStorage
+		{
+			Type = ToggledComponents
+			Toggle = IsOverclocked
+			Components
+			{
+				Overclock_BatteryStorage
+				{
+					Type = ResourceStorage
+					ResourceType = battery
+					MaxResources = "ceil((&~/Part/Components/BatteryStorage/MaxResources) * ((&~/OVERCLOCK/CAPACITY_FACTOR) - 1))"
+					IsIntermediateStorage = true
+				}
+			}
+		}
+		Overclock_BatteryStorageProxy
+		{
+			Type = ResourceStorageProxy
+			ResourceType = battery
+			ProxyToggle = IsOverclocked
+			ComponentID = Overclock_BatteryStorage
+		}
+		
+		BatteryReceiverStorage
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [ BatteryStorage, Overclock_BatteryStorageProxy ]
+			AddMode = InOrder
+			ReceiveResourceMediaEffects = &../BatteryStorage/ReceiveResourceMediaEffects
+		}
+		BatteryProviderStorage					// Move at the top to drain first????
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [ BatteryStorage, Overclock_BatteryStorageProxy ]
+			RemoveMode = InReverseOrder
+			ReceiveResourceMediaEffects = &../BatteryStorage/ReceiveResourceMediaEffects
+//			ToggleOnResources = 
+//			ToggleOffResources =
+//			ProvidedValueRange = 0
+//			ProvidedValuePerResource = 1/1000
+		}
+		
+		PowerToggleProxy
+		{
+			Type = ToggleProxy
+			ComponentID = PowerToggle
+		}
+		BatteryStorageProxy	// For Modular, to prevent using it while PowerToggle is off.
+		{
+			Type = ResourceStorageProxy
+			ResourceType = battery
+			ComponentID = BatteryProviderStorage
+			ProxyToggle = PowerToggleProxy
+		}
+	
+
+
+
+
+
+		/*BatteryStorage
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [InnerBatteryStorage, OuterBatteryStorage]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			IsDrainable = true
+			AddMode = DistributeProportionallyByAvailable
+			RemoveMode = DistributeProportionallyByAvailable
+		}*/
+		
+		// Bubble when not overclocked
+
+		BubbleIsOperational
+		{
+			Type = MultiToggle
+			Mode = Any
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BubbleRadiusBuffProvider]
+				ComponentIDs = [IsOperational_Modular_NotOverclocked]			// CAMBIAR
+				Toggles = [IsOperational_Modular_NotOverclocked]				// CAMBIAR
+			}
+		}
+		BubbleBatteryStorageProxy	// For Modular, to show progress bar
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+//			ResourceStorages = [TMP]
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BubbleRadiusBuffProvider]
+				ComponentIDs = [ModularBatteryStorage]
+			}
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		BubbleProgressBar : ProgressBar
+		{
+			Type = ProgressBar
+			OperationalToggle = BubbleIsOperational
+			ShowProgressFor = BubbleBatteryStorageProxy
+		}
+
+		
+		ToggledBatteryConsumer
+		{
+			Type = ToggledComponents
+			Toggle = BubbleCapacityBuffToggle
+			Invert = true
+			IncludeInBlueprints = true
+			Components
+			{
+				BatteryConsumer
+				{
+					Type = ResourceConsumer
+					ResourceType = battery
+					Storage = BatteryReceiverStorage
+					DefaultPriority = &/PRIORITIES/Thruster_Supply
+					ResupplyThreshold = 500
+					OperationalToggle = PowerToggle
+				}
+			}
+		}
+
+		ProgressBar
+		{
+			Type = ProgressBar
+			OperationalToggle = IsShieldOperational
+			ShowProgressFor = BatteryStorage
+			LowColor = [0, 0, 255]
+			HighColor = [0, 0, 255]
+			FullColor = [0, 0, 255]
+			Height = 10
+		}
+
+		PowerDrain
+		{
+			Type = ResourceConverter
+			OperationalToggle = IsOperational
+			FromStorage = BatteryStorage
+			FromQuantity // = 50
+			{
+				BaseValue = 50
+				Modifiers
+				[
+					{
+						Type = BuffRemap
+						BuffType = Overclock
+						ModificationMode = Multiply
+						RemapFrom = [0, 1]
+						RemapTo = [1, &~/OVERCLOCK/POWER_DRAIN_FACTOR ]
+					}
+				]
+			}
+			MinFromQuantityForConversion = 1
+			Interval = 1
+		}
+		
+		IsOperationalProxy
+		{
+			Type = MultiToggle
+			Toggles = [ProxyBatteryStorage]
+			Mode = All
+		}
+		ProxyBatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 0
+			ToggleOnResources = 1
+			DrainOnFtlJump = true
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+
+		BubbleCapacityBuffToggle
+		{
+			Type = BuffToggle
+			BuffType = BubbleCapacity
+		}
+		IsBonusResistanceOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, BubbleCapacityBuffToggle, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
+			Mode = All
+		}
+		BubbleResistanceBuffProvider
+		{
+			Type = AreaBuffProvider
+			BuffType = BubbleResistanceBonus
+			BuffAmount = 8.33
+			BuffArea = [0, 2, 2, 1]
+			OperationalToggle = IsBonusResistanceOperational
+/*			Criteria
+			{
+				Rot = 2
+				Right = 2
+				Bottom = 3
+			}*/
+		}
+		
+		Kebechet_TINY_ToggleRadius
+		{
+			Type = UIToggle
+			ToggleID = "Kebechet_ToggleID_Radius"
+			Default = 1
+			AlwaysAllowInBuildMode = true
+			RequiresCommand = false
+		}
+		IsBonusRadiusOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, BubbleCapacityBuffToggle, Kebechet_TINY_ToggleRadius, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
+			Mode = All
+		}
+		BubbleRadiusStateValue
+		{
+			Type = ValueTween
+			IsOnToggle = IsBonusRadiusOperational
+			OnTweenDuration = 1;
+			OffTweenDuration = 0.1;
+		}
+		BubbleRadiusBuffProvider
+		{
+			Type = AreaBuffProvider
+			BuffType = BubbleRadiusBonus
+			BuffAmount = 1
+			BuffMultiplier = BubbleRadiusStateValue
+			BuffArea = [0, 2, 2, 1]
+			OperationalToggle = IsBonusRadiusOperational
+/*			Criteria
+			{
+				Rot = 2
+				Right = 2
+				Bottom = 3
+			}*/
+		}
+
+		IsShieldOperational
+		{
+			Type = MultiToggle
+			Toggles = [IsOperational, {Toggle = BubbleCapacityBuffToggle, Invert = true}]
+			Mode = All
+		}
+
+
+
+
+		
+		OverclockTweenToggle
+		{
+			Type = ThresholdToggle
+			ValueFrom = OverclockStateValue
+			MinAmount = 1
+		}
+		OverclockedEffectToggle
+		{
+			Type = MultiToggle
+			Toggles = [OverclockTweenToggle, IsOperationalOverclocked, {Toggle = BubbleCapacityBuffToggle, Invert = true} ]
+			Mode = All
+		}
+
+
+
+
+
+		// Overclock / Thermal network
+		OverclockHeatProducer
+		{
+			Type = ResourceConverter
+			OperationalToggle = IsOperationalOverclocked
+			HEAT_PER_INTERVAL = ceil((&~/OVERCLOCK/HEAT_PER_SECOND) * (&Interval))
+			ToQuantity = (&HEAT_PER_INTERVAL) * (&~/HEAT_TO_RESOURCE)
+			ToStorage = &~/Part/^/0/HEAT_TARGET_STORAGE
+			Interval = 0.5
+		}
+	
+		OverheatEffects : ^/0/OverheatEffects
+		{
+			Location = [1, 1.5]
+		}
+		
+		// Modular Heat Collection
+		Overclock_BubbleHeatCollectionBuffToggle
+		{
+			Type = BuffToggle
+			BuffType = BubbleHeatCollection
+		}
+		ForceOverclockTrigger
+		{
+			Type = ToggleTrigger
+			Toggle = Overclock_BubbleHeatCollectionBuffToggle
+			AllowOperationalBypass = true
+			TriggerWhenOff = false
+		}
+
+		// Overriding to allow forcing on / locking
+		OverclockModeToggle : ^/0/OverclockModeToggle
+		{
+			AutoOnTrigger = ForceOverclockTrigger
+			OperationalToggle = Overclock_BubbleHeatCollectionBuffToggle
+			InvertOperationalToggle = true
+		}
+
+		Overclock_CombinedHeatInput
+		{
+			Type = MultiResourceStorage
+			ResourceType = heat
+			ResourceStorages = [ NetworkHeatInput ]
+			ViaBuffs
+			{
+				IncomingBuffTypes = [ BubbleHeatCollection ]
+				ComponentIDs = [ BubbleHeatCollectionStorage ]
+			}
+		}
+		
+		// Overriding to use the combined heat input
+		HeatDistributionStorage : ^/0/HeatDistributionStorage
+		{
+			ResourceStorages = [Overclock_CombinedHeatInput, OverflowHeatStorage]
+		}
+		
+		Router
+		{
+			Type = NetworkRouter
+			RouteGenerators
+			[
+				{
+					Type = Simple
+					HEAT_INPUT = &~/Part/^/0/HEAT_NETWORK_INPUT
+					Routes
+					[
+						[&../../HEAT_INPUT, Port_BL, 0]
+						[&../../HEAT_INPUT, Port_BR, 0]
+						[&../../HEAT_INPUT, Port_BP0, 0]
+						[&../../HEAT_INPUT, Port_BP1, 0]
+					]
+				}
+			]
+		}
+		Port_BL : ~/Part/^/0/BASE_THERMAL_PORT
+		{
+			Location = [0, 0]
+			Direction = Left
+		}
+		Port_BR : Port_BL
+		{
+			Location = [1, 0]
+			Direction = Right
+		}
+		Port_BP0 : Port_BL
+		{
+			Location = [0, 0]
+			Direction = Up
+		}
+		Port_BP1 : Port_BP0
+		{
+			Location = [1, 0]
+		}
+
+
+
+
+
+
+
+
+		Shield_Doodad_Graphics
+		{
+			Type = Graphics
+			Location = [1, 0.5]
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				//Offset = [0, 0]
+				DamageLevels
+				[
+					{
+						File = "doodad_axe.png"
+						NormalsFile = "doodad_axe_normals.png"
+						Size = [1, 1]
+						RotSpeed = &<../colors.rules>/StatsCommon/DoodadAxe2_RotSpeed_0DMG
+					}
+					{
+						File = "doodad_axe.png"
+						NormalsFile = "doodad_axe_normals.png"
+						Size = [1, 1]
+						RotSpeed = &<../colors.rules>/StatsCommon/DoodadAxe2_RotSpeed_33DMG
+					}
+					{
+						File = "doodad_axe.png"
+						NormalsFile = "doodad_axe_normals.png"
+						Size = [1, 1]
+						RotSpeed = &<../colors.rules>/StatsCommon/DoodadAxe2_RotSpeed_66DMG
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "doodads_high"
+				DamageLevels
+				[
+					{
+						File = "doodad_axe.png"
+						NormalsFile = "doodad_axe_normals.png"
+						Size = [1, 1]
+					}
+					{
+						File = "doodad_axe.png"
+						NormalsFile = "doodad_axe_normals.png"
+						Size = [1, 1]
+					}
+					{
+						File = "doodad_axe.png"
+						NormalsFile = "doodad_axe_normals.png"
+						Size = [1, 1]
+					}
+				]
+			}
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [1, 0.5]
+			OperationalToggle = IsOperational
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [2, 1]
+					}
+					{
+						File = "floor_33.png"
+						Size = [2, 1]
+					}
+					{
+						File = "floor_66.png"
+						Size = [2, 1]
+					}
+				]
+			}
+			
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [2, 1]
+					}
+					{
+						File = "walls_33.png"
+						Size = [2, 1]
+					}
+					{
+						File = "walls_66.png"
+						Size = [2, 1]
+					}
+				]
+			}
+			
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						NormalsFile = "roof_normals.png"
+						Size = [2, 1]
+					}
+					{
+						File = "roof_33.png"
+						NormalsFile = "roof_normals_33.png"
+						Size = [2, 1]
+					}
+					{
+						File = "roof_66.png"
+						NormalsFile = "roof_normals_66.png"
+						Size = [2, 1]
+					}
+				]
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS PURPLE START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_TINY_Graphics_Purple
+		{
+			Type = ToggledComponents
+			Toggle = Kebechet_TINY_ToggleColours_Purple
+			IncludeInBlueprints = false
+			Components = 
+			{
+				K_Graphics_Purple : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"purple/doodads_lightning1.png"
+									"purple/doodads_lightning2.png"
+									"purple/doodads_lightning3.png"
+									"purple/doodads_lightning4.png"
+									"purple/doodads_lightning5.png"
+									"purple/doodads_lightning6.png"
+									"purple/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"purple/doodads_lightning1.png"
+									"purple/doodads_lightning2.png"
+									"purple/doodads_lightning3.png"
+									"purple/doodads_lightning4.png"
+									"purple/doodads_lightning5.png"
+									"purple/doodads_lightning6.png"
+									"purple/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"purple/doodads_lightning1.png"
+									"purple/doodads_lightning2.png"
+									"purple/doodads_lightning3.png"
+									"purple/doodads_lightning4.png"
+									"purple/doodads_lightning5.png"
+									"purple/doodads_lightning6.png"
+									"purple/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "purple/lights.png"
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+			}
+		}
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS PURPLE END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS BLUE START -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_TINY_Graphics_Blue
+		{
+			Type = ToggledComponents
+			Toggle = Kebechet_TINY_ToggleColours_Blue
+			IncludeInBlueprints = false
+			Components = 
+			{
+				K_Graphics_Blue : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"blue/doodads_lightning1.png"
+									"blue/doodads_lightning2.png"
+									"blue/doodads_lightning3.png"
+									"blue/doodads_lightning4.png"
+									"blue/doodads_lightning5.png"
+									"blue/doodads_lightning6.png"
+									"blue/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"blue/doodads_lightning1.png"
+									"blue/doodads_lightning2.png"
+									"blue/doodads_lightning3.png"
+									"blue/doodads_lightning4.png"
+									"blue/doodads_lightning5.png"
+									"blue/doodads_lightning6.png"
+									"blue/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"blue/doodads_lightning1.png"
+									"blue/doodads_lightning2.png"
+									"blue/doodads_lightning3.png"
+									"blue/doodads_lightning4.png"
+									"blue/doodads_lightning5.png"
+									"blue/doodads_lightning6.png"
+									"blue/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "blue/lights.png"
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+			}
+		}
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS BLUE END -------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS ORANGE START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_TINY_Graphics_Orange
+		{
+			Type = ToggledComponents
+			Toggle = Kebechet_TINY_ToggleColours_Orange
+			//IncludeInorangeprints = true
+			Components = 
+			{
+				K_Graphics_Orange : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"orange/doodads_lightning1.png"
+									"orange/doodads_lightning2.png"
+									"orange/doodads_lightning3.png"
+									"orange/doodads_lightning4.png"
+									"orange/doodads_lightning5.png"
+									"orange/doodads_lightning6.png"
+									"orange/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"orange/doodads_lightning1.png"
+									"orange/doodads_lightning2.png"
+									"orange/doodads_lightning3.png"
+									"orange/doodads_lightning4.png"
+									"orange/doodads_lightning5.png"
+									"orange/doodads_lightning6.png"
+									"orange/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"orange/doodads_lightning1.png"
+									"orange/doodads_lightning2.png"
+									"orange/doodads_lightning3.png"
+									"orange/doodads_lightning4.png"
+									"orange/doodads_lightning5.png"
+									"orange/doodads_lightning6.png"
+									"orange/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "orange/lights.png"
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS ORANGE END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS RED START ------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_TINY_Graphics_Red
+		{
+			Type = ToggledComponents
+			Toggle = Kebechet_TINY_ToggleColours_Red
+			//IncludeInredprints = true
+			Components = 
+			{
+				K_Graphics_Red : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"red/doodads_lightning1.png"
+									"red/doodads_lightning2.png"
+									"red/doodads_lightning3.png"
+									"red/doodads_lightning4.png"
+									"red/doodads_lightning5.png"
+									"red/doodads_lightning6.png"
+									"red/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"red/doodads_lightning1.png"
+									"red/doodads_lightning2.png"
+									"red/doodads_lightning3.png"
+									"red/doodads_lightning4.png"
+									"red/doodads_lightning5.png"
+									"red/doodads_lightning6.png"
+									"red/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"red/doodads_lightning1.png"
+									"red/doodads_lightning2.png"
+									"red/doodads_lightning3.png"
+									"red/doodads_lightning4.png"
+									"red/doodads_lightning5.png"
+									"red/doodads_lightning6.png"
+									"red/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "red/lights.png"
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS RED END --------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS YELLOW START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_TINY_Graphics_Yellow
+		{
+			Type = ToggledComponents
+			Toggle = Kebechet_TINY_ToggleColours_Yellow
+			//IncludeInYellowprints = true
+			Components = 
+			{
+				K_Graphics_Yellow : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"Yellow/doodads_lightning1.png"
+									"Yellow/doodads_lightning2.png"
+									"Yellow/doodads_lightning3.png"
+									"Yellow/doodads_lightning4.png"
+									"Yellow/doodads_lightning5.png"
+									"Yellow/doodads_lightning6.png"
+									"Yellow/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"Yellow/doodads_lightning1.png"
+									"Yellow/doodads_lightning2.png"
+									"Yellow/doodads_lightning3.png"
+									"Yellow/doodads_lightning4.png"
+									"Yellow/doodads_lightning5.png"
+									"Yellow/doodads_lightning6.png"
+									"Yellow/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"Yellow/doodads_lightning1.png"
+									"Yellow/doodads_lightning2.png"
+									"Yellow/doodads_lightning3.png"
+									"Yellow/doodads_lightning4.png"
+									"Yellow/doodads_lightning5.png"
+									"Yellow/doodads_lightning6.png"
+									"Yellow/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "Yellow/lights.png"
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS YELLOW END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS GREEN START ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		K_TINY_Graphics_Green
+		{
+			Type = ToggledComponents
+			Toggle = Kebechet_TINY_ToggleColours_Green
+			//IncludeInGreenprints = true
+			Components = 
+			{
+				K_Graphics_Green : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"green/doodads_lightning1.png"
+									"green/doodads_lightning2.png"
+									"green/doodads_lightning3.png"
+									"green/doodads_lightning4.png"
+									"green/doodads_lightning5.png"
+									"green/doodads_lightning6.png"
+									"green/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"green/doodads_lightning1.png"
+									"green/doodads_lightning2.png"
+									"green/doodads_lightning3.png"
+									"green/doodads_lightning4.png"
+									"green/doodads_lightning5.png"
+									"green/doodads_lightning6.png"
+									"green/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"green/doodads_lightning1.png"
+									"green/doodads_lightning2.png"
+									"green/doodads_lightning3.png"
+									"green/doodads_lightning4.png"
+									"green/doodads_lightning5.png"
+									"green/doodads_lightning6.png"
+									"green/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS GREEN END ------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		BatterySprites
+		{
+			Type = ResourceSprites
+			Location = [1, 0.5]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_low"
+			ResourceLevels
+			[
+				{
+					File = "batteries1.png"
+					Size = [2, 1]
+				}
+				{
+					File = "batteries2.png"
+					Size = [2, 1]
+				}
+			]
+		}
+				
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/PowerOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/PowerOff
+		}
+
+		ScorchedTrigger
+		{
+			Type = ToggleTrigger
+			Toggle = ScorchedToggle
+			TriggerWhenOn = false
+		}
+
+		ScorchedEffects
+		{
+			Type = TriggeredEffects
+			Trigger = ScorchedTrigger
+			Location = &../DestroyedEffects/Location
+			MediaEffects = &/COMMON_EFFECTS/MedPartScorched
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/MedPartDestroyed
+			Location = [1, 0.5]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [1, 0.5]
+			Layer = "indicators"
+			Indicators
+			[
+				// Scorched
+				{
+					Toggle = ScorchedToggle
+					AtlasSprite = &/INDICATORS/Scorched
+					HidesIndicators = [1,2,3]
+				}
+
+				// Turned off.
+				{
+					Toggle = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1, 1]
+					}
+				}
+
+				// Resetting from overclock
+				{
+					Toggle = &~/Part/^/0/OVERCLOCK_OPERATIONAL
+					AtlasSprite : /INDICATORS/OverclockReset
+					{
+						Size = [1, 1]
+					}
+					HidesIndicators = [3]
+				}
+
+				// Out of power.
+				{
+					Toggle = BatteryStorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1, 1]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [2, 1]
+			Offset = [0, 0]
+		}
+
+		HeatGenerationValue
+		{
+			Type = StaticValue
+			Value = (&~/OVERCLOCK/HEAT_PER_SECOND)
+		}
+		HeatGenerationStatProvider
+		{
+			Type = StatProvider
+			Stat = HeatGeneration
+			OperationalToggle = OverclockModeToggle
+			ValueFrom = HeatGenerationValue
+		}
+	}
+
+	Stats
+	{
+		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxResources) / 1000
+
+		RecPower = (&../StatsByCategory/0/Stats/PowerUsageContinuous) + 0.5
+		RecCrew = (&RecPower) * 4
+		
+		// Add HP and penetration resistance for when buffing Bubble Shields?
+	}
+	
+	StatsByCategory
+	[
+		{
+			NameKey = "StatCategories/ShieldTiny"
+			Stats
+			{
+//				ShieldHP = ((&~/Part/Components/InnerBatteryStorage/MaxResources) + (&~/Part/Components/OuterBatteryStorage/MaxResources)) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage)
+//				ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0
+//				ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue)	// Useless due to being almost flat
+//				ShieldLength = 6.1	// 2 * Radius * Sen(rad(arc)/2)
+//				ShieldDist = (&~/Part/Components/ArcShield/Radius) - (&~/Part/Components/ArcShield/Location/1)
+				PowerUsageContinuous = (&~/Part/Components/PowerDrain/FromQuantity/BaseValue) / (&~/Part/Components/PowerDrain/Interval) / 1000
+			}
+		}
+	]
+	
+	SecondaryToolTip
+	{
+		TitleKey = "StatCategories/Overclocked"
+		Stats
+		{
+//			ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/ARC_FACTOR)
+//			ShieldLength = 3.05	// 2 * Radius * Sen(rad(arc)/2)
+//			ShieldHP = (&~/Part/Stats/ShieldHP) / (&~/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
+//			PowerUsageContinuous = (&~/Part/Components/PowerDrain/FromQuantity/BaseValue) * (&~/OVERCLOCK/POWER_DRAIN_FACTOR) / (&~/Part/Components/PowerDrain/Interval) / 1000
+//			HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND)
+//			HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
+//			ShieldRegen = (&~/Part/Components/Overclock_BatteryProducer/ToQuantity) / (&~/Part/Components/Overclock_BatteryProducer/Interval) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage)
+		}
+	}
+}
