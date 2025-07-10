@@ -1235,12 +1235,12 @@ ArcShieldTMP1 : ArcShieldTMP0
 		InnerFrontIsOperationalOverclocked
 		{
 			Type = MultiToggle
-			Toggles = [ InnerFrontIsOperational, IsOperationalOverclocked]
+			Toggles = [InnerFrontIsOperational, IsOperationalOverclocked]
 			Mode = All
 		}
-		InnerRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerRightIsOperational, IsOperationalOverclocked] }
-		InnerBackIsOperationalOverclocked :		InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerBackIsOperational, IsOperationalOverclocked] }
-		InnerLeftIsOperationalOverclocked :		InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerLeftIsOperational, IsOperationalOverclocked] }
+		InnerRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [InnerRightIsOperational, IsOperationalOverclocked] }
+		InnerBackIsOperationalOverclocked :		InnerFrontIsOperationalOverclocked	{ Toggles = [InnerBackIsOperational, IsOperationalOverclocked] }
+		InnerLeftIsOperationalOverclocked :		InnerFrontIsOperationalOverclocked	{ Toggles = [InnerLeftIsOperational, IsOperationalOverclocked] }
 
 		// Overclock / Thermal network
 		InnerFrontOverclockHeatProducer

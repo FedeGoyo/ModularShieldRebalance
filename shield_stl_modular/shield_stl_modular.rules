@@ -1165,14 +1165,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		InnerFrontIsOperationalOverclocked
 		{
 			Type = MultiToggle
-			Toggles = [ InnerFrontIsOperational, IsOperationalOverclocked]
+			Toggles = [InnerFrontIsOperational, IsOperationalOverclocked]
 			Mode = All
 		}
-		InnerFrontRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerFrontRightIsOperational, IsOperationalOverclocked] }
-		InnerBackRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerBackRightIsOperational, IsOperationalOverclocked] }
-		InnerBackIsOperationalOverclocked :			InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerBackIsOperational, IsOperationalOverclocked] }
-		InnerBackLeftIsOperationalOverclocked :		InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerBackLeftIsOperational, IsOperationalOverclocked] }
-		InnerFrontLeftIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerFrontLeftIsOperational, IsOperationalOverclocked] }
+		InnerFrontRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [InnerFrontRightIsOperational, IsOperationalOverclocked] }
+		InnerBackRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [InnerBackRightIsOperational, IsOperationalOverclocked] }
+		InnerBackIsOperationalOverclocked :			InnerFrontIsOperationalOverclocked	{ Toggles = [InnerBackIsOperational, IsOperationalOverclocked] }
+		InnerBackLeftIsOperationalOverclocked :		InnerFrontIsOperationalOverclocked	{ Toggles = [InnerBackLeftIsOperational, IsOperationalOverclocked] }
+		InnerFrontLeftIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [InnerFrontLeftIsOperational, IsOperationalOverclocked] }
 
 		// Overclock / Thermal network
 		InnerFrontOverclockHeatProducer
