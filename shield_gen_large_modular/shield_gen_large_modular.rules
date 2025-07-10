@@ -37,7 +37,19 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 			AlwaysAllowInBuildMode = true
 			RequiresCommand = false
 		}
-
+		
+		Kebechet_GEN_Large_ToggleColours_Purple
+		{
+			Type = ModeToggle
+			Mode = Kebechet_GEN_Large_ToggleColours
+			OnMode = 0
+		}
+		Kebechet_GEN_Large_ToggleColours_Blue :		Kebechet_GEN_Large_ToggleColours_Purple	{ OnMode = 1 }
+		Kebechet_GEN_Large_ToggleColours_Orange :	Kebechet_GEN_Large_ToggleColours_Purple	{ OnMode = 2 }
+		Kebechet_GEN_Large_ToggleColours_Red :		Kebechet_GEN_Large_ToggleColours_Purple	{ OnMode = 3 }
+		Kebechet_GEN_Large_ToggleColours_Yellow :	Kebechet_GEN_Large_ToggleColours_Purple	{ OnMode = 4 }
+		Kebechet_GEN_Large_ToggleColours_Green :	Kebechet_GEN_Large_ToggleColours_Purple	{ OnMode = 5 }
+		
 		// -----------------------------------------------
 		// ANGLE TOGGLES ---------------------------------
 		// -----------------------------------------------

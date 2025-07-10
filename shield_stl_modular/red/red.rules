@@ -4,8 +4,6 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	ToggleColours_Red :	<../purple/purple.rules>/Components/ToggleColours_Purple	{ OnMode = 3 }
-
 	Toggle_Red_On :		<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Red, ToggleDisplay_On, Rotation0, ColoursProxy, DisplayProxy]  }
 	Toggle_Red_On1 :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Red, ToggleDisplay_On, Rotation1, ColoursProxy, DisplayProxy]  }
 	Toggle_Red_On2 :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Red, ToggleDisplay_On, Rotation2, ColoursProxy, DisplayProxy]  }

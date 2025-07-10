@@ -3,9 +3,7 @@ Components
 	// -------------------------------------------------------------------------------------------------------------------------
 	// TOGGLE BLUE START -------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
-	
-	Kebechet_GEN_Small_ToggleColours_Blue :		<../purple/purple.rules>/Components/Kebechet_GEN_Small_ToggleColours_Purple		{ OnMode = 1 }
-	
+
 	K_GEN_Small_Blue_A90FrontArc_On :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Blue, Kebechet_GEN_Small_ToggleAngle_A90FrontArc, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
 	K_GEN_Small_Blue_A90FrontLine_On :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Blue, Kebechet_GEN_Small_ToggleAngle_A90FrontLine, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
 	K_GEN_Small_Blue_A22LeftLine_On :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Blue, Kebechet_GEN_Small_ToggleAngle_A22LeftLine, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }

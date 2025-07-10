@@ -3,8 +3,6 @@ Components
 	// -------------------------------------------------------------------------------------------------------------------------
 	// TOGGLE YELLOW START -----------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
-
-	Kebechet_GEN_Large_ToggleColours_Yellow :		<../purple/purple.rules>/Components/Kebechet_GEN_Large_ToggleColours_Purple		{ OnMode = 4 }
 	
 	K_GEN_Large_Yellow_A160FrontArc_On :	<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Yellow, Kebechet_GEN_Large_ToggleAngle_A160FrontArc, Kebechet_GEN_Large_ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
 	K_GEN_Large_Yellow_A160LeftArc_On :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Yellow, Kebechet_GEN_Large_ToggleAngle_A160LeftArc, Kebechet_GEN_Large_ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
