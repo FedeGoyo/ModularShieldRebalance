@@ -1236,7 +1236,7 @@ ArcShieldTMP1 : ArcShieldTMP0
 		{
 			Type = MultiToggle
 			Toggles = [ InnerFrontIsOperational, IsOperationalOverclocked]
-			Mode = Any
+			Mode = All
 		}
 		InnerRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerRightIsOperational, IsOperationalOverclocked] }
 		InnerBackIsOperationalOverclocked :		InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerBackIsOperational, IsOperationalOverclocked] }

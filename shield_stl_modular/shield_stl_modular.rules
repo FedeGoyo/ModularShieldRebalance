@@ -1166,7 +1166,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = MultiToggle
 			Toggles = [ InnerFrontIsOperational, IsOperationalOverclocked]
-			Mode = Any
+			Mode = All
 		}
 		InnerFrontRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerFrontRightIsOperational, IsOperationalOverclocked] }
 		InnerBackRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [ InnerBackRightIsOperational, IsOperationalOverclocked] }
