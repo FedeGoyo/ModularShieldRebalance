@@ -16,7 +16,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	DescriptionKey = "Parts/KebechetTINYmodularShieldDesc"
 	ID = swefpifh.Kebechet_TINY_modularShield
 	EditorGroup = "Defenses"
-	EditorParentParts = [ "swefpifh.Kebechet_STS_modularShield", "swefpifh.Kebechet_STL_modularShield" ] 
 	Resources
 	[
 		[steel, 14]
@@ -205,155 +204,9 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 		BatteryStorage
 		{
-			Type = MultiResourceStorage
-			ResourceType = battery
-			ResourceStorages = [InnerBatteryStorage, OuterBatteryStorage]
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-			IsDrainable = true
-			AddMode = DistributeProportionallyByAvailable
-			RemoveMode = DistributeProportionallyByAvailable
-		}
-		BatteryStorageProxy	// For Modular, to prevent using it while PowerToggle is off.
-		{
-			Type = ResourceStorageProxy
-			ResourceType = battery
-			ComponentID = BatteryStorage
-			OperationalToggle = PowerToggle
-		}
-		
-		// Bubble when not overclocked
-
-		BubbleIsOperational
-		{
-			Type = MultiToggle
-			Mode = Any
-			ViaBuffs
-			{
-				OutgoingBuffProviders = [BubbleRadiusBuffProvider]
-				ComponentIDs = [IsOperational_Modular_NotOverclocked]
-				Toggles = [IsOperational_Modular_NotOverclocked]
-			}
-		}
-
-		
-/*		BubbleIsOperational
-		{
-			Type = MultiToggle
-			Togles = 
-			Mode = Any
-		{		
-		
-		SmallBubbleTop
-		{
-			Type = ToggleProxy
-			PartLocation = [0, 0]
-			PartCriteria
-			{
-				Category = defense
-//				Rot = 0
-				Left = 0
-				Right = 2
-				Bottom = 2
-			}
-			ComponentID = IsOperational_Modular_NotOverclocked
-		}
-		SmallBubbleRight: SmallBubbleTop
-		{
-			PartCriteria
-			{
-				Category = defense
-//				Rot = 0
-				Left = 0
-				Right = 2
-				Bottom = 2
-			}
-		}
-*/
-/*		TMP
-		{
 			Type = ResourceStorage
 			ResourceType = battery
-			MaxResources = 0
-		}
-	*/	
-		BubbleBatteryStorageProxy	// For Modular, to show progress bar
-		{
-			Type = MultiResourceStorage
-			ResourceType = battery
-//			ResourceStorages = [TMP]
-			ViaBuffs
-			{
-				OutgoingBuffProviders = [BubbleRadiusBuffProvider]
-				ComponentIDs = [ModularBatteryStorage]
-			}
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-		}
-		BubbleProgressBar : ProgressBar
-		{
-			Type = ProgressBar
-			OperationalToggle = BubbleIsOperational
-			ShowProgressFor = BubbleBatteryStorageProxy
-		}
-		
-		// Bubble when overclocked
-		BubbleOverclockedIsOperational : BubbleIsOperational
-		{
-			ViaBuffs : ^/0/ViaBuffs
-			{
-				ComponentIDs = [IsOperational_Modular_Overclocked]
-				Toggles = [IsOperational_Modular_Overclocked]
-			}
-		}
-		OuterBubbleBatteryStorageProxy : BubbleBatteryStorageProxy	// For Modular, to show progress bar
-		{
-			ViaBuffs : ^/0/ViaBuffs
-			{
-				ComponentIDs = [ModularOuterBatteryStorage]
-			}
-		}
-		OuterBubbleProgressBar : ProgressBar
-		{
-			OperationalToggle = BubbleOverclockedIsOperational
-			ShowProgressFor = OuterBubbleBatteryStorageProxy
-		}
-
-		InnerBubbleBatteryStorageProxy : BubbleBatteryStorageProxy	// For Modular, to show progress bar
-		{
-			ViaBuffs : ^/0/ViaBuffs
-			{
-				ComponentIDs = [ModularInnerBatteryStorage]
-			}
-		}
-		InnerBubbleProgressBar : ProgressBar
-		{
-			OperationalToggle = BubbleOverclockedIsOperational
-			ShowProgressFor = InnerBubbleBatteryStorageProxy
-		}
-		
-		ToggledBatteryConsumer
-		{
-			Type = ToggledComponents
-			Toggle = BubbleCapacityBuffToggle
-			Invert = true
-			IncludeInBlueprints = true
-			Components
-			{
-				BatteryConsumer
-				{
-					Type = ResourceConsumer
-					ResourceType = battery
-					Storage = BatteryStorage
-					DefaultPriority = &/PRIORITIES/Thruster_Supply
-					ResupplyThreshold = 500
-					OperationalToggle = PowerToggle
-				}
-			}
-		}
-		InnerBatteryStorage
-		{
-			Type = ResourceStorage
-			ResourceType = battery
-			MaxResources = 1000
+			MaxResources = 2000
 			OperationalToggle = IsOperational
 			DrainOnFtlJump = true
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
@@ -370,21 +223,21 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				]
 			}
 		}
-		InnerBatteryStorageProxy	: BatteryStorageProxy	{ ComponentID = InnerBatteryStorage }	// For Modular, to prevent using it while PowerToggle is off.
-		
-		OuterBatteryStorage : InnerBatteryStorage	{}
-		OuterBatteryStorageProxy	: BatteryStorageProxy	{ ComponentID = OuterBatteryStorage }	// For Modular, to prevent using it while PowerToggle is off.
 
-		IsBatteryProducerPermitted
+		BatteryConsumer
 		{
-			Type = MultiToggle
-			Toggles = [IsOverclocked, {Toggle = BubbleCapacityBuffToggle, Invert = true}]
-			Mode = All
+			Type = ResourceConsumer
+			ResourceType = battery
+			Storage = BatteryStorage
+			DefaultPriority = &/PRIORITIES/Thruster_Supply
+			ResupplyThreshold = 500
+			OperationalToggle = PowerToggle
 		}
+		
 		Overclock_BatteryProducer
 		{
 			Type = ResourceConverter
-			OperationalToggle = IsBatteryProducerPermitted
+			OperationalToggle = IsOverclocked
 			ToStorage = BatteryStorage
 			ToQuantity = (&~/Part/Components/PowerDrain/FromQuantity/BaseValue) * (&~/OVERCLOCK/RECHARGE_USAGE_RATIO) * (&~/OVERCLOCK/POWER_DRAIN_FACTOR)
 			Interval = &~/Part/Components/PowerDrain/Interval
@@ -393,7 +246,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		ProgressBar
 		{
 			Type = ProgressBar
-			OperationalToggle = IsShieldOperational
+			OperationalToggle = IsOperational
 			ShowProgressFor = BatteryStorage
 			LowColor = [0, 0, 255]
 			HighColor = [0, 0, 255]
@@ -406,7 +259,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Type = ResourceConverter
 			OperationalToggle = IsOperational
 			FromStorage = BatteryStorage
-			FromQuantity // = 50
+			FromQuantity
 			{
 				BaseValue = 50
 				Modifiers
@@ -438,76 +291,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ToggleOnResources = 1
 			DrainOnFtlJump = true
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-		}
-
-		BubbleCapacityBuffToggle
-		{
-			Type = BuffToggle
-			BuffType = BubbleCapacity
-		}
-		IsBonusResistanceOperational
-		{
-			Type = MultiToggle
-			Toggles = [PowerToggle, BubbleCapacityBuffToggle, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
-			Mode = All
-		}
-		BubbleResistanceBuffProvider
-		{
-			Type = AreaBuffProvider
-			BuffType = BubbleResistanceBonus
-			BuffAmount = 8.33
-			BuffArea = [0, 2, 2, 1]
-			OperationalToggle = IsBonusResistanceOperational
-/*			Criteria
-			{
-				Rot = 2
-				Right = 2
-				Bottom = 3
-			}*/
-		}
-		
-		Kebechet_TINY_ToggleRadius
-		{
-			Type = UIToggle
-			ToggleID = "Kebechet_ToggleID_Radius"
-			Default = 1
-			AlwaysAllowInBuildMode = true
-			RequiresCommand = false
-		}
-		IsBonusRadiusOperational
-		{
-			Type = MultiToggle
-			Toggles = [PowerToggle, BubbleCapacityBuffToggle, Kebechet_TINY_ToggleRadius, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
-			Mode = All
-		}
-		BubbleRadiusStateValue
-		{
-			Type = ValueTween
-			IsOnToggle = IsBonusRadiusOperational
-			OnTweenDuration = 1;
-			OffTweenDuration = 0.1;
-		}
-		BubbleRadiusBuffProvider
-		{
-			Type = AreaBuffProvider
-			BuffType = BubbleRadiusBonus
-			BuffAmount = 1
-			BuffMultiplier = BubbleRadiusStateValue
-			BuffArea = [0, 2, 2, 1]
-			OperationalToggle = IsBonusRadiusOperational
-/*			Criteria
-			{
-				Rot = 2
-				Right = 2
-				Bottom = 3
-			}*/
-		}
-
-		IsShieldOperational
-		{
-			Type = MultiToggle
-			Toggles = [IsOperational, {Toggle = BubbleCapacityBuffToggle, Invert = true}]
-			Mode = All
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -588,7 +371,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		OverclockedEffectToggle
 		{
 			Type = MultiToggle
-			Toggles = [OverclockTweenToggle, IsOperationalOverclocked, {Toggle = BubbleCapacityBuffToggle, Invert = true} ]
+			Toggles = [OverclockTweenToggle, IsOperationalOverclocked]
 			Mode = All
 		}
 		
@@ -703,7 +486,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		IsOperationalOverloaded
 		{
 			Type = MultiToggle
-			Toggles = [ IsOperational, IsOverloaded, {Toggle = BubbleCapacityBuffToggle, Invert = true} ]
+			Toggles = [ IsOperational, IsOverloaded ]
 			Mode = All
 		}
 		
@@ -1023,7 +806,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			{ 
 				TINY_ArcShield : &~/Part/Components/ArcShield
 				{
-					OperationalToggle = IsShieldOperational
+					OperationalToggle = IsOperational
 					ShieldMediaEffects
 					[
 						: &../^/0/ShieldMediaEffects/0
@@ -1045,7 +828,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				TINY_EmitterEffect : &~/Part/Components/EmitterEffect	// Doesn't work...
 				{
 					FactorMediaEffectsIntensityWith = BatteryStorage
-					OperationalToggle = IsShieldOperational
+					OperationalToggle = IsOperational
 					MediaEffects
 					[
 						: &../^/0/MediaEffects/0
@@ -2635,7 +2418,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 	Stats
 	{
-		PowerCapacity = ((&~/Part/Components/InnerBatteryStorage/MaxResources) + (&~/Part/Components/OuterBatteryStorage/MaxResources)) / 1000
+		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxResources) / 1000
 
 		RecPower = (&../StatsByCategory/0/Stats/PowerUsageContinuous) + 0.5
 		RecCrew = (&RecPower) * 4
@@ -2649,7 +2432,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			NameKey = "StatCategories/ShieldTiny"
 			Stats
 			{
-				ShieldHP = ((&~/Part/Components/InnerBatteryStorage/MaxResources) + (&~/Part/Components/OuterBatteryStorage/MaxResources)) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage)
+				ShieldHP = (&~/Part/Components/BatteryStorage/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage)
 				ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0
 //				ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue)	// Useless due to being almost flat
 				ShieldLength = 6.1	// 2 * Radius * Sen(rad(arc)/2)
