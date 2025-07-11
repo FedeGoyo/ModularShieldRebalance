@@ -140,13 +140,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 
 
-		BatteryStorage
+		Base_BatteryStorage
 		{
 			Type = ResourceStorage
 			ResourceType = battery
 			MaxResources = 2000
 			OperationalToggle = IsOperational
 			DrainOnFtlJump = true
+			IsDrainable = False
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
 		
@@ -160,7 +161,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				{
 					Type = ResourceStorage
 					ResourceType = battery
-					MaxResources = "ceil((&~/Part/Components/BatteryStorage/MaxResources) * ((&~/OVERCLOCK/CAPACITY_FACTOR) - 1))"
+					MaxResources = "ceil((&~/Part/Components/Base_BatteryStorage/MaxResources) * ((&~/OVERCLOCK/CAPACITY_FACTOR) - 1))"
+					IsDrainable = False
 					IsIntermediateStorage = true
 				}
 			}
@@ -173,25 +175,26 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ComponentID = Overclock_BatteryStorage
 		}
 		
-		BatteryReceiverStorage
+		BatteryProviderStorage	// Appears first so that Drain effects target it
 		{
 			Type = MultiResourceStorage
 			ResourceType = battery
-			ResourceStorages = [ BatteryStorage, Overclock_BatteryStorageProxy ]
-			AddMode = InOrder
-			ReceiveResourceMediaEffects = &../BatteryStorage/ReceiveResourceMediaEffects
-		}
-		BatteryProviderStorage					// Move at the top to drain first????
-		{
-			Type = MultiResourceStorage
-			ResourceType = battery
-			ResourceStorages = [ BatteryStorage, Overclock_BatteryStorageProxy ]
+			ResourceStorages = [Base_BatteryStorage, Overclock_BatteryStorageProxy]
 			RemoveMode = InReverseOrder
+			IsDrainable = True
 			ReceiveResourceMediaEffects = &../BatteryStorage/ReceiveResourceMediaEffects
 //			ToggleOnResources = 
 //			ToggleOffResources =
 //			ProvidedValueRange = 0
 //			ProvidedValuePerResource = 1/1000
+		}
+		BatteryStorage	// BatteryReceiverStorage // Named like this for easier compatibility with other mods
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [Base_BatteryStorage, Overclock_BatteryStorageProxy]
+			AddMode = InOrder
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
 		
 		PowerToggleProxy
@@ -206,22 +209,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ComponentID = BatteryProviderStorage
 			ProxyToggle = PowerToggleProxy
 		}
-	
-
-
-
-
-
-		/*BatteryStorage
-		{
-			Type = MultiResourceStorage
-			ResourceType = battery
-			ResourceStorages = [InnerBatteryStorage, OuterBatteryStorage]
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-			IsDrainable = true
-			AddMode = DistributeProportionallyByAvailable
-			RemoveMode = DistributeProportionallyByAvailable
-		}*/
 		
 		// Bubble when not overclocked
 
@@ -268,7 +255,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				{
 					Type = ResourceConsumer
 					ResourceType = battery
-					Storage = BatteryReceiverStorage
+					Storage = BatteryStorage
 					DefaultPriority = &/PRIORITIES/Thruster_Supply
 					ResupplyThreshold = 500
 					OperationalToggle = PowerToggle
@@ -1245,7 +1232,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 	Stats
 	{
-		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxResources) / 1000
+		PowerCapacity = (&~/Part/Components/Base_BatteryStorage/MaxResources) / 1000
 
 		RecPower = (&../StatsByCategory/0/Stats/PowerUsageContinuous) + 0.5
 		RecCrew = (&RecPower) * 4
