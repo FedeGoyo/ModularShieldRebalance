@@ -149,8 +149,6 @@ Components
 			// When not overclocked
 			ArcShield_InnerFront :		<../stats.rules>/Stats/ArcShield_InnerFront0, &<../shield_stl_modular.rules>/Part/Components/ArcShield
 			{
-				Radius : <../stats.rules>/Stats/Radius	{}	
-				
 				ShieldMediaEffects
 				[
 					: &../^/1/ShieldMediaEffects/0

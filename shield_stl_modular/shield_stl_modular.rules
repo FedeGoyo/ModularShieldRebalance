@@ -821,12 +821,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		ArcShield : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ArcShield
 		{
-//			Type = ArcShield
-			Radius = 15
-	
-//			Radius : <&../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/Radius	{}
-
-/*			Radius
+			Radius
 			{
 				BaseValue = 15
 				Modifiers
@@ -839,7 +834,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						ModificationMode = Add
 					}
 				]
-			}*/
+			}
 			Arc = 60d
 			OperationalToggle = IsOperationalProxy
 			PenetrationResistance = [ { BaseValue= 16.66; BuffType=BubbleResistanceBonus; BuffMode=Add; }, 0]
@@ -903,7 +898,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = ArcSprite
 			ChainedTo = ArcShield
-			Radius = (&../ArcShield/Radius)
+			Radius = (&../ArcShield/Radius/BaseValue)
 			Arc = 360d
 			SpriteSegments = 256 // (&../ArcShield/BlueprintArcSpriteSegments)
 			Sprite
@@ -1368,7 +1363,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 		ShieldOperationEffects_InnerFront :			<./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ShieldOperationEffects
 		{
-			Location = [&~/Part/Components/ArcShield/Radius, 0]
+			Location = [&~/Part/Components/ArcShield/Radius/BaseValue, 0]
 			Toggle = InnerFrontIsOperational
 		}
 		ShieldOperationEffects_InnerFrontRight :	ShieldOperationEffects_InnerFront	{ Toggle = InnerFrontRightIsOperational }
@@ -1778,7 +1773,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Stats
 			{
 				ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0/BaseValue
-				ShieldDist = (&~/Part/Components/ArcShield/Radius) - (&~/Part/Components/ArcShield/Location/1)
+				ShieldDist = (&~/Part/Components/ArcShield/Radius/BaseValue) - (&~/Part/Components/ArcShield/Location/1)
 				ShieldSegments = 6
 				ShieldHPSegment = (&~/Part/Components/InnerFrontBatteryStorage/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
 				PowerUsageContinuous = (&~/Part/Components/InnerFrontPowerDrain/FromQuantity) / (&~/Part/Components/InnerFrontPowerDrain/Interval) / 1000 * (&ShieldSegments)
