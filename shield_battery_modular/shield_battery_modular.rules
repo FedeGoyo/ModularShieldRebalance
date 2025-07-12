@@ -270,7 +270,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Type = ResourceConverter
 			OperationalToggle = IsOperational
 			FromStorage = BatteryStorage
-			FromQuantity // = 50
+			FromQuantity
 			{
 				BaseValue = 50
 				Modifiers
@@ -380,10 +380,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Mode = All
 		}
 
-
-
-
-
 		// Overclock / Thermal network
 		OverclockHeatProducer
 		{
@@ -394,7 +390,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ToStorage = &~/Part/^/0/HEAT_TARGET_STORAGE
 			Interval = 0.5
 		}
-	
+		
 		OverheatEffects : ^/0/OverheatEffects
 		{
 			Location = [1, 1.5]
@@ -477,13 +473,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Location = [1, 0]
 		}
-
-
-
-
-
-
-
 
 		Shield_Doodad_Graphics
 		{
