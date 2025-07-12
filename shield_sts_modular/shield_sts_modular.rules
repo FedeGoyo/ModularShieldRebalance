@@ -1077,23 +1077,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Location = [1, 1.5]
 		}
 		
-		BubbleHeatCollectionStorage
-		{
-			Type = ResourceStorageProxy
-			ResourceType = heat
-			ComponentID = &~/Part/^/0/HEAT_TARGET_STORAGE
-//			QuantityScale = 1 / (&~/OVERCLOCK/COLLECTED_HEAT_MULTIPLIER)
-		}
-		
-		Overclock_HeatCollectionBuffProvider
-		{
-		
-			Type = GridBuffProvider
-			BuffType = BubbleHeatCollection
-			GridDistance = 1
-			OperationalToggle = IsOperationalOverclocked
-		}
-		
 		Router
 		{
 			Type = NetworkRouter
