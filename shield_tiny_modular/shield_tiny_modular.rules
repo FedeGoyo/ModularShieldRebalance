@@ -30,7 +30,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeByRotation = true
 	MaxHealth = 4000
 	TypeCategories = [defense, uses_power]
-	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacity, BubbleHeatCollection]
+	ReceivableBuffs : ^/0/ReceivableBuffs []
 	PenetrationRectType = Normal
 	// ProhibitLeft = 0
 	// ProhibitRight = 0
@@ -686,46 +686,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		OverheatEffects : ^/0/OverheatEffects
 		{
 			Location = [1, 1.5]
-		}
-		
-		// Modular Heat Collection
-		Overclock_BubbleHeatCollectionBuffToggle
-		{
-			Type = BuffToggle
-			BuffType = BubbleHeatCollection
-		}
-		ForceOverclockTrigger
-		{
-			Type = ToggleTrigger
-			Toggle = Overclock_BubbleHeatCollectionBuffToggle
-			AllowOperationalBypass = true
-			TriggerWhenOff = false
-		}
-
-		// Overriding to allow forcing on / locking
-		OverclockModeToggle : ^/0/OverclockModeToggle
-		{
-			AutoOnTrigger = ForceOverclockTrigger
-			OperationalToggle = Overclock_BubbleHeatCollectionBuffToggle
-			InvertOperationalToggle = true
-		}
-
-		Overclock_CombinedHeatInput
-		{
-			Type = MultiResourceStorage
-			ResourceType = heat
-			ResourceStorages = [ NetworkHeatInput ]
-			ViaBuffs
-			{
-				IncomingBuffTypes = [ BubbleHeatCollection ]
-				ComponentIDs = [ BubbleHeatCollectionStorage ]
-			}
-		}
-		
-		// Overriding to use the combined heat input
-		HeatDistributionStorage : ^/0/HeatDistributionStorage
-		{
-			ResourceStorages = [Overclock_CombinedHeatInput, OverflowHeatStorage]
 		}
 		
 		Router
