@@ -790,7 +790,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		// ARCSHIELD ORIGINAL - START //////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		ArcShield : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ArcShield
+		ArcShield : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield
 		{
 			Radius
 			{
@@ -839,17 +839,24 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				{
 					Radius = &~/Part/Components/ArcShield/Radius
 					Arc = &~/Part/Components/ArcShield/Arc
-					ArcSpriteSegments = 128
+					FadeInTime = 0
+					FadeOutTime = 0
 					ArcSprite : ^/0/ArcSprite
 					{
 						_xScale = 1.5
-//						Size = [0, 1.5]
+//						Size = [0, 3]
 					}
 					
 				}
 				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield/ShieldMediaEffects/1	{}
 			]
 		}
+		
+		ArcShieldFrontRight :	ArcShield	{ Rotation = -30d }
+		ArcShieldBackRight :	ArcShield	{ Rotation = 30d }
+		ArcShieldBack :			ArcShield	{ Rotation = 90d }
+		ArcShieldBackLeft :		ArcShield	{ Rotation = 150d }
+		ArcShieldFrontLeft :	ArcShield	{ Rotation = 210d }
 		
 		OverclockTweenToggle
 		{
@@ -870,8 +877,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Type = ArcSprite
 			ChainedTo = ArcShield
 			Radius = (&../ArcShield/Radius/BaseValue)
-			Arc = 360d
-			SpriteSegments = 256 // (&../ArcShield/BlueprintArcSpriteSegments)
+			Arc = 60d
+			SpriteSegments = (&../ArcShield/BlueprintArcSpriteSegments)
 			Sprite
 			{
 				Texture
@@ -885,6 +892,12 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				Color = [255, 134, 36, 127]
 			}
 		}
+		
+		Overclock_BlueprintArcFrontRight :	Overclock_BlueprintArc	{ ChainedTo = ArcShieldFrontRight }
+		Overclock_BlueprintArcBackRight :	Overclock_BlueprintArc	{ ChainedTo = ArcShieldBackRight }
+		Overclock_BlueprintArcBack :		Overclock_BlueprintArc	{ ChainedTo = ArcShieldBack }
+		Overclock_BlueprintArcBackLeft :	Overclock_BlueprintArc	{ ChainedTo = ArcShieldBackLeft }
+		Overclock_BlueprintArcFrontLeft :	Overclock_BlueprintArc	{ ChainedTo = ArcShieldFrontLeft }
 		
 		OverclockEffect
 		{
