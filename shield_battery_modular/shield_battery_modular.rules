@@ -218,8 +218,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ViaBuffs
 			{
 				OutgoingBuffProviders = [BubbleRadiusBuffProvider]
-				ComponentIDs = [IsOperational_Modular_NotOverclocked]			// CAMBIAR
-				Toggles = [IsOperational_Modular_NotOverclocked]				// CAMBIAR
+				ComponentIDs = [IsOperational]
+				Toggles = [IsOperational]
 			}
 		}
 		BubbleBatteryStorageProxy	// For Modular, to show progress bar
@@ -234,13 +234,16 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			}
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
-		BubbleProgressBar : ProgressBar
+		BubbleProgressBar
 		{
 			Type = ProgressBar
 			OperationalToggle = BubbleIsOperational
 			ShowProgressFor = BubbleBatteryStorageProxy
+			LowColor = [0, 0, 255]
+			HighColor = [0, 0, 255]
+			FullColor = [0, 0, 255]
+			Height = 10
 		}
-
 		
 		ToggledBatteryConsumer
 		{
@@ -260,17 +263,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					OperationalToggle = PowerToggle
 				}
 			}
-		}
-
-		ProgressBar
-		{
-			Type = ProgressBar
-			OperationalToggle = IsShieldOperational
-			ShowProgressFor = BatteryStorage
-			LowColor = [0, 0, 255]
-			HighColor = [0, 0, 255]
-			FullColor = [0, 0, 255]
-			Height = 10
 		}
 
 		PowerDrain
@@ -374,17 +366,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				Bottom = 3
 			}*/
 		}
-
-		IsShieldOperational
-		{
-			Type = MultiToggle
-			Toggles = [IsOperational, {Toggle = BubbleCapacityBuffToggle, Invert = true}]
-			Mode = All
-		}
-
-
-
-
 		
 		OverclockTweenToggle
 		{
