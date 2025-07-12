@@ -398,56 +398,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 		// Start Modular Battery
 		
-/* Doesn't work		
-		BuffProviderTop : BuffProviderFrontLeft
-		{
-			Type = AreaBuffProvider
-			BuffType = BubbleCapacity
-			BuffArea = [1, -1, 2, 1]
-			OperationalToggle = IsOperational
-			Criteria
-			{
-				Right = 3
-				Left = 1
-			}
-		}
-		BuffProviderRight : BuffProviderFrontLeft
-		{
-			BuffArea = [4, 1, 1, 2]
-			Criteria
-			{
-				Rot = 1
-				Left = 4
-				Right = 5
-//				Bottom = 3 // With this it also worked
-//				Top = 1
-			}
-		}
-		BuffProviderBottom : BuffProviderFrontLeft
-		{
-			BuffArea = [1, 4, 2, 1]
-			Criteria
-			{
-				Rot = 2
-				Left = 1
-				Right = 3
-				Bottom = 5
-//				Top = 4 // With this it also worked
-			}
-		}
-		BuffProviderLeft : BuffProviderFrontLeft
-		{
-			BuffArea = [-1, 1, 1, 2]
-			Criteria
-			{
-				Rot = 3
-				Right = 0
-				Bottom = 3
-				Top = 1
-			}
-		}		
-*/
-		
 		BuffProviderFrontLeft
 		{
 			Type = AreaBuffProvider
