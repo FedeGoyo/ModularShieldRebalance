@@ -222,28 +222,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				Toggles = [IsOperational]
 			}
 		}
-		BubbleBatteryStorageProxy	// For Modular, to show progress bar
-		{
-			Type = MultiResourceStorage
-			ResourceType = battery
-//			ResourceStorages = [TMP]
-			ViaBuffs
-			{
-				OutgoingBuffProviders = [BubbleRadiusBuffProvider]
-				ComponentIDs = [ModularBatteryStorage]
-			}
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-		}
-		BubbleProgressBar
-		{
-			Type = ProgressBar
-			OperationalToggle = BubbleIsOperational
-			ShowProgressFor = BubbleBatteryStorageProxy
-			LowColor = [0, 0, 255]
-			HighColor = [0, 0, 255]
-			FullColor = [0, 0, 255]
-			Height = 10
-		}
 		
 		ToggledBatteryConsumer
 		{
