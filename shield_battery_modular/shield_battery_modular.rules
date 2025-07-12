@@ -31,7 +31,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeByRotation = true
 	MaxHealth = 4000
 	TypeCategories = [defense, uses_power]
-	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacity]
+	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacity, BubbleResistanceBonus, BubbleRadiusBonus]
 	PenetrationRectType = Normal
 	// ProhibitLeft = 0
 	// ProhibitRight = 0
@@ -139,6 +139,18 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			CommandPoints = 1
 		}
 
+		BuffProviderCapacity
+		{
+			Type = AreaBuffProvider
+			BuffType = BubbleCapacity
+			BuffArea = [0, -1, 2, 1]
+			OperationalToggle = IsOperational
+/*			Criteria
+			{
+				Left = 0
+				Right = 2
+			}*/
+		}
 
 		Base_BatteryStorage
 		{
@@ -147,6 +159,22 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			MaxResources = 2000
 			DrainOnFtlJump = true
 			IsDrainable = False
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		Base_ModularBatteryStorage
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
+			ResourceType = battery
+			IsDrainable = false
+			ResourceStorages = [Base_BatteryStorage]
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProviderCapacity]
+				ComponentID = Base_BatteryStorage
+			}
+			AddMode = PrioritizeLeastResources
+			RemoveMode = PrioritizeLeastResources
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
 		
@@ -173,12 +201,28 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ProxyToggle = IsOverclocked
 			ComponentID = Overclock_BatteryStorage
 		}
+		Overclock_ModularBatteryStorage
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
+			ResourceType = battery
+			IsDrainable = false
+			ResourceStorages = [Overclock_BatteryStorageProxy]
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProviderCapacity]
+				ComponentID = Overclock_BatteryStorageProxy
+			}
+			AddMode = PrioritizeLeastResources
+			RemoveMode = PrioritizeLeastResources
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
 		
 		BatteryProviderStorage	// Appears first so that Drain effects target it
 		{
 			Type = MultiResourceStorage
 			ResourceType = battery
-			ResourceStorages = [Base_BatteryStorage, Overclock_BatteryStorageProxy]
+			ResourceStorages = [Base_ModularBatteryStorage, Overclock_ModularBatteryStorage]
 			RemoveMode = InReverseOrder
 			IsDrainable = True
 			ReceiveResourceMediaEffects = &../BatteryStorage/ReceiveResourceMediaEffects
@@ -297,7 +341,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = AreaBuffProvider
 			BuffType = BubbleResistanceBonus
-			BuffAmount = 8.33
+			BuffAmount = { BaseValue=8.33; BuffType=BubbleResistanceBonus; BuffMode=Add; }
 			BuffArea = [0, 1, 2, 1]
 			OperationalToggle = IsBonusResistanceOperational
 /*			Criteria
@@ -333,7 +377,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = AreaBuffProvider
 			BuffType = BubbleRadiusBonus
-			BuffAmount = 1
+			BuffAmount = { BaseValue=1; BuffType=BubbleRadiusBonus; BuffMode=Add; }
 			BuffMultiplier = BubbleRadiusStateValue
 			BuffArea = [0, 1, 2, 1]
 			OperationalToggle = IsBonusRadiusOperational
