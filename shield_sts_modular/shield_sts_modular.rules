@@ -877,11 +877,9 @@ ArcShieldTMP1 : ArcShieldTMP0
 				]
 			}
 			Arc = 90d
-			OperationalToggle = IsOperationalProxy // IsOperational
+			OperationalToggle = IsOperationalProxy	// IsOperational
 			PenetrationResistance = [ { BaseValue= 8.33; BuffType=BubbleResistanceBonus; BuffMode=Add; }, 0]
 			DrainResourcesFrom = ProxyBatteryStorage
-//			BlueprintArcSprite	// So that it doesn't appear
-			BlueprintArcSpriteSegments = 64
 			ResourceDrainPerDamage	//	Could be removed
 			{
 				BaseValue = .4
@@ -935,12 +933,12 @@ ArcShieldTMP1 : ArcShieldTMP0
 			Mode = All
 		}
 		
-		Overclock_BlueprintArcFront
+		Overclock_BlueprintArc
 		{
 			Type = ArcSprite
 			ChainedTo = ArcShield
 			Radius = (&../ArcShield/Radius/BaseValue) * (&~/OVERCLOCK/ARC_RADIUS_FACTOR)
-			Arc = 90d // 360d
+			Arc = 90d
 			SpriteSegments = (&../ArcShield/BlueprintArcSpriteSegments)
 			Sprite
 			{
@@ -956,9 +954,9 @@ ArcShieldTMP1 : ArcShieldTMP0
 			}
 		}
 		
-		Overclock_BlueprintArcRight : Overclock_BlueprintArcFront	{ ChainedTo = ArcShieldRight }
-		Overclock_BlueprintArcBack : Overclock_BlueprintArcFront	{ ChainedTo = ArcShieldBack }
-		Overclock_BlueprintArcLeft : Overclock_BlueprintArcFront	{ ChainedTo = ArcShieldLeft }
+		Overclock_BlueprintArcRight : Overclock_BlueprintArc	{ ChainedTo = ArcShieldRight }
+		Overclock_BlueprintArcBack : Overclock_BlueprintArc		{ ChainedTo = ArcShieldBack }
+		Overclock_BlueprintArcLeft : Overclock_BlueprintArc		{ ChainedTo = ArcShieldLeft }
 		
 		OverclockEffect
 		{
