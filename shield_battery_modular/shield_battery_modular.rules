@@ -139,17 +139,92 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			CommandPoints = 1
 		}
 
-		BuffProviderCapacity
+		IsShieldRight
+		{
+			Type = ToggleProxy
+			PartLocation = [3, 0]
+			ProxyableComponents
+			[
+				{
+					PartCriteria
+					{
+						Category = bubble_shield
+					}
+					ComponentID = PowerToggle
+				}
+				{
+					PartCriteria
+					{
+						ID = enderluck.ModularShieldBattery
+						Rot = 0
+					}
+					ComponentID = IsShieldRight
+				}
+				{
+					PartCriteria
+					{
+						ID = enderluck.ModularShieldBattery
+						Rot = 2
+					}
+					ComponentID = IsShieldLeft
+				}
+			]
+		}
+
+		IsShieldLeft
+		{
+			Type = ToggleProxy
+			PartLocation = [-1, 0]
+			ProxyableComponents
+			[
+				{
+					PartCriteria
+					{
+						Category = bubble_shield
+					}
+					ComponentID = PowerToggle
+				}
+				{
+					PartCriteria
+					{
+						ID = enderluck.ModularShieldBattery
+						Rot = 0
+					}
+					ComponentID = IsShieldLeft
+				}
+				{
+					PartCriteria
+					{
+						ID = enderluck.ModularShieldBattery
+						Rot = 2
+					}
+					ComponentID = IsShieldRight
+				}
+			]
+		}
+
+		BuffProvider_BubbleCapacityRight
 		{
 			Type = AreaBuffProvider
+			OperationalToggle = IsShieldLeft
 			BuffType = BubbleCapacity
-			BuffArea = [0, -1, 2, 1]
-			OperationalToggle = IsOperational
-/*			Criteria
+			BuffArea = [2, 0, 2, 1]
+			Criteria
 			{
-				Left = 0
-				Right = 2
-			}*/
+				Left = 2
+				Right = 4
+			}
+		}
+		
+		BuffProvider_BubbleCapacityLeft:	BuffProvider_BubbleCapacityRight
+		{
+			OperationalToggle = IsShieldRight
+			BuffArea = [-2, 0, 2, 1]
+			Criteria
+			{
+				Left = -2
+				Right = 0
+			}
 		}
 
 		Base_BatteryStorage
@@ -170,8 +245,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ResourceStorages = [Base_BatteryStorage]
 			ViaBuffs
 			{
-				OutgoingBuffProviders = [BuffProviderCapacity]
-				ComponentID = Base_BatteryStorage
+				OutgoingBuffProviders = [BuffProvider_BubbleCapacityRight, BuffProvider_BubbleCapacityLeft]
+				ComponentID = Base_ModularBatteryStorage
 			}
 			AddMode = PrioritizeLeastResources
 			RemoveMode = PrioritizeLeastResources
@@ -210,8 +285,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ResourceStorages = [Overclock_BatteryStorageProxy]
 			ViaBuffs
 			{
-				OutgoingBuffProviders = [BuffProviderCapacity]
-				ComponentID = Overclock_BatteryStorageProxy
+				OutgoingBuffProviders = [BuffProvider_BubbleCapacityRight, BuffProvider_BubbleCapacityLeft]
+				ComponentID = Overclock_ModularBatteryStorage
 			}
 			AddMode = PrioritizeLeastResources
 			RemoveMode = PrioritizeLeastResources
@@ -266,7 +341,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = ResourceConverter
 			OperationalToggle = IsOperational
-			FromStorage = BatteryStorage
+			FromStorage = BatteryProviderStorage
 			FromQuantity
 			{
 				BaseValue = 50
@@ -312,19 +387,37 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Toggles = [PowerToggle, BubbleCapacityBuffToggle, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
 			Mode = All
 		}
-		BubbleResistanceBuffProvider
+		BuffProvider_BubbleResistanceCenter
 		{
 			Type = AreaBuffProvider
 			BuffType = BubbleResistanceBonus
 			BuffAmount = { BaseValue=8.33; BuffType=BubbleResistanceBonus; BuffMode=Add; }
 			BuffArea = [0, 1, 2, 1]
 			OperationalToggle = IsBonusResistanceOperational
-/*			Criteria
+		}
+		BuffProvider_BubbleResistanceRight :	BuffProvider_BubbleResistanceCenter
+		{
+//			BuffArea : &../BuffProvider_BubbleCapacityRight/BuffArea
+//			Criteria : &../BuffProvider_BubbleCapacityRight/Criteria	{}
+			OperationalToggle = IsShieldRight
+			BuffArea = [2, 0, 2, 1]
+			Criteria
 			{
-				Rot = 2
-				Right = 2
-				Bottom = 3
-			}*/
+				Left = 2
+				Right = 4
+			}
+		}
+		BuffProvider_BubbleResistanceLeft :	BuffProvider_BubbleResistanceCenter
+		{
+//			BuffArea : &../BuffProvider_BubbleCapacityLeft/BuffArea
+//			Criteria : &../BuffProvider_BubbleCapacityLeft/Criteria	{}
+			OperationalToggle = IsShieldLeft
+			BuffArea = [-2, 0, 2, 1]
+			Criteria
+			{
+				Left = -2
+				Right = 0
+			}
 		}
 		
 		Kebechet_TINY_ToggleRadius
@@ -348,20 +441,36 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OnTweenDuration = 1;
 			OffTweenDuration = 0.1;
 		}
-		BubbleRadiusBuffProvider
+		BuffProvider_BubbleRadiusCenter :	BuffProvider_BubbleResistanceCenter
 		{
-			Type = AreaBuffProvider
 			BuffType = BubbleRadiusBonus
 			BuffAmount = { BaseValue=1; BuffType=BubbleRadiusBonus; BuffMode=Add; }
 			BuffMultiplier = BubbleRadiusStateValue
-			BuffArea = [0, 1, 2, 1]
-			OperationalToggle = IsBonusRadiusOperational
-/*			Criteria
+			OperationalToggle = IsBonusResistanceOperational
+		}
+		BuffProvider_BubbleRadiusRight :	BuffProvider_BubbleRadiusCenter
+		{
+//			BuffArea : &../BuffProvider_BubbleCapacityRight/BuffArea
+//			Criteria : &../BuffProvider_BubbleCapacityRight/Criteria	{}
+			OperationalToggle = IsShieldRight
+			BuffArea = [2, 0, 2, 1]
+			Criteria
 			{
-				Rot = 2
-				Right = 2
-				Bottom = 3
-			}*/
+				Left = 2
+				Right = 4
+			}
+		}
+		BuffProvider_BubbleRadiusLeft :		BuffProvider_BubbleRadiusCenter
+		{
+//			BuffArea : &../BuffProvider_BubbleCapacityLeft/BuffArea
+//			Criteria : &../BuffProvider_BubbleCapacityLeft/Criteria	{}
+			OperationalToggle = IsShieldLeft
+			BuffArea = [-2, 0, 2, 1]
+			Criteria
+			{
+				Left = -2
+				Right = 0
+			}
 		}
 		
 		OverclockTweenToggle
