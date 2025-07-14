@@ -66,13 +66,6 @@ Components
 					: &../^/0/MediaEffects/1	{}
 				]
 			}
-			GENS_OverclockEffect : &<../shield_gen_small_modular.rules>/Part/Components/OverclockEffect
-			{
-				OperationalToggle = OverclockedEffectToggle
-				Shield = GENS_ArcShield
-				ChainedTo = GENS_ArcShield
-				ContinuousEffects [ : &<../stats.rules>/Angle/FrontArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
 			GENS_OverloadEffect : &<../shield_gen_small_modular.rules>/Part/Components/OverloadEffect
 			{
 				OperationalToggle = IsOperationalOverloaded
@@ -80,9 +73,31 @@ Components
 				ChainedTo = GENS_ArcShield
 				ContinuousEffects [ : &<../stats.rules>/Angle/FrontArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
-			GENS_OverclockOverloadEffect : &<../shield_gen_small_modular.rules>/Part/Components/OverclockOverloadEffect
+			
+			GENS_Overclock_ExtendedEffect : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_ExtendedEffect
 			{
-				OperationalToggle = IsOperationalOverclockedOverloaded
+				OperationalToggle = Overclock_ExtendedEffectToggle
+				Shield = GENS_ArcShield
+				ChainedTo = GENS_ArcShield
+				ContinuousEffects [ : &<../stats.rules>/Angle/FrontArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_Overload_EffectExtended : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_OverloadEffect_Extended
+			{
+				OperationalToggle = IsOperationalOverloaded_Extended
+				Shield = GENS_ArcShield
+				ChainedTo = GENS_ArcShield
+				ContinuousEffects [ : &<../stats.rules>/Angle/FrontArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_ReinforcedEffect : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_ReinforcedEffect
+			{
+				OperationalToggle = Overclock_ReinforcedEffectToggle
+				Shield = GENS_ArcShield
+				ChainedTo = GENS_ArcShield
+				ContinuousEffects [ : &<../stats.rules>/Angle/FrontArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_OverloadEffect_Reinforced : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_OverloadEffect_Reinforced
+			{
+				OperationalToggle = IsOperationalOverloaded_Reinforced
 				Shield = GENS_ArcShield
 				ChainedTo = GENS_ArcShield
 				ContinuousEffects [ : &<../stats.rules>/Angle/FrontArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
@@ -118,15 +133,24 @@ Components
 					: &../^/1/HitMediaEffects/1 {}
 				]
 			}
-			GENS_OverclockEffect : ^/0/GENS_OverclockEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
 			GENS_OverloadEffect : ^/0/GENS_OverloadEffect
 			{
 				ContinuousEffects [ : &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
-			GENS_OverclockOverloadEffect : ^/0/GENS_OverclockOverloadEffect
+			
+			GENS_Overclock_ExtendedEffect : ^/0/GENS_Overclock_ExtendedEffect
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_Overload_EffectExtended : ^/0/GENS_Overclock_Overload_EffectExtended
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_ReinforcedEffect : ^/0/GENS_Overclock_ReinforcedEffect
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_OverloadEffect_Reinforced : ^/0/GENS_Overclock_OverloadEffect_Reinforced
 			{
 				ContinuousEffects [ : &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
@@ -153,15 +177,24 @@ Components
 					: &../^/1/HitMediaEffects/1 {}
 				]
 			}
-			GENS_OverclockEffect : ^/0/GENS_OverclockEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
 			GENS_OverloadEffect : ^/0/GENS_OverloadEffect
 			{
 				ContinuousEffects [ : &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
-			GENS_OverclockOverloadEffect : ^/0/GENS_OverclockOverloadEffect
+			
+			GENS_Overclock_ExtendedEffect : ^/0/GENS_Overclock_ExtendedEffect
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_Overload_EffectExtended : ^/0/GENS_Overclock_Overload_EffectExtended
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_ReinforcedEffect : ^/0/GENS_Overclock_ReinforcedEffect
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_OverloadEffect_Reinforced : ^/0/GENS_Overclock_OverloadEffect_Reinforced
 			{
 				ContinuousEffects [ : &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
@@ -188,15 +221,24 @@ Components
 					: &../^/1/HitMediaEffects/0 {}
 				]
 			}
-			GENS_OverclockEffect : ^/0/GENS_OverclockEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
 			GENS_OverloadEffect : ^/0/GENS_OverloadEffect
 			{
 				ContinuousEffects [ : &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
-			GENS_OverclockOverloadEffect : ^/0/GENS_OverclockOverloadEffect
+			
+			GENS_Overclock_ExtendedEffect : ^/0/GENS_Overclock_ExtendedEffect
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_Overload_EffectExtended : ^/0/GENS_Overclock_Overload_EffectExtended
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_ReinforcedEffect : ^/0/GENS_Overclock_ReinforcedEffect
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_OverloadEffect_Reinforced : ^/0/GENS_Overclock_OverloadEffect_Reinforced
 			{
 				ContinuousEffects [ : &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
@@ -223,15 +265,24 @@ Components
 					: &../^/1/HitMediaEffects/1 {}
 				]
 			}
-			GENS_OverclockEffect : ^/0/GENS_OverclockEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
 			GENS_OverloadEffect : ^/0/GENS_OverloadEffect
 			{
 				ContinuousEffects [ : &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
-			GENS_OverclockOverloadEffect : ^/0/GENS_OverclockOverloadEffect
+			
+			GENS_Overclock_ExtendedEffect : ^/0/GENS_Overclock_ExtendedEffect
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_Overload_EffectExtended : ^/0/GENS_Overclock_Overload_EffectExtended
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_ReinforcedEffect : ^/0/GENS_Overclock_ReinforcedEffect
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_OverloadEffect_Reinforced : ^/0/GENS_Overclock_OverloadEffect_Reinforced
 			{
 				ContinuousEffects [ : &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
@@ -258,15 +309,24 @@ Components
 					: &../^/1/HitMediaEffects/0 {}
 				]
 			}
-			GENS_OverclockEffect : ^/0/GENS_OverclockEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
 			GENS_OverloadEffect : ^/0/GENS_OverloadEffect
 			{
 				ContinuousEffects [ : &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
-			GENS_OverclockOverloadEffect : ^/0/GENS_OverclockOverloadEffect
+			
+			GENS_Overclock_ExtendedEffect : ^/0/GENS_Overclock_ExtendedEffect
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_Overload_EffectExtended : ^/0/GENS_Overclock_Overload_EffectExtended
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_ReinforcedEffect : ^/0/GENS_Overclock_ReinforcedEffect
+			{
+				ContinuousEffects [ : &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
+			}
+			GENS_Overclock_OverloadEffect_Reinforced : ^/0/GENS_Overclock_OverloadEffect_Reinforced
 			{
 				ContinuousEffects [ : &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}

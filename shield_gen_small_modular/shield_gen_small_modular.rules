@@ -1,6 +1,9 @@
 OVERCLOCK : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/OVERCLOCK
 {
-	ARC_LINERADIUS_FACTOR = 105%
+	EXTENDED : ^/0/EXTENDED
+	{
+		ARC_LINERADIUS_FACTOR = 105%
+	}	
 }
 
 Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
@@ -301,10 +304,29 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 		TitleKey = "StatCategories/Overclocked"
 		Stats
 		{
-//			ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/ARC_FACTOR)
-//			ShieldDist = (&~/Part/Components/ArcShield/Radius/BaseValue) * (&~/OVERCLOCK/ARC_RADIUS_FACTOR)
 			HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND)
-			HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
 		}
+		StatsByCategory
+		[
+			{
+				NameKey = "StatCategories/ShieldExtended"
+				Stats
+				{
+//					ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/EXTENDED/ARC_FACTOR)
+//					ShieldDist = (&~/Part/Components/ArcShield/Radius/BaseValue) * (&~/OVERCLOCK/EXTENDED/ARC_RADIUS_FACTOR)
+					HeatPerDamage = (&~/OVERCLOCK/EXTENDED/HEAT_PER_DAMAGE)
+				}
+			}
+			{
+				NameKey = "StatCategories/ShieldReinforced"
+				Stats
+				{
+//					ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/REINFORCED/ARC_FACTOR)
+//					ShieldHP = (&~/Part/StatsByCategory/0/Stats/ShieldHP) / (&~/OVERCLOCK/REINFORCED/DAMAGE_DRAIN_FACTOR)
+					EMPResistPercentage = (&~/OVERCLOCK/REINFORCED/EMP_RESIST) * 100
+					HeatPerDamage = (&~/OVERCLOCK/REINFORCED/HEAT_PER_DAMAGE)
+				}
+			}
+		]
 	}
 }

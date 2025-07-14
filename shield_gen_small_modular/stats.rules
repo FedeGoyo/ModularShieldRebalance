@@ -42,7 +42,7 @@ Angle
 						BuffType = Overclock
 						ModificationMode = Multiply
 						RemapFrom = [0, 1]
-						RemapTo = [1, &<shield_gen_small_modular.rules>/OVERCLOCK/ARC_LINERADIUS_FACTOR]
+						RemapTo = [1, &<shield_gen_small_modular.rules>/OVERCLOCK/EXTENDED/ARC_LINERADIUS_FACTOR]
 					}
 				]
 			}
@@ -80,7 +80,7 @@ Angle
 						BuffType = Overclock
 						ModificationMode = Multiply
 						RemapFrom = [0, 1]
-						RemapTo = [1, &<shield_gen_small_modular.rules>/OVERCLOCK/ARC_LINERADIUS_FACTOR]
+						RemapTo = [1, &<shield_gen_small_modular.rules>/OVERCLOCK/EXTENDED/ARC_LINERADIUS_FACTOR]
 					}
 				]
 			}
@@ -118,7 +118,7 @@ Angle
 						BuffType = Overclock
 						ModificationMode = Multiply
 						RemapFrom = [0, 1]
-						RemapTo = [1, &<shield_gen_small_modular.rules>/OVERCLOCK/ARC_LINERADIUS_FACTOR]
+						RemapTo = [1, &<shield_gen_small_modular.rules>/OVERCLOCK/EXTENDED/ARC_LINERADIUS_FACTOR]
 					}
 				]
 			}

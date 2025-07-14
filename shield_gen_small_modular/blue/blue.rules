@@ -61,9 +61,11 @@ Components
 			}
 			
 			// Already thorugh Components, but just in case
-			GENS_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components/GENS_OverclockEffect			{}
-			GENS_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components/GENS_OverloadEffect			{}
-			GENS_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components/GENS_OverclockOverloadEffect	{}
+			GENS_OverloadEffect :						&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components/GENS_OverloadEffect						{}
+			GENS_Overclock_ExtendedEffect :				&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components/GENS_Overclock_ExtendedEffect				{}
+			GENS_Overclock_Overload_EffectExtended :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components/GENS_Overclock_Overload_EffectExtended	{}
+			GENS_Overclock_ReinforcedEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components/GENS_Overclock_ReinforcedEffect			{}
+			GENS_Overclock_OverloadEffect_Reinforced :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components/GENS_Overclock_OverloadEffect_Reinforced	{}
 		}
 	}
 
@@ -87,9 +89,11 @@ Components
 					: &../^/1/HitMediaEffects/1 {}
 				]
 			}
-			GENS_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontLine_On/Components/GENS_OverclockEffect			{}
-			GENS_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontLine_On/Components/GENS_OverloadEffect			{}
-			GENS_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontLine_On/Components/GENS_OverclockOverloadEffect	{}
+			GENS_OverloadEffect :						&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontLine_On/Components/GENS_OverloadEffect						{}
+			GENS_Overclock_ExtendedEffect :				&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontLine_On/Components/GENS_Overclock_ExtendedEffect			{}
+			GENS_Overclock_Overload_EffectExtended :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontLine_On/Components/GENS_Overclock_Overload_EffectExtended	{}
+			GENS_Overclock_ReinforcedEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontLine_On/Components/GENS_Overclock_ReinforcedEffect			{}
+			GENS_Overclock_OverloadEffect_Reinforced :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90FrontLine_On/Components/GENS_Overclock_OverloadEffect_Reinforced	{}
 		}
 	}
 
@@ -113,9 +117,11 @@ Components
 					: &../^/1/HitMediaEffects/1 {}
 				]
 			}
-			GENS_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22LeftLine_On/Components/GENS_OverclockEffect			{}
-			GENS_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22LeftLine_On/Components/GENS_OverloadEffect			{}
-			GENS_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22LeftLine_On/Components/GENS_OverclockOverloadEffect	{}
+			GENS_OverloadEffect :						&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22LeftLine_On/Components/GENS_OverloadEffect						{}
+			GENS_Overclock_ExtendedEffect :				&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22LeftLine_On/Components/GENS_Overclock_ExtendedEffect				{}
+			GENS_Overclock_Overload_EffectExtended :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22LeftLine_On/Components/GENS_Overclock_Overload_EffectExtended	{}
+			GENS_Overclock_ReinforcedEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22LeftLine_On/Components/GENS_Overclock_ReinforcedEffect			{}
+			GENS_Overclock_OverloadEffect_Reinforced :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22LeftLine_On/Components/GENS_Overclock_OverloadEffect_Reinforced	{}
 		}
 	}
 
@@ -139,9 +145,11 @@ Components
 					: &../^/1/HitMediaEffects/1 {}
 				]
 			}
-			GENS_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22RightLine_On/Components/GENS_OverclockEffect			{}
-			GENS_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22RightLine_On/Components/GENS_OverloadEffect			{}
-			GENS_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22RightLine_On/Components/GENS_OverclockOverloadEffect	{}
+			GENS_OverloadEffect :						&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22RightLine_On/Components/GENS_OverloadEffect						{}
+			GENS_Overclock_ExtendedEffect :				&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22RightLine_On/Components/GENS_Overclock_ExtendedEffect			{}
+			GENS_Overclock_Overload_EffectExtended :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22RightLine_On/Components/GENS_Overclock_Overload_EffectExtended	{}
+			GENS_Overclock_ReinforcedEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22RightLine_On/Components/GENS_Overclock_ReinforcedEffect			{}
+			GENS_Overclock_OverloadEffect_Reinforced :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A22RightLine_On/Components/GENS_Overclock_OverloadEffect_Reinforced	{}
 		}
 	}
 
@@ -165,9 +173,11 @@ Components
 					: &../^/1/HitMediaEffects/1 {}
 				]
 			}
-			GENS_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90LeftArc_On/Components/GENS_OverclockEffect			{}
-			GENS_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90LeftArc_On/Components/GENS_OverloadEffect			{}
-			GENS_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90LeftArc_On/Components/GENS_OverclockOverloadEffect	{}
+			GENS_OverloadEffect :						&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90LeftArc_On/Components/GENS_OverloadEffect						{}
+			GENS_Overclock_ExtendedEffect :				&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90LeftArc_On/Components/GENS_Overclock_ExtendedEffect				{}
+			GENS_Overclock_Overload_EffectExtended :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90LeftArc_On/Components/GENS_Overclock_Overload_EffectExtended		{}
+			GENS_Overclock_ReinforcedEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90LeftArc_On/Components/GENS_Overclock_ReinforcedEffect			{}
+			GENS_Overclock_OverloadEffect_Reinforced :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90LeftArc_On/Components/GENS_Overclock_OverloadEffect_Reinforced	{}
 		}
 	}
 
@@ -191,9 +201,11 @@ Components
 					: &../^/1/HitMediaEffects/1 {}
 				]
 			}
-			GENS_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90RightArc_On/Components/GENS_OverclockEffect			{}
-			GENS_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90RightArc_On/Components/GENS_OverloadEffect			{}
-			GENS_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90RightArc_On/Components/GENS_OverclockOverloadEffect	{}
+			GENS_OverloadEffect :						&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90RightArc_On/Components/GENS_OverloadEffect						{}
+			GENS_Overclock_ExtendedEffect :				&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90RightArc_On/Components/GENS_Overclock_ExtendedEffect				{}
+			GENS_Overclock_Overload_EffectExtended :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90RightArc_On/Components/GENS_Overclock_Overload_EffectExtended	{}
+			GENS_Overclock_ReinforcedEffect :			&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90RightArc_On/Components/GENS_Overclock_ReinforcedEffect			{}
+			GENS_Overclock_OverloadEffect_Reinforced :	&<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_A90RightArc_On/Components/GENS_Overclock_OverloadEffect_Reinforced	{}
 		}
 	}
 
