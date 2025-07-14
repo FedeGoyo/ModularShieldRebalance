@@ -29,7 +29,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeID = "shield_gen_stl"
 	SelectionTypeByRotation = false
 	MaxHealth = 10000
-	TypeCategories = [defense, uses_power]
+	TypeCategories = [defense, uses_power, bubble_shield]
 	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleResistanceBonus, BubbleRadiusBonus]
 	PenetrationRectType = Normal
 	AllowedDoorLocations
@@ -280,14 +280,13 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ResourceStorages = [CentralBatteryStorage]
 			ViaBuffs
 			{
-				OutgoingBuffProviders = [BuffProviderFrontLeft, BuffProviderFrontRight, BuffProviderRightTop, BuffProviderRightBottom, BuffProviderBackRight, BuffProviderBackLeft, BuffProviderLeftBottom, BuffProviderLeftTop]
+				OutgoingBuffProviders = [BuffProvider_Top, BuffProvider_Right, BuffProvider_Bottom, BuffProvider_Left]
 				ComponentID = BatteryStorageProxy
 			}
 			AddMode = PrioritizeLeastResources
 			RemoveMode = PrioritizeLeastResources
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
-		BatteryConsumer2 : BatteryConsumer	{ Storage = ModularBatteryStorage }	// If I use ModularCombinedBatteryStorage so that all batteries (including ModularBatteryStorage) are in the same consumer, the ModularBatteryStorage never receives energy, no idea why.
 		ProgressBarModular :	ProgressBarSegments
 		{
 			OperationalToggle = IsModularToggle
@@ -399,8 +398,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 		// Start Modular Battery
 		
-/* Doesn't work		
-		BuffProviderTop : BuffProviderFrontLeft
+		BuffProvider_Top
 		{
 			Type = AreaBuffProvider
 			BuffType = BubbleCapacity
@@ -408,132 +406,36 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OperationalToggle = IsOperational
 			Criteria
 			{
-				Right = 3
-				Left = 1
+				Top = -2
+				Bottom = 0
 			}
 		}
-		BuffProviderRight : BuffProviderFrontLeft
+		BuffProvider_Right : BuffProvider_Top
 		{
 			BuffArea = [4, 1, 1, 2]
 			Criteria
 			{
-				Rot = 1
 				Left = 4
-				Right = 5
-//				Bottom = 3 // With this it also worked
-//				Top = 1
+				Right = 6
 			}
 		}
-		BuffProviderBottom : BuffProviderFrontLeft
+
+		BuffProvider_Bottom : BuffProvider_Top
 		{
 			BuffArea = [1, 4, 2, 1]
 			Criteria
 			{
-				Rot = 2
-				Left = 1
-				Right = 3
-				Bottom = 5
-//				Top = 4 // With this it also worked
+				Top = 4
+				Bottom = 6
 			}
 		}
-		BuffProviderLeft : BuffProviderFrontLeft
+		BuffProvider_Left : BuffProvider_Top
 		{
 			BuffArea = [-1, 1, 1, 2]
 			Criteria
 			{
-				Rot = 3
+				Left = -2
 				Right = 0
-				Bottom = 3
-				Top = 1
-			}
-		}		
-*/
-		
-		BuffProviderFrontLeft
-		{
-			Type = AreaBuffProvider
-			BuffType = BubbleCapacity
-			BuffArea = [0, -1, 2, 1]
-			OperationalToggle = IsOperational
-			Criteria
-			{
-				Right = 2
-				Left = 0 // testing
-			}
-		}
-		BuffProviderFrontRight : BuffProviderFrontLeft
-		{
-			BuffArea = [2, -1, 2, 1]
-			Criteria
-			{
-				Left = 2
-				Right = 4
-			}
-		}
-		BuffProviderRightTop : BuffProviderFrontLeft
-		{
-			BuffArea = [4, 0, 1, 2]
-			Criteria
-			{
-				Rot = 1
-				Left = 4
-				Right = 5
-				Bottom = 2 // With this it also worked
-			}
-		}
-		BuffProviderRightBottom : BuffProviderFrontLeft
-		{
-			BuffArea = [4, 2, 1, 2]
-			Criteria
-			{
-				Rot = 1
-				Left = 4
-				Right = 5
-				Bottom = 4
-				Top = 2
-			}
-		}
-		BuffProviderBackRight : BuffProviderFrontLeft
-		{
-			BuffArea = [2, 4, 2, 1]
-			Criteria
-			{
-				Rot = 2
-				Left = 2
-				Right = 4
-				Bottom = 5
-//				Top = 4 // With this it also worked
-			}
-		}
-		BuffProviderBackLeft : BuffProviderFrontLeft // works
-		{
-			BuffArea = [0, 4, 2, 1]
-			Criteria
-			{
-				Rot = 2
-				Right = 2
-				Bottom = 5
-			}
-		}
-		BuffProviderLeftBottom : BuffProviderFrontLeft
-		{
-			BuffArea = [-1, 2, 1, 2]
-			Criteria
-			{
-				Rot = 3
-				Right = 0
-				Bottom = 4
-				Top = 2
-			}
-		}		
-		BuffProviderLeftTop : BuffProviderFrontLeft
-		{
-			BuffArea = [-1, 0, 1, 2]
-			Criteria
-			{
-				Rot = 3
-				Right = 0
-				Bottom = 2
 			}
 		}
 		
@@ -1245,23 +1147,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		OverheatEffects : ^/0/OverheatEffects
 		{
 			Location = [1, 1.5]
-		}
-		
-		BubbleHeatCollectionStorage
-		{
-			Type = ResourceStorageProxy
-			ResourceType = heat
-			ComponentID = &~/Part/^/0/HEAT_TARGET_STORAGE
-//			QuantityScale = 1 / (&~/OVERCLOCK/COLLECTED_HEAT_MULTIPLIER)
-		}
-		
-		Overclock_HeatCollectionBuffProvider
-		{
-		
-			Type = GridBuffProvider
-			BuffType = BubbleHeatCollection
-			GridDistance = 1
-			OperationalToggle = IsOperationalOverclocked
 		}
 		
 		Router

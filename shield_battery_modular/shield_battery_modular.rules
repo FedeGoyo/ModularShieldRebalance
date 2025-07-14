@@ -31,7 +31,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeByRotation = true
 	MaxHealth = 4000
 	TypeCategories = [defense, uses_power]
-	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacity, BubbleHeatCollection]
+	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacity, BubbleResistanceBonus, BubbleRadiusBonus]
 	PenetrationRectType = Normal
 	// ProhibitLeft = 0
 	// ProhibitRight = 0
@@ -139,6 +139,93 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			CommandPoints = 1
 		}
 
+		IsShieldRight
+		{
+			Type = ToggleProxy
+			PartLocation = [3, 0]
+			ProxyableComponents
+			[
+				{
+					PartCriteria
+					{
+						Category = bubble_shield
+					}
+					ComponentID = PowerToggle
+				}
+				{
+					PartCriteria
+					{
+						ID = enderluck.ModularShieldBattery
+						Rot = 0
+					}
+					ComponentID = IsShieldRight
+				}
+				{
+					PartCriteria
+					{
+						ID = enderluck.ModularShieldBattery
+						Rot = 2
+					}
+					ComponentID = IsShieldLeft
+				}
+			]
+		}
+
+		IsShieldLeft
+		{
+			Type = ToggleProxy
+			PartLocation = [-1, 0]
+			ProxyableComponents
+			[
+				{
+					PartCriteria
+					{
+						Category = bubble_shield
+					}
+					ComponentID = PowerToggle
+				}
+				{
+					PartCriteria
+					{
+						ID = enderluck.ModularShieldBattery
+						Rot = 0
+					}
+					ComponentID = IsShieldLeft
+				}
+				{
+					PartCriteria
+					{
+						ID = enderluck.ModularShieldBattery
+						Rot = 2
+					}
+					ComponentID = IsShieldRight
+				}
+			]
+		}
+
+		BuffProvider_BubbleCapacityRight
+		{
+			Type = AreaBuffProvider
+			OperationalToggle = IsShieldLeft
+			BuffType = BubbleCapacity
+			BuffArea = [2, 0, 2, 1]
+			Criteria
+			{
+				Left = 2
+				Right = 4
+			}
+		}
+		
+		BuffProvider_BubbleCapacityLeft:	BuffProvider_BubbleCapacityRight
+		{
+			OperationalToggle = IsShieldRight
+			BuffArea = [-2, 0, 2, 1]
+			Criteria
+			{
+				Left = -2
+				Right = 0
+			}
+		}
 
 		Base_BatteryStorage
 		{
@@ -147,6 +234,22 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			MaxResources = 2000
 			DrainOnFtlJump = true
 			IsDrainable = False
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		Base_ModularBatteryStorage
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
+			ResourceType = battery
+			IsDrainable = false
+			ResourceStorages = [Base_BatteryStorage]
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProvider_BubbleCapacityRight, BuffProvider_BubbleCapacityLeft]
+				ComponentID = Base_ModularBatteryStorage
+			}
+			AddMode = PrioritizeLeastResources
+			RemoveMode = PrioritizeLeastResources
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
 		
@@ -173,12 +276,28 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ProxyToggle = IsOverclocked
 			ComponentID = Overclock_BatteryStorage
 		}
+		Overclock_ModularBatteryStorage
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
+			ResourceType = battery
+			IsDrainable = false
+			ResourceStorages = [Overclock_BatteryStorageProxy]
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProvider_BubbleCapacityRight, BuffProvider_BubbleCapacityLeft]
+				ComponentID = Overclock_ModularBatteryStorage
+			}
+			AddMode = PrioritizeLeastResources
+			RemoveMode = PrioritizeLeastResources
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
 		
 		BatteryProviderStorage	// Appears first so that Drain effects target it
 		{
 			Type = MultiResourceStorage
 			ResourceType = battery
-			ResourceStorages = [Base_BatteryStorage, Overclock_BatteryStorageProxy]
+			ResourceStorages = [Base_ModularBatteryStorage, Overclock_ModularBatteryStorage]
 			RemoveMode = InReverseOrder
 			IsDrainable = True
 			ReceiveResourceMediaEffects = &../BatteryStorage/ReceiveResourceMediaEffects
@@ -187,15 +306,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 //			ProvidedValueRange = 0
 //			ProvidedValuePerResource = 1/1000
 		}
-		BatteryStorage	// BatteryReceiverStorage // Named like this for easier compatibility with other mods
-		{
-			Type = MultiResourceStorage
-			ResourceType = battery
-			ResourceStorages = [Base_BatteryStorage, Overclock_BatteryStorageProxy]
-			AddMode = InOrder
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-		}
-		
 		PowerToggleProxy
 		{
 			Type = ToggleProxy
@@ -209,45 +319,29 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ProxyToggle = PowerToggleProxy
 		}
 		
-		// Bubble when not overclocked
-
-		BubbleIsOperational
+		BatteryStorage	// BatteryReceiverStorage // Named like this for easier compatibility with other mods
 		{
-			Type = MultiToggle
-			Mode = Any
-			ViaBuffs
-			{
-				OutgoingBuffProviders = [BubbleRadiusBuffProvider]
-				ComponentIDs = [IsOperational]
-				Toggles = [IsOperational]
-			}
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [Base_BatteryStorage, Overclock_BatteryStorageProxy]
+			AddMode = InOrder
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
-		
-		ToggledBatteryConsumer
+		BatteryConsumer
 		{
-			Type = ToggledComponents
-			Toggle = BubbleCapacityBuffToggle
-			Invert = true
-			IncludeInBlueprints = true
-			Components
-			{
-				BatteryConsumer
-				{
-					Type = ResourceConsumer
-					ResourceType = battery
-					Storage = BatteryStorage
-					DefaultPriority = &/PRIORITIES/Thruster_Supply
-					ResupplyThreshold = 500
-					OperationalToggle = PowerToggle
-				}
-			}
+			Type = ResourceConsumer
+			ResourceType = battery
+			Storage = BatteryStorage
+			DefaultPriority = &/PRIORITIES/Defense_Supply
+			ResupplyThreshold = 500
+			OperationalToggle = PowerToggle
 		}
 
 		PowerDrain
 		{
 			Type = ResourceConverter
 			OperationalToggle = IsOperational
-			FromStorage = BatteryStorage
+			FromStorage = BatteryProviderStorage
 			FromQuantity
 			{
 				BaseValue = 50
@@ -293,19 +387,18 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Toggles = [PowerToggle, BubbleCapacityBuffToggle, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
 			Mode = All
 		}
-		BubbleResistanceBuffProvider
+		BuffProvider_BubbleResistanceRight
 		{
 			Type = AreaBuffProvider
 			BuffType = BubbleResistanceBonus
-			BuffAmount = 8.33
-			BuffArea = [0, 1, 2, 1]
-			OperationalToggle = IsBonusResistanceOperational
-/*			Criteria
-			{
-				Rot = 2
-				Right = 2
-				Bottom = 3
-			}*/
+			BuffAmount = { BaseValue=8.33; BuffType=BubbleResistanceBonus; BuffMode=Add; }
+			OperationalToggle = IsShieldRight
+			BuffArea = [2, 0, 1, 1]
+		}
+		BuffProvider_BubbleResistanceLeft :	BuffProvider_BubbleResistanceRight
+		{
+			OperationalToggle = IsShieldLeft
+			BuffArea = [-1, 0, 1, 1]
 		}
 		
 		Kebechet_TINY_ToggleRadius
@@ -329,20 +422,19 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OnTweenDuration = 1;
 			OffTweenDuration = 0.1;
 		}
-		BubbleRadiusBuffProvider
+		BuffProvider_BubbleRadiusRight
 		{
 			Type = AreaBuffProvider
 			BuffType = BubbleRadiusBonus
-			BuffAmount = 1
+			BuffAmount = { BaseValue=1; BuffType=BubbleRadiusBonus; BuffMode=Add; }
 			BuffMultiplier = BubbleRadiusStateValue
-			BuffArea = [0, 1, 2, 1]
-			OperationalToggle = IsBonusRadiusOperational
-/*			Criteria
-			{
-				Rot = 2
-				Right = 2
-				Bottom = 3
-			}*/
+			OperationalToggle = IsShieldRight
+			BuffArea = [2, 0, 1, 1]
+		}
+		BuffProvider_BubbleRadiusLeft :		BuffProvider_BubbleRadiusRight
+		{
+			OperationalToggle = IsShieldLeft
+			BuffArea = [-1, 0, 1, 1]
 		}
 		
 		OverclockTweenToggle
@@ -372,46 +464,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		OverheatEffects : ^/0/OverheatEffects
 		{
 			Location = [1, 1.5]
-		}
-		
-		// Modular Heat Collection
-		Overclock_BubbleHeatCollectionBuffToggle
-		{
-			Type = BuffToggle
-			BuffType = BubbleHeatCollection
-		}
-		ForceOverclockTrigger
-		{
-			Type = ToggleTrigger
-			Toggle = Overclock_BubbleHeatCollectionBuffToggle
-			AllowOperationalBypass = true
-			TriggerWhenOff = false
-		}
-
-		// Overriding to allow forcing on / locking
-		OverclockModeToggle : ^/0/OverclockModeToggle
-		{
-			AutoOnTrigger = ForceOverclockTrigger
-			OperationalToggle = Overclock_BubbleHeatCollectionBuffToggle
-			InvertOperationalToggle = true
-		}
-
-		Overclock_CombinedHeatInput
-		{
-			Type = MultiResourceStorage
-			ResourceType = heat
-			ResourceStorages = [ NetworkHeatInput ]
-			ViaBuffs
-			{
-				IncomingBuffTypes = [ BubbleHeatCollection ]
-				ComponentIDs = [ BubbleHeatCollectionStorage ]
-			}
-		}
-		
-		// Overriding to use the combined heat input
-		HeatDistributionStorage : ^/0/HeatDistributionStorage
-		{
-			ResourceStorages = [Overclock_CombinedHeatInput, OverflowHeatStorage]
 		}
 		
 		Router

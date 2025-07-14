@@ -13,8 +13,6 @@ BubbleCapacity
 	ShowIconTextForZeroValue = false
 }
 
-BubbleHeatCollection	{}
-
 BubbleResistanceBonus
 {
 	CombineMode = Add
