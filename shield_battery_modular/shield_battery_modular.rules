@@ -387,37 +387,18 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Toggles = [PowerToggle, BubbleCapacityBuffToggle, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
 			Mode = All
 		}
-		BuffProvider_BubbleResistanceCenter
+		BuffProvider_BubbleResistanceRight
 		{
 			Type = AreaBuffProvider
 			BuffType = BubbleResistanceBonus
 			BuffAmount = { BaseValue=8.33; BuffType=BubbleResistanceBonus; BuffMode=Add; }
-			BuffArea = [0, 1, 2, 1]
-			OperationalToggle = IsBonusResistanceOperational
-		}
-		BuffProvider_BubbleResistanceRight :	BuffProvider_BubbleResistanceCenter
-		{
-//			BuffArea : &../BuffProvider_BubbleCapacityRight/BuffArea
-//			Criteria : &../BuffProvider_BubbleCapacityRight/Criteria	{}
 			OperationalToggle = IsShieldRight
-			BuffArea = [2, 0, 2, 1]
-			Criteria
-			{
-				Left = 2
-				Right = 4
-			}
+			BuffArea = [2, 0, 1, 1]
 		}
-		BuffProvider_BubbleResistanceLeft :	BuffProvider_BubbleResistanceCenter
+		BuffProvider_BubbleResistanceLeft :	BuffProvider_BubbleResistanceRight
 		{
-//			BuffArea : &../BuffProvider_BubbleCapacityLeft/BuffArea
-//			Criteria : &../BuffProvider_BubbleCapacityLeft/Criteria	{}
 			OperationalToggle = IsShieldLeft
-			BuffArea = [-2, 0, 2, 1]
-			Criteria
-			{
-				Left = -2
-				Right = 0
-			}
+			BuffArea = [-1, 0, 1, 1]
 		}
 		
 		Kebechet_TINY_ToggleRadius
@@ -441,36 +422,19 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OnTweenDuration = 1;
 			OffTweenDuration = 0.1;
 		}
-		BuffProvider_BubbleRadiusCenter :	BuffProvider_BubbleResistanceCenter
+		BuffProvider_BubbleRadiusRight
 		{
+			Type = AreaBuffProvider
 			BuffType = BubbleRadiusBonus
 			BuffAmount = { BaseValue=1; BuffType=BubbleRadiusBonus; BuffMode=Add; }
 			BuffMultiplier = BubbleRadiusStateValue
-			OperationalToggle = IsBonusResistanceOperational
-		}
-		BuffProvider_BubbleRadiusRight :	BuffProvider_BubbleRadiusCenter
-		{
-//			BuffArea : &../BuffProvider_BubbleCapacityRight/BuffArea
-//			Criteria : &../BuffProvider_BubbleCapacityRight/Criteria	{}
 			OperationalToggle = IsShieldRight
-			BuffArea = [2, 0, 2, 1]
-			Criteria
-			{
-				Left = 2
-				Right = 4
-			}
+			BuffArea = [2, 0, 1, 1]
 		}
-		BuffProvider_BubbleRadiusLeft :		BuffProvider_BubbleRadiusCenter
+		BuffProvider_BubbleRadiusLeft :		BuffProvider_BubbleRadiusRight
 		{
-//			BuffArea : &../BuffProvider_BubbleCapacityLeft/BuffArea
-//			Criteria : &../BuffProvider_BubbleCapacityLeft/Criteria	{}
 			OperationalToggle = IsShieldLeft
-			BuffArea = [-2, 0, 2, 1]
-			Criteria
-			{
-				Left = -2
-				Right = 0
-			}
+			BuffArea = [-1, 0, 1, 1]
 		}
 		
 		OverclockTweenToggle

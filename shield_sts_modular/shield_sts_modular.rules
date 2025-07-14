@@ -27,7 +27,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeID = "shield_gen_sts"
 	SelectionTypeByRotation = false
 	MaxHealth = 5000
-	TypeCategories = [defense, uses_power]
+	TypeCategories = [defense, uses_power, bubble_shield]
 	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleResistanceBonus, BubbleRadiusBonus]
 	PenetrationRectType = Normal
 	// ExplosiveDamageAbsorption = 50%
@@ -248,7 +248,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ResourceStorages = [CentralBatteryStorage]
 			ViaBuffs
 			{
-				OutgoingBuffProviders = [BuffProviderTop, BuffProviderRight, BuffProviderLeft, BuffProviderBottom]
+				OutgoingBuffProviders = [BuffProvider_Top, BuffProvider_Right, BuffProvider_Bottom, BuffProvider_Left]
 				ComponentID = BatteryStorageProxy
 			}
 			AddMode = PrioritizeLeastResources
@@ -342,7 +342,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 		// Start Modular Battery
 
-		BuffProviderTop
+
+		BuffProvider_Top
 		{
 			Type = AreaBuffProvider
 			BuffType = BubbleCapacity
@@ -350,39 +351,35 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OperationalToggle = IsOperational
 			Criteria
 			{
-				Left = 0
-				Right = 2
+				Top = -2
+				Bottom = 0
 			}
 		}
-		BuffProviderRight : BuffProviderTop
+		BuffProvider_Right : BuffProvider_Top
 		{
 			BuffArea = [2, 0, 1, 2]
 			Criteria
 			{
-				Rot = 1
 				Left = 2
-				Right = 3
-				Bottom = 2 // With this it also worked
+				Right = 4
 			}
 		}
-		BuffProviderBottom : BuffProviderTop
+		BuffProvider_Bottom : BuffProvider_Top
 		{
 			BuffArea = [0, 2, 2, 1]
 			Criteria
 			{
-				Rot = 2
-				Right = 2
-				Bottom = 3
+				Top = 2
+				Bottom = 4
 			}
 		}
-		BuffProviderLeft : BuffProviderTop
+		BuffProvider_Left : BuffProvider_Top
 		{
 			BuffArea = [-1, 0, 1, 2]
 			Criteria
 			{
-				Rot = 3
 				Right = 0
-				Bottom = 2
+				Left = -2
 			}
 		}
 
@@ -657,6 +654,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						Type = ScaledBuff
 						BuffType = BubbleRadiusBonus
 						Scale = 1.5
+						Exponent = 0.8
 						ModificationMode = Add
 					}
 				]

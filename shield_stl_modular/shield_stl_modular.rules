@@ -29,7 +29,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeID = "shield_gen_stl"
 	SelectionTypeByRotation = false
 	MaxHealth = 10000
-	TypeCategories = [defense, uses_power]
+	TypeCategories = [defense, uses_power, bubble_shield]
 	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleResistanceBonus, BubbleRadiusBonus]
 	PenetrationRectType = Normal
 	AllowedDoorLocations
@@ -280,7 +280,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ResourceStorages = [CentralBatteryStorage]
 			ViaBuffs
 			{
-				OutgoingBuffProviders = [BuffProviderFrontLeft, BuffProviderFrontRight, BuffProviderRightTop, BuffProviderRightBottom, BuffProviderBackRight, BuffProviderBackLeft, BuffProviderLeftBottom, BuffProviderLeftTop]
+				OutgoingBuffProviders = [BuffProvider_Top, BuffProvider_Right, BuffProvider_Bottom, BuffProvider_Left]
 				ComponentID = BatteryStorageProxy
 			}
 			AddMode = PrioritizeLeastResources
@@ -398,91 +398,44 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 		// Start Modular Battery
 		
-		BuffProviderFrontLeft
+		BuffProvider_Top
 		{
 			Type = AreaBuffProvider
 			BuffType = BubbleCapacity
-			BuffArea = [0, -1, 2, 1]
+			BuffArea = [1, -1, 2, 1]
 			OperationalToggle = IsOperational
 			Criteria
 			{
-				Right = 2
-				Left = 0 // testing
+				Top = -2
+				Bottom = 0
 			}
 		}
-		BuffProviderFrontRight : BuffProviderFrontLeft
+		BuffProvider_Right : BuffProvider_Top
 		{
-			BuffArea = [2, -1, 2, 1]
+			BuffArea = [4, 1, 1, 2]
 			Criteria
 			{
-				Left = 2
-				Right = 4
-			}
-		}
-		BuffProviderRightTop : BuffProviderFrontLeft
-		{
-			BuffArea = [4, 0, 1, 2]
-			Criteria
-			{
-				Rot = 1
 				Left = 4
-				Right = 5
-				Bottom = 2 // With this it also worked
+				Right = 6
 			}
 		}
-		BuffProviderRightBottom : BuffProviderFrontLeft
+
+		BuffProvider_Bottom : BuffProvider_Top
 		{
-			BuffArea = [4, 2, 1, 2]
+			BuffArea = [1, 4, 2, 1]
 			Criteria
 			{
-				Rot = 1
-				Left = 4
-				Right = 5
-				Bottom = 4
-				Top = 2
+				Top = 4
+				Bottom = 6
 			}
 		}
-		BuffProviderBackRight : BuffProviderFrontLeft
+		BuffProvider_Left : BuffProvider_Top
 		{
-			BuffArea = [2, 4, 2, 1]
+			BuffArea = [-1, 1, 1, 2]
 			Criteria
 			{
-				Rot = 2
-				Left = 2
-				Right = 4
-				Bottom = 5
-//				Top = 4 // With this it also worked
-			}
-		}
-		BuffProviderBackLeft : BuffProviderFrontLeft // works
-		{
-			BuffArea = [0, 4, 2, 1]
-			Criteria
-			{
-				Rot = 2
-				Right = 2
-				Bottom = 5
-			}
-		}
-		BuffProviderLeftBottom : BuffProviderFrontLeft
-		{
-			BuffArea = [-1, 2, 1, 2]
-			Criteria
-			{
-				Rot = 3
+				Left = -2
 				Right = 0
-				Bottom = 4
-				Top = 2
-			}
-		}		
-		BuffProviderLeftTop : BuffProviderFrontLeft
-		{
-			BuffArea = [-1, 0, 1, 2]
-			Criteria
-			{
-				Rot = 3
-				Right = 0
-				Bottom = 2
 			}
 		}
 		
