@@ -170,7 +170,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				}
 			]
 		}
-
 		IsShieldConnected_Left : IsShieldConnected_Right
 		{
 			PartLocation = [-1, 0]
@@ -180,6 +179,46 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				: ../^/0/ProxyableComponents/1	{ ComponentID = IsShieldConnected_Left }
 				: ../^/0/ProxyableComponents/2	{ ComponentID = IsShieldConnected_Right }
 			]
+		}
+		
+		IsShieldOperational_Right : IsShieldConnected_Right
+		{
+			ProxyableComponents
+			[
+				: ../^/0/ProxyableComponents/0	{ ComponentID = IsOperational }
+				: ../^/0/ProxyableComponents/1	{ ComponentID = IsShieldOperational_Right }
+				: ../^/0/ProxyableComponents/2	{ ComponentID = IsShieldOperational_Left }
+			]
+		}
+		IsShieldOperational_RightInverted
+		{
+			Type = MultiToggle
+			Toggles = [ IsShieldOperational_Right ]
+			Invert = true
+			Mode = Any
+		}
+		IsShieldOperational_RightInvertedProxy
+		{
+			Type = ToggleProxy
+			ComponentID = IsShieldOperational_RightInverted
+		}
+		
+		IsShieldOperational_Left : IsShieldConnected_Left
+		{
+			ToggleProxy = IsShieldOperational_RightInvertedProxy
+			ProxyableComponents
+			[
+				: ../^/0/ProxyableComponents/0	{ ComponentID = IsOperational }
+				: ../^/0/ProxyableComponents/1	{ ComponentID = IsShieldOperational_Left }
+				: ../^/0/ProxyableComponents/2	{ ComponentID = IsShieldOperational_Right }
+			]
+		}
+		
+		IsShieldOperational
+		{
+			Type = MultiToggle
+			Toggles = [ IsShieldOperational_Right, IsShieldOperational_Left ]
+			Mode = Any
 		}
 
 		BuffProvider_BubbleCapacityRight
@@ -319,8 +358,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		PowerDrain
 		{
 			Type = ResourceConverter
-			OperationalToggle = IsOperational
-			FromStorage = BatteryProviderStorage
+			OperationalToggle = IsShieldOperational
+			FromStorage = BatteryStorage
 			FromQuantity
 			{
 				BaseValue = 50
