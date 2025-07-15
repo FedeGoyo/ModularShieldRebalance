@@ -266,8 +266,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				OutgoingBuffProviders = [BuffProvider_BubbleCapacityRight, BuffProvider_BubbleCapacityLeft]
 				ComponentID = Base_ModularBatteryStorage
 			}
-			AddMode = PrioritizeLeastResources
-			RemoveMode = PrioritizeLeastResources
+//			AddMode = PrioritizeLeastResources
+			RemoveMode = InReverseOrder
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
 		
@@ -306,8 +306,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				OutgoingBuffProviders = [BuffProvider_BubbleCapacityRight, BuffProvider_BubbleCapacityLeft]
 				ComponentID = Overclock_ModularBatteryStorage
 			}
-			AddMode = PrioritizeLeastResources
-			RemoveMode = PrioritizeLeastResources
+//			AddMode = InReverseOrder
+			RemoveMode = InReverseOrder
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
 		
