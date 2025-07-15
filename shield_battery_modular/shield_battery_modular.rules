@@ -254,22 +254,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			IsDrainable = False
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
-		Base_ModularBatteryStorage
-		{
-			Type = MultiResourceStorage
-			OperationalToggle = IsOperational
-			ResourceType = battery
-			IsDrainable = false
-			ResourceStorages = [Base_BatteryStorage]
-			ViaBuffs
-			{
-				OutgoingBuffProviders = [BuffProvider_BubbleCapacityRight, BuffProvider_BubbleCapacityLeft]
-				ComponentID = Base_ModularBatteryStorage
-			}
-//			AddMode = PrioritizeLeastResources
-			RemoveMode = InReverseOrder
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-		}
 		
 		Overclock_ToggledBatteryStorage
 		{
@@ -294,55 +278,15 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ProxyToggle = IsOverclocked
 			ComponentID = Overclock_BatteryStorage
 		}
-		Overclock_ModularBatteryStorage
+		BatteryStorage	// CombinedBatteryStorage // Named like this for easier compatibility with other mods 
 		{
 			Type = MultiResourceStorage
 			OperationalToggle = IsOperational
 			ResourceType = battery
 			IsDrainable = false
-			ResourceStorages = [Overclock_BatteryStorageProxy]
-			ViaBuffs
-			{
-				OutgoingBuffProviders = [BuffProvider_BubbleCapacityRight, BuffProvider_BubbleCapacityLeft]
-				ComponentID = Overclock_ModularBatteryStorage
-			}
-//			AddMode = InReverseOrder
-			RemoveMode = InReverseOrder
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-		}
-		
-		BatteryProviderStorage	// Appears first so that Drain effects target it
-		{
-			Type = MultiResourceStorage
-			ResourceType = battery
-			ResourceStorages = [Base_ModularBatteryStorage, Overclock_ModularBatteryStorage]
-			RemoveMode = InReverseOrder
-			IsDrainable = True
-			ReceiveResourceMediaEffects = &../BatteryStorage/ReceiveResourceMediaEffects
-//			ToggleOnResources = 
-//			ToggleOffResources =
-//			ProvidedValueRange = 0
-//			ProvidedValuePerResource = 1/1000
-		}
-		PowerToggleProxy
-		{
-			Type = ToggleProxy
-			ComponentID = PowerToggle
-		}
-		BatteryStorageProxy	// For Modular, to prevent using it while PowerToggle is off.
-		{
-			Type = ResourceStorageProxy
-			ResourceType = battery
-			ComponentID = BatteryProviderStorage
-			ProxyToggle = PowerToggleProxy
-		}
-		
-		BatteryStorage	// BatteryReceiverStorage // Named like this for easier compatibility with other mods
-		{
-			Type = MultiResourceStorage
-			ResourceType = battery
 			ResourceStorages = [Base_BatteryStorage, Overclock_BatteryStorageProxy]
 			AddMode = InOrder
+			RemoveMode = InReverseOrder
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
 		BatteryConsumer
@@ -353,6 +297,34 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			DefaultPriority = &/PRIORITIES/Defense_Supply
 			ResupplyThreshold = 500
 			OperationalToggle = PowerToggle
+		}
+		
+		ModularBatteryStorage
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
+			ResourceType = battery
+			IsDrainable = true
+			ResourceStorages = [BatteryStorage]
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProvider_BubbleCapacityRight, BuffProvider_BubbleCapacityLeft]
+				ComponentID = ModularBatteryStorage
+			}
+			RemoveMode = InReverseOrder
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		PowerToggleProxy
+		{
+			Type = ToggleProxy
+			ComponentID = PowerToggle
+		}
+		BatteryStorageProxy	// For Modular, to prevent using it while PowerToggle is off.
+		{
+			Type = ResourceStorageProxy
+			ResourceType = battery
+			ComponentID = ModularBatteryStorage
+			ProxyToggle = PowerToggleProxy
 		}
 
 		PowerDrain
