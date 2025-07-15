@@ -139,7 +139,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			CommandPoints = 1
 		}
 
-		IsShieldRight
+		IsShieldConnected_Right
 		{
 			Type = ToggleProxy
 			PartLocation = [3, 0]
@@ -150,7 +150,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					{
 						Category = bubble_shield
 					}
-					ComponentID = PowerToggle
+					ComponentID = PowerToggle	// Maybe another type of component would have been better such as ComponentPresenceToggleRules or a DistanceThreshold
 				}
 				{
 					PartCriteria
@@ -158,7 +158,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						ID = enderluck.ModularShieldBattery
 						Rot = 0
 					}
-					ComponentID = IsShieldRight
+					ComponentID = IsShieldConnected_Right
 				}
 				{
 					PartCriteria
@@ -166,47 +166,26 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						ID = enderluck.ModularShieldBattery
 						Rot = 2
 					}
-					ComponentID = IsShieldLeft
+					ComponentID = IsShieldConnected_Left
 				}
 			]
 		}
 
-		IsShieldLeft
+		IsShieldConnected_Left : IsShieldConnected_Right
 		{
-			Type = ToggleProxy
 			PartLocation = [-1, 0]
 			ProxyableComponents
 			[
-				{
-					PartCriteria
-					{
-						Category = bubble_shield
-					}
-					ComponentID = PowerToggle
-				}
-				{
-					PartCriteria
-					{
-						ID = enderluck.ModularShieldBattery
-						Rot = 0
-					}
-					ComponentID = IsShieldLeft
-				}
-				{
-					PartCriteria
-					{
-						ID = enderluck.ModularShieldBattery
-						Rot = 2
-					}
-					ComponentID = IsShieldRight
-				}
+				: ../^/0/ProxyableComponents/0	{}
+				: ../^/0/ProxyableComponents/1	{ ComponentID = IsShieldConnected_Left }
+				: ../^/0/ProxyableComponents/2	{ ComponentID = IsShieldConnected_Right }
 			]
 		}
 
 		BuffProvider_BubbleCapacityRight
 		{
 			Type = AreaBuffProvider
-			OperationalToggle = IsShieldLeft
+			OperationalToggle = IsShieldConnected_Left
 			BuffType = BubbleCapacity
 			BuffArea = [2, 0, 2, 1]
 			Criteria
@@ -218,7 +197,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		BuffProvider_BubbleCapacityLeft:	BuffProvider_BubbleCapacityRight
 		{
-			OperationalToggle = IsShieldRight
+			OperationalToggle = IsShieldConnected_Right
 			BuffArea = [-2, 0, 2, 1]
 			Criteria
 			{
@@ -392,12 +371,12 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Type = AreaBuffProvider
 			BuffType = BubbleResistanceBonus
 			BuffAmount = { BaseValue=8.33; BuffType=BubbleResistanceBonus; BuffMode=Add; }
-			OperationalToggle = IsShieldRight
+			OperationalToggle = IsShieldConnected_Right
 			BuffArea = [2, 0, 1, 1]
 		}
 		BuffProvider_BubbleResistanceLeft :	BuffProvider_BubbleResistanceRight
 		{
-			OperationalToggle = IsShieldLeft
+			OperationalToggle = IsShieldConnected_Left
 			BuffArea = [-1, 0, 1, 1]
 		}
 		
@@ -428,12 +407,12 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			BuffType = BubbleRadiusBonus
 			BuffAmount = { BaseValue=1; BuffType=BubbleRadiusBonus; BuffMode=Add; }
 			BuffMultiplier = BubbleRadiusStateValue
-			OperationalToggle = IsShieldRight
+			OperationalToggle = IsShieldConnected_Right
 			BuffArea = [2, 0, 1, 1]
 		}
 		BuffProvider_BubbleRadiusLeft :		BuffProvider_BubbleRadiusRight
 		{
-			OperationalToggle = IsShieldLeft
+			OperationalToggle = IsShieldConnected_Left
 			BuffArea = [-1, 0, 1, 1]
 		}
 		
