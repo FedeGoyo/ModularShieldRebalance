@@ -468,207 +468,90 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 		// Starts Rotation
 		
-		IsOperationalTriggerOn
+		RotationTime
 		{
-			Type = ToggleTrigger
-			Toggle = OverclockedEffectToggle
-			TriggerWhenOn = true
-			TriggerWhenOff = false
+			Type = ValueTween
+			OnTweenDuration = 60
+			OffTweenDuration = 0
+			OnValue = 3
+			IsOnToggle = RotationMode0
+		}		
+		RotationMaxTrigger
+		{
+			Type = ThresholdTrigger
+			AmountFrom = RotationTime
+			MinAmount = 3
 		}
-		IsOperationalTriggerOff :	IsOperationalTriggerOn
+		RotationMinTrigger
 		{
-			TriggerWhenOn = false
-			TriggerWhenOff = true
-		}
-		
-		ResetTrigger :	IsOperationalTriggerOn
-		{
-			Toggle = IsOperationalNonOverclocked
-			TriggerWhenOn = false
-			TriggerWhenOff = true
-		}
-		
-		RotationTimer
-		{
-			Type = Timer
-			Duration = 60 / 60
-			Repeats = true
-			StartTrigger = IsOperationalTriggerOn
-			StopTrigger = IsOperationalTriggerOff
-			StartExpired = true
+			Type = ThresholdTrigger
+			AmountFrom = RotationTime
+			MaxAmount = 0
 		}
 		
 		RotationModes
 		{
 			Type = ModeCycle
-			IncrementTrigger = RotationTimer
-			DecrementTrigger = RotationShutDown
-			ModeRange = [0, 59]
+			IncrementTrigger = RotationMaxTrigger
+			DecrementTrigger = RotationMinTrigger
+			ModeRange = [0, 1]
 			StartingMode = 0
-			Clamp = false
 		}
-		Rotation0
+		RotationMode0
 		{
 			Type = ModeToggle
 			Mode = RotationModes
 			OnModes = [0]
 		}
-		Rotation1 :		Rotation0	{ OnModes = [1] }
-		Rotation2 :		Rotation0	{ OnModes = [2] }
-		Rotation3 :		Rotation0	{ OnModes = [3] }
-		Rotation4 :		Rotation0	{ OnModes = [4] }
-		Rotation5 :		Rotation0	{ OnModes = [5] }
-		Rotation6 :		Rotation0	{ OnModes = [6] }
-		Rotation7 :		Rotation0	{ OnModes = [7] }
-		Rotation8 :		Rotation0	{ OnModes = [8] }
-		Rotation9 :		Rotation0	{ OnModes = [9] }
-		Rotation10 :	Rotation0	{ OnModes = [10] }
-		Rotation11 :	Rotation0	{ OnModes = [11] }
-		Rotation12 :	Rotation0	{ OnModes = [12] }
-		Rotation13 :	Rotation0	{ OnModes = [13] }
-		Rotation14 :	Rotation0	{ OnModes = [14] }
-		Rotation15 :	Rotation0	{ OnModes = [15] }
-		Rotation16 :	Rotation0	{ OnModes = [16] }
-		Rotation17 :	Rotation0	{ OnModes = [17] }
-		Rotation18 :	Rotation0	{ OnModes = [18] }
-		Rotation19 :	Rotation0	{ OnModes = [19] }
-		Rotation20 :	Rotation0	{ OnModes = [20] }
-		Rotation21 :	Rotation0	{ OnModes = [21] }
-		Rotation22 :	Rotation0	{ OnModes = [22] }
-		Rotation23 :	Rotation0	{ OnModes = [23] }
-		Rotation24 :	Rotation0	{ OnModes = [24] }
-		Rotation25 :	Rotation0	{ OnModes = [25] }
-		Rotation26 :	Rotation0	{ OnModes = [26] }
-		Rotation27 :	Rotation0	{ OnModes = [27] }
-		Rotation28 :	Rotation0	{ OnModes = [28] }
-		Rotation29 :	Rotation0	{ OnModes = [29] }
-		Rotation30 :	Rotation0	{ OnModes = [30] }
-		Rotation31 :	Rotation0	{ OnModes = [31] }
-		Rotation32 :	Rotation0	{ OnModes = [32] }
-		Rotation33 :	Rotation0	{ OnModes = [33] }
-		Rotation34 :	Rotation0	{ OnModes = [34] }
-		Rotation35 :	Rotation0	{ OnModes = [35] }
-		Rotation36 :	Rotation0	{ OnModes = [36] }
-		Rotation37 :	Rotation0	{ OnModes = [37] }
-		Rotation38 :	Rotation0	{ OnModes = [38] }
-		Rotation39 :	Rotation0	{ OnModes = [39] }
-		Rotation40 :	Rotation0	{ OnModes = [40] }
-		Rotation41 :	Rotation0	{ OnModes = [41] }
-		Rotation42 :	Rotation0	{ OnModes = [42] }
-		Rotation43 :	Rotation0	{ OnModes = [43] }
-		Rotation44 :	Rotation0	{ OnModes = [44] }
-		Rotation45 :	Rotation0	{ OnModes = [45] }
-		Rotation46 :	Rotation0	{ OnModes = [46] }
-		Rotation47 :	Rotation0	{ OnModes = [47] }
-		Rotation48 :	Rotation0	{ OnModes = [48] }
-		Rotation49 :	Rotation0	{ OnModes = [49] }
-		Rotation50 :	Rotation0	{ OnModes = [50] }
-		Rotation51 :	Rotation0	{ OnModes = [51] }
-		Rotation52 :	Rotation0	{ OnModes = [52] }
-		Rotation53 :	Rotation0	{ OnModes = [53] }
-		Rotation54 :	Rotation0	{ OnModes = [54] }
-		Rotation55 :	Rotation0	{ OnModes = [55] }
-		Rotation56 :	Rotation0	{ OnModes = [56] }
-		Rotation57 :	Rotation0	{ OnModes = [57] }
-		Rotation58 :	Rotation0	{ OnModes = [58] }
-		Rotation59 :	Rotation0	{ OnModes = [59] }
-
+		RotationToggle
+		{
+			Type = MultiToggle
+			Toggles = [ RotationMode0, IsOperational ]
+			Mode = All
+		}
+			
+		One	{ Type = StaticValue; Value = -1 }
+		Two	{ Type = StaticValue; Value = -2 }
+		
+		RotationTime2
+		{
+			Type = MultiValue
+			Values = [ RotationTime, One]
+			Mode = 0
+		}
+		RotationTime3
+		{
+			Type = MultiValue
+			Values = [ RotationTime, Two]
+			Mode = 0
+		}
+		
+		TransformRotation1
+		{
+			Type = TransformLerp
+			ValueFrom = RotationTime
+			Location = [2, 2]
+			StartRotation = 0d
+			EndRotation = 120d
+		}
+		TransformRotation2
+		{
+			Type = TransformLerp
+			ValueFrom = RotationTime2
+			ChainedTo = TransformRotation1
+			StartRotation = 120d
+			EndRotation = 240d
+		}
+		TransformRotationFinal
+		{
+			Type = TransformLerp
+			ValueFrom = RotationTime3
+			ChainedTo = TransformRotation2
+			StartRotation = 240d
+			EndRotation = 360d
+		}
+		
 		// Finish Rotation
-		
-		IsNotOverclocked
-		{
-			Type = MultiToggle
-			Toggles = [OverclockedEffectToggle]
-			Invert = true
-			Mode = All
-		}
-		
-		RotationShutDown
-		{
-			Type = MultiTrigger
-			Triggers = [Rotation0ShutDown, Rotation1ShutDown, Rotation2ShutDown, Rotation3ShutDown, Rotation4ShutDown, Rotation5ShutDown, Rotation6ShutDown, Rotation7ShutDown, Rotation8ShutDown, Rotation9ShutDown,
-			Rotation10ShutDown, Rotation11ShutDown, Rotation12ShutDown, Rotation13ShutDown, Rotation14ShutDown, Rotation15ShutDown, Rotation16ShutDown, Rotation17ShutDown, Rotation18ShutDown, Rotation19ShutDown,
-			Rotation20ShutDown, Rotation21ShutDown, Rotation22ShutDown, Rotation23ShutDown, Rotation24ShutDown, Rotation25ShutDown, Rotation26ShutDown, Rotation27ShutDown, Rotation28ShutDown, Rotation29ShutDown,
-			Rotation30ShutDown, Rotation31ShutDown, Rotation32ShutDown, Rotation33ShutDown, Rotation34ShutDown, Rotation35ShutDown, Rotation36ShutDown, Rotation37ShutDown, Rotation38ShutDown, Rotation39ShutDown,
-			Rotation40ShutDown, Rotation41ShutDown, Rotation42ShutDown, Rotation43ShutDown, Rotation44ShutDown, Rotation45ShutDown, Rotation46ShutDown, Rotation47ShutDown, Rotation48ShutDown, Rotation49ShutDown,
-			Rotation50ShutDown, Rotation51ShutDown, Rotation52ShutDown, Rotation53ShutDown, Rotation54ShutDown, Rotation55ShutDown, Rotation56ShutDown, Rotation57ShutDown, Rotation58ShutDown, Rotation59ShutDown]
-		}
-		RotationShutDownStarter
-		{
-			Type = MultiToggle
-			Toggles = [ IsOperationalNonOverclocked, { Toggle=Rotation0; Invert=true } ]
-			Mode = All
-		}
-		Rotation0ShutDown
-		{
-			Type = ToggleTrigger
-			Toggle = RotationShutDownStarter
-			TriggerWhenOn = true
-			TriggerWhenOff = false
-		}
-		Rotation1ShutDown : Rotation0ShutDown
-		{
-			Toggle = Rotation1
-			OperationalToggle = IsNotOverclocked
-		}
-		Rotation2ShutDown :		Rotation1ShutDown	{ Toggle = Rotation2 }
-		Rotation3ShutDown :		Rotation1ShutDown	{ Toggle = Rotation3 }
-		Rotation4ShutDown :		Rotation1ShutDown	{ Toggle = Rotation4 }
-		Rotation5ShutDown :		Rotation1ShutDown	{ Toggle = Rotation5 }
-		Rotation6ShutDown :		Rotation1ShutDown	{ Toggle = Rotation6 }
-		Rotation7ShutDown :		Rotation1ShutDown	{ Toggle = Rotation7 }
-		Rotation8ShutDown :		Rotation1ShutDown	{ Toggle = Rotation8 }
-		Rotation9ShutDown :		Rotation1ShutDown	{ Toggle = Rotation9 }
-		Rotation10ShutDown :	Rotation1ShutDown	{ Toggle = Rotation10 }
-		Rotation11ShutDown :	Rotation1ShutDown	{ Toggle = Rotation11 }
-		Rotation12ShutDown :	Rotation1ShutDown	{ Toggle = Rotation12 }
-		Rotation13ShutDown :	Rotation1ShutDown	{ Toggle = Rotation13 }
-		Rotation14ShutDown :	Rotation1ShutDown	{ Toggle = Rotation14 }
-		Rotation15ShutDown :	Rotation1ShutDown	{ Toggle = Rotation15 }
-		Rotation16ShutDown :	Rotation1ShutDown	{ Toggle = Rotation16 }
-		Rotation17ShutDown :	Rotation1ShutDown	{ Toggle = Rotation17 }
-		Rotation18ShutDown :	Rotation1ShutDown	{ Toggle = Rotation18 }
-		Rotation19ShutDown :	Rotation1ShutDown	{ Toggle = Rotation19 }
-		Rotation20ShutDown :	Rotation1ShutDown	{ Toggle = Rotation20 }
-		Rotation21ShutDown :	Rotation1ShutDown	{ Toggle = Rotation21 }
-		Rotation22ShutDown :	Rotation1ShutDown	{ Toggle = Rotation22 }
-		Rotation23ShutDown :	Rotation1ShutDown	{ Toggle = Rotation23 }
-		Rotation24ShutDown :	Rotation1ShutDown	{ Toggle = Rotation24 }
-		Rotation25ShutDown :	Rotation1ShutDown	{ Toggle = Rotation25 }
-		Rotation26ShutDown :	Rotation1ShutDown	{ Toggle = Rotation26 }
-		Rotation27ShutDown :	Rotation1ShutDown	{ Toggle = Rotation27 }
-		Rotation28ShutDown :	Rotation1ShutDown	{ Toggle = Rotation28 }
-		Rotation29ShutDown :	Rotation1ShutDown	{ Toggle = Rotation29 }
-		Rotation30ShutDown :	Rotation1ShutDown	{ Toggle = Rotation30 }
-		Rotation31ShutDown :	Rotation1ShutDown	{ Toggle = Rotation31 }
-		Rotation32ShutDown :	Rotation1ShutDown	{ Toggle = Rotation32 }
-		Rotation33ShutDown :	Rotation1ShutDown	{ Toggle = Rotation33 }
-		Rotation34ShutDown :	Rotation1ShutDown	{ Toggle = Rotation34 }
-		Rotation35ShutDown :	Rotation1ShutDown	{ Toggle = Rotation35 }
-		Rotation36ShutDown :	Rotation1ShutDown	{ Toggle = Rotation36 }
-		Rotation37ShutDown :	Rotation1ShutDown	{ Toggle = Rotation37 }
-		Rotation38ShutDown :	Rotation1ShutDown	{ Toggle = Rotation38 }
-		Rotation39ShutDown :	Rotation1ShutDown	{ Toggle = Rotation39 }
-		Rotation40ShutDown :	Rotation1ShutDown	{ Toggle = Rotation40 }
-		Rotation41ShutDown :	Rotation1ShutDown	{ Toggle = Rotation41 }
-		Rotation42ShutDown :	Rotation1ShutDown	{ Toggle = Rotation42 }
-		Rotation43ShutDown :	Rotation1ShutDown	{ Toggle = Rotation43 }
-		Rotation44ShutDown :	Rotation1ShutDown	{ Toggle = Rotation44 }
-		Rotation45ShutDown :	Rotation1ShutDown	{ Toggle = Rotation45 }
-		Rotation46ShutDown :	Rotation1ShutDown	{ Toggle = Rotation46 }
-		Rotation47ShutDown :	Rotation1ShutDown	{ Toggle = Rotation47 }
-		Rotation48ShutDown :	Rotation1ShutDown	{ Toggle = Rotation48 }
-		Rotation49ShutDown :	Rotation1ShutDown	{ Toggle = Rotation49 }
-		Rotation50ShutDown :	Rotation1ShutDown	{ Toggle = Rotation50 }
-		Rotation51ShutDown :	Rotation1ShutDown	{ Toggle = Rotation51 }
-		Rotation52ShutDown :	Rotation1ShutDown	{ Toggle = Rotation52 }
-		Rotation53ShutDown :	Rotation1ShutDown	{ Toggle = Rotation53 }
-		Rotation54ShutDown :	Rotation1ShutDown	{ Toggle = Rotation54 }
-		Rotation55ShutDown :	Rotation1ShutDown	{ Toggle = Rotation55 }
-		Rotation56ShutDown :	Rotation1ShutDown	{ Toggle = Rotation56 }
-		Rotation57ShutDown :	Rotation1ShutDown	{ Toggle = Rotation57 }
-		Rotation58ShutDown :	Rotation1ShutDown	{ Toggle = Rotation58 }
-		Rotation59ShutDown :	Rotation1ShutDown	{ Toggle = Rotation59 }
 
 		IsOperationalProxy
 		{
@@ -707,6 +590,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				]
 			}
 			Arc = 60d
+			ChainedTo = TransformRotationFinal
 			OperationalToggle = IsOperationalProxy
 			PenetrationResistance = [ { BaseValue= 16.66; BuffType=BubbleResistanceBonus; BuffMode=Add; }, 0]
 			BlockedByOperationalParts = false
@@ -732,7 +616,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				]
 			}
 			Rotation = -90d
-			Location = [2, 2]
+			Location = [0, 0]
 			
 			ShieldMediaEffects
 			[
