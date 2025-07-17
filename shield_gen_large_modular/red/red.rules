@@ -1,27 +1,22 @@
 Components
 {
 	// -------------------------------------------------------------------------------------------------------------------------
-	// TOGGLE RED START --------------------------------------------------------------------------------------------------------
+	// TOGGLE START -----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	K_GEN_Large_Red_A160FrontArc_On :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Red, Kebechet_GEN_Large_ToggleAngle_A160FrontArc, Kebechet_GEN_Large_ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
-	K_GEN_Large_Red_A160LeftArc_On :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Red, Kebechet_GEN_Large_ToggleAngle_A160LeftArc, Kebechet_GEN_Large_ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
-	K_GEN_Large_Red_A160RightArc_On :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Red, Kebechet_GEN_Large_ToggleAngle_A160RightArc, Kebechet_GEN_Large_ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
-
-	K_GEN_Large_Red_A160FrontArc_Off :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Red, Kebechet_GEN_Large_ToggleAngle_A160FrontArc, Kebechet_GEN_Large_ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
-	K_GEN_Large_Red_A160LeftArc_Off :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Red, Kebechet_GEN_Large_ToggleAngle_A160LeftArc, Kebechet_GEN_Large_ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
-	K_GEN_Large_Red_A160RightArc_Off :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_A160FrontArc_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Red, Kebechet_GEN_Large_ToggleAngle_A160RightArc, Kebechet_GEN_Large_ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_AngleProxy, Kebechet_GEN_Large_DisplayProxy] }
+	K_GEN_Large_Red_On :	<../purple/purple.rules>/Components/K_GEN_Large_Purple_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Red, Kebechet_GEN_Large_ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
+	K_GEN_Large_Red_Off :	<../purple/purple.rules>/Components/K_GEN_Large_Purple_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Red, Kebechet_GEN_Large_ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
-	// ARCSHIELD RED START -----------------------------------------------------------------------------------------------------
+	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	K_GENL_ToggleComponents_Red_A160FrontArc_On
+	K_GENL_ToggleComponents_Red_On
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Large_Red_A160FrontArc_On
+		Toggle = K_GEN_Large_Red_On
 		IncludeInRedprints = false
-		Components : &<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components
+		Components : &<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_On/Components
 		{
 			GENL_ArcShield : ^/0/GENL_ArcShield
 			{
@@ -55,73 +50,20 @@ Components
 			}
 							
 			// Already thorugh Components, but just in case
-			GENL_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverclockEffect			{}
-			GENL_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverloadEffect			{}
-			GENL_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverclockOverloadEffect	{}
+			GENL_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_On/Components/GENL_OverclockEffect			{}
+			GENL_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_On/Components/GENL_OverloadEffect			{}
+			GENL_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_On/Components/GENL_OverclockOverloadEffect	{}
 		}
 	}
 
-	K_GENL_ToggleComponents_Red_A160LeftArc_On
+	K_GENL_ToggleComponents_Red_Off
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Large_Red_A160LeftArc_On
-		IncludeInRedprints = false
-		Components : &../K_GENL_ToggleComponents_Red_A160FrontArc_On/Components
-		{
-			GENL_ArcShield : &<../stats.rules>/Angle/LeftArc160/ArcShield, ^/0/GENL_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &<../stats.rules>/Angle/LeftArc160/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0 {}
-					: &../^/1/ShieldMediaEffects/1 {}
-				]
-				HitMediaEffects
-				[
-					: &<../stats.rules>/Angle/LeftArc160/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
-					: &../^/1/HitMediaEffects/1 {}
-				]
-			}
-			GENL_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverclockEffect			{}
-			GENL_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverloadEffect			{}
-			GENL_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverclockOverloadEffect	{}
-		}
-	}
-
-	K_GENL_ToggleComponents_Red_A160RightArc_On
-	{
-		Type = ToggledComponents
-		Toggle = K_GEN_Large_Red_A160RightArc_On
-		IncludeInRedprints = false
-		Components : &../K_GENL_ToggleComponents_Red_A160FrontArc_On/Components
-		{
-			GENL_ArcShield : &<../stats.rules>/Angle/RightArc160/ArcShield, ^/0/GENL_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &<../stats.rules>/Angle/RightArc160/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0 {}
-					: &../^/1/ShieldMediaEffects/1 {}
-				]
-				HitMediaEffects
-				[
-					: &<../stats.rules>/Angle/RightArc160/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
-					: &../^/1/HitMediaEffects/1 {}
-				]
-			}
-			GENL_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverclockEffect			{}
-			GENL_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverloadEffect			{}
-			GENL_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_A160FrontArc_On/Components/GENL_OverclockOverloadEffect	{}
-		}
-	}
-
-
-	K_GENL_ToggleComponents_Red_A160FrontArc_Off
-	{
-		Type = ToggledComponents
-		Toggle = K_GEN_Large_Red_A160FrontArc_Off
+		Toggle = K_GEN_Large_Red_Off
 		IncludeInRedprints = false
 		Components =
 		{
-			GENL_ArcShield : &../../K_GENL_ToggleComponents_Red_A160FrontArc_On/Components/GENL_ArcShield
+			GENL_ArcShield : &../../K_GENL_ToggleComponents_Red_On/Components/GENL_ArcShield
 			{
 				ShieldMediaEffects
 				[
@@ -130,55 +72,13 @@ Components
 						ArcSprite : &<../../colors.rules>/Color/Red/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
 					}
 					: &../^/0/ShieldMediaEffects/1	{}
-				]
-			}
-		}
-	}
-
-	K_GENL_ToggleComponents_Red_A160LeftArc_Off
-	{
-		Type = ToggledComponents
-		Toggle = K_GEN_Large_Red_A160LeftArc_Off
-		IncludeInRedprints = false
-		Components =
-		{
-			GENL_ArcShield : &../../K_GENL_ToggleComponents_Red_A160LeftArc_On/Components/GENL_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &../^/0/ShieldMediaEffects/0
-					{
-						ArcSprite : &<../../colors.rules>/Color/Red/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
-					}
-					: &../^/0/ShieldMediaEffects/1	{}
-				]
-			}
-		}
-	}
-	
-	K_GENL_ToggleComponents_Red_A160RightArc_Off
-	{
-		Type = ToggledComponents
-		Toggle = K_GEN_Large_Red_A160RightArc_Off
-		IncludeInRedprints = false
-		Components =
-		{
-			GENL_ArcShield : &../../K_GENL_ToggleComponents_Red_A160RightArc_On/Components/GENL_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &../^/0/ShieldMediaEffects/0
-					{
-						ArcSprite : &<../../colors.rules>/Color/Red/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
-					}
-					: &../^/0/ShieldMediaEffects/1 {}
 				]
 			}
 		}
 	}
 
 	// -------------------------------------------------------------------------------------------------------------------------
-	// GRAPHICS RED START ------------------------------------------------------------------------------------------------------
+	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
 	K_GENL_Graphics_Red

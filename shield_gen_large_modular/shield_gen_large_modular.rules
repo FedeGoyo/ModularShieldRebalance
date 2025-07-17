@@ -1,5 +1,12 @@
 OVERCLOCK : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/OVERCLOCK	{}
 
+ROTATION
+{
+	LEFT = -140d
+	FRONT = -90d
+	RIGHT = -40d
+}
+
 Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 {
 /*
@@ -164,6 +171,68 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 			DrainOnFtlJump = true
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
+		
+		// Starts Rotation
+		
+		RotationTween1
+		{
+			Type = ValueTween
+			OnTweenDuration = 1
+			OffTweenDuration = 1
+			IsOnToggle = RotationFrontToggleToChain
+		}
+		RotationTween2 : RotationTween1	{ IsOnToggle = RotationRightToggle }
+		
+		Rotation2MinToggle
+		{
+			Type = ThresholdToggle
+			AmountFrom = RotationTween2
+			MaxAmount = 0
+		}
+		RotationFrontUIToggle
+		{
+			Type = MultiToggle
+			Toggles = [ Kebechet_GEN_Large_ToggleAngle_A160FrontArc, Kebechet_GEN_Large_ToggleAngle_A160RightArc, { Toggle=Kebechet_GEN_Large_ToggleAngle_A160LeftArc; Invert=true} ]
+			Mode = Any
+		}
+		RotationFrontToggleToChain
+		{
+			Type = MultiToggle
+			Toggles = [ RotationFrontUIToggle, { Toggle=Rotation2MinToggle; Invert=true } ]
+			Mode = Any
+		}
+		
+		Rotation1MaxToggle
+		{
+			Type = ThresholdToggle
+			AmountFrom = RotationTween1
+			MinAmount = 1
+		}
+		RotationRightToggle
+		{
+			Type = MultiToggle
+			Toggles = [ Rotation1MaxToggle, Kebechet_GEN_Large_ToggleAngle_A160RightArc ]
+			Mode = All
+		}
+
+		TransformRotation1
+		{
+			Type = TransformLerp
+			ValueFrom = RotationTween1
+			Location = [1.5, 1.5]
+			StartRotation = &~/ROTATION/LEFT
+			EndRotation = &~/ROTATION/FRONT
+		}
+		TransformRotationFinal
+		{
+			Type = TransformLerp
+			ValueFrom = RotationTween2
+			ChainedTo = TransformRotation1
+			StartRotation = 0d
+			EndRotation = (&~/ROTATION/RIGHT) - (&~/ROTATION/FRONT)
+		}
+		
+		// Finish Rotation
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// ARCSHIELD ORIGINAL - START //////////////////////////////////////////////////////////////////////////////////////////////
@@ -172,15 +241,20 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 		ArcShield : ^/0/ArcShield
 		{
 			OperationalToggle = IsOperationalProxy
+			ChainedTo = TransformRotationFinal
+			Location = [0, 0]	// Takes from TransformRotationFinal
+			Rotation = 0d	// Takes from TransformRotationFinal
 		}
 
 		EmitterEffect : ^/0/EmitterEffect
 		{
 			OperationalToggle = IsOperationalProxy
+			Location = [(&~/Part/Components/TransformRotation1/Location/1) , (&~/Part/Components/TransformRotation1/Location/0) - (&../^/0/Location/0)]	// The locations are switched cause it is rotated
+			Rotation = (&../^/0/ArcShield/Rotation)
+			ChainedTo	// Normally chained to ArcShield, but we don't want it to rotate
 		}
 		
 		// Proxy to OverloadEffect and OverclockOverloadEffect???
-		
 		
 		Overclock_ArcShieldProxy
 		{
