@@ -254,14 +254,18 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 			ChainedTo	// Normally chained to ArcShield, but we don't want it to rotate
 		}
 		
-		// Proxy to OverloadEffect and OverclockOverloadEffect???
+		ShieldOperationEffects : ^/0/ShieldOperationEffects	{ Toggle = IsOperationalProxy }
 		
 		Overclock_ArcShieldProxy
 		{
 			Type = TriggerProxy
 			ComponentID = GENL_ArcShield
-			ProxyToggle = IsOperationalOverclocked
+			ProxyToggle = IsOverclocked
 		}
+		
+		OverclockEffect : ^/0/OverclockEffect	{ OperationalToggle = IsOperationalProxy }
+		OverloadEffect : ^/0/OverloadEffect	{ OperationalToggle = IsOperationalProxy }
+		OverclockOverloadEffect : ^/0/OverclockOverloadEffect	{ OperationalToggle = IsOperationalProxy }
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////
