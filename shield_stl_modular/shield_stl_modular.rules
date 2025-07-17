@@ -534,21 +534,16 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			StartRotation = 0d
 			EndRotation = 120d
 		}
-		TransformRotation2
+		TransformRotation2 :		TransformRotation1
 		{
-			Type = TransformLerp
 			ValueFrom = RotationTime2
 			ChainedTo = TransformRotation1
-			StartRotation = 120d
-			EndRotation = 240d
+			Location = [0, 0]
 		}
-		TransformRotationFinal
+		TransformRotationFinal :	TransformRotation2
 		{
-			Type = TransformLerp
 			ValueFrom = RotationTime3
 			ChainedTo = TransformRotation2
-			StartRotation = 240d
-			EndRotation = 360d
 		}
 		
 		// Finish Rotation
