@@ -6,6 +6,15 @@ OVERCLOCK : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/OVERCL
 	}	
 }
 
+ROTATION
+{
+	LEFTARC = -117.5d
+	RIGHTARC = -62.5d
+	LEFTLINE = -109.7d
+	RIGHTLINE = -70.3d
+	FRONT = -90d
+}
+
 Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 {
 /*
@@ -173,7 +182,132 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			DrainOnFtlJump = true
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
-
+		
+		// Starts Rotation
+		
+		RotationTween1
+		{
+			Type = ValueTween
+			OnTweenDuration = 0.5
+			OffTweenDuration = 0.5
+			IsOnToggle = RotationLeftLineToggleToChain
+		}
+		RotationTween2 : RotationTween1	{ IsOnToggle = RotationFrontToggleToChain }
+		RotationTween3 : RotationTween1	{ IsOnToggle = RotationRightLineToggleToChain }
+		RotationTween4 : RotationTween1	{ IsOnToggle = RotationRightArcToggle }
+		
+		Rotation2MinToggle
+		{
+			Type = ThresholdToggle
+			AmountFrom = RotationTween2
+			MaxAmount = 0
+		}
+		RotationLeftUIToggle
+		{
+			Type = MultiToggle
+			Toggles = [ Kebechet_GEN_Small_ToggleAngle_A22LeftLine, { Toggle=Kebechet_GEN_Small_ToggleAngle_A90LeftArc; Invert=true}, RotationFrontUIToggle ]
+			Mode = Any
+		}
+		RotationLeftLineToggleToChain
+		{
+			Type = MultiToggle
+			Toggles = [ RotationLeftUIToggle, { Toggle=Rotation2MinToggle; Invert=true } ]
+			Mode = Any
+		}
+		
+		Rotation3MinToggle
+		{
+			Type = ThresholdToggle
+			AmountFrom = RotationTween3
+			MaxAmount = 0
+		}
+		Rotation1MaxToggle
+		{
+			Type = ThresholdToggle
+			AmountFrom = RotationTween1
+			MinAmount = 1
+		}
+		RotationFrontUIToggle
+		{
+			Type = MultiToggle
+			Toggles = [ Kebechet_GEN_Small_ToggleAngle_A90FrontArc, Kebechet_GEN_Small_ToggleAngle_A90FrontLine, RotationRightLineUIToggle ]
+			Mode = Any
+		}
+		RotationFrontToggle
+		{
+			Type = MultiToggle
+			Toggles = [ Rotation1MaxToggle, RotationFrontUIToggle ]
+			Mode = All
+		}
+		RotationFrontToggleToChain
+		{
+			Type = MultiToggle
+			Toggles = [ RotationFrontToggle, { Toggle=Rotation3MinToggle; Invert=true } ]
+			Mode = Any
+		}
+		
+		Rotation4MinToggle
+		{
+			Type = ThresholdToggle
+			AmountFrom = RotationTween4
+			MaxAmount = 0
+		}
+		Rotation2MaxToggle
+		{
+			Type = ThresholdToggle
+			AmountFrom = RotationTween2
+			MinAmount = 1
+		}
+		RotationRightLineUIToggle
+		{
+			Type = MultiToggle
+			Toggles = [ Kebechet_GEN_Small_ToggleAngle_A22RightLine, Kebechet_GEN_Small_ToggleAngle_A90RightArc ]
+			Mode = Any
+		}
+		RotationRightLineToggle
+		{
+			Type = MultiToggle
+			Toggles = [ Rotation2MaxToggle, RotationRightLineUIToggle ]
+			Mode = All
+		}
+		RotationRightLineToggleToChain
+		{
+			Type = MultiToggle
+			Toggles = [ RotationRightLineToggle, { Toggle=Rotation4MinToggle; Invert=true } ]
+			Mode = Any
+		}
+		
+		Rotation3MaxToggle
+		{
+			Type = ThresholdToggle
+			AmountFrom = RotationTween3
+			MinAmount = 1
+		}
+		RotationRightArcToggle
+		{
+			Type = MultiToggle
+			Toggles = [ Rotation3MaxToggle, Kebechet_GEN_Small_ToggleAngle_A90RightArc ]
+			Mode = All
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		ArcShield2 : ArcShield
+		{
+			OperationalToggle = IsOperational
+			Location = [0, 0]
+			Rotation = 0d
+			ChainedTo = TransformRotationFinal
+		}
+		
+		// Finish Rotation
+		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// ARCSHIELD ORIGINAL - START //////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
