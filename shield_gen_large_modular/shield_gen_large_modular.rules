@@ -267,40 +267,4 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
-	
-	Stats	// Make it inherit? Exactly same as Small Shield
-	{
-		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxResources) / 1000
-
-		RecPower = (&../StatsByCategory/0/Stats/PowerUsageContinuous) + 0.5
-		RecCrew = (&RecPower) * 4
-	}
-	
-	StatsByCategory
-	[
-		{
-			NameKey = "StatCategories/ShieldLarge"
-			Stats
-			{
-				ShieldHP = (&~/Part/Components/BatteryStorage/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
-				ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0
-				ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue)
-				ShieldDist = (&~/Part/Components/ArcShield/Radius) - (&~/Part/Components/ArcShield/Location/1)
-				PowerUsageContinuous = (&~/Part/Components/PowerDrain/FromQuantity) / (&~/Part/Components/PowerDrain/Interval) / 1000
-			}
-		}
-	]
-
-	SecondaryToolTip
-	{
-		TitleKey = "StatCategories/Overclocked"
-		Stats
-		{
-//			ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/ARC_FACTOR)
-			ShieldHP = (&~/Part/StatsByCategory/0/Stats/ShieldHP) / (&~/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
-			EMPResistPercentage = (&~/OVERCLOCK/EMP_RESIST) * 100
-			HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND)
-			HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
-		}
-	}
 }

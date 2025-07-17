@@ -15,7 +15,6 @@ Components
 	{
 		Type = ToggledComponents
 		Toggle = K_GEN_Large_Yellow_On
-		IncludeInYellowprints = false
 		Components : &<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_On/Components
 		{
 			GENL_ArcShield : ^/0/GENL_ArcShield
@@ -48,11 +47,6 @@ Components
 					: &../^/0/MediaEffects/1	{}
 				]
 			}
-							
-			// Already thorugh Components, but just in case
-			GENL_OverclockEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_On/Components/GENL_OverclockEffect			{}
-			GENL_OverloadEffect :			&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_On/Components/GENL_OverloadEffect			{}
-			GENL_OverclockOverloadEffect :	&<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_On/Components/GENL_OverclockOverloadEffect	{}
 		}
 	}
 
@@ -60,7 +54,6 @@ Components
 	{
 		Type = ToggledComponents
 		Toggle = K_GEN_Large_Yellow_Off
-		IncludeInYellowprints = false
 		Components =
 		{
 			GENL_ArcShield : &../../K_GENL_ToggleComponents_Yellow_On/Components/GENL_ArcShield
