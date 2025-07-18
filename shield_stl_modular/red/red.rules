@@ -4,19 +4,18 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	Toggle_Red_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Red, ToggleDisplay_On, ColoursProxy, DisplayProxy]  }
-	Toggle_Red_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Red, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
+	Toggle_Red_On :		<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Red, ToggleDisplay_On, ColoursProxy, DisplayProxy]  }
+	Toggle_Red_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Red, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	ToggleComponents_Red_On
+	ToggleComponents_Shield_Red_On
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Red_On
-		IncludeInRedprints = false
-		Components : <../purple/purple.rules>/Components/ToggleComponents_Purple_On/Components
+		Components : <../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_On/Components
 		{
 			// Inner
 			ArcShield_InnerFront :		^/0/ArcShield_InnerFront
@@ -60,15 +59,14 @@ Components
 		}
 	}
 	
-	ToggleComponents_Red_Off
+	ToggleComponents_Shield_Red_Off
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Red_Off
-		IncludeInRedprints = false
 		Components =
 		{
 			// Inner
-			ArcShield_InnerFront :		&../../ToggleComponents_Red_On/Components/ArcShield_InnerFront
+			ArcShield_InnerFront :		&../../ToggleComponents_Shield_Red_On/Components/ArcShield_InnerFront
 			{
 				ShieldMediaEffects
 				[
@@ -91,11 +89,10 @@ Components
 	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	K_STL_Graphics_Red
+	ToggleComponents_Graphics_Red
 	{
 		Type = ToggledComponents
-		Toggle = ToggleColours_Red
-		IncludeInRedprints = false
+		Toggle = ToggleColour_Red
 		Components = 
 		{
 			K_Graphics : &<../shield_stl_modular.rules>/Part/Components/Graphics

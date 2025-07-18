@@ -4,19 +4,18 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	Toggle_Orange_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Orange, ToggleDisplay_On, ColoursProxy, DisplayProxy]  }
-	Toggle_Orange_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Orange, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
+	Toggle_Orange_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Orange, ToggleDisplay_On, ColoursProxy, DisplayProxy]  }
+	Toggle_Orange_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Orange, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	ToggleComponents_Orange_On
+	ToggleComponents_Shield_Orange_On
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Orange_On
-		IncludeInOrangeprints = false
-		Components : <../purple/purple.rules>/Components/ToggleComponents_Purple_On/Components
+		Components : <../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_On/Components
 		{
 			// Inner
 			ArcShield_InnerFront :	^/0/ArcShield_InnerFront
@@ -58,15 +57,14 @@ Components
 		}
 	}
 	
-	ToggleComponents_Orange_Off
+	ToggleComponents_Shield_Orange_Off
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Orange_Off
-		IncludeInOrangeprints = false
 		Components =
 		{
 			// Inner
-			ArcShield_InnerFront :	&../../ToggleComponents_Orange_On/Components/ArcShield_InnerFront
+			ArcShield_InnerFront :	&../../ToggleComponents_Shield_Orange_On/Components/ArcShield_InnerFront
 			{
 				ShieldMediaEffects
 				[
@@ -87,11 +85,10 @@ Components
 	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	K_STS_Graphics_Orange
+	ToggleComponents_Graphics_Orange
 	{
 		Type = ToggledComponents
-		Toggle = ToggleColours_Orange
-		IncludeInOrangeprints = false
+		Toggle = ToggleColour_Orange
 		Components = 
 		{
 			K_Graphics : &<../shield_sts_modular.rules>/Part/Components/Graphics

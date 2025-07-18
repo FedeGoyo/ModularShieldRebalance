@@ -4,19 +4,18 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	Toggle_Yellow_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Yellow, ToggleDisplay_On, ColoursProxy, DisplayProxy]  }
-	Toggle_Yellow_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Yellow, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
+	Toggle_Yellow_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Yellow, ToggleDisplay_On, ColoursProxy, DisplayProxy]  }
+	Toggle_Yellow_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Yellow, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	ToggleComponents_Yellow_On
+	ToggleComponents_Shield_Yellow_On
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Yellow_On
-		IncludeInYellowprints = false
-		Components : <../purple/purple.rules>/Components/ToggleComponents_Purple_On/Components
+		Components : <../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_On/Components
 		{
 			// Inner
 			ArcShield_InnerFront :		^/0/ArcShield_InnerFront
@@ -60,15 +59,14 @@ Components
 		}
 	}
 	
-	ToggleComponents_Yellow_Off
+	ToggleComponents_Shield_Yellow_Off
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Yellow_Off
-		IncludeInYellowprints = false
 		Components =
 		{
 			// Inner
-			ArcShield_InnerFront :		&../../ToggleComponents_Yellow_On/Components/ArcShield_InnerFront
+			ArcShield_InnerFront :		&../../ToggleComponents_Shield_Yellow_On/Components/ArcShield_InnerFront
 			{
 				ShieldMediaEffects
 				[
@@ -91,11 +89,10 @@ Components
 	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	K_STL_Graphics_Yellow
+	ToggleComponents_Graphics_Yellow
 	{
 		Type = ToggledComponents
-		Toggle = ToggleColours_Yellow
-		IncludeInYellowprints = false
+		Toggle = ToggleColour_Yellow
 		Components = 
 		{
 			K_Graphics : &<../shield_stl_modular.rules>/Part/Components/Graphics

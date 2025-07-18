@@ -4,19 +4,18 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	Toggle_Blue_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Blue, ToggleDisplay_On, ColoursProxy, DisplayProxy]  }
-	Toggle_Blue_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Blue, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
+	Toggle_Blue_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Blue, ToggleDisplay_On, ColoursProxy, DisplayProxy]  }
+	Toggle_Blue_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Blue, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	ToggleComponents_Blue_On
+	ToggleComponents_Shield_Blue_On
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Blue_On
-		IncludeInBlueprints = false
-		Components : <../purple/purple.rules>/Components/ToggleComponents_Purple_On/Components
+		Components : <../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_On/Components
 		{
 			// Inner
 			ArcShield_InnerFront :		^/0/ArcShield_InnerFront
@@ -60,15 +59,14 @@ Components
 		}
 	}
 	
-	ToggleComponents_Blue_Off
+	ToggleComponents_Shield_Blue_Off
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Blue_Off
-		IncludeInBlueprints = false
 		Components =
 		{
 			// Inner
-			ArcShield_InnerFront :		&../../ToggleComponents_Blue_On/Components/ArcShield_InnerFront
+			ArcShield_InnerFront :		&../../ToggleComponents_Shield_Blue_On/Components/ArcShield_InnerFront
 			{
 				ShieldMediaEffects
 				[
@@ -91,11 +89,10 @@ Components
 	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	K_STL_Graphics_Blue
+	ToggleComponents_Graphics_Blue
 	{
 		Type = ToggledComponents
-		Toggle = ToggleColours_Blue
-		IncludeInBlueprints = false
+		Toggle = ToggleColour_Blue
 		Components = 
 		{
 			K_Graphics : &<../shield_stl_modular.rules>/Part/Components/Graphics

@@ -62,7 +62,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		// COLOURS TOGGLES -------------------------------
 		// -----------------------------------------------
 
-		Kebechet_TINY_ToggleColours
+		ToggleColour
 		{
 			Type = UIToggle
 			ToggleID = "Kebechet_ToggleID_Colours"
@@ -71,18 +71,18 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			RequiresCommand = false
 		}
 
-		Kebechet_TINY_ToggleColours_Purple
+		ToggleColour_Purple
 		{
 			Type = ModeToggle
-			Mode = Kebechet_TINY_ToggleColours
+			Mode = ToggleColour
 			OnMode = 0
 		}
 
-		Kebechet_TINY_ToggleColours_Blue : Kebechet_TINY_ToggleColours_Purple	{ OnMode = 1 }
-		Kebechet_TINY_ToggleColours_Orange : Kebechet_TINY_ToggleColours_Purple	{ OnMode = 2 }
-		Kebechet_TINY_ToggleColours_Red : Kebechet_TINY_ToggleColours_Purple	{ OnMode = 3 }
-		Kebechet_TINY_ToggleColours_Yellow : Kebechet_TINY_ToggleColours_Purple	{ OnMode = 4 }
-		Kebechet_TINY_ToggleColours_Green : Kebechet_TINY_ToggleColours_Purple	{ OnMode = 5 }
+		ToggleColour_Blue :		ToggleColour_Purple	{ OnMode = 1 }
+		ToggleColour_Orange :	ToggleColour_Purple	{ OnMode = 2 }
+		ToggleColour_Red :		ToggleColour_Purple	{ OnMode = 3 }
+		ToggleColour_Yellow :	ToggleColour_Purple	{ OnMode = 4 }
+		ToggleColour_Green :	ToggleColour_Purple	{ OnMode = 5 }
 
 		// -----------------------------------------------
 		// PROXY -----------------------------------------
@@ -96,7 +96,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		Kebechet_TINY_ColoursSet
 		{
 			Type = MultiToggle
-			Toggles = [Kebechet_TINY_ToggleColours_Purple, Kebechet_TINY_ToggleColours_Blue, Kebechet_TINY_ToggleColours_Orange, Kebechet_TINY_ToggleColours_Red, Kebechet_TINY_ToggleColours_Yellow, Kebechet_TINY_ToggleColours_Green]
+			Toggles = [ToggleColour_Purple, ToggleColour_Blue, ToggleColour_Orange, ToggleColour_Red, ToggleColour_Yellow, ToggleColour_Green]
 			Mode = Any
 		}
 
@@ -622,11 +622,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		// GRAPHICS PURPLE START ---------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
-		K_TINY_Graphics_Purple
+		ToggleComponents_Graphics_Purple
 		{
 			Type = ToggledComponents
-			Toggle = Kebechet_TINY_ToggleColours_Purple
-			IncludeInBlueprints = false
+			Toggle = ToggleColour_Purple
 			Components = 
 			{
 				K_Graphics_Purple : ~/Part/Components/Graphics
@@ -704,11 +703,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		// GRAPHICS BLUE START -----------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
-		K_TINY_Graphics_Blue
+		ToggleComponents_Graphics_Blue
 		{
 			Type = ToggledComponents
-			Toggle = Kebechet_TINY_ToggleColours_Blue
-			IncludeInBlueprints = false
+			Toggle = ToggleColour_Blue
 			Components = 
 			{
 				K_Graphics_Blue : ~/Part/Components/Graphics
@@ -786,11 +784,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		// GRAPHICS ORANGE START ---------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
-		K_TINY_Graphics_Orange
+		ToggleComponents_Graphics_Orange
 		{
 			Type = ToggledComponents
-			Toggle = Kebechet_TINY_ToggleColours_Orange
-			//IncludeInorangeprints = true
+			Toggle = ToggleColour_Orange
 			Components = 
 			{
 				K_Graphics_Orange : ~/Part/Components/Graphics
@@ -869,11 +866,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		// GRAPHICS RED START ------------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
-		K_TINY_Graphics_Red
+		ToggleComponents_Graphics_Red
 		{
 			Type = ToggledComponents
-			Toggle = Kebechet_TINY_ToggleColours_Red
-			//IncludeInredprints = true
+			Toggle = ToggleColour_Red
 			Components = 
 			{
 				K_Graphics_Red : ~/Part/Components/Graphics
@@ -952,11 +948,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		// GRAPHICS YELLOW START ---------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
-		K_TINY_Graphics_Yellow
+		ToggleComponents_Graphics_Yellow
 		{
 			Type = ToggledComponents
-			Toggle = Kebechet_TINY_ToggleColours_Yellow
-			//IncludeInYellowprints = true
+			Toggle = ToggleColour_Yellow
 			Components = 
 			{
 				K_Graphics_Yellow : ~/Part/Components/Graphics
@@ -1035,11 +1030,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		// GRAPHICS GREEN START ----------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
-		K_TINY_Graphics_Green
+		ToggleComponents_Graphics_Green
 		{
 			Type = ToggledComponents
-			Toggle = Kebechet_TINY_ToggleColours_Green
-			//IncludeInGreenprints = true
+			Toggle = ToggleColour_Green
 			Components = 
 			{
 				K_Graphics_Green : ~/Part/Components/Graphics

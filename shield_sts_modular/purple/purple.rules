@@ -7,20 +7,19 @@ Components
 	Toggle_Purple_On
 	{
 		Type = MultiToggle
-		Toggles = [ToggleColours_Purple, ToggleDisplay_On, ]
+		Toggles = [ToggleColour_Purple, ToggleDisplay_On, ]
 		Mode = All
 	}
-	Toggle_Purple_Off :		Toggle_Purple_On	{ Toggles = [ToggleColours_Purple, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
+	Toggle_Purple_Off :		Toggle_Purple_On	{ Toggles = [ToggleColour_Purple, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	ToggleComponents_Purple_On
+	ToggleComponents_Shield_Purple_On
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Purple_On
-		IncludeInBlueprints = false
 		Components = 
 		{
 			// Inner
@@ -88,15 +87,14 @@ Components
 		}
 	}
 	
-	ToggleComponents_Purple_Off
+	ToggleComponents_Shield_Purple_Off
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Purple_Off
-		IncludeInBlueprints = false
 		Components =
 		{
 			// Inner
-			ArcShield_InnerFront :	&../../ToggleComponents_Purple_On/Components/ArcShield_InnerFront
+			ArcShield_InnerFront :	&../../ToggleComponents_Shield_Purple_On/Components/ArcShield_InnerFront
 			{
 				ShieldMediaEffects
 				[
@@ -117,11 +115,10 @@ Components
 	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	K_STS_Graphics_Purple
+	ToggleComponents_Graphics_Purple
 	{
 		Type = ToggledComponents
-		Toggle = ToggleColours_Purple
-		IncludeInBlueprints = false
+		Toggle = ToggleColour_Purple
 		Components = 
 		{
 			K_Graphics : &<../shield_sts_modular.rules>/Part/Components/Graphics

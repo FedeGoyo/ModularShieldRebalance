@@ -4,21 +4,21 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	K_GEN_Small_Green_Arc_On :		<../purple/purple.rules>/Components/K_GEN_Small_Purple_Arc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Green, ArcToggle, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
-	K_GEN_Small_Green_Line_On :		<../purple/purple.rules>/Components/K_GEN_Small_Purple_Arc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Green, LineToggle, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
+	Toggle_Green_Arc_On :	<../purple/purple.rules>/Components/Toggle_Purple_Arc_On	{ Toggles = [ToggleColour_Green, ToggleAngle_Arc, ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
+	Toggle_Green_Line_On :	<../purple/purple.rules>/Components/Toggle_Purple_Arc_On	{ Toggles = [ToggleColour_Green, ToggleAngle_Line, ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
 
-	K_GEN_Small_Green_Arc_Off :		<../purple/purple.rules>/Components/K_GEN_Small_Purple_Arc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Green, ArcToggle, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
-	K_GEN_Small_Green_Line_Off :	<../purple/purple.rules>/Components/K_GEN_Small_Purple_Arc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Green, LineToggle, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
+	Toggle_Green_Arc_Off :	<../purple/purple.rules>/Components/Toggle_Purple_Arc_On	{ Toggles = [ToggleColour_Green, ToggleAngle_Arc, ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
+	Toggle_Green_Line_Off :	<../purple/purple.rules>/Components/Toggle_Purple_Arc_On	{ Toggles = [ToggleColour_Green, ToggleAngle_Line, ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
 
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	K_GENS_ToggleComponents_Green_Arc_On
+	ToggleComponents_Shield_Green_Arc_On
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Small_Green_Arc_On
-		Components : &<../purple/purple.rules>/Components/K_GENS_ToggleComponents_Purple_Arc_On/Components
+		Toggle = Toggle_Green_Arc_On
+		Components : &<../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_Arc_On/Components
 		{
 			GENS_ArcShield : ^/0/GENS_ArcShield
 			{
@@ -52,23 +52,23 @@ Components
 			}		}
 	}
 
-	K_GENS_ToggleComponents_Green_Line_On
+	ToggleComponents_Shield_Green_Line_On
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Small_Green_Line_On
-		Components : &../K_GENS_ToggleComponents_Green_Arc_On/Components
+		Toggle = Toggle_Green_Line_On
+		Components : &../ToggleComponents_Shield_Green_Arc_On/Components
 		{
 			GENS_ArcShield : ^/0/GENS_ArcShield	{ ChainedTo = Transform_Line_Rotation_FrontToRight }
 		}
 	}
 
-	K_GENS_ToggleComponents_Green_Arc_Off
+	ToggleComponents_Shield_Green_Arc_Off
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Small_Green_Arc_Off
+		Toggle = Toggle_Green_Arc_Off
 		Components =
 		{
-			GENS_ArcShield : &../../K_GENS_ToggleComponents_Green_Arc_On/Components/GENS_ArcShield
+			GENS_ArcShield : &../../ToggleComponents_Shield_Green_Arc_On/Components/GENS_ArcShield
 			{
 				ShieldMediaEffects
 				[
@@ -82,11 +82,11 @@ Components
 		}
 	}
 
-	K_GENS_ToggleComponents_Green_Line_Off
+	ToggleComponents_Shield_Green_Line_Off
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Small_Green_Line_Off
-		Components : &../K_GENS_ToggleComponents_Green_Arc_Off/Components
+		Toggle = Toggle_Green_Line_Off
+		Components : &../ToggleComponents_Shield_Green_Arc_Off/Components
 		{
 			GENS_ArcShield : ^/0/GENS_ArcShield	{ ChainedTo = Transform_Line_Rotation_FrontToRight }
 		}
@@ -96,11 +96,10 @@ Components
 	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	K_GENS_Graphics_Green
+	ToggleComponents_Graphics_Green
 	{
 		Type = ToggledComponents
-		Toggle = Kebechet_GEN_Small_ToggleColours_Green
-		IncludeInGreenprints = false
+		Toggle = ToggleColour_Green
 		Components = 
 		{
 			K_Graphics : &<../shield_gen_small_modular.rules>/Part/Components/Graphics

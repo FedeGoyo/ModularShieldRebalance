@@ -4,18 +4,18 @@ Components
 	// TOGGLE START -----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	K_GEN_Large_Yellow_On :	<../purple/purple.rules>/Components/K_GEN_Large_Purple_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Yellow, Kebechet_GEN_Large_ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
-	K_GEN_Large_Yellow_Off :	<../purple/purple.rules>/Components/K_GEN_Large_Purple_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Yellow, Kebechet_GEN_Large_ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
+	Toggle_Yellow_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Yellow, ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
+	Toggle_Yellow_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Yellow, ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	K_GENL_ToggleComponents_Yellow_On
+	ToggleComponents_Shield_Yellow_On
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Large_Yellow_On
-		Components : &<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_On/Components
+		Toggle = Toggle_Yellow_On
+		Components : &<../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_On/Components
 		{
 			GENL_ArcShield : ^/0/GENL_ArcShield
 			{
@@ -50,13 +50,13 @@ Components
 		}
 	}
 
-	K_GENL_ToggleComponents_Yellow_Off
+	ToggleComponents_Shield_Yellow_Off
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Large_Yellow_Off
+		Toggle = Toggle_Yellow_Off
 		Components =
 		{
-			GENL_ArcShield : &../../K_GENL_ToggleComponents_Yellow_On/Components/GENL_ArcShield
+			GENL_ArcShield : &../../ToggleComponents_Shield_Yellow_On/Components/GENL_ArcShield
 			{
 				ShieldMediaEffects
 				[
@@ -74,11 +74,10 @@ Components
 	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	K_GENL_Graphics_Yellow
+	ToggleComponents_Graphics_Yellow
 	{
 		Type = ToggledComponents
-		Toggle = Kebechet_GEN_Large_ToggleColours_Yellow
-		IncludeInYellowprints = false
+		Toggle = ToggleColour_Yellow
 		Components = 
 		{
 			K_Graphics : &<../shield_gen_large_modular.rules>/Part/Components/Graphics

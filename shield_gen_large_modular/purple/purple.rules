@@ -4,23 +4,22 @@ Components
 	// TOGGLE PURPLE START -----------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	K_GEN_Large_Purple_On
+	Toggle_Purple_On
 	{
 		Type = MultiToggle
-		Toggles = [Kebechet_GEN_Large_ToggleColours_Purple, Kebechet_GEN_Large_ToggleDisplay_On]
+		Toggles = [ToggleColour_Purple, ToggleDisplay_On]
 		Mode = All
 	}
-	K_GEN_Large_Purple_Off :	K_GEN_Large_Purple_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Purple, Kebechet_GEN_Large_ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
+	Toggle_Purple_Off :	Toggle_Purple_On	{ Toggles = [ToggleColour_Purple, ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD PURPLE START --------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	K_GENL_ToggleComponents_Purple_On
+	ToggleComponents_Shield_Purple_On
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Large_Purple_On
-		IncludeInBlueprints = true
+		Toggle = Toggle_Purple_On
 		Components = 
 		{ 
 			GENL_ArcShield : &<../shield_gen_large_modular.rules>/Part/Components/ArcShield
@@ -81,14 +80,13 @@ Components
 		}
 	}
 
-	K_GENL_ToggleComponents_Purple_Off
+	ToggleComponents_Shield_Purple_Off
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Large_Purple_Off
-		IncludeInBlueprints = false
+		Toggle = Toggle_Purple_Off
 		Components =
 		{
-			GENL_ArcShield : &../../K_GENL_ToggleComponents_Purple_On/Components/GENL_ArcShield
+			GENL_ArcShield : &../../ToggleComponents_Shield_Purple_On/Components/GENL_ArcShield
 			{
 				ShieldMediaEffects
 				[
@@ -106,11 +104,10 @@ Components
 	// GRAPHICS PURPLE START ---------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	K_GENL_Graphics_Purple
+	ToggleComponents_Graphics_Purple
 	{
 		Type = ToggledComponents
-		Toggle = Kebechet_GEN_Large_ToggleColours_Purple
-		IncludeInBlueprints = false
+		Toggle = ToggleColour_Purple
 		Components = 
 		{
 			K_Graphics : &<../shield_gen_large_modular.rules>/Part/Components/Graphics

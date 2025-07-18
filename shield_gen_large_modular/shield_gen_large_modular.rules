@@ -36,7 +36,7 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 		// COLOURS TOGGLES -------------------------------
 		// -----------------------------------------------
 
-		Kebechet_GEN_Large_ToggleColours
+		ToggleColour
 		{
 			Type = UIToggle
 			ToggleID = "Kebechet_ToggleID_Colours"
@@ -45,23 +45,23 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 			RequiresCommand = false
 		}
 		
-		Kebechet_GEN_Large_ToggleColours_Purple
+		ToggleColour_Purple
 		{
 			Type = ModeToggle
-			Mode = Kebechet_GEN_Large_ToggleColours
+			Mode = ToggleColour
 			OnMode = 0
 		}
-		Kebechet_GEN_Large_ToggleColours_Blue :		Kebechet_GEN_Large_ToggleColours_Purple	{ OnMode = 1 }
-		Kebechet_GEN_Large_ToggleColours_Orange :	Kebechet_GEN_Large_ToggleColours_Purple	{ OnMode = 2 }
-		Kebechet_GEN_Large_ToggleColours_Red :		Kebechet_GEN_Large_ToggleColours_Purple	{ OnMode = 3 }
-		Kebechet_GEN_Large_ToggleColours_Yellow :	Kebechet_GEN_Large_ToggleColours_Purple	{ OnMode = 4 }
-		Kebechet_GEN_Large_ToggleColours_Green :	Kebechet_GEN_Large_ToggleColours_Purple	{ OnMode = 5 }
+		ToggleColour_Blue :		ToggleColour_Purple	{ OnMode = 1 }
+		ToggleColour_Orange :	ToggleColour_Purple	{ OnMode = 2 }
+		ToggleColour_Red :		ToggleColour_Purple	{ OnMode = 3 }
+		ToggleColour_Yellow :	ToggleColour_Purple	{ OnMode = 4 }
+		ToggleColour_Green :	ToggleColour_Purple	{ OnMode = 5 }
 		
 		// -----------------------------------------------
 		// ANGLE TOGGLES ---------------------------------
 		// -----------------------------------------------
 
-		Kebechet_GEN_Large_ToggleAngle
+		ToggleAngle
 		{
 			Type = UIToggle
 			ToggleID = "Kebechet_ToggleID_GENL_Angle"
@@ -70,21 +70,21 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 			RequiresCommand = false
 		}
 
-		Kebechet_GEN_Large_ToggleAngle_A160FrontArc
+		ToggleAngle_Arc_Front
 		{
 			Type = ModeToggle
-			Mode = Kebechet_GEN_Large_ToggleAngle
+			Mode = ToggleAngle
 			OnMode = 1
 		}
 
-		Kebechet_GEN_Large_ToggleAngle_A160LeftArc : Kebechet_GEN_Large_ToggleAngle_A160FrontArc	{ OnMode = 0 }
-		Kebechet_GEN_Large_ToggleAngle_A160RightArc : Kebechet_GEN_Large_ToggleAngle_A160FrontArc	{ OnMode = 2 }
+		ToggleAngle_Arc_Left : ToggleAngle_Arc_Front	{ OnMode = 0 }
+		ToggleAngle_Arc_Right : ToggleAngle_Arc_Front	{ OnMode = 2 }
 		
 		// -----------------------------------------------
 		// DISPLAY TOGGLES -------------------------------
 		// -----------------------------------------------
 		
-		Kebechet_GEN_Large_ToggleDisplay
+		ToggleDisplay
 		{
 			Type = UIToggle
 			ToggleID = "Kebechet_ToggleID_Display"
@@ -93,14 +93,14 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 			RequiresCommand = false
 		}
 
-		Kebechet_GEN_Large_ToggleDisplay_On
+		ToggleDisplay_On
 		{
 			Type = ModeToggle
-			Mode = Kebechet_GEN_Large_ToggleDisplay
+			Mode = ToggleDisplay
 			OnMode = 0
 		}
 
-		Kebechet_GEN_Large_ToggleDisplay_Off : Kebechet_GEN_Large_ToggleDisplay_On	{ OnMode = 1 }
+		ToggleDisplay_Off : ToggleDisplay_On	{ OnMode = 1 }
 		
 		// -----------------------------------------------
 		// PROXY -----------------------------------------
@@ -114,7 +114,7 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 		Kebechet_GEN_Large_ColoursSet
 		{
 			Type = MultiToggle
-			Toggles = [Kebechet_GEN_Large_ToggleColours_Purple, Kebechet_GEN_Large_ToggleColours_Blue, Kebechet_GEN_Large_ToggleColours_Orange, Kebechet_GEN_Large_ToggleColours_Red, Kebechet_GEN_Large_ToggleColours_Yellow, Kebechet_GEN_Large_ToggleColours_Green]
+			Toggles = [ToggleColour_Purple, ToggleColour_Blue, ToggleColour_Orange, ToggleColour_Red, ToggleColour_Yellow, ToggleColour_Green]
 			Mode = Any
 		}
 		
@@ -126,7 +126,7 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 		Kebechet_GEN_Large_AngleSet
 		{
 			Type = MultiToggle
-			Toggles = [Kebechet_GEN_Large_ToggleAngle_A160FrontArc, Kebechet_GEN_Large_ToggleAngle_A160LeftArc, Kebechet_GEN_Large_ToggleAngle_A160RightArc]
+			Toggles = [ToggleAngle_Arc_Front, ToggleAngle_Arc_Left, ToggleAngle_Arc_Right]
 			Mode = Any
 		}
 		
@@ -138,7 +138,7 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 		Kebechet_GEN_Large_DisplaySet
 		{
 			Type = MultiToggle
-			Toggles = [Kebechet_GEN_Large_ToggleDisplay_Off, Kebechet_GEN_Large_ToggleDisplay_On]
+			Toggles = [ToggleDisplay_Off, ToggleDisplay_On]
 			Mode = Any
 		}
 
@@ -192,7 +192,7 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 		RotationFrontUIToggle
 		{
 			Type = MultiToggle
-			Toggles = [ Kebechet_GEN_Large_ToggleAngle_A160FrontArc, Kebechet_GEN_Large_ToggleAngle_A160RightArc, { Toggle=Kebechet_GEN_Large_ToggleAngle_A160LeftArc; Invert=true} ]
+			Toggles = [ ToggleAngle_Arc_Front, ToggleAngle_Arc_Right, { Toggle=ToggleAngle_Arc_Left; Invert=true} ]
 			Mode = Any
 		}
 		RotationFrontToggleToChain
@@ -211,7 +211,7 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 		RotationRightToggle
 		{
 			Type = MultiToggle
-			Toggles = [ Rotation1MaxToggle, Kebechet_GEN_Large_ToggleAngle_A160RightArc ]
+			Toggles = [ Rotation1MaxToggle, ToggleAngle_Arc_Right ]
 			Mode = All
 		}
 

@@ -4,19 +4,18 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	Toggle_Green_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Green, ToggleDisplay_On, ColoursProxy, DisplayProxy]  }
-	Toggle_Green_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColours_Green, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
+	Toggle_Green_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Green, ToggleDisplay_On, ColoursProxy, DisplayProxy]  }
+	Toggle_Green_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Green, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	ToggleComponents_Green_On
+	ToggleComponents_Shield_Green_On
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Green_On
-		IncludeInGreenprints = false
-		Components : <../purple/purple.rules>/Components/ToggleComponents_Purple_On/Components
+		Components : <../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_On/Components
 		{
 			// Inner
 			ArcShield_InnerFront :		^/0/ArcShield_InnerFront
@@ -60,15 +59,14 @@ Components
 		}
 	}
 	
-	ToggleComponents_Green_Off
+	ToggleComponents_Shield_Green_Off
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Green_Off
-		IncludeInGreenprints = false
 		Components =
 		{
 			// Inner
-			ArcShield_InnerFront :		&../../ToggleComponents_Green_On/Components/ArcShield_InnerFront
+			ArcShield_InnerFront :		&../../ToggleComponents_Shield_Green_On/Components/ArcShield_InnerFront
 			{
 				ShieldMediaEffects
 				[
@@ -91,11 +89,10 @@ Components
 	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	K_STL_Graphics_Green
+	ToggleComponents_Graphics_Green
 	{
 		Type = ToggledComponents
-		Toggle = ToggleColours_Green
-		IncludeInGreenprints = false
+		Toggle = ToggleColour_Green
 		Components = 
 		{
 			K_Graphics : &<../shield_stl_modular.rules>/Part/Components/Graphics

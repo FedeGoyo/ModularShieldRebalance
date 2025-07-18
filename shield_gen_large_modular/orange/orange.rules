@@ -4,18 +4,18 @@ Components
 	// TOGGLE START -----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	K_GEN_Large_Orange_On :		<../purple/purple.rules>/Components/K_GEN_Large_Purple_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Orange, Kebechet_GEN_Large_ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
-	K_GEN_Large_Orange_Off :	<../purple/purple.rules>/Components/K_GEN_Large_Purple_On	{ Toggles = [Kebechet_GEN_Large_ToggleColours_Orange, Kebechet_GEN_Large_ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
+	Toggle_Orange_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Orange, ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
+	Toggle_Orange_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Orange, ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	K_GENL_ToggleComponents_Orange_On
+	ToggleComponents_Shield_Orange_On
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Large_Orange_On
-		Components : &<../purple/purple.rules>/Components/K_GENL_ToggleComponents_Purple_On/Components
+		Toggle = Toggle_Orange_On
+		Components : &<../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_On/Components
 		{
 			GENL_ArcShield : ^/0/GENL_ArcShield
 			{
@@ -50,13 +50,13 @@ Components
 		}
 	}
 
-	K_GENL_ToggleComponents_Orange_Off
+	ToggleComponents_Shield_Orange_Off
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Large_Orange_Off
+		Toggle = Toggle_Orange_Off
 		Components =
 		{
-			GENL_ArcShield : &../../K_GENL_ToggleComponents_Orange_On/Components/GENL_ArcShield
+			GENL_ArcShield : &../../ToggleComponents_Shield_Orange_On/Components/GENL_ArcShield
 			{
 				ShieldMediaEffects
 				[
@@ -74,11 +74,10 @@ Components
 	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	K_GENL_Graphics_Orange
+	ToggleComponents_Graphics_Orange
 	{
 		Type = ToggledComponents
-		Toggle = Kebechet_GEN_Large_ToggleColours_Orange
-		IncludeInOrangeprints = false
+		Toggle = ToggleColour_Orange
 		Components = 
 		{
 			K_Graphics : &<../shield_gen_large_modular.rules>/Part/Components/Graphics
