@@ -44,3 +44,6 @@ BubbleShutDown
 	Multiplier = 1
 	BaseValue = 0
 }
+
+ShieldOverclockExtendedLine {}
+ShieldLine {}

@@ -1,57 +1,49 @@
 Components
 {
 	// -------------------------------------------------------------------------------------------------------------------------
-	// TOGGLE PURPLE START -----------------------------------------------------------------------------------------------------
+	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	K_GEN_Small_Purple_A90FrontArc_On
+	K_GEN_Small_Purple_Arc_On
 	{
 		Type = MultiToggle
-		Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, Kebechet_GEN_Small_ToggleAngle_A90FrontArc, Kebechet_GEN_Small_ToggleDisplay_On] 
+		Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, ArcToggle, Kebechet_GEN_Small_ToggleDisplay_On] 
 		Mode = All
 	}
-	K_GEN_Small_Purple_A90FrontLine_On :	K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, Kebechet_GEN_Small_ToggleAngle_A90FrontLine, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
-	K_GEN_Small_Purple_A22LeftLine_On :		K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, Kebechet_GEN_Small_ToggleAngle_A22LeftLine, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
-	K_GEN_Small_Purple_A22RightLine_On :	K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, Kebechet_GEN_Small_ToggleAngle_A22RightLine, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
-	K_GEN_Small_Purple_A90LeftArc_On :		K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, Kebechet_GEN_Small_ToggleAngle_A90LeftArc, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
-	K_GEN_Small_Purple_A90RightArc_On :		K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, Kebechet_GEN_Small_ToggleAngle_A90RightArc, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
-	
-	K_GEN_Small_Purple_A90FrontArc_Off :	K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, Kebechet_GEN_Small_ToggleAngle_A90FrontArc, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
-	K_GEN_Small_Purple_A90FrontLine_Off :	K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, Kebechet_GEN_Small_ToggleAngle_A90FrontLine, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
-	K_GEN_Small_Purple_A22LeftLine_Off :	K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, Kebechet_GEN_Small_ToggleAngle_A22LeftLine, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
-	K_GEN_Small_Purple_A22RightLine_Off :	K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, Kebechet_GEN_Small_ToggleAngle_A22RightLine, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
-	K_GEN_Small_Purple_A90LeftArc_Off :		K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, Kebechet_GEN_Small_ToggleAngle_A90LeftArc, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
-	K_GEN_Small_Purple_A90RightArc_Off :	K_GEN_Small_Purple_A90FrontArc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, Kebechet_GEN_Small_ToggleAngle_A90RightArc, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_AngleProxy, Kebechet_GEN_Small_DisplayProxy] }
+	K_GEN_Small_Purple_Line_On :	K_GEN_Small_Purple_Arc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, LineToggle, Kebechet_GEN_Small_ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
+
+	K_GEN_Small_Purple_Arc_Off :	K_GEN_Small_Purple_Arc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, ArcToggle, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
+	K_GEN_Small_Purple_Line_Off :	K_GEN_Small_Purple_Arc_On	{ Toggles = [Kebechet_GEN_Small_ToggleColours_Purple, LineToggle, Kebechet_GEN_Small_ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
 		
 	// -------------------------------------------------------------------------------------------------------------------------
-	// ARCSHIELD PURPLE START --------------------------------------------------------------------------------------------------
+	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 			
-	K_GENS_ToggleComponents_Purple_A90FrontArc_On
+	K_GENS_ToggleComponents_Purple_Arc_On
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Small_Purple_A90FrontArc_On
-		IncludeInBlueprints = true
+		Toggle = K_GEN_Small_Purple_Arc_On
 		Components = 
 		{
-			GENS_ArcShield : &<../stats.rules>/Angle/FrontArc90/ArcShield, &<../shield_gen_small_modular.rules>/Part/Components/ArcShield
+			GENS_ArcShield : &<../shield_gen_small_modular.rules>/Part/Components/ArcShield
 			{
 				OperationalToggle = IsOperational
+				ChainedTo = Transform_Arc_Rotation_FrontToRight
 				ShieldMediaEffects
 				[
-					: &<../stats.rules>/Angle/FrontArc90/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0
+					: &../^/0/ShieldMediaEffects/0
 					{
-						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/1/ArcSprite	{}
+						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
-					: &../^/1/ShieldMediaEffects/1 {}
+					: &../^/0/ShieldMediaEffects/1 {}
 				]
 				HitMediaEffects
 				[
-					: &<../stats.rules>/Angle/FrontArc90/HitMediaEffects, &../^/1/HitMediaEffects/0
+					: &../^/0/HitMediaEffects/0
 					{
-						ArcSprite : &<../../colors.rules>/Color/Purple/HitMediaEffects, ^/1/ArcSprite	{}
+						ArcSprite : &<../../colors.rules>/Color/Purple/HitMediaEffects, ^/0/ArcSprite	{}
 					}
-					: &../^/1/HitMediaEffects/1 {}
+					: &../^/0/HitMediaEffects/1 {}
 				]
 			}
 			GENS_EmitterEffect : &<../shield_gen_small_modular.rules>/Part/Components/EmitterEffect
@@ -71,7 +63,6 @@ Components
 				OperationalToggle = IsOperationalOverloaded
 				Shield = GENS_ArcShield
 				ChainedTo = GENS_ArcShield
-				ContinuousEffects [ : &<../stats.rules>/Angle/FrontArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
 			
 			GENS_Overclock_ExtendedEffect : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_ExtendedEffect
@@ -79,269 +70,45 @@ Components
 				OperationalToggle = Overclock_ExtendedEffectToggle
 				Shield = GENS_ArcShield
 				ChainedTo = GENS_ArcShield
-				ContinuousEffects [ : &<../stats.rules>/Angle/FrontArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
 			GENS_Overclock_Overload_EffectExtended : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_OverloadEffect_Extended
 			{
 				OperationalToggle = IsOperationalOverloaded_Extended
 				Shield = GENS_ArcShield
 				ChainedTo = GENS_ArcShield
-				ContinuousEffects [ : &<../stats.rules>/Angle/FrontArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
 			GENS_Overclock_ReinforcedEffect : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_ReinforcedEffect
 			{
 				OperationalToggle = Overclock_ReinforcedEffectToggle
 				Shield = GENS_ArcShield
 				ChainedTo = GENS_ArcShield
-				ContinuousEffects [ : &<../stats.rules>/Angle/FrontArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
 			GENS_Overclock_OverloadEffect_Reinforced : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_OverloadEffect_Reinforced
 			{
 				OperationalToggle = IsOperationalOverloaded_Reinforced
 				Shield = GENS_ArcShield
 				ChainedTo = GENS_ArcShield
-				ContinuousEffects [ : &<../stats.rules>/Angle/FrontArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
 			}
 		}
 	}
 
-	K_GENS_ToggleComponents_Purple_A90FrontLine_On
+	K_GENS_ToggleComponents_Purple_Line_On
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Small_Purple_A90FrontLine_On
-		IncludeInBlueprints = false
-		Components : &../K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components
+		Toggle = K_GEN_Small_Purple_Line_On
+		Components : &../K_GENS_ToggleComponents_Purple_Arc_On/Components
 		{
-			GENS_ArcShield : &<../stats.rules>/Angle/FrontLine90/ArcShield, ^/0/GENS_ArcShield
-			{
-				BlueprintArcSpriteSegments = 64
-				ShieldMediaEffects
-				[
-					: &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0	{}
-					: &../^/1/ShieldMediaEffects/1
-					{
-/*						ArcSprite : /0/ArcSprite
-						{
-							_xScale = 1
-							Size = [0, 1.5]
-						}*/
-					}
-				]
-				HitMediaEffects
-				[
-					: &<../stats.rules>/Angle/FrontLine90/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
-					: &../^/1/HitMediaEffects/1 {}
-				]
-			}
-			GENS_OverloadEffect : ^/0/GENS_OverloadEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			
-			GENS_Overclock_ExtendedEffect : ^/0/GENS_Overclock_ExtendedEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_Overload_EffectExtended : ^/0/GENS_Overclock_Overload_EffectExtended
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_ReinforcedEffect : ^/0/GENS_Overclock_ReinforcedEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_OverloadEffect_Reinforced : ^/0/GENS_Overclock_OverloadEffect_Reinforced
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/FrontLine90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
+			GENS_ArcShield : ^/0/GENS_ArcShield	{ ChainedTo = Transform_Line_Rotation_FrontToRight }
 		}
 	}
 
-	K_GENS_ToggleComponents_Purple_A22LeftLine_On
+	K_GENS_ToggleComponents_Purple_Arc_Off
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Small_Purple_A22LeftLine_On
-		IncludeInBlueprints = false
-		Components : &../K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components
-		{
-			GENS_ArcShield : &<../stats.rules>/Angle/LeftLine22/ArcShield, ^/0/GENS_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0	{}
-					: &../^/1/ShieldMediaEffects/1 {}
-				]
-				HitMediaEffects
-				[
-					: &<../stats.rules>/Angle/LeftLine22/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
-					: &../^/1/HitMediaEffects/1 {}
-				]
-			}
-			GENS_OverloadEffect : ^/0/GENS_OverloadEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			
-			GENS_Overclock_ExtendedEffect : ^/0/GENS_Overclock_ExtendedEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_Overload_EffectExtended : ^/0/GENS_Overclock_Overload_EffectExtended
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_ReinforcedEffect : ^/0/GENS_Overclock_ReinforcedEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_OverloadEffect_Reinforced : ^/0/GENS_Overclock_OverloadEffect_Reinforced
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/LeftLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-		}
-	}
-
-	K_GENS_ToggleComponents_Purple_A22RightLine_On
-	{
-		Type = ToggledComponents
-		Toggle = K_GEN_Small_Purple_A22RightLine_On
-		IncludeInBlueprints = false
-		Components : &../K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components
-		{
-			GENS_ArcShield : &<../stats.rules>/Angle/RightLine22/ArcShield, ^/0/GENS_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0	{}
-					: &../^/1/ShieldMediaEffects/1 {}
-				]
-				HitMediaEffects
-				[
-					: &<../stats.rules>/Angle/RightLine22/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
-					: &../^/1/HitMediaEffects/0 {}
-				]
-			}
-			GENS_OverloadEffect : ^/0/GENS_OverloadEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			
-			GENS_Overclock_ExtendedEffect : ^/0/GENS_Overclock_ExtendedEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_Overload_EffectExtended : ^/0/GENS_Overclock_Overload_EffectExtended
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_ReinforcedEffect : ^/0/GENS_Overclock_ReinforcedEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_OverloadEffect_Reinforced : ^/0/GENS_Overclock_OverloadEffect_Reinforced
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/RightLine22/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-		}
-	}
-
-	K_GENS_ToggleComponents_Purple_A90LeftArc_On
-	{
-		Type = ToggledComponents
-		Toggle = K_GEN_Small_Purple_A90LeftArc_On
-		IncludeInBlueprints = false
-		Components : &../K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components
-		{
-			GENS_ArcShield : &<../stats.rules>/Angle/LeftArc90/ArcShield, ^/0/GENS_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0	{}
-					: &../^/1/ShieldMediaEffects/1 {}
-				]
-				HitMediaEffects
-				[
-					: &<../stats.rules>/Angle/LeftArc90/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
-					: &../^/1/HitMediaEffects/1 {}
-				]
-			}
-			GENS_OverloadEffect : ^/0/GENS_OverloadEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			
-			GENS_Overclock_ExtendedEffect : ^/0/GENS_Overclock_ExtendedEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_Overload_EffectExtended : ^/0/GENS_Overclock_Overload_EffectExtended
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_ReinforcedEffect : ^/0/GENS_Overclock_ReinforcedEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_OverloadEffect_Reinforced : ^/0/GENS_Overclock_OverloadEffect_Reinforced
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/LeftArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-		}
-	}
-
-	K_GENS_ToggleComponents_Purple_A90RightArc_On
-	{
-		Type = ToggledComponents
-		Toggle = K_GEN_Small_Purple_A90RightArc_On
-		IncludeInBlueprints = false
-		Components : &../K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components
-		{
-			GENS_ArcShield : &<../stats.rules>/Angle/RightArc90/ArcShield, ^/0/GENS_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/1/ShieldMediaEffects/0	{}
-					: &../^/1/ShieldMediaEffects/1 {}
-				]
-				HitMediaEffects
-				[
-					: &<../stats.rules>/Angle/RightArc90/HitMediaEffects, &../^/1/HitMediaEffects/0	{}
-					: &../^/1/HitMediaEffects/0 {}
-				]
-			}
-			GENS_OverloadEffect : ^/0/GENS_OverloadEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			
-			GENS_Overclock_ExtendedEffect : ^/0/GENS_Overclock_ExtendedEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_Overload_EffectExtended : ^/0/GENS_Overclock_Overload_EffectExtended
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_ReinforcedEffect : ^/0/GENS_Overclock_ReinforcedEffect
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-			GENS_Overclock_OverloadEffect_Reinforced : ^/0/GENS_Overclock_OverloadEffect_Reinforced
-			{
-				ContinuousEffects [ : &<../stats.rules>/Angle/RightArc90/ShieldMediaEffects, &../^/0/ContinuousEffects/0	{} ]
-			}
-		}
-	}
-
-
-	K_GENS_ToggleComponents_Purple_A90FrontArc_Off
-	{
-		Type = ToggledComponents
-		Toggle = K_GEN_Small_Purple_A90FrontArc_Off
-		IncludeInBlueprints = false
+		Toggle = K_GEN_Small_Purple_Arc_Off
 		Components =
 		{
-			GENS_ArcShield : &../../K_GENS_ToggleComponents_Purple_A90FrontArc_On/Components/GENS_ArcShield
+			GENS_ArcShield : &../../K_GENS_ToggleComponents_Purple_Arc_On/Components/GENS_ArcShield
 			{
 				ShieldMediaEffects
 				[
@@ -355,113 +122,19 @@ Components
 		}
 	}
 
-	K_GENS_ToggleComponents_Purple_A90FrontLine_Off
+	K_GENS_ToggleComponents_Purple_Line_Off
 	{
 		Type = ToggledComponents
-		Toggle = K_GEN_Small_Purple_A90FrontLine_Off
+		Toggle = K_GEN_Small_Purple_Line_Off
 		IncludeInBlueprints = false
-		Components =
+		Components  : &../K_GENS_ToggleComponents_Purple_Arc_Off/Components
 		{
-			GENS_ArcShield : &../../K_GENS_ToggleComponents_Purple_A90FrontLine_On/Components/GENS_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &../^/0/ShieldMediaEffects/0
-					{
-						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
-					}
-					: &../^/0/ShieldMediaEffects/1 {}
-				]
-			}
+			GENS_ArcShield : ^/0/GENS_ArcShield	{ ChainedTo = Transform_Line_Rotation_FrontToRight }
 		}
 	}
-
-	K_GENS_ToggleComponents_Purple_A22LeftLine_Off
-	{
-		Type = ToggledComponents
-		Toggle = K_GEN_Small_Purple_A22LeftLine_Off
-		IncludeInBlueprints = false
-		Components =
-		{
-			GENS_ArcShield : &../../K_GENS_ToggleComponents_Purple_A22LeftLine_On/Components/GENS_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &../^/0/ShieldMediaEffects/0
-					{
-						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
-					}
-					: &../^/0/ShieldMediaEffects/1 {}
-				]
-			}
-		}
-	}
-
-	K_GENS_ToggleComponents_Purple_A22RightLine_Off
-	{
-		Type = ToggledComponents
-		Toggle = K_GEN_Small_Purple_A22RightLine_Off
-		IncludeInBlueprints = false
-		Components =
-		{
-			GENS_ArcShield : &../../K_GENS_ToggleComponents_Purple_A22RightLine_On/Components/GENS_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &../^/0/ShieldMediaEffects/0
-					{
-						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
-					}
-					: &../^/0/ShieldMediaEffects/1 {}
-				]
-			}
-		}
-	}
-
-	K_GENS_ToggleComponents_Purple_A90LeftArc_Off
-	{
-		Type = ToggledComponents
-		Toggle = K_GEN_Small_Purple_A90LeftArc_Off
-		IncludeInBlueprints = false
-		Components =
-		{
-			GENS_ArcShield : &../../K_GENS_ToggleComponents_Purple_A90LeftArc_On/Components/GENS_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &../^/0/ShieldMediaEffects/0
-					{
-						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
-					}
-					: &../^/0/ShieldMediaEffects/1 {}
-				]
-			}
-		}
-	}
-
-	K_GENS_ToggleComponents_Purple_A90RightArc_Off
-	{
-		Type = ToggledComponents
-		Toggle = K_GEN_Small_Purple_A90RightArc_Off
-		IncludeInBlueprints = false
-		Components =
-		{
-			GENS_ArcShield : &../../K_GENS_ToggleComponents_Purple_A90RightArc_On/Components/GENS_ArcShield
-			{
-				ShieldMediaEffects
-				[
-					: &../^/0/ShieldMediaEffects/0
-					{
-						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
-					}
-					: &../^/0/ShieldMediaEffects/1 {}
-				]
-			}
-		}
-	}
-
+	
 	// -------------------------------------------------------------------------------------------------------------------------
-	// GRAPHICS PURPLE START ---------------------------------------------------------------------------------------------------
+	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
 	K_GENS_Graphics_Purple

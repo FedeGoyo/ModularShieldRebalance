@@ -6,13 +6,22 @@ OVERCLOCK : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/OVERCL
 	}	
 }
 
-ROTATION
+STATS
 {
-	LEFTARC = -117.5d
-	RIGHTARC = -62.5d
-	LEFTLINE = -109.7d
-	RIGHTLINE = -70.3d
-	FRONT = -90d
+	ROTATION_SPEED = 50	// degrees per second
+	
+	ARC_LEFT_ROTATION = -117.5d
+	ARC_FRONT_ROTATION = -90d
+	ARC_RIGHT_ROTATION = -62.5d
+	
+	LINE_LEFT_ROTATION = -109.7d
+	LINE_FRONT_ROTATION = -90d
+	LINE_RIGHT_ROTATION = -70.3d
+		
+	LINE_LEFT_LOCATION = [27, 75]
+	LINE_FRONT_LOCATION = [1, 80]
+	LINE_RIGHT_LOCATION = [-25, 75]
+	
 }
 
 Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
@@ -26,6 +35,7 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 	ID = cosmoteer.shield_gen_small
 	OtherIDs = [shield_generator, swefpifh.Kebechet_GenSmall_ModularShield]
 	IsBuildable = true
+	ReceivableBuffs : ^/0/ReceivableBuffs [ ShieldOverclockExtendedLine, ShieldLine ]
 	EditorIcon
 	{
 		Texture
@@ -183,130 +193,169 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
 		
-		// Starts Rotation
+		// Starts Rotation for Arcs
 		
-		RotationTween1
+		ArcToggle
+		{
+			Type = MultiToggle
+			Toggles = [ Kebechet_GEN_Small_ToggleAngle_A90LeftArc, Kebechet_GEN_Small_ToggleAngle_A90FrontArc, Kebechet_GEN_Small_ToggleAngle_A90RightArc ]
+			Mode = Any
+		}
+		
+		RotationTween_Arc_LeftToFront
 		{
 			Type = ValueTween
-			OnTweenDuration = 0.5
-			OffTweenDuration = 0.5
-			IsOnToggle = RotationLeftLineToggleToChain
+			OnTweenDuration = 0.55
+			OffTweenDuration = &OnTweenDuration
+			IsOnToggle = RotationToggle_Arc_Front
 		}
-		RotationTween2 : RotationTween1	{ IsOnToggle = RotationFrontToggleToChain }
-		RotationTween3 : RotationTween1	{ IsOnToggle = RotationRightLineToggleToChain }
-		RotationTween4 : RotationTween1	{ IsOnToggle = RotationRightArcToggle }
+		RotationTween_Arc_FrontToRight : RotationTween_Arc_LeftToFront	{ IsOnToggle = RotationToggle_Arc_Right }
 		
-		Rotation2MinToggle
+		RotationToggle_Arc_IsNotRight
 		{
 			Type = ThresholdToggle
-			AmountFrom = RotationTween2
+			AmountFrom = RotationTween_Arc_FrontToRight
 			MaxAmount = 0
 		}
-		RotationLeftUIToggle
+		RotationToggle_Arc_UIFront
 		{
 			Type = MultiToggle
-			Toggles = [ Kebechet_GEN_Small_ToggleAngle_A22LeftLine, { Toggle=Kebechet_GEN_Small_ToggleAngle_A90LeftArc; Invert=true}, RotationFrontUIToggle ]
+			Toggles = [ Kebechet_GEN_Small_ToggleAngle_A90FrontArc, Kebechet_GEN_Small_ToggleAngle_A90RightArc, { Toggle=Kebechet_GEN_Small_ToggleAngle_A90LeftArc; Invert=true} ]
 			Mode = Any
 		}
-		RotationLeftLineToggleToChain
+		RotationToggle_Arc_Front
 		{
 			Type = MultiToggle
-			Toggles = [ RotationLeftUIToggle, { Toggle=Rotation2MinToggle; Invert=true } ]
+			Toggles = [ RotationToggle_Arc_UIFront, { Toggle=RotationToggle_Arc_IsNotRight; Invert=true } ]
 			Mode = Any
 		}
 		
-		Rotation3MinToggle
+		RotationToggle_Arc_IsFront
 		{
 			Type = ThresholdToggle
-			AmountFrom = RotationTween3
-			MaxAmount = 0
-		}
-		Rotation1MaxToggle
-		{
-			Type = ThresholdToggle
-			AmountFrom = RotationTween1
+			AmountFrom = RotationTween_Arc_LeftToFront
 			MinAmount = 1
 		}
-		RotationFrontUIToggle
+		RotationToggle_Arc_Right
 		{
 			Type = MultiToggle
-			Toggles = [ Kebechet_GEN_Small_ToggleAngle_A90FrontArc, Kebechet_GEN_Small_ToggleAngle_A90FrontLine, RotationRightLineUIToggle ]
-			Mode = Any
-		}
-		RotationFrontToggle
-		{
-			Type = MultiToggle
-			Toggles = [ Rotation1MaxToggle, RotationFrontUIToggle ]
+			Toggles = [ RotationToggle_Arc_IsFront, Kebechet_GEN_Small_ToggleAngle_A90RightArc ]
 			Mode = All
 		}
-		RotationFrontToggleToChain
+
+		Transform_Arc_Rotation_LeftToFront
+		{
+			Type = TransformLerp
+			ValueFrom = RotationTween_Arc_LeftToFront
+			Location = [1.5, 1.5]
+			StartRotation = &~/STATS/ARC_LEFT_ROTATION
+			EndRotation = &~/STATS/ARC_FRONT_ROTATION
+		}
+		Transform_Arc_Rotation_FrontToRight
+		{
+			Type = TransformLerp
+			ValueFrom = RotationTween_Arc_FrontToRight
+			ChainedTo = Transform_Arc_Rotation_LeftToFront
+			StartRotation = 0
+			EndRotation = (&~/STATS/ARC_RIGHT_ROTATION) - (&~/STATS/ARC_FRONT_ROTATION)
+		}
+		
+		// Starts Rotation for Lines
+		
+		LineToggle
 		{
 			Type = MultiToggle
-			Toggles = [ RotationFrontToggle, { Toggle=Rotation3MinToggle; Invert=true } ]
+			Toggles = [ Kebechet_GEN_Small_ToggleAngle_A22LeftLine, Kebechet_GEN_Small_ToggleAngle_A90FrontLine, Kebechet_GEN_Small_ToggleAngle_A22RightLine ]
 			Mode = Any
 		}
-		
-		Rotation4MinToggle
+		LineModeRawValue
 		{
-			Type = ThresholdToggle
-			AmountFrom = RotationTween4
-			MaxAmount = 0
+			Type = ValueTween
+			IsOnToggle = LineToggle
+			OnTweenDuration = &~/OVERCLOCK/MODE_SWITCH_TIME
+			OffTweenDuration = &OnTweenDuration
 		}
-		Rotation2MaxToggle
+		Overclock_ExtendedLineModeValue
 		{
-			Type = ThresholdToggle
-			AmountFrom = RotationTween2
-			MinAmount = 1
+			Type = MultiValue
+			Values = [ Overclock_ExtendedModeRawValue, OverclockStateValue, LineModeRawValue ]
+			Mode = Min
 		}
-		RotationRightLineUIToggle
+		Overclock_ExtendedLineModeBuff
 		{
-			Type = MultiToggle
-			Toggles = [ Kebechet_GEN_Small_ToggleAngle_A22RightLine, Kebechet_GEN_Small_ToggleAngle_A90RightArc ]
-			Mode = Any
+			Type = SelfBuffProvider
+			OperationalToggle = IsOverclocked
+			BuffType = ShieldOverclockExtendedLine
+			BuffMultiplier = Overclock_ExtendedLineModeValue
 		}
-		RotationRightLineToggle
+		LineModeBuff
 		{
-			Type = MultiToggle
-			Toggles = [ Rotation2MaxToggle, RotationRightLineUIToggle ]
-			Mode = All
-		}
-		RotationRightLineToggleToChain
-		{
-			Type = MultiToggle
-			Toggles = [ RotationRightLineToggle, { Toggle=Rotation4MinToggle; Invert=true } ]
-			Mode = Any
-		}
-		
-		Rotation3MaxToggle
-		{
-			Type = ThresholdToggle
-			AmountFrom = RotationTween3
-			MinAmount = 1
-		}
-		RotationRightArcToggle
-		{
-			Type = MultiToggle
-			Toggles = [ Rotation3MaxToggle, Kebechet_GEN_Small_ToggleAngle_A90RightArc ]
-			Mode = All
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		ArcShield2 : ArcShield
-		{
+			Type = SelfBuffProvider
 			OperationalToggle = IsOperational
-			Location = [0, 0]
-			Rotation = 0d
-			ChainedTo = TransformRotationFinal
+			BuffType = ShieldLine
+			BuffMultiplier = LineModeRawValue
 		}
 		
-		// Finish Rotation
+		RotationTween_Line_LeftToFront
+		{
+			Type = ValueTween
+			OnTweenDuration = 0.394
+			OffTweenDuration = &OnTweenDuration
+			IsOnToggle = RotationToggle_Line_Front
+		}
+		RotationTween_Line_FrontToRight : RotationTween_Line_LeftToFront	{ IsOnToggle = RotationToggle_Line_Right }
+		
+		RotationToggle_Line_IsNotRight
+		{
+			Type = ThresholdToggle
+			AmountFrom = RotationTween_Line_FrontToRight
+			MaxAmount = 0
+		}
+		RotationToggle_Line_UIFront
+		{
+			Type = MultiToggle
+			Toggles = [ Kebechet_GEN_Small_ToggleAngle_A90FrontLine, { Toggle=Kebechet_GEN_Small_ToggleAngle_A22LeftLine; Invert=true } ]
+			Mode = Any
+		}
+		RotationToggle_Line_Front
+		{
+			Type = MultiToggle
+			Toggles = [ RotationToggle_Line_UIFront, { Toggle=RotationToggle_Line_IsNotRight; Invert=true } ]
+			Mode = Any
+		}
+		
+		RotationToggle_IsFront
+		{
+			Type = ThresholdToggle
+			AmountFrom = RotationTween_Line_LeftToFront
+			MinAmount = 1
+		}
+		RotationToggle_Line_Right
+		{
+			Type = MultiToggle
+			Toggles = [ RotationToggle_IsFront, Kebechet_GEN_Small_ToggleAngle_A22RightLine ]
+			Mode = All
+		}
+
+		Transform_Line_Rotation_LeftToFront
+		{
+			Type = TransformLerp
+			ValueFrom = RotationTween_Line_LeftToFront
+			StartLocation = &~/STATS/LINE_LEFT_LOCATION
+			StartRotation = &~/STATS/LINE_LEFT_ROTATION
+			EndLocation = &~/STATS/LINE_FRONT_LOCATION
+			EndRotation = &~/STATS/LINE_FRONT_ROTATION
+		}
+		Transform_Line_Rotation_FrontToRight
+		{
+			Type = TransformLerp
+			ValueFrom = RotationTween_Line_FrontToRight
+			ChainedTo = Transform_Line_Rotation_LeftToFront
+			StartLocation = [0, 0]
+			StartRotation = 0d
+			EndLocation = [(&~/STATS/LINE_FRONT_LOCATION/1) - (&~/STATS/LINE_RIGHT_LOCATION/1), (&~/STATS/LINE_RIGHT_LOCATION/0) - (&~/STATS/LINE_FRONT_LOCATION/0)] // It is rotated to the right. Therefore X and Y are switched, and also Y is also reflected			EndRotation = (&~/STATS/LINE_RIGHT_ROTATION) - (&~/STATS/LINE_FRONT_ROTATION)
+			EndRotation = (&~/STATS/LINE_RIGHT_ROTATION) - (&~/STATS/LINE_FRONT_ROTATION)
+		}
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// ARCSHIELD ORIGINAL - START //////////////////////////////////////////////////////////////////////////////////////////////
@@ -315,6 +364,84 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 		ArcShield : ^/0/ArcShield
 		{
 			OperationalToggle = IsOperationalProxy
+			Location = [0, 0]
+			Rotation = 0d
+			ChainedTo = Transform_Arc_Rotation_FrontToRight
+			Radius : ^/0/Radius
+			{
+				BaseValue = 7.5
+				Modifiers
+				[
+					{
+						Type = BuffRemap
+						BuffType = ShieldOverclockExtended
+						ModificationMode = Multiply
+						RemapFrom = [0, 1]
+						RemapTo = [1, &~/OVERCLOCK/EXTENDED/ARC_RADIUS_FACTOR ]
+					}
+					{
+						Type = BuffRemap
+						BuffType = ShieldOverclockExtendedLine
+						ModificationMode = Multiply
+						RemapFrom = [0, 1]
+						RemapTo = [1, (1 / 1.5) * (&<shield_gen_small_modular.rules>/OVERCLOCK/EXTENDED/ARC_LINERADIUS_FACTOR)]
+					}
+					{
+						Type = BuffRemap
+						BuffType = ShieldLine
+						ModificationMode = Multiply
+						RemapFrom = [0, 1]
+						RemapTo = [1, 85 / 7.5]
+					}
+				]
+			}
+			Arc : ^/0/Arc
+			{
+				BaseValue = 90d
+				Modifiers
+				[
+					{
+						Type = BuffRemap
+						BuffType = ShieldOverclockExtended
+						ModificationMode = Multiply
+						RemapFrom = [0, 1]
+						RemapTo = [1, &~/OVERCLOCK/EXTENDED/ARC_FACTOR ]
+					}
+					{
+						Type = BuffRemap
+						BuffType = ShieldOverclockReinforced
+						ModificationMode = Multiply
+						RemapFrom = [0, 1]
+						RemapTo = [1, &~/OVERCLOCK/REINFORCED/ARC_FACTOR ]
+					}
+					{
+						Type = BuffRemap
+						BuffType = ShieldLine
+						ModificationMode = Divide
+						RemapFrom = [0, 1]
+						RemapTo = [1, 90 / 7.15 ]
+					}
+				]
+			}
+						
+			ShieldMediaEffects
+			[
+				: &../^/0/ShieldMediaEffects/0
+				{
+					Radius = &../../Radius
+					Arc = &../../Arc
+				}
+				: &../^/0/ShieldMediaEffects/1 {}
+			]
+			HitMediaEffects
+			[
+				: &../^/0/HitMediaEffects/0
+				{
+					Radius = &../../Radius
+					Arc = 2d
+				}
+				: &../^/0/HitMediaEffects/1 {}
+			]
 		}
 		
 		EmitterEffect : ^/0/EmitterEffect
@@ -353,61 +480,6 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 		}
 		*/
 		
-		
-		
-		
-		
-		
-		
-		
-		
-/*		Location
-		{
-			BaseValue = 1
-			Modifiers
-			[
-				{
-					Type = BuffRemap
-					BuffType = Overclock
-					ModificationMode = Multiply
-					RemapFrom = [0, 1]
-					RemapTo = [1, &~/OVERCLOCK/ARC_FACTOR]
-				}
-			]
-		}
-		
-		Location
-		{
-			Type = ValueTween
-			OnTweenDuration = 1
-			OffTweenDuration = 1
-			IsOnToggle = OverclockedEffectToggle
-		}
-		
-		FrontLine
-		{
-			Type = TransformLerp
-			ValueFrom = Location
-			StartLocation = [1, 80]
-			EndLocation = [1, 40]
-		}
-		
-		RightLine
-		{
-			Type = TransformLerp
-			ValueFrom = Location
-			StartLocation = [-25, 75]
-			EndLocation = [-25, 150]
-		}
-		
-		LeftLine
-		{
-			Type = TransformLerp
-			ValueFrom = Location
-			StartLocation = [27, 75]
-			EndLocation = [27, 150]
-		}
-		*/
 	}
 
 	Stats 	// Make it inherit? Exactly same as Small Shield
@@ -463,4 +535,5 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			}
 		]
 	}
+	
 }
