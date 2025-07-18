@@ -1089,10 +1089,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		EmitterEffect
 		{
 			Type = ContinuousEffects
-			ChainedTo = ArcShield
+//			ChainedTo = ArcShield
 			FactorMediaEffectsIntensityWith = CombinedBatteryStorage
 			MaxMediaEffectsZoom = 12
-			Location = [2.4, 0]
+			Location = [2 + 2.4, 2]
 			OperationalToggle = IsOperationalProxy
 			ParentToShip = true
 			MediaEffects
@@ -1102,7 +1102,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					Radius = 2.4
 					Arc = 360d
 //					ArcSprite : ^/0/ArcSprite	 { }
-//					Bucket = Upper1
+					Bucket = Upper1	// So that the emitter can project over the part
 				}
 				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/EmitterEffect/MediaEffects/1	{}
 			]

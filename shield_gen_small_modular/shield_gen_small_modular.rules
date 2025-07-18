@@ -363,8 +363,8 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 		ArcShield : ^/0/ArcShield
 		{
 			OperationalToggle = IsOperationalProxy
-			Location = [0, 0]
-			Rotation = 0d
+			Location = [0, 0]	// Takes from Transform_Line_Rotation_FrontToRight
+			Rotation = 0d	// Takes from Transform_Line_Rotation_FrontToRight
 			ChainedTo = Transform_Arc_Rotation_FrontToRight
 			Radius : ^/0/Radius
 			{
@@ -446,6 +446,9 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 		EmitterEffect : ^/0/EmitterEffect
 		{
 			OperationalToggle = IsOperationalProxy
+			Location = [&../../^/0/ArcShield/Location/0 , (&../../^/0/ArcShield/Location/1) - (&../^/0/Location/0)]	// The location is switched cause it is rotated
+			Rotation = &../^/0/ArcShield/Rotation
+			ChainedTo	// Normally chained to ArcShield, but we don't want it to rotate
 		}
 		
 		// Proxy to OverloadEffect and OverclockOverloadEffect???

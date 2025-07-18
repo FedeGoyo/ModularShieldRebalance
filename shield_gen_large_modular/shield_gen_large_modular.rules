@@ -219,7 +219,7 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 		{
 			Type = TransformLerp
 			ValueFrom = RotationTween1
-			Location = [1.5, 1.5]
+			Location = [&../../^/0/ArcShield/Location/0, &../../^/0/ArcShield/Location/1]
 			StartRotation = &~/ROTATION/LEFT
 			EndRotation = &~/ROTATION/FRONT
 		}
@@ -249,8 +249,8 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 		EmitterEffect : ^/0/EmitterEffect
 		{
 			OperationalToggle = IsOperationalProxy
-			Location = [(&~/Part/Components/TransformRotation1/Location/1) , (&~/Part/Components/TransformRotation1/Location/0) - (&../^/0/Location/0)]	// The locations are switched cause it is rotated
-			Rotation = (&../^/0/ArcShield/Rotation)
+			Location = [&../../^/0/ArcShield/Location/0 , (&../../^/0/ArcShield/Location/1) - (&../^/0/Location/0)]	// The location is switched cause it is rotated
+			Rotation = &../^/0/ArcShield/Rotation
 			ChainedTo	// Normally chained to ArcShield, but we don't want it to rotate
 		}
 		

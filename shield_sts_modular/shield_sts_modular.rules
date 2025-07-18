@@ -1013,10 +1013,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		EmitterEffect
 		{
 			Type = ContinuousEffects
-			ChainedTo = ArcShield
+//			ChainedTo = ArcShield
 			FactorMediaEffectsIntensityWith = CombinedBatteryStorage
 			MaxMediaEffectsZoom = 12
-			Location = [1.8, 0]
+			Location = [1 + 1.8, 1]
 			OperationalToggle = IsOperationalProxy
 			ParentToShip = true
 			MediaEffects
