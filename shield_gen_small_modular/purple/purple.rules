@@ -64,7 +64,6 @@ Components
 				Shield = GENS_ArcShield
 				ChainedTo = GENS_ArcShield
 			}
-			
 			GENS_Overclock_ExtendedEffect : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_ExtendedEffect
 			{
 				OperationalToggle = Overclock_ExtendedEffectToggle

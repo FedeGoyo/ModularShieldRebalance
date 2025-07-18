@@ -54,11 +54,6 @@ Components
 					: &../^/0/MediaEffects/1	{}
 				]
 			}
-			GENL_ShieldOperationEffects : &<../shield_gen_large_modular.rules>/Part/Components/ShieldOperationEffects
-			{
-				Toggle = IsOperational
-				ChainedTo = GENL_ArcShield
-			}
 			GENL_OverclockEffect : &<../shield_gen_large_modular.rules>/Part/Components/OverclockEffect
 			{
 				OperationalToggle = OverclockedEffectToggle

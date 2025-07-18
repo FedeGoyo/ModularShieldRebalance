@@ -451,13 +451,84 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			ChainedTo	// Normally chained to ArcShield, but we don't want it to rotate
 		}
 		
-		// Proxy to OverloadEffect and OverclockOverloadEffect???
+		GENL_ArcShield_Proxy
+		{
+			Type = ChainableProxy
+			ComponentID = GENL_ArcShield
+		}
 		
+		ShieldOperationEffects : ^/0/ShieldOperationEffects
+		{
+			ChainedTo = GENL_ArcShield_Proxy
+			Location = [&~/Part/Components/ArcShield/Radius/BaseValue, 0]
+		}
+
 		Overclock_ArcShieldProxy
 		{
 			Type = TriggerProxy
 			ComponentID = GENS_ArcShield
 			ProxyToggle = IsOperationalOverclocked
+		}
+		
+		OverloadEffect :	^/0/OverloadEffect
+		{
+			OperationalToggle = IsOperationalProxy
+			ContinuousEffects
+			[
+				: ../^/0/ContinuousEffects/0
+				{
+					Radius = &~/Part/Components/ArcShield/Radius
+					Arc = &~/Part/Components/ArcShield/Arc
+				}
+			]
+		}
+		Overclock_ExtendedEffect :	^/0/Overclock_ExtendedEffect
+		{
+			OperationalToggle = IsOperationalProxy
+			ContinuousEffects
+			[
+				: ../^/0/ContinuousEffects/0
+				{
+					Radius = &~/Part/Components/ArcShield/Radius
+					Arc = &~/Part/Components/ArcShield/Arc
+				}
+			]
+		}
+		Overclock_OverloadEffect_Extended :	^/0/Overclock_OverloadEffect_Extended
+		{
+			OperationalToggle = IsOperationalProxy
+			ContinuousEffects
+			[
+				: ../^/0/ContinuousEffects/0
+				{
+					Radius = &~/Part/Components/ArcShield/Radius
+					Arc = &~/Part/Components/ArcShield/Arc
+				}
+			]
+		}
+		Overclock_ReinforcedEffect :	^/0/Overclock_ReinforcedEffect
+		{
+			OperationalToggle = IsOperationalProxy
+			ContinuousEffects
+			[
+				: ../^/0/ContinuousEffects/0
+				{
+					Radius = &~/Part/Components/ArcShield/Radius
+					Arc = &~/Part/Components/ArcShield/Arc
+				}
+			]
+		}
+		Overclock_OverloadEffect_Reinforced :	^/0/Overclock_OverloadEffect_Reinforced
+		{
+			OperationalToggle = IsOperationalProxy
+			ContinuousEffects
+			[
+				: ../^/0/ContinuousEffects/0
+				{
+					Radius = &~/Part/Components/ArcShield/Radius
+					Arc = &~/Part/Components/ArcShield/Arc
+				}
+			]
 		}
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
