@@ -445,34 +445,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			}
 		}
 		
-		IsModularToggle
-		{
-			Type = BuffToggle
-			BuffType = BubbleResistanceBonus
-		}
-
-		IsOperational_Modular_NotOverclocked
-		{
-			Type = MultiToggle
-			Toggles = [IsOperational, IsModularToggle, {Toggle = OverclockedEffectToggle, Invert = true} ]
-			Mode = All
-		}
-		IsOperational_Modular_Overclocked
-		{
-			Type = MultiToggle
-			Toggles = [IsOperational, IsModularToggle, OverclockedEffectToggle]
-			Mode = All
-		}
-		
-		CentralBatteryStorage // It isn't necesarely, but adding this makes the shield less buggy.
-		{
-			Type = ResourceStorage
-			ResourceType = battery
-			MaxResources = 0
-			DrainOnFtlJump = true
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-		}
-
 		// Starts Rotation
 		
 		RotationTime

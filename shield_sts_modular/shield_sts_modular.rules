@@ -380,34 +380,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				Left = -2
 			}
 		}
-
-		IsModularToggle
-		{
-			Type = BuffToggle
-			BuffType = BubbleResistanceBonus
-		}
-		
-		IsOperational_Modular_NotOverclocked
-		{
-			Type = MultiToggle
-			Toggles = [IsOperational, IsModularToggle, {Toggle = OverclockedEffectToggle, Invert = true} ]
-			Mode = All
-		}
-		IsOperational_Modular_Overclocked
-		{
-			Type = MultiToggle
-			Toggles = [IsOperational, IsModularToggle, OverclockedEffectToggle]
-			Mode = All
-		}
-		
-		CentralBatteryStorage	// I think that using this makes the modular battery less bugged
-		{
-			Type = ResourceStorage
-			ResourceType = battery
-			MaxResources = 0
-			DrainOnFtlJump = true
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-		}
 		
 		// Starts Rotation
 		
