@@ -17,8 +17,7 @@ Components
 		Toggle = Toggle_Blue_On
 		Components : <../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_On/Components
 		{
-			// Inner
-			ArcShield_InnerFront :		^/0/ArcShield_InnerFront
+			ArcShield_Front :		^/0/ArcShield_Front
 			{
 				ShieldMediaEffects
 				[
@@ -37,11 +36,11 @@ Components
 					: &../^/0/HitMediaEffects/1 {}
 				]
 			}
-			ArcShield_InnerFrontRight :	<../stats.rules>/Stats/ArcShield_InnerFrontRight, ArcShield_InnerFront	{}
-			ArcShield_InnerBackRight :	<../stats.rules>/Stats/ArcShield_InnerBackRight, ArcShield_InnerFront	{}
-			ArcShield_InnerBack :		<../stats.rules>/Stats/ArcShield_InnerBack, ArcShield_InnerFront		{}
-			ArcShield_InnerBackLeft :	<../stats.rules>/Stats/ArcShield_InnerBackLeft, ArcShield_InnerFront	{}
-			ArcShield_InnerFrontLeft :	<../stats.rules>/Stats/ArcShield_InnerFrontLeft, ArcShield_InnerFront	{}
+			ArcShield_FrontRight :	<../stats.rules>/Stats/ArcShield_FrontRight, ArcShield_Front	{}
+			ArcShield_BackRight :	<../stats.rules>/Stats/ArcShield_BackRight, ArcShield_Front		{}
+			ArcShield_Back :		<../stats.rules>/Stats/ArcShield_Back, ArcShield_Front			{}
+			ArcShield_BackLeft :	<../stats.rules>/Stats/ArcShield_BackLeft, ArcShield_Front		{}
+			ArcShield_FrontLeft :	<../stats.rules>/Stats/ArcShield_FrontLeft, ArcShield_Front		{}
 
 			// Always
 			STL_EmitterEffect : ^/0/STL_EmitterEffect
@@ -65,8 +64,7 @@ Components
 		Toggle = Toggle_Blue_Off
 		Components =
 		{
-			// Inner
-			ArcShield_InnerFront :		&../../ToggleComponents_Shield_Blue_On/Components/ArcShield_InnerFront
+			ArcShield_Front :		&../../ToggleComponents_Shield_Blue_On/Components/ArcShield_Front
 			{
 				ShieldMediaEffects
 				[
@@ -77,11 +75,11 @@ Components
 					: &../^/0/ShieldMediaEffects/1 {}
 				]
 			}
-			ArcShield_InnerFrontRight :	<../stats.rules>/Stats/ArcShield_InnerFrontRight, ArcShield_InnerFront	{}
-			ArcShield_InnerBackRight :	<../stats.rules>/Stats/ArcShield_InnerBackRight, ArcShield_InnerFront	{}
-			ArcShield_InnerBack :		<../stats.rules>/Stats/ArcShield_InnerBack, ArcShield_InnerFront		{}
-			ArcShield_InnerBackLeft :	<../stats.rules>/Stats/ArcShield_InnerBackLeft, ArcShield_InnerFront	{}
-			ArcShield_InnerFrontLeft :	<../stats.rules>/Stats/ArcShield_InnerFrontLeft, ArcShield_InnerFront	{}
+			ArcShield_FrontRight :	<../stats.rules>/Stats/ArcShield_FrontRight, ArcShield_Front	{}
+			ArcShield_BackRight :	<../stats.rules>/Stats/ArcShield_BackRight, ArcShield_Front		{}
+			ArcShield_Back :		<../stats.rules>/Stats/ArcShield_Back, ArcShield_Front			{}
+			ArcShield_BackLeft :	<../stats.rules>/Stats/ArcShield_BackLeft, ArcShield_Front		{}
+			ArcShield_FrontLeft :	<../stats.rules>/Stats/ArcShield_FrontLeft, ArcShield_Front		{}
 		}
 	}
 	

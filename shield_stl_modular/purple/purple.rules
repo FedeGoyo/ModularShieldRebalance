@@ -22,8 +22,7 @@ Components
 		Toggle = Toggle_Purple_On
 		Components = 
 		{
-			// When not overclocked
-			ArcShield_InnerFront :		<../stats.rules>/Stats/ArcShield_InnerFront, &<../shield_stl_modular.rules>/Part/Components/ArcShield
+			ArcShield_Front :		<../stats.rules>/Stats/ArcShield_Front, &<../shield_stl_modular.rules>/Part/Components/ArcShield
 			{
 				ShieldMediaEffects
 				[
@@ -43,41 +42,41 @@ Components
 					: &../^/1/HitMediaEffects/1 {}
 				]
 			}
-			ArcShield_InnerFrontRight :	<../stats.rules>/Stats/ArcShield_InnerFrontRight, ArcShield_InnerFront	{}
-			ArcShield_InnerBackRight :	<../stats.rules>/Stats/ArcShield_InnerBackRight, ArcShield_InnerFront	{}
-			ArcShield_InnerBack :		<../stats.rules>/Stats/ArcShield_InnerBack, ArcShield_InnerFront		{}
-			ArcShield_InnerBackLeft :	<../stats.rules>/Stats/ArcShield_InnerBackLeft, ArcShield_InnerFront	{}
-			ArcShield_InnerFrontLeft :	<../stats.rules>/Stats/ArcShield_InnerFrontLeft, ArcShield_InnerFront	{}
+			ArcShield_FrontRight :	<../stats.rules>/Stats/ArcShield_FrontRight, ArcShield_Front	{}
+			ArcShield_BackRight :	<../stats.rules>/Stats/ArcShield_BackRight, ArcShield_Front		{}
+			ArcShield_Back :		<../stats.rules>/Stats/ArcShield_Back, ArcShield_Front			{}
+			ArcShield_BackLeft :	<../stats.rules>/Stats/ArcShield_BackLeft, ArcShield_Front		{}
+			ArcShield_FrontLeft :	<../stats.rules>/Stats/ArcShield_FrontLeft, ArcShield_Front		{}
 			
-			OverloadEffect_InnerFront :			<../stats.rules>/Stats/OverloadEffect_InnerFront, &<../shield_stl_modular.rules>/Part/Components/OverloadEffect
+			OverloadEffect_Front :			<../stats.rules>/Stats/OverloadEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverloadEffect
 			{
-				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_InnerFront/Radius } ]
+				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
 			}
-			OverloadEffect_InnerFrontRight :	<../stats.rules>/Stats/OverloadEffect_InnerFrontRight, OverloadEffect_InnerFront	{}
-			OverloadEffect_InnerBackRight :		<../stats.rules>/Stats/OverloadEffect_InnerBackRight, OverloadEffect_InnerFront		{}
-			OverloadEffect_InnerBack :			<../stats.rules>/Stats/OverloadEffect_InnerBack, OverloadEffect_InnerFront			{}
-			OverloadEffect_InnerBackLeft :		<../stats.rules>/Stats/OverloadEffect_InnerBackLeft, OverloadEffect_InnerFront		{}
-			OverloadEffect_InnerFrontLeft :		<../stats.rules>/Stats/OverloadEffect_InnerFrontLeft, OverloadEffect_InnerFront		{}
+			OverloadEffect_FrontRight :	<../stats.rules>/Stats/OverloadEffect_FrontRight, OverloadEffect_Front			{}
+			OverloadEffect_BackRight :		<../stats.rules>/Stats/OverloadEffect_BackRight, OverloadEffect_Front		{}
+			OverloadEffect_Back :			<../stats.rules>/Stats/OverloadEffect_Back, OverloadEffect_Front			{}
+			OverloadEffect_BackLeft :		<../stats.rules>/Stats/OverloadEffect_BackLeft, OverloadEffect_Front		{}
+			OverloadEffect_FrontLeft :		<../stats.rules>/Stats/OverloadEffect_FrontLeft, OverloadEffect_Front		{}
 
-			OverclockEffect_InnerFront :		<../stats.rules>/Stats/OverclockEffect_InnerFront, &<../shield_stl_modular.rules>/Part/Components/OverclockEffect
+			OverclockEffect_Front :		<../stats.rules>/Stats/OverclockEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverclockEffect
 			{
-				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_InnerFront/Radius } ]
+				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
 			}
-			OverclockEffect_InnerFrontRight :	<../stats.rules>/Stats/OverclockEffect_InnerFrontRight, OverclockEffect_InnerFront	{}
-			OverclockEffect_InnerBackRight :	<../stats.rules>/Stats/OverclockEffect_InnerBackRight, OverclockEffect_InnerFront	{}
-			OverclockEffect_InnerBack :			<../stats.rules>/Stats/OverclockEffect_InnerBack, OverclockEffect_InnerFront		{}
-			OverclockEffect_InnerBackLeft :		<../stats.rules>/Stats/OverclockEffect_InnerBackLeft, OverclockEffect_InnerFront	{}
-			OverclockEffect_InnerFrontLeft :	<../stats.rules>/Stats/OverclockEffect_InnerFrontLeft, OverclockEffect_InnerFront	{}
+			OverclockEffect_FrontRight :	<../stats.rules>/Stats/OverclockEffect_FrontRight, OverclockEffect_Front	{}
+			OverclockEffect_BackRight :	<../stats.rules>/Stats/OverclockEffect_BackRight, OverclockEffect_Front			{}
+			OverclockEffect_Back :			<../stats.rules>/Stats/OverclockEffect_Back, OverclockEffect_Front			{}
+			OverclockEffect_BackLeft :		<../stats.rules>/Stats/OverclockEffect_BackLeft, OverclockEffect_Front		{}
+			OverclockEffect_FrontLeft :	<../stats.rules>/Stats/OverclockEffect_FrontLeft, OverclockEffect_Front			{}
 			
-			OverclockOverloadEffect_InnerFront :		<../stats.rules>/Stats/OverclockOverloadEffect_InnerFront, &<../shield_stl_modular.rules>/Part/Components/OverclockOverloadEffect
+			OverclockOverloadEffect_Front :		<../stats.rules>/Stats/OverclockOverloadEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverclockOverloadEffect
 			{
-				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_InnerFront/Radius } ]
+				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
 			}
-			OverclockOverloadEffect_InnerFrontRight :	<../stats.rules>/Stats/OverclockOverloadEffect_InnerFrontRight, OverclockOverloadEffect_InnerFront	{}
-			OverclockOverloadEffect_InnerBackRight :	<../stats.rules>/Stats/OverclockOverloadEffect_InnerBackRight, OverclockOverloadEffect_InnerFront	{}
-			OverclockOverloadEffect_InnerBack :			<../stats.rules>/Stats/OverclockOverloadEffect_InnerBack, OverclockOverloadEffect_InnerFront		{}
-			OverclockOverloadEffect_InnerBackLeft :		<../stats.rules>/Stats/OverclockOverloadEffect_InnerBackLeft, OverclockOverloadEffect_InnerFront	{}
-			OverclockOverloadEffect_InnerFrontLeft :	<../stats.rules>/Stats/OverclockOverloadEffect_InnerFrontLeft, OverclockOverloadEffect_InnerFront	{}
+			OverclockOverloadEffect_FrontRight :	<../stats.rules>/Stats/OverclockOverloadEffect_FrontRight, OverclockOverloadEffect_Front	{}
+			OverclockOverloadEffect_BackRight :	<../stats.rules>/Stats/OverclockOverloadEffect_BackRight, OverclockOverloadEffect_Front			{}
+			OverclockOverloadEffect_Back :			<../stats.rules>/Stats/OverclockOverloadEffect_Back, OverclockOverloadEffect_Front			{}
+			OverclockOverloadEffect_BackLeft :		<../stats.rules>/Stats/OverclockOverloadEffect_BackLeft, OverclockOverloadEffect_Front		{}
+			OverclockOverloadEffect_FrontLeft :	<../stats.rules>/Stats/OverclockOverloadEffect_FrontLeft, OverclockOverloadEffect_Front			{}
 
 			// Always
 			STL_EmitterEffect :	&<../shield_stl_modular.rules>/Part/Components/EmitterEffect
@@ -101,8 +100,7 @@ Components
 		Toggle = Toggle_Purple_Off
 		Components =
 		{
-			// Inner
-			ArcShield_InnerFront :		&../../ToggleComponents_Shield_Purple_On/Components/ArcShield_InnerFront
+			ArcShield_Front :		&../../ToggleComponents_Shield_Purple_On/Components/ArcShield_Front
 			{
 				ShieldMediaEffects
 				[
@@ -113,11 +111,11 @@ Components
 					: &../^/0/ShieldMediaEffects/1 {}
 				]
 			}
-			ArcShield_InnerFrontRight :	<../stats.rules>/Stats/ArcShield_InnerFrontRight, ArcShield_InnerFront	{}
-			ArcShield_InnerBackRight :	<../stats.rules>/Stats/ArcShield_InnerBackRight, ArcShield_InnerFront	{}
-			ArcShield_InnerBack :		<../stats.rules>/Stats/ArcShield_InnerBack, ArcShield_InnerFront		{}
-			ArcShield_InnerBackLeft :	<../stats.rules>/Stats/ArcShield_InnerBackLeft, ArcShield_InnerFront	{}
-			ArcShield_InnerFrontLeft :	<../stats.rules>/Stats/ArcShield_InnerFrontLeft, ArcShield_InnerFront	{}
+			ArcShield_FrontRight :	<../stats.rules>/Stats/ArcShield_FrontRight, ArcShield_Front	{}
+			ArcShield_BackRight :	<../stats.rules>/Stats/ArcShield_BackRight, ArcShield_Front		{}
+			ArcShield_Back :		<../stats.rules>/Stats/ArcShield_Back, ArcShield_Front			{}
+			ArcShield_BackLeft :	<../stats.rules>/Stats/ArcShield_BackLeft, ArcShield_Front		{}
+			ArcShield_FrontLeft :	<../stats.rules>/Stats/ArcShield_FrontLeft, ArcShield_Front		{}
 		}
 	}
 	

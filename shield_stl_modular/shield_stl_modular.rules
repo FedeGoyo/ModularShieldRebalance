@@ -220,7 +220,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Type = MultiResourceStorage
 			ResourceType = battery
 			IsDrainable = true
-			ResourceStorages = [CombinedInnerFrontBatteryStorage, CombinedInnerFrontRightBatteryStorage, CombinedInnerBackRightBatteryStorage, CombinedInnerBackBatteryStorage, CombinedInnerBackLeftBatteryStorage, CombinedInnerFrontLeftBatteryStorage]
+			ResourceStorages = [CombinedBatteryStorage_Front, CombinedBatteryStorage_FrontRight, CombinedBatteryStorage_BackRight, CombinedBatteryStorage_Back, CombinedBatteryStorage_BackLeft, CombinedBatteryStorage_FrontLeft]
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 			RemoveMode = DistributeEvenly
 			ToggleOnResources = 7001
@@ -260,7 +260,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Type = MultiResourceStorage
 			ResourceType = battery
 			IsDrainable = false
-			ResourceStorages = [InnerFrontBatteryStorage, InnerFrontRightBatteryStorage, InnerBackRightBatteryStorage, InnerBackBatteryStorage, InnerBackLeftBatteryStorage, InnerFrontLeftBatteryStorage]
+			ResourceStorages = [BatteryStorage_Front, BatteryStorage_FrontRight, BatteryStorage_BackRight, BatteryStorage_Back, BatteryStorage_BackLeft, BatteryStorage_FrontLeft]
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 			AddMode = DistributeEvenly
 		}
@@ -274,18 +274,18 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OperationalToggle = PowerToggle
 		}
 		
-		// Inner (when overclocked)
+		// Segments
 		
-		InnerFrontIsOperational
+		IsOperational_LargeFront
 		{
 			Type = MultiToggle
-			Toggles = [PowerToggle, InnerFrontBatteryStorage, ScorchedToggle, IsOperational]
+			Toggles = [PowerToggle, BatteryStorage_Front, ScorchedToggle, IsOperational]
 			Mode = All
 		}
-		InnerFrontOverclockEffect :			InnerFrontIsOperational	{ Toggles = [InnerFrontIsOperational, OverclockedEffectToggle] }
-		InnerFrontOverloadEffect :			InnerFrontIsOperational	{ Toggles = [InnerFrontIsOperational, IsOperationalOverloaded] }
-		InnerFrontOverclockOverloadEffect :	InnerFrontIsOperational	{ Toggles = [InnerFrontIsOperational, IsOperationalOverclockedOverloaded] }
-		InnerFrontBatteryStorage
+		IsOperationalOverloaded_Front :				IsOperational_LargeFront	{ Toggles = [IsOperational_LargeFront, IsOperationalOverloaded] }
+		OverclockedEffectToggle_Front :				IsOperational_LargeFront	{ Toggles = [IsOperational_LargeFront, OverclockedEffectToggle] }
+		IsOperationalOverclockedOverloaded_Front :	IsOperational_LargeFront	{ Toggles = [IsOperational_LargeFront, IsOperationalOverclockedOverloaded] }
+		BatteryStorage_Front
 		{
 			Type = ResourceStorage
 			ResourceType = battery
@@ -295,13 +295,13 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			DrainOnFtlJump = true
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
-		CombinedInnerFrontBatteryStorage
+		CombinedBatteryStorage_Front
 		{
 			Type = MultiResourceStorage
 			ResourceType = battery
 			IsDrainable = false
 			OperationalToggle = IsOverclocked
-			ResourceStorages = [InnerFrontBatteryStorage]
+			ResourceStorages = [BatteryStorage_Front]
 			ViaBuffs
 			{
 				OutgoingBuffProviders = [BuffProvider_Top, BuffProvider_Right, BuffProvider_Bottom, BuffProvider_Left]
@@ -310,94 +310,94 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 			RemoveMode = InReverseOrder
 		}
-		InnerFrontPowerDrain
+		PowerDrain_Front
 		{
 			Type = ResourceConverter
-			OperationalToggle = InnerFrontIsOperational
-			FromStorage = InnerFrontBatteryStorage
+			OperationalToggle = IsOperational_LargeFront
+			FromStorage = BatteryStorage_Front
 			FromQuantity = 50
 			MinFromQuantityForConversion = 1
 			Interval = 1
 		}
 		
-		InnerFrontRightIsOperational : 				InnerFrontIsOperational				{ Toggles = [PowerToggle, InnerFrontRightBatteryStorage, ScorchedToggle, IsOperational] }
-		InnerFrontRightOverloadEffect :				InnerFrontIsOperational				{ Toggles = [InnerFrontRightIsOperational, IsOperationalOverloaded] }
-		InnerFrontRightOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerFrontRightIsOperational, OverclockedEffectToggle] }
-		InnerFrontRightOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerFrontRightIsOperational, IsOperationalOverclockedOverloaded] }
-		InnerFrontRightBatteryStorage : 			InnerFrontBatteryStorage			{}
-		CombinedInnerFrontRightBatteryStorage :		CombinedInnerFrontBatteryStorage
+		IsOperational_LargeFrontRight : 				IsOperational_LargeFront				{ Toggles = [PowerToggle, BatteryStorage_FrontRight, ScorchedToggle, IsOperational] }
+		IsOperationalOverloaded_FrontRight :			IsOperational_LargeFront				{ Toggles = [IsOperational_LargeFrontRight, IsOperationalOverloaded] }
+		OverclockedEffectToggle_FrontRight :			IsOperational_LargeFront				{ Toggles = [IsOperational_LargeFrontRight, OverclockedEffectToggle] }
+		IsOperationalOverclockedOverloaded_FrontRight :	IsOperational_LargeFront				{ Toggles = [IsOperational_LargeFrontRight, IsOperationalOverclockedOverloaded] }
+		BatteryStorage_FrontRight : 					BatteryStorage_Front					{}
+		CombinedBatteryStorage_FrontRight :				CombinedBatteryStorage_Front
 		{
-			ResourceStorages = [InnerFrontRightBatteryStorage]
+			ResourceStorages = [BatteryStorage_FrontRight]
 			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_LargeFrontRight }
 		}
-		InnerFrontRightPowerDrain : 				InnerFrontPowerDrain
+		PowerDrain_FrontRight : 						PowerDrain_Front
 		{
-			OperationalToggle = InnerFrontRightIsOperational
-			FromStorage = InnerFrontRightBatteryStorage
+			OperationalToggle = IsOperational_LargeFrontRight
+			FromStorage = BatteryStorage_FrontRight
 		}
 		
-		InnerBackRightIsOperational : 			InnerFrontIsOperational				{ Toggles = [PowerToggle, InnerBackRightBatteryStorage, ScorchedToggle, IsOperational] }
-		InnerBackRightOverloadEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackRightIsOperational, IsOperationalOverloaded] }
-		InnerBackRightOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackRightIsOperational, OverclockedEffectToggle] }
-		InnerBackRightOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerBackRightIsOperational, IsOperationalOverclockedOverloaded] }
-		InnerBackRightBatteryStorage : 			InnerFrontBatteryStorage			{}
-		CombinedInnerBackRightBatteryStorage :	CombinedInnerFrontBatteryStorage
+		IsOperational_LargeBackRight : 					IsOperational_LargeFront				{ Toggles = [PowerToggle, BatteryStorage_BackRight, ScorchedToggle, IsOperational] }
+		IsOperationalOverloaded_BackRight :				IsOperational_LargeFront				{ Toggles = [IsOperational_LargeBackRight, IsOperationalOverloaded] }
+		OverclockedEffectToggle_BackRight :				IsOperational_LargeFront				{ Toggles = [IsOperational_LargeBackRight, OverclockedEffectToggle] }
+		IsOperationalOverclockedOverloaded_BackRight :	IsOperational_LargeFront				{ Toggles = [IsOperational_LargeBackRight, IsOperationalOverclockedOverloaded] }
+		BatteryStorage_BackRight : 						BatteryStorage_Front					{}
+		CombinedBatteryStorage_BackRight :				CombinedBatteryStorage_Front
 		{
-			ResourceStorages = [InnerBackRightBatteryStorage]
+			ResourceStorages = [BatteryStorage_BackRight]
 			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_LargeBackRight }
 		}
-		InnerBackRightPowerDrain : 				InnerFrontPowerDrain
+		PowerDrain_BackRight : 							PowerDrain_Front
 		{
-			OperationalToggle = InnerBackRightIsOperational
-			FromStorage = InnerBackRightBatteryStorage
+			OperationalToggle = IsOperational_LargeBackRight
+			FromStorage = BatteryStorage_BackRight
 		}
 		
-		InnerBackIsOperational : 			InnerFrontIsOperational				{ Toggles = [PowerToggle, InnerBackBatteryStorage, ScorchedToggle, IsOperational] }
-		InnerBackOverloadEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackIsOperational, IsOperationalOverloaded] }
-		InnerBackOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackIsOperational, OverclockedEffectToggle] }
-		InnerBackOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerBackIsOperational, IsOperationalOverclockedOverloaded] }
-		InnerBackBatteryStorage : 			InnerFrontBatteryStorage			{}
-		CombinedInnerBackBatteryStorage :	CombinedInnerFrontBatteryStorage
+		IsOperational_LargeBack : 					IsOperational_LargeFront				{ Toggles = [PowerToggle, BatteryStorage_Back, ScorchedToggle, IsOperational] }
+		IsOperationalOverloaded_Back :				IsOperational_LargeFront				{ Toggles = [IsOperational_LargeBack, IsOperationalOverloaded] }
+		OverclockedEffectToggle_Back :				IsOperational_LargeFront				{ Toggles = [IsOperational_LargeBack, OverclockedEffectToggle] }
+		IsOperationalOverclockedOverloaded_Back :	IsOperational_LargeFront				{ Toggles = [IsOperational_LargeBack, IsOperationalOverclockedOverloaded] }
+		BatteryStorage_Back : 						BatteryStorage_Front					{}
+		CombinedBatteryStorage_Back :				CombinedBatteryStorage_Front
 		{
-			ResourceStorages = [InnerBackBatteryStorage]
+			ResourceStorages = [BatteryStorage_Back]
 			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_LargeBack }
 		}
-		InnerBackPowerDrain : 				InnerFrontPowerDrain
+		PowerDrain_Back : 							PowerDrain_Front
 		{
-			OperationalToggle = InnerBackIsOperational
-			FromStorage = InnerBackBatteryStorage
+			OperationalToggle = IsOperational_LargeBack
+			FromStorage = BatteryStorage_Back
 		}
 
-		InnerBackLeftIsOperational : 			InnerFrontIsOperational				{ Toggles = [PowerToggle, InnerBackLeftBatteryStorage, ScorchedToggle, IsOperational] }
-		InnerBackLeftOverloadEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackLeftIsOperational, IsOperationalOverloaded] }
-		InnerBackLeftOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackLeftIsOperational, OverclockedEffectToggle] }
-		InnerBackLeftOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerBackLeftIsOperational, IsOperationalOverclockedOverloaded] }
-		InnerBackLeftBatteryStorage : 			InnerFrontBatteryStorage			{}
-		CombinedInnerBackLeftBatteryStorage :	CombinedInnerFrontBatteryStorage
+		IsOperational_LargeBackLeft : 					IsOperational_LargeFront				{ Toggles = [PowerToggle, BatteryStorage_BackLeft, ScorchedToggle, IsOperational] }
+		IsOperationalOverloaded_BackLeft :				IsOperational_LargeFront				{ Toggles = [IsOperational_LargeBackLeft, IsOperationalOverloaded] }
+		OverclockedEffectToggle_BackLeft :				IsOperational_LargeFront				{ Toggles = [IsOperational_LargeBackLeft, OverclockedEffectToggle] }
+		IsOperationalOverclockedOverloaded_BackLeft :	IsOperational_LargeFront				{ Toggles = [IsOperational_LargeBackLeft, IsOperationalOverclockedOverloaded] }
+		BatteryStorage_BackLeft : 						BatteryStorage_Front					{}
+		CombinedBatteryStorage_BackLeft :				CombinedBatteryStorage_Front
 		{
-			ResourceStorages = [InnerBackLeftBatteryStorage]
+			ResourceStorages = [BatteryStorage_BackLeft]
 			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_LargeBackLeft }
 		}
-		InnerBackLeftPowerDrain : 				InnerFrontPowerDrain
+		PowerDrain_BackLeft : 							PowerDrain_Front
 		{
-			OperationalToggle = InnerBackLeftIsOperational
-			FromStorage = InnerBackLeftBatteryStorage
+			OperationalToggle = IsOperational_LargeBackLeft
+			FromStorage = BatteryStorage_BackLeft
 		}
 		
-		InnerFrontLeftIsOperational : 			InnerFrontIsOperational				{ Toggles = [PowerToggle, InnerFrontLeftBatteryStorage, ScorchedToggle, IsOperational] }
-		InnerFrontLeftOverloadEffect :			InnerFrontIsOperational				{ Toggles = [InnerFrontLeftIsOperational, IsOperationalOverloaded] }
-		InnerFrontLeftOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerFrontLeftIsOperational, OverclockedEffectToggle] }
-		InnerFrontLeftOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerFrontLeftIsOperational, IsOperationalOverclockedOverloaded] }
-		InnerFrontLeftBatteryStorage : 			InnerFrontBatteryStorage			{}
-		CombinedInnerFrontLeftBatteryStorage :	CombinedInnerFrontBatteryStorage
+		IsOperational_LargeFrontLeft : 					IsOperational_LargeFront				{ Toggles = [PowerToggle, BatteryStorage_FrontLeft, ScorchedToggle, IsOperational] }
+		IsOperationalOverloaded_FrontLeft :				IsOperational_LargeFront				{ Toggles = [IsOperational_LargeFrontLeft, IsOperationalOverloaded] }
+		OverclockedEffectToggle_FrontLeft :				IsOperational_LargeFront				{ Toggles = [IsOperational_LargeFrontLeft, OverclockedEffectToggle] }
+		IsOperationalOverclockedOverloaded_FrontLeft :	IsOperational_LargeFront				{ Toggles = [IsOperational_LargeFrontLeft, IsOperationalOverclockedOverloaded] }
+		BatteryStorage_FrontLeft : 						BatteryStorage_Front					{}
+		CombinedBatteryStorage_FrontLeft :				CombinedBatteryStorage_Front
 		{
-			ResourceStorages = [InnerFrontLeftBatteryStorage]
+			ResourceStorages = [BatteryStorage_FrontLeft]
 			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_LargeFrontLeft }
 		}
-		InnerFrontLeftPowerDrain : 				InnerFrontPowerDrain
+		PowerDrain_FrontLeft : 							PowerDrain_Front
 		{
-			OperationalToggle = InnerFrontLeftIsOperational
-			FromStorage = InnerFrontLeftBatteryStorage
+			OperationalToggle = IsOperational_LargeFrontLeft
+			FromStorage = BatteryStorage_FrontLeft
 		}
 
 		// Ends Normal Batteries
@@ -576,7 +576,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		// ARCSHIELD ORIGINAL - START //////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		ArcShield : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield
+		ArcShield : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield	// _Blueprint_Front
 		{
 			Radius
 			{
@@ -639,11 +639,11 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			]
 		}
 		
-		ArcShieldFrontRight :	ArcShield	{ Rotation = -30d }
-		ArcShieldBackRight :	ArcShield	{ Rotation = 30d }
-		ArcShieldBack :			ArcShield	{ Rotation = 90d }
-		ArcShieldBackLeft :		ArcShield	{ Rotation = 150d }
-		ArcShieldFrontLeft :	ArcShield	{ Rotation = 210d }
+		ArcShield_Blueprint_FrontRight :	ArcShield	{ Rotation = -30d }
+		ArcShield_Blueprint_BackRight :		ArcShield	{ Rotation = 30d }
+		ArcShield_Blueprint_Back :			ArcShield	{ Rotation = 90d }
+		ArcShield_Blueprint_BackLeft :		ArcShield	{ Rotation = 150d }
+		ArcShield_Blueprint_FrontLeft :		ArcShield	{ Rotation = 210d }
 		
 		OverclockTweenToggle
 		{
@@ -659,7 +659,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Mode = All
 		}
 		
-		Overclock_BlueprintArc
+		Overclock_BlueprintArc	// Front
 		{
 			Type = ArcSprite
 			ChainedTo = ArcShield
@@ -680,11 +680,11 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			}
 		}
 		
-		Overclock_BlueprintArcFrontRight :	Overclock_BlueprintArc	{ ChainedTo = ArcShieldFrontRight }
-		Overclock_BlueprintArcBackRight :	Overclock_BlueprintArc	{ ChainedTo = ArcShieldBackRight }
-		Overclock_BlueprintArcBack :		Overclock_BlueprintArc	{ ChainedTo = ArcShieldBack }
-		Overclock_BlueprintArcBackLeft :	Overclock_BlueprintArc	{ ChainedTo = ArcShieldBackLeft }
-		Overclock_BlueprintArcFrontLeft :	Overclock_BlueprintArc	{ ChainedTo = ArcShieldFrontLeft }
+		Overclock_BlueprintArc_FrontRight :	Overclock_BlueprintArc	{ ChainedTo = ArcShield_Blueprint_FrontRight }
+		Overclock_BlueprintArc_BackRight :	Overclock_BlueprintArc	{ ChainedTo = ArcShield_Blueprint_BackRight }
+		Overclock_BlueprintArc_Back :		Overclock_BlueprintArc	{ ChainedTo = ArcShield_Blueprint_Back }
+		Overclock_BlueprintArc_BackLeft :	Overclock_BlueprintArc	{ ChainedTo = ArcShield_Blueprint_BackLeft }
+		Overclock_BlueprintArc_FrontLeft :	Overclock_BlueprintArc	{ ChainedTo = ArcShield_Blueprint_FrontLeft }
 		
 		OverclockEffect
 		{
@@ -928,33 +928,33 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			]
 		}
 
-		InnerFrontIsOperationalOverclocked
+		IsOperationalOverclocked_Front
 		{
 			Type = MultiToggle
-			Toggles = [InnerFrontIsOperational, IsOperationalOverclocked]
+			Toggles = [IsOperational_LargeFront, IsOperationalOverclocked]
 			Mode = All
 		}
-		InnerFrontRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [InnerFrontRightIsOperational, IsOperationalOverclocked] }
-		InnerBackRightIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [InnerBackRightIsOperational, IsOperationalOverclocked] }
-		InnerBackIsOperationalOverclocked :			InnerFrontIsOperationalOverclocked	{ Toggles = [InnerBackIsOperational, IsOperationalOverclocked] }
-		InnerBackLeftIsOperationalOverclocked :		InnerFrontIsOperationalOverclocked	{ Toggles = [InnerBackLeftIsOperational, IsOperationalOverclocked] }
-		InnerFrontLeftIsOperationalOverclocked :	InnerFrontIsOperationalOverclocked	{ Toggles = [InnerFrontLeftIsOperational, IsOperationalOverclocked] }
+		IsOperationalOverclocked_FrontRight :	IsOperationalOverclocked_Front	{ Toggles = [IsOperational_LargeFrontRight, IsOperationalOverclocked] }
+		IsOperationalOverclocked_BackRight :	IsOperationalOverclocked_Front	{ Toggles = [IsOperational_LargeBackRight, IsOperationalOverclocked] }
+		IsOperationalOverclocked_Back :			IsOperationalOverclocked_Front	{ Toggles = [IsOperational_LargeBack, IsOperationalOverclocked] }
+		IsOperationalOverclocked_BackLeft :		IsOperationalOverclocked_Front	{ Toggles = [IsOperational_LargeBackLeft, IsOperationalOverclocked] }
+		IsOperationalOverclocked_FrontLeft :	IsOperationalOverclocked_Front	{ Toggles = [IsOperational_LargeFrontLeft, IsOperationalOverclocked] }
 
 		// Overclock / Thermal network
-		InnerFrontOverclockHeatProducer
+		OverclockHeatProducer_Front
 		{
 			Type = ResourceConverter
-			OperationalToggle = InnerFrontIsOperationalOverclocked
+			OperationalToggle = IsOperationalOverclocked_Front
 			HEAT_PER_INTERVAL = ceil((&~/OVERCLOCK/HEAT_PER_SECOND) * (&Interval))
 			ToQuantity = (&HEAT_PER_INTERVAL) * (&~/HEAT_TO_RESOURCE)
 			ToStorage = &~/Part/^/0/HEAT_TARGET_STORAGE
 			Interval = 0.5
 		}
-		InnerFrontRightOverclockHeatProducer :	InnerFrontOverclockHeatProducer	{ OperationalToggle = InnerFrontRightIsOperationalOverclocked }
-		InnerBackRightOverclockHeatProducer :	InnerFrontOverclockHeatProducer	{ OperationalToggle = InnerBackRightIsOperationalOverclocked }
-		InnerBackOverclockHeatProducer :		InnerFrontOverclockHeatProducer	{ OperationalToggle = InnerBackIsOperationalOverclocked }
-		InnerBackLeftOverclockHeatProducer :	InnerFrontOverclockHeatProducer	{ OperationalToggle = InnerBackLeftIsOperationalOverclocked }
-		InnerFrontLeftOverclockHeatProducer :	InnerFrontOverclockHeatProducer	{ OperationalToggle = InnerFrontRightIsOperationalOverclocked }
+		OverclockHeatProducer_FrontRight :	OverclockHeatProducer_Front	{ OperationalToggle = IsOperationalOverclocked_FrontRight }
+		OverclockHeatProducer_BackRight :	OverclockHeatProducer_Front	{ OperationalToggle = IsOperationalOverclocked_BackRight }
+		OverclockHeatProducer_Back :		OverclockHeatProducer_Front	{ OperationalToggle = IsOperationalOverclocked_Back }
+		OverclockHeatProducer_BackLeft :	OverclockHeatProducer_Front	{ OperationalToggle = IsOperationalOverclocked_BackLeft }
+		OverclockHeatProducer_FrontLeft :	OverclockHeatProducer_Front	{ OperationalToggle = IsOperationalOverclocked_FrontRight }
 		
 		OverclockHitHeatProducer
 		{
@@ -989,42 +989,37 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		Overclock_ArcShieldProxy
 		{
 			Type = MultiTrigger
-			Triggers = [Overclock_ArcShieldInnerFrontProxy, Overclock_ArcShieldInnerFrontRightProxy, Overclock_ArcShieldInnerBackRightProxy, Overclock_ArcShieldInnerBackProxy, Overclock_ArcShieldInnerBackLeftProxy, Overclock_ArcShieldInnerFrontLeftProxy]
+			Triggers = [Overclock_ArcShieldProxy_Front, Overclock_ArcShieldProxy_FrontRight, Overclock_ArcShieldProxy_BackRight, Overclock_ArcShieldProxy_Back, Overclock_ArcShieldProxy_BackLeft, Overclock_ArcShieldProxy_FrontLeft]
 		}
 		
-		Overclock_ArcShieldInnerFrontProxy
+		Overclock_ArcShieldProxy_Front
 		{
 			Type = TriggerProxy
-			ComponentID = ArcShield_InnerFront
+			ComponentID = ArcShield_Front
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldInnerFrontRightProxy
+		Overclock_ArcShieldProxy_FrontRight :	Overclock_ArcShieldProxy_Front
 		{
-			Type = TriggerProxy
-			ComponentID = ArcShield_InnerFrontRight
+			ComponentID = ArcShield_FrontRight
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldInnerBackRightProxy
+		Overclock_ArcShieldProxy_BackRight :	Overclock_ArcShieldProxy_Front
 		{
-			Type = TriggerProxy
-			ComponentID = ArcShield_InnerBackRight
+			ComponentID = ArcShield_BackRight
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldInnerBackProxy
+		Overclock_ArcShieldProxy_Back :	Overclock_ArcShieldProxy_Front
 		{
-			Type = TriggerProxy
-			ComponentID = ArcShield_InnerBack
+			ComponentID = ArcShield_Back
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldInnerBackLeftProxy
+		Overclock_ArcShieldProxy_BackLeft :	Overclock_ArcShieldProxy_Front
 		{
-			Type = TriggerProxy
 			ComponentID = ArcShield_BackLeft
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldInnerFrontLeftProxy
+		Overclock_ArcShieldProxy_FrontLeft :	Overclock_ArcShieldProxy_Front
 		{
-			Type = TriggerProxy
 			ComponentID = ArcShield_FrontLeft
 			ProxyToggle = IsOperationalOverclocked
 		}
@@ -1115,16 +1110,16 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			]
 		}
 
-		ShieldOperationEffects_InnerFront :			<./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ShieldOperationEffects
+		ShieldOperationEffects_Front :			<./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ShieldOperationEffects
 		{
 			Location = [&~/Part/Components/ArcShield/Radius/BaseValue, 0]
-			Toggle = InnerFrontIsOperational
+			Toggle = IsOperational_LargeFront
 		}
-		ShieldOperationEffects_InnerFrontRight :	ShieldOperationEffects_InnerFront	{ Toggle = InnerFrontRightIsOperational }
-		ShieldOperationEffects_InnerBackRight :		ShieldOperationEffects_InnerFront	{ Toggle = InnerBackRightIsOperational }
-		ShieldOperationEffects_InnerBack :			ShieldOperationEffects_InnerFront	{ Toggle = InnerBackIsOperational }
-		ShieldOperationEffects_InnerBackLeft :		ShieldOperationEffects_InnerFront	{ Toggle = InnerBackLeftIsOperational }
-		ShieldOperationEffects_InnerFrontLeft :		ShieldOperationEffects_InnerFront	{ Toggle = InnerFrontLeftIsOperational }
+		ShieldOperationEffects_FrontRight :		ShieldOperationEffects_Front	{ Toggle = IsOperational_LargeFrontRight }
+		ShieldOperationEffects_BackRight :		ShieldOperationEffects_Front	{ Toggle = IsOperational_LargeBackRight }
+		ShieldOperationEffects_Back :			ShieldOperationEffects_Front	{ Toggle = IsOperational_LargeBack }
+		ShieldOperationEffects_BackLeft :		ShieldOperationEffects_Front	{ Toggle = IsOperational_LargeBackLeft }
+		ShieldOperationEffects_FrontLeft :		ShieldOperationEffects_Front	{ Toggle = IsOperational_LargeFrontLeft }
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1529,9 +1524,9 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0/BaseValue
 				ShieldDist = (&~/Part/Components/ArcShield/Radius/BaseValue) - (&~/Part/Components/ArcShield/Location/1)
 				ShieldSegments = 6
-				ShieldHPSegment = (&~/Part/Components/InnerFrontBatteryStorage/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
-				PowerUsageContinuous = (&~/Part/Components/InnerFrontPowerDrain/FromQuantity) / (&~/Part/Components/InnerFrontPowerDrain/Interval) / 1000 * (&ShieldSegments)
-				SegmentCapacity = (&~/Part/Components/InnerFrontBatteryStorage/MaxResources) / 1000
+				ShieldHPSegment = (&~/Part/Components/BatteryStorage_Front/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
+				PowerUsageContinuous = (&~/Part/Components/PowerDrain_Front/FromQuantity) / (&~/Part/Components/PowerDrain_Front/Interval) / 1000 * (&ShieldSegments)
+				SegmentCapacity = (&~/Part/Components/BatteryStorage_Front/MaxResources) / 1000
 			}
 		}
 	]

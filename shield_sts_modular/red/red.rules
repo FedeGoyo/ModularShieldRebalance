@@ -17,8 +17,7 @@ Components
 		Toggle = Toggle_Red_On
 		Components : <../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_On/Components
 		{
-			// Inner
-			ArcShield_InnerFront :	^/0/ArcShield_InnerFront
+			ArcShield_Front :	^/0/ArcShield_Front
 			{
 				ShieldMediaEffects
 				[
@@ -37,9 +36,9 @@ Components
 					: &../^/0/HitMediaEffects/1 {}
 				]
 			}
-			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight, ArcShield_InnerFront	{}
-			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack, ArcShield_InnerFront	{}
-			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft, ArcShield_InnerFront	{}
+			ArcShield_Right :	<../stats.rules>/Stats/ArcShield_Right, ArcShield_Front	{}
+			ArcShield_Back :	<../stats.rules>/Stats/ArcShield_Back, ArcShield_Front	{}
+			ArcShield_Left :	<../stats.rules>/Stats/ArcShield_Left, ArcShield_Front	{}
 			
 			// Always
 			STS_EmitterEffect : ^/0/STS_EmitterEffect
@@ -63,8 +62,7 @@ Components
 		Toggle = Toggle_Red_Off
 		Components =
 		{
-			// Inner
-			ArcShield_InnerFront :	&../../ToggleComponents_Shield_Red_On/Components/ArcShield_InnerFront
+			ArcShield_Front :	&../../ToggleComponents_Shield_Red_On/Components/ArcShield_Front
 			{
 				ShieldMediaEffects
 				[
@@ -75,9 +73,9 @@ Components
 					: &../^/0/ShieldMediaEffects/1 {}
 				]
 			}
-			ArcShield_InnerRight :	<../stats.rules>/Stats/ArcShield_InnerRight, ArcShield_InnerFront		{}
-			ArcShield_InnerBack :	<../stats.rules>/Stats/ArcShield_InnerBack, ArcShield_InnerFront		{}
-			ArcShield_InnerLeft :	<../stats.rules>/Stats/ArcShield_InnerLeft, ArcShield_InnerFront		{}
+			ArcShield_Right :	<../stats.rules>/Stats/ArcShield_Right, ArcShield_Front		{}
+			ArcShield_Back :	<../stats.rules>/Stats/ArcShield_Back, ArcShield_Front		{}
+			ArcShield_Left :	<../stats.rules>/Stats/ArcShield_Left, ArcShield_Front		{}
 		}
 	}
 	

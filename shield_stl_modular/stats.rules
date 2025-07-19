@@ -3,116 +3,102 @@ Stats
 	Rotation = 360d / 60
 	
 	// Inner
-	ArcShield_InnerFront
+	ArcShield_Front
 	{
 		Rotation = -90d
-		OperationalToggle = InnerFrontIsOperational
-		DrainResourcesFrom = CombinedInnerFrontBatteryStorage
+		OperationalToggle = IsOperational_LargeFront
+		DrainResourcesFrom = CombinedBatteryStorage_Front
 	}
-	ArcShield_InnerFrontRight
+	ArcShield_FrontRight
 	{
 		Rotation = -30d
-		OperationalToggle = InnerFrontRightIsOperational
-		DrainResourcesFrom = CombinedInnerFrontRightBatteryStorage
+		OperationalToggle = IsOperational_LargeFrontRight
+		DrainResourcesFrom = CombinedBatteryStorage_FrontRight
 	}
-	ArcShield_InnerBackRight
+	ArcShield_BackRight
 	{
 		Rotation = 30d
-		OperationalToggle = InnerBackRightIsOperational
-		DrainResourcesFrom = CombinedInnerBackRightBatteryStorage
+		OperationalToggle = IsOperational_LargeBackRight
+		DrainResourcesFrom = CombinedBatteryStorage_BackRight
 	}
-	ArcShield_InnerBack
+	ArcShield_Back
 	{
 		Rotation = 90d
-		OperationalToggle = InnerBackIsOperational
-		DrainResourcesFrom = CombinedInnerBackBatteryStorage
+		OperationalToggle = IsOperational_LargeBack
+		DrainResourcesFrom = CombinedBatteryStorage_Back
 	}
-	ArcShield_InnerBackLeft
+	ArcShield_BackLeft
 	{
 		Rotation = 150d
-		OperationalToggle = InnerBackLeftIsOperational
-		DrainResourcesFrom = CombinedInnerBackLeftBatteryStorage
+		OperationalToggle = IsOperational_LargeBackLeft
+		DrainResourcesFrom = CombinedBatteryStorage_BackLeft
 	}
-	ArcShield_InnerFrontLeft
+	ArcShield_FrontLeft
 	{
 		Rotation = 210d
-		OperationalToggle = InnerFrontLeftIsOperational
-		DrainResourcesFrom = CombinedInnerFrontLeftBatteryStorage
+		OperationalToggle = IsOperational_LargeFrontLeft
+		DrainResourcesFrom = CombinedBatteryStorage_FrontLeft
 	}
 	
-	BaseEffect_InnerFront
+	BaseEffect_Front
 	{
-		Shield = ArcShield_InnerFront
-		ChainedTo = ArcShield_InnerFront
-		FactorMediaEffectsIntensityWith = CombinedInnerFrontBatteryStorage
+		Shield = ArcShield_Front
+		ChainedTo = ArcShield_Front
+		FactorMediaEffectsIntensityWith = CombinedBatteryStorage_Front
 	}
-	OverclockEffect_InnerFront : 			BaseEffect_InnerFront	{ OperationalToggle = InnerFrontOverclockEffect }
-	OverloadEffect_InnerFront :				BaseEffect_InnerFront	{ OperationalToggle = InnerFrontOverloadEffect }
-	OverclockOverloadEffect_InnerFront :	BaseEffect_InnerFront	{ OperationalToggle = InnerFrontOverclockOverloadEffect }
+	OverloadEffect_Front :				BaseEffect_Front	{ OperationalToggle = IsOperationalOverloaded_Front }
+	OverclockEffect_Front : 			BaseEffect_Front	{ OperationalToggle = OverclockedEffectToggle_Front }
+	OverclockOverloadEffect_Front :		BaseEffect_Front	{ OperationalToggle = IsOperationalOverclockedOverloaded_Front }
 	
-	BaseEffect_InnerFrontRight
+	BaseEffect_FrontRight
 	{
-		Shield = ArcShield_InnerFrontRight
-		ChainedTo = ArcShield_InnerFrontRight
-		FactorMediaEffectsIntensityWith = CombinedInnerFrontRightBatteryStorage
+		Shield = ArcShield_FrontRight
+		ChainedTo = ArcShield_FrontRight
+		FactorMediaEffectsIntensityWith = CombinedBatteryStorage_FrontRight
 	}
-	OverclockEffect_InnerFrontRight : 			BaseEffect_InnerFrontRight	{ OperationalToggle = InnerFrontRightOverclockEffect }
-	OverloadEffect_InnerFrontRight :			BaseEffect_InnerFrontRight	{ OperationalToggle = InnerFrontRightOverloadEffect }
-	OverclockOverloadEffect_InnerFrontRight :	BaseEffect_InnerFrontRight	{ OperationalToggle = InnerFrontRightOverclockOverloadEffect }
+	OverloadEffect_FrontRight :				BaseEffect_FrontRight	{ OperationalToggle = IsOperationalOverloaded_FrontRight }
+	OverclockEffect_FrontRight : 			BaseEffect_FrontRight	{ OperationalToggle = OverclockedEffectToggle_FrontRight }
+	OverclockOverloadEffect_FrontRight :	BaseEffect_FrontRight	{ OperationalToggle = IsOperationalOverclockedOverloaded_FrontRight }
 	
-	BaseEffect_InnerBackRight
+	BaseEffect_BackRight
 	{
-		Shield = ArcShield_InnerBackRight
-		ChainedTo = ArcShield_InnerBackRight
-		FactorMediaEffectsIntensityWith = CombinedInnerBackRightBatteryStorage
+		Shield = ArcShield_BackRight
+		ChainedTo = ArcShield_BackRight
+		FactorMediaEffectsIntensityWith = CombinedBatteryStorage_BackRight
 	}
-	OverclockEffect_InnerBackRight : 			BaseEffect_InnerBackRight	{ OperationalToggle = InnerBackRightOverclockEffect }
-	OverloadEffect_InnerBackRight :				BaseEffect_InnerBackRight	{ OperationalToggle = InnerBackRightOverloadEffect }
-	OverclockOverloadEffect_InnerBackRight :	BaseEffect_InnerBackRight	{ OperationalToggle = InnerBackRightOverclockOverloadEffect }
+	OverloadEffect_BackRight :				BaseEffect_BackRight	{ OperationalToggle = IsOperationalOverloaded_BackRight }
+	OverclockEffect_BackRight : 			BaseEffect_BackRight	{ OperationalToggle = OverclockedEffectToggle_BackRight }
+	OverclockOverloadEffect_BackRight :		BaseEffect_BackRight	{ OperationalToggle = IsOperationalOverclockedOverloaded_BackRight }
 	
-	BaseEffect_InnerBack
+	BaseEffect_Back
 	{
-		Shield = ArcShield_InnerBack
-		ChainedTo = ArcShield_InnerBack
-		FactorMediaEffectsIntensityWith = CombinedInnerBackBatteryStorage
+		Shield = ArcShield_Back
+		ChainedTo = ArcShield_Back
+		FactorMediaEffectsIntensityWith = CombinedBatteryStorage_Back
 	}
-	OverclockEffect_InnerBack : 		BaseEffect_InnerBack	{ OperationalToggle = InnerBackOverclockEffect }
-	OverloadEffect_InnerBack :			BaseEffect_InnerBack	{ OperationalToggle = InnerBackOverloadEffect }
-	OverclockOverloadEffect_InnerBack :	BaseEffect_InnerBack	{ OperationalToggle = InnerBackOverclockOverloadEffect }
+	OverloadEffect_Back :			BaseEffect_Back	{ OperationalToggle = IsOperationalOverloaded_Back }
+	OverclockEffect_Back : 			BaseEffect_Back	{ OperationalToggle = OverclockedEffectToggle_Back }
+	OverclockOverloadEffect_Back :	BaseEffect_Back	{ OperationalToggle = IsOperationalOverclockedOverloaded_Back }
 	
-	BaseEffect_InnerBackLeft
+	BaseEffect_BackLeft
 	{
-		Shield = ArcShield_InnerBackLeft
-		ChainedTo = ArcShield_InnerBackLeft
-		FactorMediaEffectsIntensityWith = CombinedInnerBackLeftBatteryStorage
+		Shield = ArcShield_BackLeft
+		ChainedTo = ArcShield_BackLeft
+		FactorMediaEffectsIntensityWith = CombinedBatteryStorage_BackLeft
 	}
-	OverclockEffect_InnerBackLeft : 		BaseEffect_InnerBackLeft	{ OperationalToggle = InnerBackLeftOverclockEffect }
-	OverloadEffect_InnerBackLeft :			BaseEffect_InnerBackLeft	{ OperationalToggle = InnerBackLeftOverloadEffect }
-	OverclockOverloadEffect_InnerBackLeft :	BaseEffect_InnerBackLeft	{ OperationalToggle = InnerBackLeftOverclockOverloadEffect }
+	OverloadEffect_BackLeft :			BaseEffect_BackLeft	{ OperationalToggle = IsOperationalOverloaded_BackLeft }
+	OverclockEffect_BackLeft : 			BaseEffect_BackLeft	{ OperationalToggle = OverclockedEffectToggle_BackLeft }
+	OverclockOverloadEffect_BackLeft :	BaseEffect_BackLeft	{ OperationalToggle = IsOperationalOverclockedOverloaded_BackLeft }
 	
-	BaseEffect_InnerFrontLeft
+	BaseEffect_FrontLeft
 	{
-		Shield = ArcShield_InnerFrontLeft
-		ChainedTo = ArcShield_InnerFrontLeft
-		FactorMediaEffectsIntensityWith = CombinedInnerFrontLeftBatteryStorage
+		Shield = ArcShield_FrontLeft
+		ChainedTo = ArcShield_FrontLeft
+		FactorMediaEffectsIntensityWith = CombinedBatteryStorage_FrontLeft
 	}
-	OverclockEffect_InnerFrontLeft : 			BaseEffect_InnerFrontLeft	{ OperationalToggle = InnerFrontLeftOverclockEffect }
-	OverloadEffect_InnerFrontLeft :				BaseEffect_InnerFrontLeft	{ OperationalToggle = InnerFrontLeftOverloadEffect }
-	OverclockOverloadEffect_InnerFrontLeft :	BaseEffect_InnerFrontLeft	{ OperationalToggle = InnerFrontLeftOverclockOverloadEffect }
-
-	Radius
-	{
-		BaseValue = 15
-		Modifiers
-		[
-			{
-				Type = ScaledBuff
-				BuffType = BubbleRadiusBonus
-				Scale = 1.5
-				ModificationMode = Add
-			}
-		]
-	}
+	OverloadEffect_FrontLeft :				BaseEffect_FrontLeft	{ OperationalToggle = IsOperationalOverloaded_FrontLeft }
+	OverclockEffect_FrontLeft : 			BaseEffect_FrontLeft	{ OperationalToggle = OverclockedEffectToggle_FrontLeft }
+	OverclockOverloadEffect_FrontLeft :		BaseEffect_FrontLeft	{ OperationalToggle = IsOperationalOverclockedOverloaded_FrontLeft }
 }
 
 /*
