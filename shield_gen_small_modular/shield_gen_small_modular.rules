@@ -540,25 +540,6 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-	/*	
-		OverclockBuff
-		{
-			Type = SelfBuffProvider
-			OperationalToggle = IsOverclocked
-			BuffType = Overclock
-			BuffMultiplier = OverclockStateValue
-		}
-		
-		OverclockStateValue
-		{
-			Type = ValueTween
-			IsOnToggle = OverclockModeToggle
-			OnTweenDuration = 1;
-			OffTweenDuration = 0.1;
-		}
-		*/
-		
 	}
 
 	Stats 	// Make it inherit? Exactly same as Small Shield
