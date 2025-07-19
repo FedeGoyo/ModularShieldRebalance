@@ -28,7 +28,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeByRotation = false
 	MaxHealth = 5000
 	TypeCategories = [defense, uses_power, bubble_shield]
-	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleResistanceBonus, BubbleRadiusBonus]
+	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleResistanceBonus, BubbleRadiusBonus, BubbleCapacityReversed]
 	PenetrationRectType = Normal
 	// ExplosiveDamageAbsorption = 50%
 	IsRotateable = false
@@ -131,6 +131,11 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Type = MultiToggle
 			Toggles = [PowerToggle, BatteryStorage, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL] // ModularCombinedBatteryStorage // CombinedBatteryStorage
 			Mode = All
+		}
+		IsOperationalBubble
+		{
+			Type = ToggleProxy
+			ComponentID = IsOperational
 		}
 		
 		IsOperationalNonOverclocked

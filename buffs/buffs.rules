@@ -13,6 +13,8 @@ BubbleCapacity
 	ShowIconTextForZeroValue = false
 }
 
+BubbleCapacityReversed	{}
+
 BubbleResistanceBonus
 {
 	CombineMode = Add
