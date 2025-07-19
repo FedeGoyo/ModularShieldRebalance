@@ -190,15 +190,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 		// Starts Normal Batteries
 
-		BatteryStorage  // Used for Drain effects
+		BatteryStorage
 		{
 			Type = MultiResourceStorage
 			ResourceType = battery
 			IsDrainable = true
-			ResourceStorages = [InnerFrontBatteryStorage, InnerRightBatteryStorage, InnerBackBatteryStorage, InnerLeftBatteryStorage, ModularBatteryStorage]
+			ResourceStorages = [CombinedInnerFrontBatteryStorage, CombinedInnerRightBatteryStorage, CombinedInnerBackBatteryStorage, CombinedInnerLeftBatteryStorage]
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-			AddMode = PrioritizeLeastResources
-			RemoveMode = DistributeProportionallyByAvailable
+			RemoveMode = DistributeEvenly
 			ToggleOnResources = 7001
 			DrainResistance
 			{
@@ -213,15 +212,24 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				]
 			}
 		}
+		ProgressBarSegments
+		{
+			Type = ProgressBar
+			OperationalToggle = IsOperational
+			ShowProgressFor = BatteryStorage
+			LowColor = [0, 0, 255]
+			HighColor = [0, 0, 255]
+			FullColor = [0, 0, 255]
+			Height = 10
+		}
 
 		CombinedBatteryStorage
 		{
 			Type = MultiResourceStorage
 			ResourceType = battery
-			IsDrainable = false
 			ResourceStorages = [InnerFrontBatteryStorage, InnerRightBatteryStorage, InnerBackBatteryStorage, InnerLeftBatteryStorage]
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-			AddMode = PrioritizeLeastResources // DistributeProportionallyByAvailable
+			AddMode = DistributeEvenly
 		}
 		BatteryConsumer
 		{
@@ -231,38 +239,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			DefaultPriority = &/PRIORITIES/Defense_Supply
 			ResupplyThreshold = 500
 			OperationalToggle = PowerToggle
-		}
-		ProgressBarSegments
-		{
-			Type = ProgressBar
-			OperationalToggle = IsOperational
-			ShowProgressFor = CombinedBatteryStorage
-			LowColor = [0, 0, 255]
-			HighColor = [0, 0, 255]
-			FullColor = [0, 0, 255]
-			Height = 10
-		}
-		
-		ModularBatteryStorage
-		{
-			Type = MultiResourceStorage
-			OperationalToggle = IsOperational
-			ResourceType = battery
-			IsDrainable = false
-			ToggleOnResources = 0
-			ResourceStorages = [CentralBatteryStorage]
-			ViaBuffs
-			{
-				OutgoingBuffProviders = [BuffProvider_Top, BuffProvider_Right, BuffProvider_Bottom, BuffProvider_Left]
-				ComponentID = BatteryStorageProxy
-			}
-			RemoveMode = DistributeEvenly
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-		}
-		ProgressBarModular :	ProgressBarSegments
-		{
-			OperationalToggle = IsModularToggle
-			ShowProgressFor = ModularBatteryStorage
 		}
 		
 		// Inner
@@ -289,12 +265,18 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		CombinedInnerFrontBatteryStorage
 		{
 			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
 			ResourceType = battery
 			IsDrainable = false
-			OperationalToggle = IsOverclocked
-			ResourceStorages = [InnerFrontBatteryStorage, ModularBatteryStorage]
+			ToggleOnResources = 0
+			ResourceStorages = [InnerFrontBatteryStorage]
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProvider_Top, BuffProvider_Right, BuffProvider_Bottom, BuffProvider_Left]
+				ComponentID = BatteryStorageProxy_SmallFront
+			}
+			RemoveMode = InReverseOrder
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
-			RemoveMode = PrioritizeMostResources // DistributeProportionallyByAvailable
 		}
 		InnerFrontPowerDrain
 		{
@@ -311,7 +293,11 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		InnerRightOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerRightIsOperational, OverclockedEffectToggle] }
 		InnerRightOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerRightIsOperational, IsOperationalOverclockedOverloaded] }
 		InnerRightBatteryStorage : 			InnerFrontBatteryStorage			{}
-		CombinedInnerRightBatteryStorage :	CombinedInnerFrontBatteryStorage	{ ResourceStorages = [InnerRightBatteryStorage, ModularBatteryStorage] }
+		CombinedInnerRightBatteryStorage :	CombinedInnerFrontBatteryStorage
+		{
+			ResourceStorages = [InnerRightBatteryStorage]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_SmallRight }
+		}
 		InnerRightPowerDrain : 				InnerFrontPowerDrain
 		{
 			OperationalToggle = InnerRightIsOperational
@@ -323,7 +309,11 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		InnerBackOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerBackIsOperational, OverclockedEffectToggle] }
 		InnerBackOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerBackIsOperational, IsOperationalOverclockedOverloaded] }
 		InnerBackBatteryStorage : 			InnerFrontBatteryStorage			{}
-		CombinedInnerBackBatteryStorage :	CombinedInnerFrontBatteryStorage	{ ResourceStorages = [InnerBackBatteryStorage, ModularBatteryStorage] }
+		CombinedInnerBackBatteryStorage :	CombinedInnerFrontBatteryStorage
+		{
+			ResourceStorages = [InnerBackBatteryStorage]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_SmallBack }
+		}
 		InnerBackPowerDrain : 				InnerFrontPowerDrain
 		{
 			OperationalToggle = InnerBackIsOperational
@@ -335,7 +325,11 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		InnerLeftOverclockEffect :			InnerFrontIsOperational				{ Toggles = [InnerLeftIsOperational, OverclockedEffectToggle] }
 		InnerLeftOverclockOverloadEffect :	InnerFrontIsOperational				{ Toggles = [InnerLeftIsOperational, IsOperationalOverclockedOverloaded] }
 		InnerLeftBatteryStorage : 			InnerFrontBatteryStorage			{}
-		CombinedInnerLeftBatteryStorage :	CombinedInnerFrontBatteryStorage	{ ResourceStorages = [InnerLeftBatteryStorage, ModularBatteryStorage] }
+		CombinedInnerLeftBatteryStorage :	CombinedInnerFrontBatteryStorage
+		{
+			ResourceStorages = [InnerLeftBatteryStorage]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_SmallLeft }
+		}
 		InnerLeftPowerDrain : 				InnerFrontPowerDrain
 		{
 			OperationalToggle = InnerLeftIsOperational

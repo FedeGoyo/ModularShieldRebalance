@@ -246,15 +246,26 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		// Start Battery
 		
-		Base_BatteryStorage
+		Base_BatteryStorage_1
 		{
 			Type = ResourceStorage
 			ResourceType = battery
-			MaxResources = 2000
+			MaxResources = "round(2000/12, 0)"
 			DrainOnFtlJump = true
 			IsDrainable = False
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
+		Base_BatteryStorage_2 :		Base_BatteryStorage_1	{}
+		Base_BatteryStorage_3 :		Base_BatteryStorage_1	{}
+		Base_BatteryStorage_4 :		Base_BatteryStorage_1	{}
+		Base_BatteryStorage_5 :		Base_BatteryStorage_1	{}
+		Base_BatteryStorage_6 :		Base_BatteryStorage_1	{}
+		Base_BatteryStorage_7 :		Base_BatteryStorage_1	{}
+		Base_BatteryStorage_8 :		Base_BatteryStorage_1	{}
+		Base_BatteryStorage_9 :		Base_BatteryStorage_1	{}
+		Base_BatteryStorage_10 :	Base_BatteryStorage_1	{}
+		Base_BatteryStorage_11 :	Base_BatteryStorage_1	{}
+		Base_BatteryStorage_12 :	Base_BatteryStorage_1	{}
 		
 		Overclock_ToggledBatteryStorage
 		{
@@ -262,30 +273,120 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Toggle = IsOverclocked
 			Components
 			{
-				Overclock_BatteryStorage
+				Overclock_BatteryStorage_1
 				{
 					Type = ResourceStorage
 					ResourceType = battery
-					MaxResources = "ceil((&~/Part/Components/Base_BatteryStorage/MaxResources) * ((&~/OVERCLOCK/CAPACITY_FACTOR) - 1))"
+					MaxResources = "ceil((&~/Part/Components/Base_BatteryStorage_1/MaxResources) * ((&~/OVERCLOCK/CAPACITY_FACTOR) - 1))"
 					IsDrainable = False
 					IsIntermediateStorage = true
 				}
+				Overclock_BatteryStorage_2 :	Overclock_BatteryStorage_1	{}
+				Overclock_BatteryStorage_3 :	Overclock_BatteryStorage_1	{}
+				Overclock_BatteryStorage_4 :	Overclock_BatteryStorage_1	{}
+				Overclock_BatteryStorage_5 :	Overclock_BatteryStorage_1	{}
+				Overclock_BatteryStorage_6 :	Overclock_BatteryStorage_1	{}
+				Overclock_BatteryStorage_7 :	Overclock_BatteryStorage_1	{}
+				Overclock_BatteryStorage_8 :	Overclock_BatteryStorage_1	{}
+				Overclock_BatteryStorage_9 :	Overclock_BatteryStorage_1	{}
+				Overclock_BatteryStorage_10 :	Overclock_BatteryStorage_1	{}
+				Overclock_BatteryStorage_11 :	Overclock_BatteryStorage_1	{}
+				Overclock_BatteryStorage_12 :	Overclock_BatteryStorage_1	{}
 			}
 		}
-		Overclock_BatteryStorageProxy
+		
+		Overclock_BatteryStorageProxy_1
 		{
 			Type = ResourceStorageProxy
 			ResourceType = battery
 			ProxyToggle = IsOverclocked
-			ComponentID = Overclock_BatteryStorage
+			ComponentID = Overclock_BatteryStorage_1
 		}
-		BatteryStorage	// CombinedBatteryStorage // Named like this for easier compatibility with other mods 
+		Overclock_BatteryStorageProxy_2 :	Overclock_BatteryStorageProxy_1	{}
+		Overclock_BatteryStorageProxy_3 :	Overclock_BatteryStorageProxy_1	{}
+		Overclock_BatteryStorageProxy_4 :	Overclock_BatteryStorageProxy_1	{}
+		Overclock_BatteryStorageProxy_5 :	Overclock_BatteryStorageProxy_1	{}
+		Overclock_BatteryStorageProxy_6 :	Overclock_BatteryStorageProxy_1	{}
+		Overclock_BatteryStorageProxy_7 :	Overclock_BatteryStorageProxy_1	{}
+		Overclock_BatteryStorageProxy_8 :	Overclock_BatteryStorageProxy_1	{}
+		Overclock_BatteryStorageProxy_9 :	Overclock_BatteryStorageProxy_1	{}
+		Overclock_BatteryStorageProxy_10 :	Overclock_BatteryStorageProxy_1	{}
+		Overclock_BatteryStorageProxy_11 :	Overclock_BatteryStorageProxy_1	{}
+		Overclock_BatteryStorageProxy_12 :	Overclock_BatteryStorageProxy_1	{}
+		
+		CombinedBase_BatteryStorage_SmallFront
 		{
 			Type = MultiResourceStorage
 			OperationalToggle = IsOperational
 			ResourceType = battery
 			IsDrainable = false
-			ResourceStorages = [Base_BatteryStorage, Overclock_BatteryStorageProxy]
+			ResourceStorages = [Base_BatteryStorage_1, Base_BatteryStorage_2, Base_BatteryStorage_3]
+			AddMode = DistributeEvenly
+			RemoveMode = DistributeEvenly
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		CombinedBase_BatteryStorage_SmallRight :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_4, Base_BatteryStorage_5, Base_BatteryStorage_6] }
+		CombinedBase_BatteryStorage_SmallBack :			CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_7, Base_BatteryStorage_8, Base_BatteryStorage_9] }
+		CombinedBase_BatteryStorage_SmallLeft :			CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_10, Base_BatteryStorage_11, Base_BatteryStorage_12] }
+		CombinedBase_BatteryStorage_LargeFront :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_1, Base_BatteryStorage_2] }
+		CombinedBase_BatteryStorage_LargeFrontRight :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_3, Base_BatteryStorage_4] }
+		CombinedBase_BatteryStorage_LargeBackRight :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_5, Base_BatteryStorage_6] }
+		CombinedBase_BatteryStorage_LargeBack :			CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_7, Base_BatteryStorage_8] }
+		CombinedBase_BatteryStorage_LargeBackLeft :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_9, Base_BatteryStorage_10] }
+		CombinedBase_BatteryStorage_LargeFrontLeft :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_11, Base_BatteryStorage_12] }
+		
+		CombinedOverclock_BatteryStorage_SmallFront	:		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_1, Overclock_BatteryStorageProxy_2, Overclock_BatteryStorageProxy_3] }
+		CombinedOverclock_BatteryStorage_SmallRight :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_4, Overclock_BatteryStorageProxy_5, Overclock_BatteryStorageProxy_6] }
+		CombinedOverclock_BatteryStorage_SmallBack :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_7, Overclock_BatteryStorageProxy_8, Overclock_BatteryStorageProxy_9] }
+		CombinedOverclock_BatteryStorage_SmallLeft :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_10, Overclock_BatteryStorageProxy_11, Overclock_BatteryStorageProxy_12] }
+		CombinedOverclock_BatteryStorage_LargeFront :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_1, Overclock_BatteryStorageProxy_2] }
+		CombinedOverclock_BatteryStorage_LargeFrontRight :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_3, Overclock_BatteryStorageProxy_4] }
+		CombinedOverclock_BatteryStorage_LargeBackRight :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_5, Overclock_BatteryStorageProxy_6] }
+		CombinedOverclock_BatteryStorage_LargeBack :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_7, Overclock_BatteryStorageProxy_8] }
+		CombinedOverclock_BatteryStorage_LargeBackLeft :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_9, Overclock_BatteryStorageProxy_10] }
+		CombinedOverclock_BatteryStorage_LargeFrontLeft :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_11, Overclock_BatteryStorageProxy_12] }
+		
+		CombinedBatteryStorage_SmallFront
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
+			ResourceType = battery
+			IsDrainable = false
+			ResourceStorages = [CombinedBase_BatteryStorage_SmallFront, CombinedOverclock_BatteryStorage_SmallFront]
+			AddMode = InOrder
+			RemoveMode = InReverseOrder
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		CombinedBatteryStorage_SmallRight :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_SmallRight, CombinedOverclock_BatteryStorage_SmallRight] }
+		CombinedBatteryStorage_SmallBack :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_SmallBack, CombinedOverclock_BatteryStorage_SmallBack] }
+		CombinedBatteryStorage_SmallLeft :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_SmallLeft, CombinedOverclock_BatteryStorage_SmallLeft] }
+		CombinedBatteryStorage_LargeFront :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_LargeFront, CombinedOverclock_BatteryStorage_LargeFront] }
+		CombinedBatteryStorage_LargeFrontRight :	CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_LargeFrontRight, CombinedOverclock_BatteryStorage_LargeFrontRight] }
+		CombinedBatteryStorage_LargeBackRight :		CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_LargeBackRight, CombinedOverclock_BatteryStorage_LargeBackRight] }
+		CombinedBatteryStorage_LargeBack :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_LargeBack, CombinedOverclock_BatteryStorage_LargeBack] }
+		CombinedBatteryStorage_LargeBackLeft :		CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_LargeBackLeft, CombinedOverclock_BatteryStorage_LargeBackLeft] }
+		CombinedBatteryStorage_LargeFrontLeft :		CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_LargeFrontLeft, CombinedOverclock_BatteryStorage_LargeFrontLeft] }
+		
+		CombinedBaseBatteryStorage
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
+			ResourceType = battery
+			IsDrainable = false
+			ResourceStorages = [Base_BatteryStorage_1, Base_BatteryStorage_2, Base_BatteryStorage_3, Base_BatteryStorage_4, Base_BatteryStorage_5, Base_BatteryStorage_6, Base_BatteryStorage_7, Base_BatteryStorage_8, Base_BatteryStorage_9, Base_BatteryStorage_10, Base_BatteryStorage_11, Base_BatteryStorage_12]
+			AddMode = DistributeEvenly
+			RemoveMode = DistributeEvenly
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		CombinedOverclockBatteryStorage :	CombinedBaseBatteryStorage	{ ResourceStorages = [Overclock_BatteryStorageProxy_1, Overclock_BatteryStorageProxy_2, Overclock_BatteryStorageProxy_3, Overclock_BatteryStorageProxy_4, Overclock_BatteryStorageProxy_5, Overclock_BatteryStorageProxy_6, Overclock_BatteryStorageProxy_7, Overclock_BatteryStorageProxy_8, Overclock_BatteryStorageProxy_9, Overclock_BatteryStorageProxy_10, Overclock_BatteryStorageProxy_11, Overclock_BatteryStorageProxy_12] }
+		
+		BatteryStorage	// CombinedBatteryStorage // Named like this for easier compatibility with other mods 
+		{
+			Type = MultiResourceStorage
+			OperationalToggle = IsOperational
+			ResourceType = battery
+			IsDrainable = true
+			ResourceStorages = [CombinedBaseBatteryStorage, CombinedOverclockBatteryStorage]
 			AddMode = InOrder
 			RemoveMode = InReverseOrder
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
@@ -300,28 +401,83 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OperationalToggle = PowerToggle
 		}
 		
-		ModularBatteryStorage
+		ModularBatteryStorage_SmallFront
 		{
 			Type = MultiResourceStorage
 			OperationalToggle = IsOperational
 			ResourceType = battery
 			IsDrainable = true
-			ResourceStorages = [BatteryStorage]
+			ResourceStorages = [CombinedBatteryStorage_SmallFront]
 			ViaBuffs
 			{
 				OutgoingBuffProviders = [BuffProvider_BubbleCapacityRight, BuffProvider_BubbleCapacityLeft]
-				ComponentID = BatteryStorageProxy
+				ComponentID = BatteryStorageProxy_SmallFront
 			}
 			RemoveMode = InReverseOrder
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
-		BatteryStorageProxy	// For Modular, to prevent using it while disabled
+		ModularBatteryStorage_SmallRight :		ModularBatteryStorage_SmallFront
+		{
+			ResourceStorages = [CombinedBatteryStorage_SmallRight]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_2 }
+		}
+		ModularBatteryStorage_SmallBack :		ModularBatteryStorage_SmallFront
+		{
+			ResourceStorages = [CombinedBatteryStorage_SmallBack]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_SmallBack }
+		}
+		ModularBatteryStorage_SmallLeft :		ModularBatteryStorage_SmallFront
+		{
+			ResourceStorages = [CombinedBatteryStorage_SmallLeft]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_SmallLeft }
+		}
+		ModularBatteryStorage_LargeFront :		ModularBatteryStorage_SmallFront
+		{
+			ResourceStorages = [CombinedBatteryStorage_LargeFront]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_LargeFront }
+		}
+		ModularBatteryStorage_LargeFrontRight :	ModularBatteryStorage_SmallFront
+		{
+			ResourceStorages = [CombinedBatteryStorage_LargeFrontRight]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_LargeFrontRight }
+		}
+		ModularBatteryStorage_LargeBackRight :	ModularBatteryStorage_SmallFront
+		{
+			ResourceStorages = [CombinedBatteryStorage_LargeBackRight]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_LargeBackRight }
+		}
+		ModularBatteryStorage_LargeBack :		ModularBatteryStorage_SmallFront
+		{
+			ResourceStorages = [CombinedBatteryStorage_LargeBack]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_LargeBack }
+		}
+		ModularBatteryStorage_LargeBackLeft :	ModularBatteryStorage_SmallFront
+		{
+			ResourceStorages = [CombinedBatteryStorage_LargeBackLeft]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_LargeBackLeft }
+		}
+		ModularBatteryStorage_LargeFrontLeft :	ModularBatteryStorage_SmallFront
+		{
+			ResourceStorages = [CombinedBatteryStorage_LargeFrontLeft]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_LargeFrontLeft }
+		}
+		
+		BatteryStorageProxy_SmallFront	// For Modular, to prevent using it while disabled
 		{
 			Type = ResourceStorageProxy
 			ResourceType = battery
-			ComponentID = ModularBatteryStorage
+			ComponentID = ModularBatteryStorage_SmallFront
 			ProxyToggle = CanOperateProxy
 		}
+		BatteryStorageProxy_SmallRight :		BatteryStorageProxy_SmallFront	{ ComponentID = ModularBatteryStorage_SmallRight }
+		BatteryStorageProxy_SmallBack :			BatteryStorageProxy_SmallFront	{ ComponentID = ModularBatteryStorage_SmallBack }
+		BatteryStorageProxy_SmallLeft :			BatteryStorageProxy_SmallFront	{ ComponentID = ModularBatteryStorage_SmallLeft }
+		BatteryStorageProxy_LargeFront :		BatteryStorageProxy_SmallFront	{ ComponentID = ModularBatteryStorage_LargeFront }
+		BatteryStorageProxy_LargeFrontRight :	BatteryStorageProxy_SmallFront	{ ComponentID = ModularBatteryStorage_LargeFrontRight }
+		BatteryStorageProxy_LargeBackRight :	BatteryStorageProxy_SmallFront	{ ComponentID = ModularBatteryStorage_LargeBackRight }
+		BatteryStorageProxy_LargeBack :			BatteryStorageProxy_SmallFront	{ ComponentID = ModularBatteryStorage_LargeBack }
+		BatteryStorageProxy_LargeBackLeft :		BatteryStorageProxy_SmallFront	{ ComponentID = ModularBatteryStorage_LargeBackLeft }
+		BatteryStorageProxy_LargeFrontLeft :	BatteryStorageProxy_SmallFront	{ ComponentID = ModularBatteryStorage_LargeFrontLeft }
 		
 		// Start Power Drain
 		
@@ -1246,7 +1402,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 	Stats
 	{
-		PowerCapacity = (&~/Part/Components/Base_BatteryStorage/MaxResources) / 1000
+		PowerCapacity = (&~/Part/Components/Base_BatteryStorage_1/MaxResources) / 1000 * 12
 
 		RecPower = (&../StatsByCategory/0/Stats/PowerUsageContinuous) + 0.5
 		RecCrew = (&RecPower) * 4
