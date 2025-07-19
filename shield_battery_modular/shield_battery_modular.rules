@@ -8,6 +8,11 @@ OVERCLOCK
 }
 HEAT_TO_RESOURCE = &<./Data/statuses/heat/heat.rules>/STATUS_TO_RESOURCE_RATIO
 HEAT_TO_STATUS = &<./Data/statuses/heat/heat.rules>/RESOURCE_TO_STATUS_RATIO
+STATS
+{
+	POWER_DRAIN = 50	// Total
+	POWER_CAPACITY = 2000	// Total
+}
 
 Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 {
@@ -233,15 +238,18 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			}
 		}
 		
-		BuffProvider_BubbleCapacityReversedRight :	BuffProvider_BubbleCapacityRight
+		BuffProvider_BubbleCapacityReversedRight
 		{
+			Type = AreaBuffProvider
 			OperationalToggle = IsShieldConnected_Right
 			BuffType = BubbleCapacityReversed
+			BuffArea = [2, 0, 2, 1]
 		}
-		BuffProvider_BubbleCapacityReversedLeft :	BuffProvider_BubbleCapacityLeft
+		BuffProvider_BubbleCapacityReversedLeft :	BuffProvider_BubbleCapacityReversedRight
 		{
 			OperationalToggle = IsShieldConnected_Left
 			BuffType = BubbleCapacityReversed
+			BuffArea = [-2, 0, 2, 1]
 		}
 		
 		// Start Battery
@@ -250,7 +258,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = ResourceStorage
 			ResourceType = battery
-			MaxResources = "round(2000/12, 0)"
+			MaxResources = "round( (&~/STATS/POWER_CAPACITY) / 12, 0)"
 			DrainOnFtlJump = true
 			IsDrainable = False
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
@@ -481,30 +489,77 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		// Start Power Drain
 		
-		IsShieldOperational
+		IsOperational_BubbleSmallFront
 		{
 			Type = MultiToggle
 			ViaBuffs
 			{
 				OutgoingBuffProviders = [BuffProvider_BubbleCapacityReversedRight, BuffProvider_BubbleCapacityReversedLeft]
-				ComponentIDs = [ IsShieldOperationalProxy, IsOperationalBubble ]
+				ComponentIDs = [ IsOperationalProxy_BubbleSmallFront, IsOperational_SmallFront ]
 			}
 			Mode = Any
 		}
-		IsShieldOperationalProxy	// For Modular, to prevent using it while disabled
+		IsOperational_BubbleSmallRight :		IsOperational_BubbleSmallFront
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentIDs = [ IsOperationalProxy_BubbleSmallRight, IsOperational_SmallRight ] }
+		}
+		IsOperational_BubbleSmallBack :			IsOperational_BubbleSmallFront
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentIDs = [ IsOperationalProxy_BubbleSmallBack, IsOperational_SmallBack ] }
+		}
+		IsOperational_BubbleSmallLeft :			IsOperational_BubbleSmallFront
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentIDs = [ IsOperationalProxy_BubbleSmallLeft, IsOperational_SmallLeft ] }
+		}
+		IsOperational_BubbleLargeFront :		IsOperational_BubbleSmallFront
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentIDs = [ IsOperationalProxy_BubbleLargeFront, IsOperational_LargeFront ] }
+		}
+		IsOperational_BubbleLargeFrontRight :	IsOperational_BubbleSmallFront
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentIDs = [ IsOperationalProxy_BubbleLargeFrontRight, IsOperational_LargeFrontRight ] }
+		}
+		IsOperational_BubbleLargeBackRight :	IsOperational_BubbleSmallFront
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentIDs = [ IsOperationalProxy_BubbleLargeBackRight, IsOperational_LargeBackRight ] }
+		}
+		IsOperational_BubbleLargeBack :			IsOperational_BubbleSmallFront
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentIDs = [ IsOperationalProxy_BubbleLargeBack, IsOperational_LargeBack ] }
+		}
+		IsOperational_BubbleLargeBackLeft :		IsOperational_BubbleSmallFront
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentIDs = [ IsOperationalProxy_BubbleLargeBackLeft, IsOperational_LargeBackLeft ] }
+		}
+		IsOperational_BubbleLargeFrontLeft :	IsOperational_BubbleSmallFront
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentIDs = [ IsOperationalProxy_BubbleLargeFrontLeft, IsOperational_LargeFrontLeft ] }
+		}
+		
+		IsOperationalProxy_BubbleSmallFront	// For Modular, to prevent using it while disabled
 		{
 			Type = ToggleProxy
-			ComponentID = IsShieldOperational
+			ComponentID = IsOperational_BubbleSmallFront
 			ProxyToggle = CanOperateProxy
 		}
-		PowerDrain
+		IsOperationalProxy_BubbleSmallRight :		IsOperationalProxy_BubbleSmallFront	{ ComponentID = IsOperational_BubbleSmallRight }
+		IsOperationalProxy_BubbleSmallBack :		IsOperationalProxy_BubbleSmallFront	{ ComponentID = IsOperational_BubbleSmallBack }
+		IsOperationalProxy_BubbleSmallLeft :		IsOperationalProxy_BubbleSmallFront	{ ComponentID = IsOperational_BubbleSmallLeft }
+		IsOperationalProxy_BubbleLargeFront :		IsOperationalProxy_BubbleSmallFront	{ ComponentID = IsOperational_BubbleLargeFront }
+		IsOperationalProxy_BubbleLargeFrontRight :	IsOperationalProxy_BubbleSmallFront	{ ComponentID = IsOperational_BubbleLargeFrontRight }
+		IsOperationalProxy_BubbleLargeBackRight :	IsOperationalProxy_BubbleSmallFront	{ ComponentID = IsOperational_BubbleLargeBackRight }
+		IsOperationalProxy_BubbleLargeBack :		IsOperationalProxy_BubbleSmallFront	{ ComponentID = IsOperational_BubbleLargeBack }
+		IsOperationalProxy_BubbleLargeBackLeft :	IsOperationalProxy_BubbleSmallFront	{ ComponentID = IsOperational_BubbleLargeBackLeft }
+		IsOperationalProxy_BubbleLargeFrontLeft :	IsOperationalProxy_BubbleSmallFront	{ ComponentID = IsOperational_BubbleLargeFrontLeft }
+		
+		PowerDrain_SmallFront
 		{
 			Type = ResourceConverter
-			OperationalToggle = IsShieldOperationalProxy
-			FromStorage = BatteryStorage
+			OperationalToggle = IsOperationalProxy_BubbleSmallFront
+			FromStorage = CombinedBatteryStorage_SmallFront
 			FromQuantity
 			{
-				BaseValue = 50
+				BaseValue = "round( (&~/STATS/POWER_DRAIN) / 4, 0)"
 				Modifiers
 				[
 					{
@@ -518,6 +573,52 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			}
 			MinFromQuantityForConversion = 1
 			Interval = 1
+		}
+		PowerDrain_SmallRight :			PowerDrain_SmallFront
+		{
+			OperationalToggle = IsOperationalProxy_BubbleSmallRight
+			FromStorage = CombinedBatteryStorage_SmallRight
+		}
+		PowerDrain_SmallBack :			PowerDrain_SmallFront
+		{
+			OperationalToggle = IsOperationalProxy_BubbleSmallBack
+			FromStorage = CombinedBatteryStorage_SmallBack
+		}
+		PowerDrain_SmallLeft :			PowerDrain_SmallFront
+		{
+			OperationalToggle = IsOperationalProxy_BubbleSmallLeft
+			FromStorage = CombinedBatteryStorage_SmallLeft
+		}
+		PowerDrain_LargeFront :			PowerDrain_SmallFront
+		{
+			OperationalToggle = IsOperationalProxy_BubbleLargeFront
+			FromStorage = CombinedBatteryStorage_LargeFront
+			FromQuantity : ^/0/FromQuantity	{ BaseValue = "round( (&~/STATS/POWER_DRAIN) / 6, 0)" }
+		}
+		PowerDrain_LargeFrontRight :	PowerDrain_LargeFront
+		{
+			OperationalToggle = IsOperationalProxy_BubbleLargeFrontRight
+			FromStorage = CombinedBatteryStorage_LargeFrontRight
+		}
+		PowerDrain_LargeBackRight :		PowerDrain_LargeFront
+		{
+			OperationalToggle = IsOperationalProxy_BubbleLargeBackRight
+			FromStorage = CombinedBatteryStorage_LargeBackRight
+		}
+		PowerDrain_LargeBack :			PowerDrain_LargeFront
+		{
+			OperationalToggle = IsOperationalProxy_BubbleLargeBack
+			FromStorage = CombinedBatteryStorage_LargeBack
+		}
+		PowerDrain_LargeBackLeft :		PowerDrain_LargeFront
+		{
+			OperationalToggle = IsOperationalProxy_BubbleLargeBackLeft
+			FromStorage = CombinedBatteryStorage_LargeBackLeft
+		}
+		PowerDrain_LargeFrontLeft :		PowerDrain_LargeFront
+		{
+			OperationalToggle = IsOperationalProxy_BubbleLargeFrontLeft
+			FromStorage = CombinedBatteryStorage_LargeFrontLeft
 		}
 		
 		// Start Resistance Bonus
@@ -1402,7 +1503,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 	Stats
 	{
-		PowerCapacity = (&~/Part/Components/Base_BatteryStorage_1/MaxResources) / 1000 * 12
+		PowerCapacity = (&~/STATS/POWER_CAPACITY) / 1000
 
 		RecPower = (&../StatsByCategory/0/Stats/PowerUsageContinuous) + 0.5
 		RecCrew = (&RecPower) * 4
@@ -1421,7 +1522,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 //				ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue)	// Useless due to being almost flat
 //				ShieldLength = 6.1	// 2 * Radius * Sen(rad(arc)/2)
 //				ShieldDist = (&~/Part/Components/ArcShield/Radius) - (&~/Part/Components/ArcShield/Location/1)
-				PowerUsageContinuous = (&~/Part/Components/PowerDrain/FromQuantity/BaseValue) / (&~/Part/Components/PowerDrain/Interval) / 1000
+				PowerUsageContinuous = (&~/STATS/POWER_DRAIN) / (&~/Part/Components/PowerDrain_SmallFront/Interval) / 1000
 			}
 		}
 	]
