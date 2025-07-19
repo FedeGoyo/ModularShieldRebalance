@@ -287,12 +287,18 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			BuffType = ShieldOverclockExtendedLine
 			BuffMultiplier = Overclock_ExtendedLineModeValue
 		}
+		
+		LineModeRawValue2 : LineModeRawValue	// If the arc and line change were more combined, this could be used to buff the radius gradually to change from arc to line
+		{
+			OnTweenDuration = 0
+			OffTweenDuration = &OnTweenDuration
+		}
 		LineModeBuff
 		{
 			Type = SelfBuffProvider
 			OperationalToggle = IsOperational
 			BuffType = ShieldLine
-			BuffMultiplier = LineModeRawValue
+			BuffMultiplier = LineModeRawValue2
 		}
 		
 		RotationTween_Line_LeftToFront
