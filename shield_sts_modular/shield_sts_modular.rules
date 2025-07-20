@@ -190,7 +190,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			CommandPoints = 4
 		}
 
-		// Starts Normal Batteries
+		// Normal Batteries
 
 		BatteryStorage
 		{
@@ -258,9 +258,40 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Toggles = [PowerToggle, BatteryStorage_Front, ScorchedToggle, IsOperational]
 			Mode = All
 		}
-		IsOperationalOverloaded_Front :				IsOperational_SmallFront	{ Toggles = [IsOperational_SmallFront, IsOperationalOverloaded] }
-		OverclockedEffectToggle_Front :				IsOperational_SmallFront	{ Toggles = [IsOperational_SmallFront, OverclockedEffectToggle] }
-		IsOperationalOverclockedOverloaded_Front :	IsOperational_SmallFront	{ Toggles = [IsOperational_SmallFront, IsOperationalOverclockedOverloaded] }
+		IsOperational_SmallRight : 	IsOperational_SmallFront	{ Toggles = [PowerToggle, BatteryStorage_Right, ScorchedToggle, IsOperational] }
+		IsOperational_SmallBack : 	IsOperational_SmallFront	{ Toggles = [PowerToggle, BatteryStorage_Back, ScorchedToggle, IsOperational] }
+		IsOperational_SmallLeft : 	IsOperational_SmallFront	{ Toggles = [PowerToggle, BatteryStorage_Left, ScorchedToggle, IsOperational] }
+		
+		IsOperationalOverloaded_Front
+		{
+			Type = MultiToggle
+			Toggles = [IsOperational_SmallFront, IsOperationalOverloaded]
+			Mode = All
+		}
+		IsOperationalOverloaded_Right :	IsOperationalOverloaded_Front	{ Toggles = [IsOperational_SmallRight, IsOperationalOverloaded] }
+		IsOperationalOverloaded_Back :	IsOperationalOverloaded_Front	{ Toggles = [IsOperational_SmallBack, IsOperationalOverloaded] }
+		IsOperationalOverloaded_Left :	IsOperationalOverloaded_Front	{ Toggles = [IsOperational_SmallLeft, IsOperationalOverloaded] }
+		
+		OverclockedEffectToggle_Front
+		{
+			Type = MultiToggle
+			Toggles = [IsOperational_SmallFront, OverclockedEffectToggle]
+			Mode = All
+		}
+		OverclockedEffectToggle_Right :	OverclockedEffectToggle_Front	{ Toggles = [IsOperational_SmallRight, OverclockedEffectToggle] }
+		OverclockedEffectToggle_Back :	OverclockedEffectToggle_Front	{ Toggles = [IsOperational_SmallBack, OverclockedEffectToggle] }
+		OverclockedEffectToggle_Left :	OverclockedEffectToggle_Front	{ Toggles = [IsOperational_SmallLeft, OverclockedEffectToggle] }
+		
+		IsOperationalOverclockedOverloaded_Front
+		{
+			Type = MultiToggle
+			Toggles = [IsOperational_SmallFront, IsOperationalOverclockedOverloaded]
+			Mode = All
+		}
+		IsOperationalOverclockedOverloaded_Right :	IsOperationalOverclockedOverloaded_Front	{ Toggles = [IsOperational_SmallRight, IsOperationalOverclockedOverloaded] }
+		IsOperationalOverclockedOverloaded_Back :	IsOperationalOverclockedOverloaded_Front	{ Toggles = [IsOperational_SmallBack, IsOperationalOverclockedOverloaded] }
+		IsOperationalOverclockedOverloaded_Left :	IsOperationalOverclockedOverloaded_Front	{ Toggles = [IsOperational_SmallLeft, IsOperationalOverclockedOverloaded] }
+		
 		BatteryStorage_Front
 		{
 			Type = ResourceStorage
@@ -271,6 +302,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			DrainOnFtlJump = true
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
+		BatteryStorage_Right :	BatteryStorage_Front	{}
+		BatteryStorage_Back :	BatteryStorage_Front	{}
+		BatteryStorage_Left :	BatteryStorage_Front	{}
+		
 		CombinedBatteryStorage_Front
 		{
 			Type = MultiResourceStorage
@@ -287,6 +322,22 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			RemoveMode = InReverseOrder
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
+		CombinedBatteryStorage_Right :	CombinedBatteryStorage_Front
+		{
+			ResourceStorages = [BatteryStorage_Right]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_SmallRight }
+		}
+		CombinedBatteryStorage_Back :	CombinedBatteryStorage_Front
+		{
+			ResourceStorages = [BatteryStorage_Back]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_SmallBack }
+		}
+		CombinedBatteryStorage_Left :	CombinedBatteryStorage_Front
+		{
+			ResourceStorages = [BatteryStorage_Left]
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_SmallLeft }
+		}
+		
 		PowerDrain_Front
 		{
 			Type = ResourceConverter
@@ -296,60 +347,24 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			MinFromQuantityForConversion = 1
 			Interval = 1
 		}
-		
-		IsOperational_SmallRight : 					IsOperational_SmallFront				{ Toggles = [PowerToggle, BatteryStorage_Right, ScorchedToggle, IsOperational] }
-		IsOperationalOverloaded_Right :				IsOperational_SmallFront				{ Toggles = [IsOperational_SmallRight, IsOperationalOverloaded] }
-		OverclockedEffectToggle_Right :				IsOperational_SmallFront				{ Toggles = [IsOperational_SmallRight, OverclockedEffectToggle] }
-		IsOperationalOverclockedOverloaded_Right :	IsOperational_SmallFront				{ Toggles = [IsOperational_SmallRight, IsOperationalOverclockedOverloaded] }
-		BatteryStorage_Right : 						BatteryStorage_Front					{}
-		CombinedBatteryStorage_Right :				CombinedBatteryStorage_Front
-		{
-			ResourceStorages = [BatteryStorage_Right]
-			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_SmallRight }
-		}
-		PowerDrain_Right : 							PowerDrain_Front
+		PowerDrain_Right :	PowerDrain_Front
 		{
 			OperationalToggle = IsOperational_SmallRight
 			FromStorage = BatteryStorage_Right
 		}
-		
-		IsOperational_SmallBack : 					IsOperational_SmallFront				{ Toggles = [PowerToggle, BatteryStorage_Back, ScorchedToggle, IsOperational] }
-		IsOperationalOverloaded_Back :				IsOperational_SmallFront				{ Toggles = [IsOperational_SmallBack, IsOperationalOverloaded] }
-		OverclockedEffectToggle_Back :				IsOperational_SmallFront				{ Toggles = [IsOperational_SmallBack, OverclockedEffectToggle] }
-		IsOperationalOverclockedOverloaded_Back :	IsOperational_SmallFront				{ Toggles = [IsOperational_SmallBack, IsOperationalOverclockedOverloaded] }
-		BatteryStorage_Back : 						BatteryStorage_Front					{}
-		CombinedBatteryStorage_Back :				CombinedBatteryStorage_Front
-		{
-			ResourceStorages = [BatteryStorage_Back]
-			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_SmallBack }
-		}
-		PowerDrain_Back : 							PowerDrain_Front
+		PowerDrain_Back :	PowerDrain_Front
 		{
 			OperationalToggle = IsOperational_SmallBack
 			FromStorage = BatteryStorage_Back
 		}
-		
-		IsOperational_SmallLeft : 					IsOperational_SmallFront				{ Toggles = [PowerToggle, BatteryStorage_Left, ScorchedToggle, IsOperational] }
-		IsOperationalOverloaded_Left :				IsOperational_SmallFront				{ Toggles = [IsOperational_SmallLeft, IsOperationalOverloaded] }
-		OverclockedEffectToggle_Left :				IsOperational_SmallFront				{ Toggles = [IsOperational_SmallLeft, OverclockedEffectToggle] }
-		IsOperationalOverclockedOverloaded_Left :	IsOperational_SmallFront				{ Toggles = [IsOperational_SmallLeft, IsOperationalOverclockedOverloaded] }
-		BatteryStorage_Left : 						BatteryStorage_Front					{}
-		CombinedBatteryStorage_Left :				CombinedBatteryStorage_Front
-		{
-			ResourceStorages = [BatteryStorage_Left]
-			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_SmallLeft }
-		}
-		PowerDrain_Left : 							PowerDrain_Front
+		PowerDrain_Left :	PowerDrain_Front
 		{
 			OperationalToggle = IsOperational_SmallLeft
 			FromStorage = BatteryStorage_Left
 		}
+			
+		// Modular Battery
 		
-		// Ends Normal Batteries
-
-		// Start Modular Battery
-
-
 		BuffProvider_Top
 		{
 			Type = AreaBuffProvider
@@ -390,7 +405,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			}
 		}
 		
-		// Starts Rotation
+		// Rotation
 		
 		RotationTime
 		{
@@ -592,7 +607,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			BuffMultiplier = BaseResistanceBonus
 		}
 		
-		// End Self Buffs
+		// Disable
 		
 		IsOperationalProxy
 		{
