@@ -621,6 +621,51 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			FromStorage = CombinedBatteryStorage_LargeFrontLeft
 		}
 		
+		// Out of Power Toggle
+		
+		IsSmallToggle
+		{
+			Type = MultiToggle
+			Toggles = [IsOperational_BubbleSmallFront, IsOperational_BubbleSmallRight, IsOperational_BubbleSmallBack, IsOperational_BubbleSmallLeft]
+			Mode = Any
+		}
+		IsSmallTrigger
+		{
+			Type = ToggleTrigger
+			Toggle = IsSmallToggle
+			TriggerWhenOn = true
+			TriggerWhenOff = false
+		}
+		IsSmallHardToggle
+		{
+			Type = TriggeredToggle
+			OnTrigger = IsSmallTrigger
+			OffTrigger = IsLargeTrigger
+		}
+		
+		IsLargeToggle :		IsSmallToggle	{ Toggles = [IsOperational_BubbleLargeFront, IsOperational_BubbleLargeFrontRight, IsOperational_BubbleLargeBackRight, IsOperational_BubbleLargeBack, IsOperational_BubbleLargeBackLeft, IsOperational_BubbleLargeFrontLeft] }
+		IsLargeTrigger :	IsSmallTrigger	{ Toggle = IsLargeToggle }
+		IsLargeHardToggle : IsSmallHardToggle
+		{
+			OnTrigger = IsLargeTrigger
+			OffTrigger = IsSmallTrigger
+		}
+	
+		HasEnergySmall	// Out of power Toggle
+		{
+			Type = MultiToggle
+			Toggles = [IsSmallHardToggle, CombinedBatteryStorage_SmallFront, CombinedBatteryStorage_SmallRight, CombinedBatteryStorage_SmallBack, CombinedBatteryStorage_SmallLeft]
+			Mode = All
+		}
+		HasEnergyLarge :	HasEnergySmall	{ Toggles = [IsLargeHardToggle, CombinedBatteryStorage_LargeFront, CombinedBatteryStorage_LargeFrontRight, CombinedBatteryStorage_LargeBackRight, CombinedBatteryStorage_LargeBack, CombinedBatteryStorage_LargeBackLeft, CombinedBatteryStorage_LargeFrontLeft] }
+	
+		HasEnergy
+		{
+			Type = MultiToggle
+			Toggles = [HasEnergySmall, HasEnergyLarge]
+			Mode = Any
+		}
+		
 		// Start Resistance Bonus
 		
 		BubbleCapacityBuffToggle
@@ -1469,7 +1514,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 				// Out of power.
 				{
-					Toggle = BatteryStorage
+					Toggle = HasEnergy
 					AtlasSprite
 					{
 						File = &/INDICATORS/NoPower
