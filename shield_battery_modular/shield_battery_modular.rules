@@ -426,7 +426,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		ModularBatteryStorage_SmallRight :		ModularBatteryStorage_SmallFront
 		{
 			ResourceStorages = [CombinedBatteryStorage_SmallRight]
-			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_2 }
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_SmallRight }
 		}
 		ModularBatteryStorage_SmallBack :		ModularBatteryStorage_SmallFront
 		{
