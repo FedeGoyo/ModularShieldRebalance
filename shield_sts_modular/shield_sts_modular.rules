@@ -491,25 +491,79 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			BuffMultiplier = BaseValue_Radius
 		}
 		
-		ValueLerp_Radius
+		ValueLerp_Radius0
 		{
 			Type = ValueLerp
-			InputValue = OverclockStateValue
+			InputValue = Value0
 			OutputRange = [ {BaseValue = 0, BuffType = BubbleRadiusBase; BuffMode = Add}, {BaseValue = 0, BuffType = BubbleRadius; BuffMode = Add}]
 		}
-		ValueMax_Radius	// Cause the ValueLerp_Radius doesn't update properly as the BubbleRadiusBase increases from 0 when it becomes operational
+		ValueLerp_Radius1 :	ValueLerp_Radius0	{ InputValue = Value1 }
+		
+		UpdateTimer
 		{
-			Type = MultiValue
-			Values = [ ValueLerp_Radius, BaseValue_Radius]
-			Mode = Max
+			Type = Timer
+			Duration = 1/30
+			AutoStart = true
+			Repeats = true
 		}
+		UpdateModes
+		{
+			Type = ModeCycle
+			IncrementTrigger = UpdateTimer
+		}
+		UpdateMode0
+		{
+			Type = ModeToggle
+			Mode = UpdateModes
+			OnMode = 0
+		}
+		UpdateMode1 :	UpdateMode0	{ OnMode = 1 }
+		UpdateMode0Trigger
+		{
+			Type = ToggleTrigger
+			Toggle = UpdateMode0
+			TriggerWhenOn = true
+			TriggerWhenOff = false
+		}
+		UpdateMode1Trigger :	UpdateMode0Trigger	{ Toggle = UpdateMode1 }
+		ToggleSelector
+		{
+			Type = TriggeredToggle
+			OnTrigger = UpdateMode0Trigger
+			OffTrigger = UpdateMode1Trigger
+		}
+		Constant
+		{
+			Type = StaticValue
+			Value = 2	// Anything works
+		}
+		Value0
+		{
+			Type = ToggleValueSelector
+			Toggle = ToggleSelector
+			ToggleOnValue = Constant
+			ToggleOffValue = OverclockStateValue
+		}
+		Value1 :	Value0
+		{
+			ToggleOnValue = OverclockStateValue
+			ToggleOffValue = Constant
+		}
+		ValueLerp_RadiusFinal
+		{
+			Type = ToggleValueSelector
+			Toggle = ToggleSelector
+			ToggleOffValue = ValueLerp_Radius0
+			ToggleOnValue = ValueLerp_Radius1
+		}
+		
 		BuffProvider_Radius_Final
 		{
 			Type = SelfBuffProvider
 			ChainsFromBuffType = BubbleRadius
 			BuffType = BubbleRadiusBonus
 			BuffAmount = 1
-			BuffMultiplier = ValueMax_Radius
+			BuffMultiplier = ValueLerp_RadiusFinal
 		}
 		
 		BaseResistanceBonus

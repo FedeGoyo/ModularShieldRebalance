@@ -662,7 +662,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		IsBonusResistanceOperational
 		{
 			Type = MultiToggle
-			Toggles = [PowerToggle, BubbleCapacityBuffToggle, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
+			Toggles = [PowerToggle, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
 			Mode = All
 		}
 		BuffProvider_BubbleResistanceRight
@@ -692,7 +692,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		IsBonusRadiusOperational
 		{
 			Type = MultiToggle
-			Toggles = [PowerToggle, BubbleCapacityBuffToggle, Kebechet_TINY_ToggleRadius, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
+			Toggles = [PowerToggle, Kebechet_TINY_ToggleRadius, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
 			Mode = All
 		}
 		BubbleRadiusStateValue
