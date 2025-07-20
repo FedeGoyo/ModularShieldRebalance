@@ -30,7 +30,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeByRotation = false
 	MaxHealth = 5000
 	TypeCategories = [defense, uses_power, bubble_shield]
-	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleResistanceBonus, BubbleRadiusBonus, BubbleCapacityReversed]
+	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleResistance, BubbleResistanceBonus, BubbleRadius, BubbleRadiusBonus, BubbleRadiusBase, BubbleCapacityReversed]
 	PenetrationRectType = Normal
 	// ExplosiveDamageAbsorption = 50%
 	IsRotateable = false
@@ -463,7 +463,82 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ChainedTo = TransformRotation2
 		}
 		
-		// Finish Rotation
+		// Self Buffs
+		
+		BaseValue_Radius_Imput
+		{
+			Type = BuffableValue
+			Value = { BaseValue=0; BuffType=BubbleRadius; BuffMode=Add; }
+		}
+		BaseValue_Radius_Exponent
+		{
+			Type = StaticValue
+			Value = 0.8
+		}
+		BaseValue_Radius
+		{
+			Type = ValueOperation
+			Operator = Power
+			ValueOne = BaseValue_Radius_Imput
+			ValueTwo = BaseValue_Radius_Exponent
+		}
+		BuffProvider_Radius
+		{
+			Type = SelfBuffProvider
+			ChainsFromBuffType = BubbleRadius
+			BuffType = BubbleRadiusBase
+			BuffAmount = 1
+			BuffMultiplier = BaseValue_Radius
+		}
+		
+		ValueLerp_Radius
+		{
+			Type = ValueLerp
+			InputValue = OverclockStateValue
+			OutputRange = [ {BaseValue = 0, BuffType = BubbleRadiusBase; BuffMode = Add}, {BaseValue = 0, BuffType = BubbleRadius; BuffMode = Add}]
+		}
+		ValueMax_Radius	// Cause the ValueLerp_Radius doesn't update properly as the BubbleRadiusBase increases from 0 when it becomes operational
+		{
+			Type = MultiValue
+			Values = [ ValueLerp_Radius, BaseValue_Radius]
+			Mode = Max
+		}
+		BuffProvider_Radius_Final
+		{
+			Type = SelfBuffProvider
+			ChainsFromBuffType = BubbleRadius
+			BuffType = BubbleRadiusBonus
+			BuffAmount = 1
+			BuffMultiplier = ValueMax_Radius
+		}
+		
+		BaseResistanceBonus
+		{
+			Type = StaticValue
+			Value = 2000 / 0.4 / 600 / 4
+		}
+		OverclockResistanceBonus
+		{
+			Type = StaticValue
+			Value = 4000 / 0.4 / 600 / 4
+		}
+		BuffProvider_Overclock_Resistance
+		{
+			Type = SelfBuffProvider
+			OperationalToggle = IsOverclocked
+			BuffType = BubbleResistanceBonus
+			ChainsFromBuffType = BubbleResistance
+			BuffAmount = { BaseValue=0; BuffType=BubbleResistance; BuffMode=Add; }
+			BuffMultiplier = OverclockResistanceBonus
+		}
+		BuffProvider_Resistance :	BuffProvider_Overclock_Resistance
+		{
+			InvertOperationalToggle = true
+			BuffAmount = { BaseValue=0; BuffType=BubbleResistance; BuffMode=Add; }
+			BuffMultiplier = BaseResistanceBonus
+		}
+		
+		// End Self Buffs
 		
 		IsOperationalProxy
 		{
@@ -494,11 +569,9 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				Modifiers
 				[
 					{
-						Type = ScaledBuff
+						Type = Buff
 						BuffType = BubbleRadiusBonus
-						Scale = 1.5
-						Exponent = 0.8
-						ModificationMode = Add
+						ModificationMode = Multiply
 					}
 				]
 			}

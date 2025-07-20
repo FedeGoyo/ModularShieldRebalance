@@ -15,6 +15,19 @@ BubbleCapacity
 
 BubbleCapacityReversed	{}
 
+BubbleResistance
+{
+	CombineMode = Add
+}
+BubbleRadius
+{
+	CombineMode = Add
+}
+BubbleRadiusBase
+{
+	CombineMode = Add
+}
+
 BubbleResistanceBonus
 {
 	CombineMode = Add
@@ -30,8 +43,9 @@ BubbleResistanceBonus
 BubbleRadiusBonus
 {
 	CombineMode = Add
-	Multiplier = 1
-	BaseValue = 0
+	Exponent = 0.8
+	Multiplier = 20%
+	BaseValue = 100%
 /*
 	IconTextFormatKey = "BuildBox/BuffRadiusFmt"
 	IconTextMultiply = 1

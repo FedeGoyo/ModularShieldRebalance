@@ -668,8 +668,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		BuffProvider_BubbleResistanceRight
 		{
 			Type = AreaBuffProvider
-			BuffType = BubbleResistanceBonus
-			BuffAmount = { BaseValue=8.33; BuffType=BubbleResistanceBonus; BuffMode=Add; }
+			BuffType = BubbleResistance
+			BuffAmount = { BaseValue=1; BuffType=BubbleResistance; BuffMode=Add; }
 			OperationalToggle = IsShieldConnected_Right
 			BuffArea = [2, 0, 1, 1]
 		}
@@ -719,7 +719,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		BuffProvider_BubbleRadiusRight_Self
 		{
 			Type = AreaBuffProvider
-			BuffType = BubbleRadiusBonus
+			BuffType = BubbleRadius
 			BuffAmount = 1
 			BuffMultiplier = BubbleRadiusStateValue_SelfMin
 			OperationalToggle = IsShieldConnected_Right
@@ -727,7 +727,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 		BuffProvider_BubbleRadiusRight_Chained : BuffProvider_BubbleRadiusRight_Self
 		{
-			BuffAmount = { BaseValue=0; BuffType=BubbleRadiusBonus; BuffMode=Add; }
+			BuffAmount = { BaseValue=0; BuffType=BubbleRadius; BuffMode=Add; }
 			BuffMultiplier = BubbleRadiusStateValue
 		}
 		BuffProvider_BubbleRadiusLeft_Self :		BuffProvider_BubbleRadiusRight_Self
@@ -737,7 +737,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 		BuffProvider_BubbleRadiusLeft_Chained :		BuffProvider_BubbleRadiusLeft_Self
 		{
-			BuffAmount = { BaseValue=0; BuffType=BubbleRadiusBonus; BuffMode=Add; }
+			BuffAmount = { BaseValue=0; BuffType=BubbleRadius; BuffMode=Add; }
 			BuffMultiplier = BubbleRadiusStateValue_SelfMin
 		}
 		
