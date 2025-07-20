@@ -86,10 +86,9 @@ Stats
 {
 	ShieldHPSegmentFmt = "<white>Resistencia del escudo:</white> <good>{0:n0}</good> <gray>por segmento</gray>"
 	ShieldSegmentsFmt = "<white>Segmentos del escudo:</white> <good>{0:n0}</good>"
-	ShieldRingsFmt = "<white>Anillos del escudo:</white> <good>{0:n0}</good>"
-	ShieldDistRingsFmt = "<white>Shield Rings Distance:</white> <good>{0:n0}</good> <gray>metros</gray>"
 	ShieldLengthFmT = "<white>Longitud del escudo:</white> <good>{0:n0}</good> <gray>metros</gray>"
 	ShieldRegenFmT = "<white>Regeneración del escudo:</white> <good>{0:n0}</good> <gray>resistencia/s</gray>"
+	ShieldSpeedFmt = "<white>Velocidad del escudo:</white> <good>{0:0}°</good><gray>/s</gray>"
 	BubbleNotes = "<gray>NOTA: La resistencia a la penetración y el uso de energía se incrementan con cada Generador de Escudo Diminuto adicional. Además, ellos proveen un bono de salud global al escudo</gray>"
 }
 

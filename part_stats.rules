@@ -5,14 +5,6 @@ PartStats
 		FormatKey = "Stats/ShieldSegmentsFmt"
 	}
 	{
-		ID = ShieldRings
-		FormatKey = "Stats/ShieldRingsFmT"
-	}
-	{
-		ID = ShieldDistRings
-		FormatKey = "Stats/ShieldDistRingsFmT"
-	}
-	{
 		ID = ShieldHPSegment
 		FormatKey = "Stats/ShieldHPSegmentFmT"
 	}
@@ -23,5 +15,9 @@ PartStats
 	{
 		ID = ShieldRegen
 		FormatKey = "Stats/ShieldRegenFmT"
+	}
+	{
+		ID = ShieldSpeed
+		FormatKey = "Stats/ShieldSpeedFmT"
 	}
 ]

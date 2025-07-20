@@ -85,10 +85,9 @@ Stats
 {
 	ShieldHPSegmentFmt = "<white>Shield Strength:</white> <good>{0:n0}</good> <gray>per segment</gray>"
 	ShieldSegmentsFmt = "<white>Shield Segments:</white> <good>{0:n0}</good>"
-	ShieldRingsFmt = "<white>Shield Rings:</white> <good>{0:n0}</good>"
-	ShieldDistRingsFmt = "<white>Shield Rings Distance:</white> <good>{0:n0}</good> <gray>meters</gray>"
 	ShieldLengthFmT = "<white>Shield Length:</white> <good>{0:n0}</good> <gray>meters</gray>"
 	ShieldRegenFmT = "<white>Shield Regen:</white> <good>{0:n0}</good> <gray>strength/sec</gray>"
+	ShieldSpeedFmt = "<white>Shield Speed:</white> <good>{0:0}°</good><gray>/sec</gray>"
 	BubbleNotes = "<gray>NOTE: Penetration Resistance and Power Usage are increased with each additional Tiny Shield Generator. Also, they provide a global health bonus to the shield</gray>"
 }
 

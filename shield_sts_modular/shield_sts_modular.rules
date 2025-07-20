@@ -398,7 +398,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			AccumulatingToggle = IsOperational
 			AccumulationRate
 			{
-				BaseValue = 3 / 30
+				BaseValue = (&../../RotationReset/MinAmount) / 30
 				Modifiers
 				[
 					{
@@ -1294,6 +1294,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				ShieldDist = (&~/Part/Components/ArcShield/Radius/BaseValue) - (&~/Part/Components/ArcShield/Location/1)
 				ShieldSegments = 4
 				ShieldHPSegment = (&~/Part/Components/BatteryStorage_Front/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
+				RotationSeconds = (&~/Part/Components/RotationReset/MinAmount) / (&~/Part/Components/RotationTime/AccumulationRate/BaseValue)
+				ShieldSpeed = 360 / (&RotationSeconds)
 				PowerUsageContinuous = (&~/Part/Components/PowerDrain_Front/FromQuantity) / (&~/Part/Components/PowerDrain_Front/Interval) / 1000 * (&ShieldSegments)
 				SegmentCapacity = (&~/Part/Components/BatteryStorage_Front/MaxResources) / 1000
 			}
@@ -1307,8 +1309,9 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			ShieldHP = (&~/Part/StatsByCategory/0/Stats/ShieldHPSegment) / (&~/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
 			EMPResistPercentage = (&~/OVERCLOCK/EMP_RESIST) * 100
-//			ShieldRotationSpeed =
-			HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND) * (&~/Part/StatsByCategory/0/Stats/ShieldSegments) // * (&ShieldRings)
+			RotationSeconds = (&~/Part/StatsByCategory/0/Stats/RotationSeconds) / (&~/OVERCLOCK/ROTATION_SPEED_FACTOR)
+			ShieldSpeed = 360 / (&RotationSeconds)
+			HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND) * (&~/Part/StatsByCategory/0/Stats/ShieldSegments)
 			HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
 		}
 	}
