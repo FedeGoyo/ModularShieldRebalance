@@ -287,7 +287,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					ResourceType = battery
 					MaxResources = "ceil((&~/Part/Components/Base_BatteryStorage_1/MaxResources) * ((&~/OVERCLOCK/CAPACITY_FACTOR) - 1))"
 					IsDrainable = False
-					IsIntermediateStorage = true
 				}
 				Overclock_BatteryStorage_2 :	Overclock_BatteryStorage_1	{}
 				Overclock_BatteryStorage_3 :	Overclock_BatteryStorage_1	{}
@@ -310,17 +309,17 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ProxyToggle = IsOverclocked
 			ComponentID = Overclock_BatteryStorage_1
 		}
-		Overclock_BatteryStorageProxy_2 :	Overclock_BatteryStorageProxy_1	{}
-		Overclock_BatteryStorageProxy_3 :	Overclock_BatteryStorageProxy_1	{}
-		Overclock_BatteryStorageProxy_4 :	Overclock_BatteryStorageProxy_1	{}
-		Overclock_BatteryStorageProxy_5 :	Overclock_BatteryStorageProxy_1	{}
-		Overclock_BatteryStorageProxy_6 :	Overclock_BatteryStorageProxy_1	{}
-		Overclock_BatteryStorageProxy_7 :	Overclock_BatteryStorageProxy_1	{}
-		Overclock_BatteryStorageProxy_8 :	Overclock_BatteryStorageProxy_1	{}
-		Overclock_BatteryStorageProxy_9 :	Overclock_BatteryStorageProxy_1	{}
-		Overclock_BatteryStorageProxy_10 :	Overclock_BatteryStorageProxy_1	{}
-		Overclock_BatteryStorageProxy_11 :	Overclock_BatteryStorageProxy_1	{}
-		Overclock_BatteryStorageProxy_12 :	Overclock_BatteryStorageProxy_1	{}
+		Overclock_BatteryStorageProxy_2 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_2 }
+		Overclock_BatteryStorageProxy_3 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_3 }
+		Overclock_BatteryStorageProxy_4 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_4 }
+		Overclock_BatteryStorageProxy_5 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_5 }
+		Overclock_BatteryStorageProxy_6 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_6 }
+		Overclock_BatteryStorageProxy_7 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_7 }
+		Overclock_BatteryStorageProxy_8 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_8 }
+		Overclock_BatteryStorageProxy_9 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_9 }
+		Overclock_BatteryStorageProxy_10 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_10 }
+		Overclock_BatteryStorageProxy_11 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_11 }
+		Overclock_BatteryStorageProxy_12 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_12 }
 		
 		CombinedBase_BatteryStorage_SmallFront
 		{
@@ -557,20 +556,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Type = ResourceConverter
 			OperationalToggle = IsOperationalProxy_BubbleSmallFront
 			FromStorage = CombinedBatteryStorage_SmallFront
-			FromQuantity
-			{
-				BaseValue = "round( (&~/STATS/POWER_DRAIN) / 4, 0)"
-				Modifiers
-				[
-					{
-						Type = BuffRemap
-						BuffType = Overclock
-						ModificationMode = Multiply
-						RemapFrom = [0, 1]
-						RemapTo = [1, &~/OVERCLOCK/POWER_DRAIN_FACTOR ]
-					}
-				]
-			}
+			FromQuantity = "round( (&~/STATS/POWER_DRAIN) / 4, 0)"
 			MinFromQuantityForConversion = 1
 			Interval = 1
 		}
@@ -593,7 +579,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			OperationalToggle = IsOperationalProxy_BubbleLargeFront
 			FromStorage = CombinedBatteryStorage_LargeFront
-			FromQuantity : ^/0/FromQuantity	{ BaseValue = "round( (&~/STATS/POWER_DRAIN) / 6, 0)" }
+			FromQuantity = "round( (&~/STATS/POWER_DRAIN) / 6, 0)"
 		}
 		PowerDrain_LargeFrontRight :	PowerDrain_LargeFront
 		{
@@ -603,7 +589,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		PowerDrain_LargeBackRight :		PowerDrain_LargeFront
 		{
 			OperationalToggle = IsOperationalProxy_BubbleLargeBackRight
-			FromStorage = CombinedBatteryStorage_LargeBackRight
+			FromStorage = CombinedBase_BatteryStorage_LargeBackRight
 		}
 		PowerDrain_LargeBack :			PowerDrain_LargeFront
 		{
