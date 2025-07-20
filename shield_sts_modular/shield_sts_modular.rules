@@ -1,6 +1,7 @@
 OVERCLOCK
 {
 	ARC_RADIUS_FACTOR = 150%
+	ROTATION_SPEED_FACTOR = 50%
 	HEAT_PER_SECOND = 30 // x4, use 15 if using the second ring
 	HEAT_PER_DAMAGE = 0.25
 }
@@ -385,44 +386,37 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		RotationTime
 		{
-			Type = ValueTween
-			OnTweenDuration = 60
-			OffTweenDuration = 0
-			OnValue = 3
-			IsOnToggle = RotationMode0
-		}		
-		RotationMaxTrigger
+			Type = ValueAccumulator
+			AccumulatingToggle = IsOperational
+			AccumulationRate
+			{
+				BaseValue = 3 / 30
+				Modifiers
+				[
+					{
+						Type = BuffRemap
+						BuffType = Overclock
+						ModificationMode = Multiply
+						RemapFrom = [0, 1]
+						RemapTo = [1, &~/OVERCLOCK/ROTATION_SPEED_FACTOR]
+					}
+				]
+			}
+			AccumulationTriggers
+			[
+				{
+					Trigger = RotationReset
+					Value = 0
+					Operation = 2
+				}
+			]
+		}
+		
+		RotationReset
 		{
 			Type = ThresholdTrigger
 			AmountFrom = RotationTime
 			MinAmount = 3
-		}
-		RotationMinTrigger
-		{
-			Type = ThresholdTrigger
-			AmountFrom = RotationTime
-			MaxAmount = 0
-		}
-		
-		RotationModes
-		{
-			Type = ModeCycle
-			IncrementTrigger = RotationMaxTrigger
-			DecrementTrigger = RotationMinTrigger
-			ModeRange = [0, 1]
-			StartingMode = 0
-		}
-		RotationMode0
-		{
-			Type = ModeToggle
-			Mode = RotationModes
-			OnModes = [0]
-		}
-		RotationToggle
-		{
-			Type = MultiToggle
-			Toggles = [ RotationMode0, IsOperational ]
-			Mode = All
 		}
 			
 		One	{ Type = StaticValue; Value = -1 }
