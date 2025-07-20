@@ -327,6 +327,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OperationalToggle = IsOperational
 			ResourceType = battery
 			IsDrainable = false
+			ProvideValueRange = 1
 			ResourceStorages = [Base_BatteryStorage_1, Base_BatteryStorage_2, Base_BatteryStorage_3]
 			AddMode = DistributeEvenly
 			RemoveMode = DistributeEvenly
@@ -359,6 +360,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OperationalToggle = IsOperational
 			ResourceType = battery
 			IsDrainable = false
+			ToggleOnResources = 1
 			ResourceStorages = [CombinedBase_BatteryStorage_SmallFront, CombinedOverclock_BatteryStorage_SmallFront]
 			AddMode = InOrder
 			RemoveMode = InReverseOrder
@@ -398,15 +400,16 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			RemoveMode = InReverseOrder
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
+		
 		BatteryConsumer
 		{
 			Type = ResourceConsumer
 			ResourceType = battery
 			Storage = BatteryStorage
 			DefaultPriority = &/PRIORITIES/Defense_Supply
-			ResupplyThreshold = 500
+			ResupplyThreshold = "round( (&~/STATS/POWER_CAPACITY) / 12, 0) * 2"
 			OperationalToggle = PowerToggle
-		}
+		}		
 		
 		ModularBatteryStorage_SmallFront
 		{
@@ -486,7 +489,104 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		BatteryStorageProxy_LargeBackLeft :		BatteryStorageProxy_SmallFront	{ ComponentID = ModularBatteryStorage_LargeBackLeft }
 		BatteryStorageProxy_LargeFrontLeft :	BatteryStorageProxy_SmallFront	{ ComponentID = ModularBatteryStorage_LargeFrontLeft }
 		
-		// Start Power Drain
+		// Segment is Operational
+		
+		IsModular
+		{
+			Type = BuffToggle
+			BuffType = BubbleCapacityReversed
+		}
+
+		IsOperational_ModularReversed_SmallFront
+		{
+			Type = MultiToggle
+			Toggles = [{Toggle=IsModular; Invert=true}]
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProvider_BubbleCapacityRight, BuffProvider_BubbleCapacityLeft]
+				ComponentID = IsOperational_ModularProxy_SmallFront
+			}
+			Mode = Any
+		}
+		IsOperational_ModularReversed_SmallRight :			IsOperational_ModularReversed_SmallFront
+		{
+			Toggles = [CombinedBase_BatteryStorage_SmallRight]
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_SmallRight }
+		}
+		IsOperational_ModularReversed_SmallBack :			IsOperational_ModularReversed_SmallFront
+		{
+			Toggles = [CombinedBase_BatteryStorage_SmallBack]
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_SmallBack }
+		}
+		IsOperational_ModularReversed_SmallLeft :			IsOperational_ModularReversed_SmallFront
+		{
+			Toggles = [CombinedBase_BatteryStorage_SmallLeft]
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_SmallLeft }
+		}
+		IsOperational_ModularReversed_LargeFront :			IsOperational_ModularReversed_SmallFront
+		{
+			Toggles = [CombinedBase_BatteryStorage_LargeFront]
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeFront }
+		}
+		IsOperational_ModularReversed_LargeFrontRight :		IsOperational_ModularReversed_SmallFront
+		{
+			Toggles = [CombinedBase_BatteryStorage_LargeFrontRight]
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeFrontRight }
+		}
+		IsOperational_ModularReversed_LargeBackRight :		IsOperational_ModularReversed_SmallFront
+		{
+			Toggles = [CombinedBase_BatteryStorage_LargeBackRight]
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBackRight }
+		}
+		IsOperational_ModularReversed_LargeBack :			IsOperational_ModularReversed_SmallFront
+		{
+			Toggles = [CombinedBase_BatteryStorage_LargeBack]
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBack }
+		}
+		IsOperational_ModularReversed_LargeBackLeft :		IsOperational_ModularReversed_SmallFront
+		{
+			Toggles = [CombinedBase_BatteryStorage_LargeBackLeft]
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBackLeft }
+		}
+		IsOperational_ModularReversed_LargeFrontLeft :		IsOperational_ModularReversed_SmallFront
+		{
+			Toggles = [CombinedBase_BatteryStorage_LargeFrontLeft]
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID =IsOperational_ModularProxy_LargeFrontLeft }
+		}
+		
+		IsOperational_ModularSelf_SmallFront
+		{
+			Type = MultiToggle
+			Toggles = [IsOperational_ModularReversed_SmallFront, CombinedBase_BatteryStorage_SmallFront]
+			Mode = All
+		}
+		IsOperational_ModularSelf_SmallRight :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_SmallRight, CombinedBase_BatteryStorage_SmallRight] }
+		IsOperational_ModularSelf_SmallBack :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_SmallBack, CombinedBase_BatteryStorage_SmallBack] }
+		IsOperational_ModularSelf_SmallLeft :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_SmallLeft, CombinedBase_BatteryStorage_SmallLeft] }
+		IsOperational_ModularSelf_LargeFront :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeFront, CombinedBase_BatteryStorage_LargeFront] }
+		IsOperational_ModularSelf_LargeFrontRight :	IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeFrontRight, CombinedBase_BatteryStorage_LargeFrontRight] }
+		IsOperational_ModularSelf_LargeBackRight :	IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeBackRight, CombinedBase_BatteryStorage_LargeBackRight] }
+		IsOperational_ModularSelf_LargeBack :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeBack, CombinedBase_BatteryStorage_LargeBack] }
+		IsOperational_ModularSelf_LargeBackLeft :	IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeBackLeft, CombinedBase_BatteryStorage_LargeBackLeft] }
+		IsOperational_ModularSelf_LargeFrontLeft :	IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeFrontLeft, CombinedBase_BatteryStorage_LargeFrontLeft] }
+		
+		IsOperational_ModularProxy_SmallFront
+		{
+			Type = MultiToggle
+			Toggles = [IsOperational_ModularSelf_SmallFront, {Toggle=CanOperate; Invert=true}]
+			Mode = Any
+		}
+		IsOperational_ModularProxy_SmallRight :			IsOperational_ModularProxy_SmallFront	{ Toggles = [IsOperational_ModularSelf_SmallFront, {Toggle=CanOperate; Invert=true}] }
+		IsOperational_ModularProxy_SmallBack :			IsOperational_ModularProxy_SmallFront	{ Toggles = [IsOperational_ModularSelf_SmallRight, {Toggle=CanOperate; Invert=true}] }
+		IsOperational_ModularProxy_SmallLeft :			IsOperational_ModularProxy_SmallFront	{ Toggles = [IsOperational_ModularSelf_SmallBack, {Toggle=CanOperate; Invert=true}] }
+		IsOperational_ModularProxy_LargeFront :			IsOperational_ModularProxy_SmallFront	{ Toggles = [IsOperational_ModularSelf_LargeFront, {Toggle=CanOperate; Invert=true}] }
+		IsOperational_ModularProxy_LargeFrontRight :	IsOperational_ModularProxy_SmallFront	{ Toggles = [IsOperational_ModularSelf_LargeFrontRight, {Toggle=CanOperate; Invert=true}] }
+		IsOperational_ModularProxy_LargeBackRight :		IsOperational_ModularProxy_SmallFront	{ Toggles = [IsOperational_ModularSelf_LargeBackRight, {Toggle=CanOperate; Invert=true}] }
+		IsOperational_ModularProxy_LargeBack :			IsOperational_ModularProxy_SmallFront	{ Toggles = [IsOperational_ModularSelf_LargeBack, {Toggle=CanOperate; Invert=true}] }
+		IsOperational_ModularProxy_LargeBackLeft :		IsOperational_ModularProxy_SmallFront	{ Toggles = [IsOperational_ModularSelf_LargeBackLeft, {Toggle=CanOperate; Invert=true}] }
+		IsOperational_ModularProxy_LargeFrontLeft :		IsOperational_ModularProxy_SmallFront	{ Toggles = [IsOperational_ModularSelf_LargeFrontLeft, {Toggle=CanOperate; Invert=true}] }
+		
+		// Power Drain
 		
 		IsOperational_BubbleSmallFront
 		{

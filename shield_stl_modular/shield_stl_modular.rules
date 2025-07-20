@@ -155,9 +155,23 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		IsOperational
 		{
 			Type = MultiToggle
-			Toggles = [PowerToggle, BatteryStorage, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL] // ModularCombinedBatteryStorage // CombinedBatteryStorage
+			Toggles = [PowerToggle, CombinedBatteryStorage, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL, IsOperational_AllSegments_ToggleProxy] // There is no problem with CombinedBatteryStorage and IsOperational_AllSegments_ToggleProxy, as the first one can never be depleated without first depleating the second one due to RemoveMode
 			Mode = All
 		}
+		
+		CanOperate
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
+			Mode = All
+		}
+		
+		IsModular
+		{
+			Type = BuffToggle
+			BuffType = BubbleCapacityReversed
+		}
+		
 		IsOperationalBubble
 		{
 			Type = ToggleProxy
@@ -275,19 +289,187 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OperationalToggle = PowerToggle
 		}
 		
+		// All Segments Toggle
+		
+		IsOperational_AllSegments_On
+		{
+			Type = MultiToggle
+			Toggles = [BatteryStorage, IsOperational_SegmentLargeFront_On, IsOperational_SegmentLargeFrontRight_On, IsOperational_SegmentLargeBackRight_On, IsOperational_SegmentLargeBack_On, IsOperational_SegmentLargeBackLeft_On, IsOperational_SegmentLargeFrontLeft_On]
+			Mode = All
+		}
+		IsOperational_AllSegments_Off :	IsOperational_AllSegments_On	{ Toggles = [BatteryStorage, IsOperational_SegmentLargeFront_Off, IsOperational_SegmentLargeFrontRight_Off, IsOperational_SegmentLargeBackRight_Off, IsOperational_SegmentLargeBack_Off, IsOperational_SegmentLargeBackLeft_Off, IsOperational_SegmentLargeFrontLeft_Off] }
+		IsOperational_AllSegments_TriggerOn
+		{
+			Type = ToggleTrigger
+			Toggle = IsOperational_AllSegments_On
+			TriggerWhenOn = true
+			TriggerWhenOff = false
+		}
+		IsOperational_AllSegments_TriggerOff :	IsOperational_AllSegments_TriggerOn
+		{
+			Toggle = IsOperational_AllSegments_Off
+			TriggerWhenOn = false
+			TriggerWhenOff = true
+		}
+		IsOperational_AllSegments_Toggle
+		{
+			Type = TriggeredToggle
+			OnTrigger = IsOperational_AllSegments_TriggerOn
+			OffTrigger = IsOperational_AllSegments_TriggerOff
+		}
+		IsOperational_AllSegments_ToggleProxy
+		{
+			Type = MultiToggle
+			Toggles = [{Toggle=IsModular; Invert=true}, IsOperational_AllSegments_Toggle]
+			Mode = Any
+		}
+		
 		// Segments
+		
+		IsOperational_SegmentLargeFront_On
+		{
+			Type = MultiToggle
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProvider_Top, BuffProvider_Right, BuffProvider_Bottom, BuffProvider_Left]
+				ComponentID = IsOperational_ModularProxy_LargeFront
+			}
+			Mode = All
+		}
+		IsOperational_SegmentLargeFrontRight_On :	IsOperational_SegmentLargeFront_On
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeFrontRight }
+		}
+		IsOperational_SegmentLargeBackRight_On :	IsOperational_SegmentLargeFront_On
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBackRight }
+		}
+		IsOperational_SegmentLargeBack_On :		IsOperational_SegmentLargeFront_On
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBack }
+		}
+		IsOperational_SegmentLargeBackLeft_On :	IsOperational_SegmentLargeFront_On
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBackLeft }
+		}
+		IsOperational_SegmentLargeFrontLeft_On :	IsOperational_SegmentLargeFront_On
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeFrontLeft }
+		}
+		
+		IsOperational_SegmentLargeFront_Off
+		{
+			Type = MultiToggle
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProvider_Top, BuffProvider_Right, BuffProvider_Bottom, BuffProvider_Left]
+				ComponentID = IsOperational_ModularProxy_LargeFront
+			}
+			Invert = true
+			Mode = Any
+		}
+		IsOperational_SegmentLargeFrontRight_Off :	IsOperational_SegmentLargeFront_Off
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeFrontRight }
+		}
+		IsOperational_SegmentLargeBackRight_Off :	IsOperational_SegmentLargeFront_Off
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBackRight }
+		}
+		IsOperational_SegmentLargeBack_Off :		IsOperational_SegmentLargeFront_Off
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBack }
+		}
+		IsOperational_SegmentLargeBackLeft_Off :	IsOperational_SegmentLargeFront_Off
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBackLeft }
+		}
+		IsOperational_SegmentLargeFrontLeft_Off :	IsOperational_SegmentLargeFront_Off
+		{
+			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeFrontLeft }
+		}
+		
+		IsOperational_SegmentLargeFront_TriggerOn
+		{
+			Type = ToggleTrigger
+			Toggle = IsOperational_SegmentLargeFront_On
+			TriggerWhenOn = true
+			TriggerWhenOff = false
+		}
+		IsOperational_SegmentLargeFrontRight_TriggerOn :	IsOperational_SegmentLargeFront_TriggerOn	{ Toggle = IsOperational_SegmentLargeFrontRight_On }
+		IsOperational_SegmentLargeBackRight_TriggerOn :		IsOperational_SegmentLargeFront_TriggerOn	{ Toggle = IsOperational_SegmentLargeBackRight_On }
+		IsOperational_SegmentLargeBack_TriggerOn :			IsOperational_SegmentLargeFront_TriggerOn	{ Toggle = IsOperational_SegmentLargeBack_On }
+		IsOperational_SegmentLargeBackLeft_TriggerOn :		IsOperational_SegmentLargeFront_TriggerOn	{ Toggle = IsOperational_SegmentLargeBackLeft_On }
+		IsOperational_SegmentLargeFrontLeft_TriggerOn :		IsOperational_SegmentLargeFront_TriggerOn	{ Toggle = IsOperational_SegmentLargeFrontLeft_On }
+		
+		IsOperational_SegmentLargeFront_TriggerOff
+		{
+			Type = ToggleTrigger
+			Toggle = IsOperational_SegmentLargeFront_Off
+			TriggerWhenOn = false
+			TriggerWhenOff = true
+		}
+		IsOperational_SegmentLargeFrontRight_TriggerOff :	IsOperational_SegmentLargeFront_TriggerOff	{ Toggle = IsOperational_SegmentLargeFrontRight_Off }
+		IsOperational_SegmentLargeBackRight_TriggerOff :	IsOperational_SegmentLargeFront_TriggerOff	{ Toggle = IsOperational_SegmentLargeBackRight_Off }
+		IsOperational_SegmentLargeBack_TriggerOff :			IsOperational_SegmentLargeFront_TriggerOff	{ Toggle = IsOperational_SegmentLargeBack_Off }
+		IsOperational_SegmentLargeBackLeft_TriggerOff :		IsOperational_SegmentLargeFront_TriggerOff	{ Toggle = IsOperational_SegmentLargeBackLeft_Off }
+		IsOperational_SegmentLargeFrontLeft_TriggerOff :	IsOperational_SegmentLargeFront_TriggerOff	{ Toggle = IsOperational_SegmentLargeFrontLeft_Off }
+		
+		IsOperational_SegmentLargeFront_Toggle
+		{
+			Type = TriggeredToggle
+			OnTrigger = IsOperational_SegmentLargeFront_TriggerOn
+			OffTrigger = IsOperational_SegmentLargeFront_TriggerOff
+		}
+		IsOperational_SegmentLargeFrontRight_Toggle :	IsOperational_SegmentLargeFront_Toggle
+		{
+			OnTrigger = IsOperational_SegmentLargeFrontRight_TriggerOn
+			OffTrigger = IsOperational_SegmentLargeFrontRight_TriggerOff
+		}
+		IsOperational_SegmentLargeBackRight_Toggle :	IsOperational_SegmentLargeFront_Toggle
+		{
+			OnTrigger = IsOperational_SegmentLargeBackRight_TriggerOn
+			OffTrigger = IsOperational_SegmentLargeBackRight_TriggerOff
+		}
+		IsOperational_SegmentLargeBack_Toggle :			IsOperational_SegmentLargeFront_Toggle
+		{
+			OnTrigger = IsOperational_SegmentLargeBack_TriggerOn
+			OffTrigger = IsOperational_SegmentLargeBack_TriggerOff
+		}
+		IsOperational_SegmentLargeBackLeft_Toggle :		IsOperational_SegmentLargeFront_Toggle
+		{
+			OnTrigger = IsOperational_SegmentLargeBackLeft_TriggerOn
+			OffTrigger = IsOperational_SegmentLargeBackLeft_TriggerOff
+		}
+		IsOperational_SegmentLargeFrontLeft_Toggle :	IsOperational_SegmentLargeFront_Toggle
+		{
+			OnTrigger = IsOperational_SegmentLargeFrontLeft_TriggerOn
+			OffTrigger = IsOperational_SegmentLargeFrontLeft_TriggerOff
+		}
+		
+		IsOperational_SegmentLargeFront_ToggleProxy
+		{
+			Type = MultiToggle
+			Toggles = [{Toggle=IsModular; Invert=true}, IsOperational_SegmentLargeFront_Toggle]
+			Mode = Any
+		}
+		IsOperational_SegmentLargeFrontRight_ToggleProxy :	IsOperational_SegmentLargeFront_ToggleProxy	{ Toggles = [{Toggle=IsModular; Invert=true}, IsOperational_SegmentLargeFrontRight_Toggle] }
+		IsOperational_SegmentLargeBackRight_ToggleProxy :	IsOperational_SegmentLargeFront_ToggleProxy	{ Toggles = [{Toggle=IsModular; Invert=true}, IsOperational_SegmentLargeBackRight_Toggle] }
+		IsOperational_SegmentLargeBack_ToggleProxy :		IsOperational_SegmentLargeFront_ToggleProxy	{ Toggles = [{Toggle=IsModular; Invert=true}, IsOperational_SegmentLargeBack_Toggle] }
+		IsOperational_SegmentLargeBackLeft_ToggleProxy :	IsOperational_SegmentLargeFront_ToggleProxy	{ Toggles = [{Toggle=IsModular; Invert=true}, IsOperational_SegmentLargeBackLeft_Toggle] }
+		IsOperational_SegmentLargeFrontLeft_ToggleProxy :	IsOperational_SegmentLargeFront_ToggleProxy	{ Toggles = [{Toggle=IsModular; Invert=true}, IsOperational_SegmentLargeFrontLeft_Toggle] }
 		
 		IsOperational_LargeFront
 		{
 			Type = MultiToggle
-			Toggles = [PowerToggle, BatteryStorage_Front, ScorchedToggle, IsOperational]
+			Toggles = [PowerToggle, BatteryStorage_Front, ScorchedToggle, IsOperational, IsOperational_SegmentLargeFront_ToggleProxy]
 			Mode = All
 		}
-		IsOperational_LargeFrontRight :	IsOperational_LargeFront	{ Toggles = [PowerToggle, BatteryStorage_FrontRight, ScorchedToggle, IsOperational] }
-		IsOperational_LargeBackRight :	IsOperational_LargeFront	{ Toggles = [PowerToggle, BatteryStorage_BackRight, ScorchedToggle, IsOperational] }
-		IsOperational_LargeBack :		IsOperational_LargeFront	{ Toggles = [PowerToggle, BatteryStorage_Back, ScorchedToggle, IsOperational] }
-		IsOperational_LargeBackLeft :	IsOperational_LargeFront	{ Toggles = [PowerToggle, BatteryStorage_BackLeft, ScorchedToggle, IsOperational] }
-		IsOperational_LargeFrontLeft :	IsOperational_LargeFront	{ Toggles = [PowerToggle, BatteryStorage_FrontLeft, ScorchedToggle, IsOperational] }
+		IsOperational_LargeFrontRight :	IsOperational_LargeFront	{ Toggles = [PowerToggle, BatteryStorage_FrontRight, ScorchedToggle, IsOperational, IsOperational_SegmentLargeFrontRight_ToggleProxy] }
+		IsOperational_LargeBackRight :	IsOperational_LargeFront	{ Toggles = [PowerToggle, BatteryStorage_BackRight, ScorchedToggle, IsOperational, IsOperational_SegmentLargeBackRight_ToggleProxy] }
+		IsOperational_LargeBack :		IsOperational_LargeFront	{ Toggles = [PowerToggle, BatteryStorage_Back, ScorchedToggle, IsOperational, IsOperational_SegmentLargeBack_ToggleProxy] }
+		IsOperational_LargeBackLeft :	IsOperational_LargeFront	{ Toggles = [PowerToggle, BatteryStorage_BackLeft, ScorchedToggle, IsOperational, IsOperational_SegmentLargeBackLeft_ToggleProxy] }
+		IsOperational_LargeFrontLeft :	IsOperational_LargeFront	{ Toggles = [PowerToggle, BatteryStorage_FrontLeft, ScorchedToggle, IsOperational, IsOperational_SegmentLargeFrontLeft_ToggleProxy] }
 		
 		IsOperationalOverloaded_Front :			IsOperational_LargeFront	{ Toggles = [IsOperational_LargeFront, IsOperationalOverloaded] }
 		IsOperationalOverloaded_FrontRight :	IsOperational_LargeFront	{ Toggles = [IsOperational_LargeFrontRight, IsOperationalOverloaded] }
@@ -409,7 +591,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Type = AreaBuffProvider
 			BuffType = BubbleCapacity
 			BuffArea = [1, -1, 2, 1]
-			OperationalToggle = IsOperational
+			OperationalToggle = CanOperate
 			Criteria
 			{
 				Top = -2
@@ -1569,7 +1751,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 				// Out of power.
 				{
-					Toggle = BatteryStorage // ModularCombinedBatteryStorage
+					Toggle = CombinedBatteryStorage
 					AtlasSprite
 					{
 						File = &/INDICATORS/NoPower
