@@ -1,7 +1,7 @@
 OVERCLOCK
 {
 	HEAT_PER_SECOND = 10
-	HEAT_PER_DAMAGE = 0.01
+	HEAT_PER_DAMAGE = 0.02
 	CAPACITY_FACTOR = 200%
 	ARC_RADIUS_FACTOR = 150%
 	POWER_DRAIN_FACTOR = 200%
@@ -36,7 +36,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeByRotation = true
 	MaxHealth = 4000
 	TypeCategories = [defense, uses_power]
-	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacity, BubbleCapacityReversed, BubbleResistanceBonus, BubbleRadiusBonus]
+	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacity, BubbleCapacityReversed, BubbleResistanceBonus, BubbleRadiusBonus, ShieldOverload]
 	PenetrationRectType = Normal
 	// ProhibitLeft = 0
 	// ProhibitRight = 0
@@ -770,6 +770,69 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Interval = 0.5
 		}
 		
+		Overclock_BubbleArcShieldProxy
+		{
+			Type = MultiTrigger
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProvider_BubbleCapacityReversedRight, BuffProvider_BubbleCapacityReversedLeft]
+				ComponentIDs = [ Overclock_BubbleArcShieldProxy, Overclock_ArcShieldProxy ]
+			}
+		}
+		Overclock_BubbleArcShieldProxyProxy	// For Modular, to prevent using it while disabled
+		{
+			Type = TriggerProxy
+			ComponentID = Overclock_BubbleArcShieldProxy
+			ProxyToggle = IsOverclocked
+		}
+		
+		BubbleOverloadValue
+		{
+			Type = MultiValue
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProvider_BubbleCapacityReversedRight, BuffProvider_BubbleCapacityReversedLeft]
+				ComponentIDs = [ BubbleOverloadValue, OverloadValue ]
+			}
+			Mode = Max
+		}
+		SelfBuffProviderOverload
+		{
+			Type = SelfBuffProvider
+			BuffType = ShieldOverload
+			BuffAmount = 1
+			BuffMultiplier = BubbleOverloadValue
+		}
+		
+		OverclockHitHeatProducer
+		{
+			Type = ResourceChange
+			ResourceStorage = &~/Part/^/0/HEAT_TARGET_STORAGE
+			// Provides the post-resistance damage value as EffectScale
+			Trigger = Overclock_BubbleArcShieldProxyProxy
+			Amount
+			{
+				BaseValue = "round((&~/OVERCLOCK/HEAT_PER_DAMAGE) * (&~/HEAT_TO_RESOURCE), 0)"
+				Modifiers
+				[
+					{
+						Type = EffectScale
+						ModificationMode = Multiply
+					}
+					{
+						Type = Buff
+						BuffType = ShieldOverload
+						ModificationMode = Multiply
+					}
+					{
+						Type = Buff
+						BuffType = Overclock
+						ModificationMode = Multiply
+					}
+				]
+			}
+		}
+				
 		OverheatEffects : ^/0/OverheatEffects
 		{
 			Location = [1, 1.5]

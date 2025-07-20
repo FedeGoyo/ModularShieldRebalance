@@ -40,6 +40,8 @@ BubbleRadiusBonus
 */
 }
 
+ShieldOverload {}
+
 BubbleShutDown
 {
 	CombineMode = Add
