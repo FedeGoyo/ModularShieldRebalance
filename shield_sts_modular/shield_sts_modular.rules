@@ -1,9 +1,10 @@
 OVERCLOCK
 {
-	ARC_RADIUS_FACTOR = 150%
+	DAMAGE_DRAIN_FACTOR = 1 / 200%
+	EMP_RESIST = 33%
 	ROTATION_SPEED_FACTOR = 50%
 	HEAT_PER_SECOND = 30 // x4, use 15 if using the second ring
-	HEAT_PER_DAMAGE = 0.25
+	HEAT_PER_DAMAGE = 0.6
 }
 HEAT_TO_RESOURCE = &<./Data/statuses/heat/heat.rules>/STATUS_TO_RESOURCE_RATIO
 HEAT_TO_STATUS = &<./Data/statuses/heat/heat.rules>/RESOURCE_TO_STATUS_RATIO
@@ -205,6 +206,13 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				BaseValue = 0
 				Modifiers
 				[
+					{
+						Type = BuffRemap
+						BuffType = Overclock
+						ModificationMode = Add
+						RemapFrom = [0, 1]
+						RemapTo = [0, (&~/OVERCLOCK/EMP_RESIST)]
+					}
 					{
 						Type = Status
 						StatusType = cosmoteer.shield_overload
@@ -486,13 +494,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				Modifiers
 				[
 					{
-						Type = BuffRemap
-						BuffType = Overclock
-						ModificationMode = Multiply
-						RemapFrom = [0, 1]
-						RemapTo = [1, &~/OVERCLOCK/ARC_RADIUS_FACTOR]
-					}
-					{
 						Type = ScaledBuff
 						BuffType = BubbleRadiusBonus
 						Scale = 1.5
@@ -506,7 +507,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OperationalToggle = IsOperationalProxy	// IsOperational
 			PenetrationResistance = [ { BaseValue= 8.33; BuffType=BubbleResistanceBonus; BuffMode=Add; }, 0]
 			DrainResourcesFrom = ProxyBatteryStorage
-			ResourceDrainPerDamage	//	Could be removed
+			ResourceDrainPerDamage
 			{
 				BaseValue = .4
 				Modifiers
@@ -516,6 +517,13 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						StatusType = cosmoteer.shield_overload
 						ModificationMode = Multiply
 						BaseStatusValue = 1
+					}
+					{
+						Type = BuffRemap
+						BuffType = Overclock
+						ModificationMode = Multiply
+						RemapFrom = [0, 1]
+						RemapTo = [1, &~/OVERCLOCK/DAMAGE_DRAIN_FACTOR ]
 					}
 				]
 			}
@@ -563,7 +571,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = ArcSprite
 			ChainedTo = ArcShield
-			Radius = (&../ArcShield/Radius/BaseValue) * (&~/OVERCLOCK/ARC_RADIUS_FACTOR)
+			Radius = (&../ArcShield/Radius/BaseValue)
 			Arc = 90d
 			SpriteSegments = (&../ArcShield/BlueprintArcSpriteSegments)
 			Sprite
@@ -1297,9 +1305,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		TitleKey = "StatCategories/Overclocked"
 		Stats
 		{
-//			ShieldHP = (&~/Part/Components/BatteryStorage_Front/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
-//			ShieldRings = 2
-//			ShieldDistRings = (&<stats.rules>/Stats/RadiusOverclocked)
+			ShieldHP = (&~/Part/StatsByCategory/0/Stats/ShieldHPSegment) / (&~/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
+			EMPResistPercentage = (&~/OVERCLOCK/EMP_RESIST) * 100
 //			ShieldRotationSpeed =
 			HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND) * (&~/Part/StatsByCategory/0/Stats/ShieldSegments) // * (&ShieldRings)
 			HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
