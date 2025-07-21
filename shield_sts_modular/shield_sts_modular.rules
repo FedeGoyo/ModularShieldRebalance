@@ -148,6 +148,12 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			BuffType = BubbleCapacityReversed
 		}
 		
+		Size	// Used for Modular Shield Batteries to know that they connected to a Small Bubble Shield
+		{
+			Type = StaticValue
+			Value = 1
+		}
+		
 		IsOperationalBubble
 		{
 			Type = ToggleProxy
@@ -369,8 +375,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = ToggleTrigger
 			Toggle = IsOperational_SegmentSmallFront_Off
-			TriggerWhenOn = false
-			TriggerWhenOff = true
+			TriggerWhenOn = true
+			TriggerWhenOff = false
 		}
 		IsOperational_SegmentSmallRight_TriggerOff :	IsOperational_SegmentSmallFront_TriggerOff	{ Toggle = IsOperational_SegmentSmallRight_Off }
 		IsOperational_SegmentSmallBack_TriggerOff :		IsOperational_SegmentSmallFront_TriggerOff	{ Toggle = IsOperational_SegmentSmallBack_Off }
@@ -518,7 +524,16 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OperationalToggle = IsOperational_SmallLeft
 			FromStorage = BatteryStorage_Left
 		}
-			
+		
+		// Out of Power Toggle
+		
+		HasEnergy	// The BatteryStorages are the last at being depletead due to RemoveMode and so the segment will be always disabled when they are depleated
+		{
+			Type = MultiToggle
+			Toggles = [BatteryStorage_Front, BatteryStorage_Right, BatteryStorage_Back, BatteryStorage_Left]
+			Mode = All
+		}
+		
 		// Modular Battery
 		
 		BuffProvider_Top
@@ -1543,7 +1558,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 				// Out of power.
 				{
-					Toggle = CombinedBatteryStorage
+					Toggle = HasEnergy
 					AtlasSprite
 					{
 						File = &/INDICATORS/NoPower
