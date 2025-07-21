@@ -244,7 +244,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ResourceStorages = [CombinedBatteryStorage_Front, CombinedBatteryStorage_FrontRight, CombinedBatteryStorage_BackRight, CombinedBatteryStorage_Back, CombinedBatteryStorage_BackLeft, CombinedBatteryStorage_FrontLeft]
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 			RemoveMode = DistributeEvenly
-			ToggleOnResources = 7001
 			DrainResistance
 			{
 				BaseValue = 0
@@ -297,13 +296,21 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		// All Segments Toggle
 		
+		Base_BatteryStorage
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [BatteryStorage_Front, BatteryStorage_FrontRight, BatteryStorage_BackRight, BatteryStorage_Back, BatteryStorage_BackLeft, BatteryStorage_FrontLeft]
+			ToggleOnResources = 23001
+		}
+		
 		IsOperational_AllSegments_On
 		{
 			Type = MultiToggle
-			Toggles = [BatteryStorage, IsOperational_SegmentLargeFront_On, IsOperational_SegmentLargeFrontRight_On, IsOperational_SegmentLargeBackRight_On, IsOperational_SegmentLargeBack_On, IsOperational_SegmentLargeBackLeft_On, IsOperational_SegmentLargeFrontLeft_On]
+			Toggles = [IsOperational_SegmentLargeFront_On, IsOperational_SegmentLargeFrontRight_On, IsOperational_SegmentLargeBackRight_On, IsOperational_SegmentLargeBack_On, IsOperational_SegmentLargeBackLeft_On, IsOperational_SegmentLargeFrontLeft_On]
 			Mode = All
 		}
-		IsOperational_AllSegments_Off :	IsOperational_AllSegments_On	{ Toggles = [BatteryStorage, IsOperational_SegmentLargeFront_Off, IsOperational_SegmentLargeFrontRight_Off, IsOperational_SegmentLargeBackRight_Off, IsOperational_SegmentLargeBack_Off, IsOperational_SegmentLargeBackLeft_Off, IsOperational_SegmentLargeFrontLeft_Off] }
+		IsOperational_AllSegments_Off :	IsOperational_AllSegments_On	{ Toggles = [IsOperational_SegmentLargeFront_Off, IsOperational_SegmentLargeFrontRight_Off, IsOperational_SegmentLargeBackRight_Off, IsOperational_SegmentLargeBack_Off, IsOperational_SegmentLargeBackLeft_Off, IsOperational_SegmentLargeFrontLeft_Off] }
 		IsOperational_AllSegments_TriggerOn
 		{
 			Type = ToggleTrigger
@@ -335,6 +342,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		IsOperational_SegmentLargeFront_On
 		{
 			Type = MultiToggle
+			Toggles = [BatteryStorage_Front, CanOperate]	// The battery is added otherwise if you build a new Bubble Shield connected to a fully loaded Modular Shield Batteries it won't trigger. The CanOperate is added otherwise if you disable the overclock, togglepower or is scorched it won't trigger.
 			ViaBuffs
 			{
 				OutgoingBuffProviders = [BuffProvider_Top, BuffProvider_Right, BuffProvider_Bottom, BuffProvider_Left]
@@ -344,28 +352,34 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 		IsOperational_SegmentLargeFrontRight_On :	IsOperational_SegmentLargeFront_On
 		{
+			Toggles = [BatteryStorage_FrontRight, CanOperate]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeFrontRight }
 		}
 		IsOperational_SegmentLargeBackRight_On :	IsOperational_SegmentLargeFront_On
 		{
+			Toggles = [BatteryStorage_BackRight, CanOperate]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBackRight }
 		}
 		IsOperational_SegmentLargeBack_On :		IsOperational_SegmentLargeFront_On
 		{
+			Toggles = [BatteryStorage_Back, CanOperate]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBack }
 		}
 		IsOperational_SegmentLargeBackLeft_On :	IsOperational_SegmentLargeFront_On
 		{
+			Toggles = [BatteryStorage_BackLeft, CanOperate]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBackLeft }
 		}
 		IsOperational_SegmentLargeFrontLeft_On :	IsOperational_SegmentLargeFront_On
 		{
+			Toggles = [BatteryStorage_FrontLeft, CanOperate]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeFrontLeft }
 		}
 		
 		IsOperational_SegmentLargeFront_Off
 		{
 			Type = MultiToggle
+			Toggles = [BatteryStorage_Front]
 			ViaBuffs
 			{
 				OutgoingBuffProviders = [BuffProvider_Top, BuffProvider_Right, BuffProvider_Bottom, BuffProvider_Left]
@@ -376,22 +390,27 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 		IsOperational_SegmentLargeFrontRight_Off :	IsOperational_SegmentLargeFront_Off
 		{
+			Toggles = [BatteryStorage_FrontRight]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeFrontRight }
 		}
 		IsOperational_SegmentLargeBackRight_Off :	IsOperational_SegmentLargeFront_Off
 		{
+			Toggles = [BatteryStorage_BackRight]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBackRight }
 		}
 		IsOperational_SegmentLargeBack_Off :		IsOperational_SegmentLargeFront_Off
 		{
+			Toggles = [BatteryStorage_Back]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBack }
 		}
 		IsOperational_SegmentLargeBackLeft_Off :	IsOperational_SegmentLargeFront_Off
 		{
+			Toggles = [BatteryStorage_BackLeft]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeBackLeft }
 		}
 		IsOperational_SegmentLargeFrontLeft_Off :	IsOperational_SegmentLargeFront_Off
 		{
+			Toggles = [BatteryStorage_FrontLeft]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_LargeFrontLeft }
 		}
 		

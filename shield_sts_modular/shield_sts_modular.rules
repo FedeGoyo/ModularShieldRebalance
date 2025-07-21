@@ -220,7 +220,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ResourceStorages = [CombinedBatteryStorage_Front, CombinedBatteryStorage_Right, CombinedBatteryStorage_Back, CombinedBatteryStorage_Left]
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 			RemoveMode = DistributeEvenly
-			ToggleOnResources = 7001
 			DrainResistance
 			{
 				BaseValue = 0
@@ -272,13 +271,21 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		// All Segments Toggle
 		
+		Base_BatteryStorage
+		{
+			Type = MultiResourceStorage
+			ResourceType = battery
+			ResourceStorages = [BatteryStorage_Front, BatteryStorage_Right, BatteryStorage_Back, BatteryStorage_Left]
+			ToggleOnResources = 7001
+		}
+		
 		IsOperational_AllSegments_On
 		{
 			Type = MultiToggle
-			Toggles = [BatteryStorage, IsOperational_SegmentSmallFront_On, IsOperational_SegmentSmallRight_On, IsOperational_SegmentSmallBack_On, IsOperational_SegmentSmallLeft_On]
+			Toggles = [IsOperational_SegmentSmallFront_On, IsOperational_SegmentSmallRight_On, IsOperational_SegmentSmallBack_On, IsOperational_SegmentSmallLeft_On]
 			Mode = All
 		}
-		IsOperational_AllSegments_Off : IsOperational_AllSegments_On	{ Toggles = [BatteryStorage, IsOperational_SegmentSmallFront_Off, IsOperational_SegmentSmallRight_Off, IsOperational_SegmentSmallBack_Off, IsOperational_SegmentSmallLeft_Off] }
+		IsOperational_AllSegments_Off : IsOperational_AllSegments_On	{ Toggles = [IsOperational_SegmentSmallFront_Off, IsOperational_SegmentSmallRight_Off, IsOperational_SegmentSmallBack_Off, IsOperational_SegmentSmallLeft_Off] }
 		IsOperational_AllSegments_TriggerOn
 		{
 			Type = ToggleTrigger
@@ -310,6 +317,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		IsOperational_SegmentSmallFront_On
 		{
 			Type = MultiToggle
+			Toggles = [BatteryStorage_Front, CanOperate]	// The battery is added otherwise if you build a new Bubble Shield connected to a fully loaded Modular Shield Batteries it won't trigger. The CanOperate is added otherwise if you disable the overclock, togglepower or is scorched it won't trigger.
 			ViaBuffs
 			{
 				OutgoingBuffProviders = [BuffProvider_Top, BuffProvider_Right, BuffProvider_Bottom, BuffProvider_Left]
@@ -319,20 +327,24 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 		IsOperational_SegmentSmallRight_On :	IsOperational_SegmentSmallFront_On
 		{
+			Toggles = [BatteryStorage_Right, CanOperate]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_SmallRight }
 		}
 		IsOperational_SegmentSmallBack_On :	IsOperational_SegmentSmallFront_On
 		{
+			Toggles = [BatteryStorage_Back, CanOperate]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_SmallBack }
 		}
 		IsOperational_SegmentSmallLeft_On :	IsOperational_SegmentSmallFront_On
 		{
+			Toggles = [BatteryStorage_Left, CanOperate]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_SmallLeft }
 		}
 		
 		IsOperational_SegmentSmallFront_Off
 		{
 			Type = MultiToggle
+			Toggles = [BatteryStorage_Front]
 			ViaBuffs
 			{
 				OutgoingBuffProviders = [BuffProvider_Top, BuffProvider_Right, BuffProvider_Bottom, BuffProvider_Left]
@@ -343,21 +355,18 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 		IsOperational_SegmentSmallRight_Off :	IsOperational_SegmentSmallFront_Off
 		{
+			Toggles = [BatteryStorage_Right]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_SmallRight }
-			Invert = true
-			Mode = Any
 		}
 		IsOperational_SegmentSmallBack_Off :	IsOperational_SegmentSmallFront_Off
 		{
+			Toggles = [BatteryStorage_Back]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_SmallBack }
-			Invert = true
-			Mode = Any
 		}
 		IsOperational_SegmentSmallLeft_Off :	IsOperational_SegmentSmallFront_Off
 		{
+			Toggles = [BatteryStorage_Left]
 			ViaBuffs :	^/0/ViaBuffs	{ ComponentID = IsOperational_ModularProxy_SmallLeft }
-			Invert = true
-			Mode = Any
 		}
 		
 		IsOperational_SegmentSmallFront_TriggerOn
