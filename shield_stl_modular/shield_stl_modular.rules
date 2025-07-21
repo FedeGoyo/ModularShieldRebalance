@@ -1799,7 +1799,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 	Stats
 	{
-		PowerCapacity = (&../StatsByCategory/0/Stats/SegmentCapacity) * (&../StatsByCategory/0/Stats/ShieldSegments)
+		PowerCapacity = (&../StatsByCategory/1/Stats/SEGMENT_CAPACITY) * (&../StatsByCategory/0/Stats/SHIELD_SEGMENTS)
 
 		RecPower = (&../StatsByCategory/0/Stats/PowerUsageContinuous) + 0.5
 		RecCrew = (&RecPower) * 4
@@ -1811,14 +1811,21 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			NameKey = "StatCategories/ShieldBubbleLarge"
 			Stats
 			{
+				ShieldRadius = (&~/Part/Components/ArcShield/Radius/BaseValue) - (&~/Part/Components/ArcShield/Location/1)
+				ROTATION_SECONDS = (&~/Part/Components/RotationReset/MinAmount) / (&~/Part/Components/RotationTime/AccumulationRate/BaseValue)
+				ShieldSpeed = 360 / (&ROTATION_SECONDS)
+				SHIELD_SEGMENTS = 6
+				PowerUsageContinuous = (&~/Part/Components/PowerDrain_Front/FromQuantity) / (&~/Part/Components/PowerDrain_Front/Interval) / 1000 * (&SHIELD_SEGMENTS)
+			}
+		}
+		{
+			NameKey = "StatCategories/ShieldSegmentLarge"
+			Stats
+			{
+				ShieldHP = (&~/Part/Components/BatteryStorage_Front/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
 				ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0/BaseValue
-				ShieldDist = (&~/Part/Components/ArcShield/Radius/BaseValue) - (&~/Part/Components/ArcShield/Location/1)
-				ShieldSegments = 6
-				ShieldHPSegment = (&~/Part/Components/BatteryStorage_Front/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
-				RotationSeconds = (&~/Part/Components/RotationReset/MinAmount) / (&~/Part/Components/RotationTime/AccumulationRate/BaseValue)
-				ShieldSpeed = 360 / (&RotationSeconds)
-				PowerUsageContinuous = (&~/Part/Components/PowerDrain_Front/FromQuantity) / (&~/Part/Components/PowerDrain_Front/Interval) / 1000 * (&ShieldSegments)
-				SegmentCapacity = (&~/Part/Components/BatteryStorage_Front/MaxResources) / 1000
+				ShieldArc = deg(&~/Part/Components/ArcShield/Arc)
+				SEGMENT_CAPACITY = (&~/Part/Components/BatteryStorage_Front/MaxResources) / 1000
 			}
 		}
 	]
@@ -1826,15 +1833,27 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SecondaryToolTip
 	{
 		TitleKey = "StatCategories/Overclocked"
-		Stats
-		{
-			ShieldHP =  (&~/Part/StatsByCategory/0/Stats/ShieldHPSegment) / (&~/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
-			EMPResistPercentage = (&~/OVERCLOCK/EMP_RESIST) * 100
-			RotationSeconds = (&~/Part/StatsByCategory/0/Stats/RotationSeconds) / (&~/OVERCLOCK/ROTATION_SPEED_FACTOR)
-			ShieldSpeed = 360 / (&RotationSeconds)
-			HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND) * (&~/Part/StatsByCategory/0/Stats/ShieldSegments)
-			HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
-		}
+		StatsByCategory
+		[
+			{
+				NameKey = "StatCategories/ShieldBubbleSmall"
+				Stats
+				{
+					ROTATION_SECONDS = (&~/Part/StatsByCategory/0/Stats/ROTATION_SECONDS) / (&~/OVERCLOCK/ROTATION_SPEED_FACTOR)
+					ShieldSpeed = 360 / (&ROTATION_SECONDS)
+					EMPResistPercentage = (&~/OVERCLOCK/EMP_RESIST) * 100
+					HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND) * (&~/Part/StatsByCategory/0/Stats/SHIELD_SEGMENTS)
+					HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
+				}
+			}
+			{
+				NameKey = "StatCategories/ShieldSegmentSmall"
+				Stats
+				{
+					ShieldHP = (&~/Part/StatsByCategory/1/Stats/ShieldHP) / (&~/OVERCLOCK/DAMAGE_DRAIN_FACTOR)	
+				}
+			}
+		]
 	}
 	
 	StatsNotesKey = "Stats/BubbleNotes"

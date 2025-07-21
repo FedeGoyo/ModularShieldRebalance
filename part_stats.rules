@@ -1,12 +1,16 @@
 PartStats
 [
 	{
-		ID = ShieldSegments
-		FormatKey = "Stats/ShieldSegmentsFmt"
+		ID = ShieldRadius
+		FormatKey = "Stats/ShieldRadiusFmT"
 	}
 	{
-		ID = ShieldHPSegment
-		FormatKey = "Stats/ShieldHPSegmentFmT"
+		ID = ShieldSpeed
+		FormatKey = "Stats/ShieldSpeedFmT"
+	}
+	{
+		ID = ShieldSegments
+		FormatKey = "Stats/ShieldSegmentsFmt"
 	}
 	{
 		ID = ShieldLength
@@ -17,7 +21,19 @@ PartStats
 		FormatKey = "Stats/ShieldRegenFmT"
 	}
 	{
-		ID = ShieldSpeed
-		FormatKey = "Stats/ShieldSpeedFmT"
+		ID = ShieldRadiusMult
+		FormatKey = "Stats/ShieldRadiusMultFmT"
+	}
+	{
+		ID = ShieldRadiusExp
+		FormatKey = "Stats/ShieldRadiusExpFmT"
+	}
+	{
+		ID = ShieldHPBonus
+		FormatKey = "Stats/ShieldHPBonusFmT"
+	}
+	{
+		ID = ShieldPenResBonus
+		FormatKey = "Stats/ShieldPenResBonusFmT"
 	}
 ]

@@ -83,19 +83,37 @@ PartToggles
 
 Stats
 {
-	ShieldHPSegmentFmt = "<white>Shield Strength:</white> <good>{0:n0}</good> <gray>per segment</gray>"
+	// Bubble Shield
+	ShieldRadiusFmt = "<white>Shield Radius:</white> <good>{0:n0}</good> <gray>meters</gray>"
+	ShieldSpeedFmt = "<white>Shield Rotation Speed:</white> <good>{0:0}°</good><gray>/sec</gray>"
 	ShieldSegmentsFmt = "<white>Shield Segments:</white> <good>{0:n0}</good>"
+	// Flat Shields
 	ShieldLengthFmT = "<white>Shield Length:</white> <good>{0:n0}</good> <gray>meters</gray>"
+	// Tiny Shield
 	ShieldRegenFmT = "<white>Shield Regen:</white> <good>{0:n0}</good> <gray>strength/sec</gray>"
-	ShieldSpeedFmt = "<white>Shield Speed:</white> <good>{0:0}°</good><gray>/sec</gray>"
-	BubbleNotes = "<gray>NOTE: Penetration Resistance and Power Usage are increased with each additional Tiny Shield Generator. Also, they provide a global health bonus to the shield</gray>"
+	// Modular Shield Battery
+	ShieldRadiusMultFmT = "<white>Shield Radius Multiplier:</white> <good>{0:n0}%</good>"
+	ShieldRadiusExpFmT = "<white>Shield Radius Exponent:</white> <good>{0:n0}</good>"
+	ShieldHPBonusFmT = "<white>Shield Strength Bonus:</white> <good>+{0:n0}</good>"
+	ShieldPenResBonusFmT = "<white>Shield Pen. Res. Bonus:</white> <good>-{0:n0}</good> <gray>meters</gray>"
+	
+	BubbleNotes = "<gray>NOTE: Shield Strength, Penetration Resistance and Radius are increased with each additional Modular Shield Battery.</gray>"
 }
 
 StatCategories
 {
 	ShieldTiny = "Tiny Shield"
-	ShieldBubbleLarge = "Large Bubble Shield"
 	ShieldBubbleSmall = "Small Bubble Shield"
+	ShieldBubbleLarge = "Large Bubble Shield"
+	ShieldSegmentSmall = "Small Segment Shield"
+	ShieldSegmentLarge = "Large Segment Shield"
+	// Modular Shield Battery
+	ShieldBubbleBonus = "Bubble Shield Bonus"
+	ShieldBubbleBonusOverclock = "Bubble Shield Bonus (Overclocked)"
+	ShieldSegmentSmallBonus = "Small Segment Shield Bonus"
+	ShieldSegmentSmallBonusOverclock = "Small Segment Shield Bonus (Overclocked)"
+	ShieldSegmentLargeBonus = "Large Segment Shield Bonus"
+	ShieldSegmentLargeBonusOverclock = "Large Segment Shield Bonus (Overclocked)"
 }
 
 StarterShips

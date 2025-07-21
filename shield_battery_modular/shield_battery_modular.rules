@@ -1768,15 +1768,28 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	StatsByCategory
 	[
 		{
-			NameKey = "StatCategories/ShieldTiny"
+			NameKey = "StatCategories/ShieldBubbleBonus"
 			Stats
 			{
-//				ShieldHP = ((&~/Part/Components/InnerBatteryStorage/MaxResources) + (&~/Part/Components/OuterBatteryStorage/MaxResources)) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage)
-//				ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0
-//				ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue)	// Useless due to being almost flat
-//				ShieldLength = 6.1	// 2 * Radius * Sen(rad(arc)/2)
-//				ShieldDist = (&~/Part/Components/ArcShield/Radius) - (&~/Part/Components/ArcShield/Location/1)
+				ShieldRadiusMult = (&<./Data/buffs/buffs.rules>/BubbleRadiusBonus/Multiplier) * 100
+				ShieldRadiusExp = (&<./Data/buffs/buffs.rules>/BubbleRadiusBonus/Exponent)
 				PowerUsageContinuous = (&~/STATS/POWER_DRAIN) / (&~/Part/Components/PowerDrain_SmallFront/Interval) / 1000
+			}
+		}
+		{
+			NameKey = "StatCategories/ShieldSegmentSmallBonus"
+			Stats
+			{
+				ShieldHPBonus = (&~/Part/Components/Base_BatteryStorage_1/MaxResources) * 3 / (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
+				ShieldPenResBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/BaseResistanceBonus/Value)
+			}
+		}
+		{
+			NameKey = "StatCategories/ShieldSegmentLargeBonus"
+			Stats
+			{
+				ShieldHPBonus = (&~/Part/Components/Base_BatteryStorage_1/MaxResources) * 2 / (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
+				ShieldPenResBonus = (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/BaseResistanceBonus/Value)
 			}
 		}
 	]
@@ -1786,13 +1799,35 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		TitleKey = "StatCategories/Overclocked"
 		Stats
 		{
-//			ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/ARC_FACTOR)
-//			ShieldLength = 3.05	// 2 * Radius * Sen(rad(arc)/2)
-//			ShieldHP = (&~/Part/Stats/ShieldHP) / (&~/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
-//			PowerUsageContinuous = (&~/Part/Components/PowerDrain/FromQuantity/BaseValue) * (&~/OVERCLOCK/POWER_DRAIN_FACTOR) / (&~/Part/Components/PowerDrain/Interval) / 1000
-//			HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND)
-//			HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
-//			ShieldRegen = (&~/Part/Components/Overclock_BatteryProducer/ToQuantity) / (&~/Part/Components/Overclock_BatteryProducer/Interval) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage)
+			PowerCapacity = (&~/Part/Stats/PowerCapacity) * (&~/OVERCLOCK/CAPACITY_FACTOR)
 		}
+		StatsByCategory
+		[
+			{
+				NameKey = "StatCategories/ShieldBubbleBonusOverclock"
+				Stats
+				{
+					ShieldRadiusMult = (&~/Part/StatsByCategory/0/Stats/ShieldRadiusMult)
+					ShieldRadiusExp = 1
+					PowerUsageContinuous = (&~/Part/StatsByCategory/0/Stats/PowerUsageContinuous)
+				}
+			}
+			{
+				NameKey = "StatCategories/ShieldSegmentSmallBonusOverclock"
+				Stats
+				{
+					ShieldHPBonus = (&~/Part/StatsByCategory/1/Stats/ShieldHPBonus) * (&~/OVERCLOCK/CAPACITY_FACTOR) / (&<../shield_sts_modular/shield_sts_modular.rules>/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
+					ShieldPenResBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/OverclockResistanceBonus/Value)
+				}
+			}
+			{
+				NameKey = "StatCategories/ShieldSegmentLargeBonusOverclock"
+				Stats
+				{
+					ShieldHPBonus = (&~/Part/StatsByCategory/2/Stats/ShieldHPBonus) * (&~/OVERCLOCK/CAPACITY_FACTOR) / (&<../shield_stl_modular/shield_stl_modular.rules>/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
+					ShieldPenResBonus = (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/OverclockResistanceBonus/Value)
+				}
+			}
+		]
 	}
 }

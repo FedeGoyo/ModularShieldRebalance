@@ -84,16 +84,39 @@ PartToggles
 
 Stats
 {
-	ShieldHPSegmentFmt = "<white>Resistencia del escudo:</white> <good>{0:n0}</good> <gray>por segmento</gray>"
+	// Bubble Shield
+	ShieldRadiusFmt = "<white>Radio del escudo:</white> <good>{0:n0}</good> <gray>m</gray>"
+	ShieldSpeedFmt = "<white>Velocidad de rotación del escudo:</white> <good>{0:0}°</good><gray>/s</gray>"
 	ShieldSegmentsFmt = "<white>Segmentos del escudo:</white> <good>{0:n0}</good>"
+	// Flat Shields
 	ShieldLengthFmT = "<white>Longitud del escudo:</white> <good>{0:n0}</good> <gray>metros</gray>"
+	// Tiny Shield
 	ShieldRegenFmT = "<white>Regeneración del escudo:</white> <good>{0:n0}</good> <gray>resistencia/s</gray>"
-	ShieldSpeedFmt = "<white>Velocidad del escudo:</white> <good>{0:0}°</good><gray>/s</gray>"
-	BubbleNotes = "<gray>NOTA: La resistencia a la penetración y el uso de energía se incrementan con cada Generador de Escudo Diminuto adicional. Además, ellos proveen un bono de salud global al escudo</gray>"
+	// Modular Shield Battery
+	ShieldRadiusMultFmT = "<white>Multiplicador del radio del escudo:</white> <good>{0:n0}%</good>"
+	ShieldRadiusExpFmT = "<white>Exponente del radio del escudo:</white> <good>{0:n0}</good>"
+	ShieldHPBonusFmT = "<white>Bono de resistencia del escudo</white> <good>+{0:n0}</good>"
+	ShieldPenResBonusFmT = "<white>Bono de resistencia a la penetración del escudo:</white> <good>-{0:n0}</good> <gray>m</gray>"
+	
+	BubbleNotes = "<gray>NOTE: La resistencia del escudo, resistencia a la penetración y el radio se incrementan con cada Bateria Modular de Escudo.</gray>"
 }
 
 StatCategories
 {
+	ShieldTiny = "Escudo Diminuto"
+	ShieldBubbleSmall = "Escudo de Burbuja Pequeño"
+	ShieldBubbleLarge = "Escudo de Burbuja Grande"
+	ShieldSegmentSmall = "Segmento de Escudo Pequeño"
+	ShieldSegmentLarge = "Segmento de Escudo Grande"
+	// Modular Shield Battery
+	ShieldBubbleBonus = "Bono al Escudo Burbuja"
+	ShieldBubbleBonusOverclock = "Bono al Escudo Burbuja (Overclocked)"
+	ShieldSegmentSmallBonus = "Bono a los Segmentos de Escudo Pequeño"
+	ShieldSegmentSmallBonusOverclock = ""Bono a los Segmentos de Escudo Pequeño" (Overclocked)"
+	ShieldSegmentLargeBonus = "Bono a los Segmentos de Escudo Grande"
+	ShieldSegmentLargeBonusOverclock = "Bono a los Segmentos de Escudo Grande (Overclocked)"
+	
+	
 	ShieldTiny = "Escudo Diminuto"
 	ShieldBubbleLarge = "Escudo de Bubuja Grande"
 	ShieldBubbleSmall = "Escudo de Burbuja Pequeño"
