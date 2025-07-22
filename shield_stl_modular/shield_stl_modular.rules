@@ -2,7 +2,7 @@ OVERCLOCK
 {
 	DAMAGE_DRAIN_FACTOR = 1 / 200%
 	EMP_RESIST = 33%
-	ROTATION_SPEED_FACTOR = 50%
+	ROTATION_SPEED_FACTOR = 2/3
 	HEAT_PER_SECOND = 40	// x6
 	HEAT_PER_DAMAGE = 0.6
 }
@@ -669,7 +669,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			AccumulatingToggle = IsOperational
 			AccumulationRate
 			{
-				BaseValue = (&../../RotationReset/MinAmount) / 30
+				BaseValue = (&../../RotationReset/MinAmount) / 10
 				Modifiers
 				[
 					{
