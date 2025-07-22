@@ -63,7 +63,10 @@ BubbleRadiusFinal
 }
 
 
-ShieldOverload {}
+ShieldOverload
+{
+	BaseValue = 100%
+}
 
 ShieldOverclockExtendedLine {}
 ShieldLine {}

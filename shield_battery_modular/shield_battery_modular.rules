@@ -18,7 +18,7 @@ STATS
 	TOTAL_BATTERIES = 12	
 }
 
-Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
 {
 	NameKey = "Parts/KebechetTINYmodularShield"
 	IconNameKey = "Parts/KebechetTINYmodularShieldIcon"
@@ -114,14 +114,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		IsOperational
 		{
 			Type = MultiToggle
-			Toggles = [PowerToggle, BatteryStorage, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL ]
+			Toggles = [PowerToggle, BatteryStorage, ScorchedToggle]
 			Mode = All
 		}
 		
 		CanOperate
 		{
 			Type = MultiToggle
-			Toggles = [PowerToggle, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
+			Toggles = [PowerToggle, ScorchedToggle]
 			Mode = All
 		}
 		CanOperateProxy
@@ -160,7 +160,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			CommandPoints = 1
 		}
 		
-		// Start Modular Shield Connection
+		// Modular Shield Connection
 		
 		IsShieldConnected_Right
 		{
@@ -877,7 +877,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		IsBonusResistanceOperational
 		{
 			Type = MultiToggle
-			Toggles = [PowerToggle, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
+			Toggles = [PowerToggle, ScorchedToggle]
 			Mode = All
 		}
 		BuffProvider_BubbleResistanceRight
@@ -907,7 +907,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		IsBonusRadiusOperational
 		{
 			Type = MultiToggle
-			Toggles = [PowerToggle, Kebechet_TINY_ToggleRadius, ScorchedToggle, &~/Part/^/0/OVERCLOCK_OPERATIONAL]
+			Toggles = [PowerToggle, Kebechet_TINY_ToggleRadius, ScorchedToggle]
 			Mode = All
 		}
 		BubbleRadiusStateValue
@@ -975,13 +975,66 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 		
 		// Overclock / Thermal network
+		
+		ModularOverclockModeToggle
+		{
+			Type = MultiToggle
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProvider_BubbleCapacityReversedRight, BuffProvider_BubbleCapacityReversedLeft]
+				ComponentIDs = [ ModularOverclockModeToggleProxy, OverclockModeToggle ]
+			}
+			Mode = Any
+		}
+		ModularOverclockModeToggleProxy	// For Modular, to prevent using it while disabled
+		{
+			Type = ToggleProxy
+			ComponentID = ModularOverclockModeToggle
+			ProxyToggle = CanOperateProxy
+		}
+		
+		ModularOverclockStateValue
+		{
+			Type = MultiValue
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProvider_BubbleCapacityReversedRight, BuffProvider_BubbleCapacityReversedLeft]
+				ComponentIDs = [ModularOverclockStateValueProxy, OverclockStateValue]
+			}
+			Mode = Max
+		}
+		ModularOverclockStateValueProxy
+		{
+			Type = ValueProxy
+			ComponentID = BubbleSize
+			Mode = CanOperateProxy
+		}
+		IsOverclocked
+		{
+			Type = ThresholdToggle
+			ValueFrom = ModularOverclockStateValue
+			MinAmount = 0
+			MaxAmount = 0
+			Invert = true
+		}
+		IsOperationalOverclocked
+		{
+			Type = MultiToggle
+			Toggles = [ IsOperational, IsOverclocked ]
+			Mode = All
+		}
+		
+		OverflowHeatStorage : <./Data/ships/terran/base_part_terran_overclock.rules>/Part/Components/OverflowHeatStorage {}	// The game ask for it though I can't find were
+		HeatDistributionStorage : <./Data/ships/terran/base_part_terran_overclock.rules>/Part/Components/HeatDistributionStorage {}	// Is HEAT_TARGET_STORAGE
+		NetworkHeatInput : <./Data/ships/terran/base_part_terran_overclock.rules>/Part/Components/NetworkHeatInput {}	// Is HEAT_NETWORK_INPUT
+		
 		OverclockHeatProducer
 		{
 			Type = ResourceConverter
 			OperationalToggle = IsOperationalOverclocked
 			HEAT_PER_INTERVAL = ceil((&~/OVERCLOCK/HEAT_PER_SECOND) * (&Interval))
 			ToQuantity = (&HEAT_PER_INTERVAL) * (&~/HEAT_TO_RESOURCE)
-			ToStorage = &~/Part/^/0/HEAT_TARGET_STORAGE
+			ToStorage = HeatDistributionStorage
 			Interval = 0.5
 		}
 		
@@ -1022,12 +1075,12 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		OverclockHitHeatProducer
 		{
 			Type = ResourceChange
-			ResourceStorage = &~/Part/^/0/HEAT_TARGET_STORAGE
+			ResourceStorage = HeatDistributionStorage
 			// Provides the post-resistance damage value as EffectScale
 			Trigger = Overclock_BubbleArcShieldProxyProxy
 			Amount
 			{
-				BaseValue = "round((&~/OVERCLOCK/HEAT_PER_DAMAGE) * (&~/HEAT_TO_RESOURCE), 0)"
+				BaseValue = 1 // "round((&~/OVERCLOCK/HEAT_PER_DAMAGE) * (&~/HEAT_TO_RESOURCE), 0)"
 				Modifiers
 				[
 					{
@@ -1037,18 +1090,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					{
 						Type = Buff
 						BuffType = ShieldOverload
-						ModificationMode = Multiply
-					}
-					{
-						Type = Buff
-						BuffType = Overclock
+//						BaseValue = 1
 						ModificationMode = Multiply
 					}
 				]
 			}
 		}
-				
-		OverheatEffects : ^/0/OverheatEffects
+		
+		OverheatEffects : <./Data/ships/terran/base_part_terran_overclock.rules>/Part/Components/OverheatEffects
 		{
 			Location = [1, 1.5]
 		}
@@ -1060,7 +1109,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			[
 				{
 					Type = Simple
-					HEAT_INPUT = &~/Part/^/0/HEAT_NETWORK_INPUT
+					HEAT_INPUT = NetworkHeatInput
 					Routes
 					[
 						[&../../HEAT_INPUT, Port_TL, 0]
@@ -1071,8 +1120,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				}
 			]
 		}
-		Port_TL : ~/Part/^/0/BASE_THERMAL_PORT
+		Port_TL : <./Data/ships/terran/base_part_terran_overclock.rules>/Part/BASE_THERMAL_PORT
 		{
+			OperationalToggle = ModularOverclockModeToggle
+			BlueprintOperationalToggle = &OperationalToggle
 			Location = [0, 0]
 			Direction = Up
 		}
@@ -1752,7 +1803,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				{
 					Toggle = ScorchedToggle
 					AtlasSprite = &/INDICATORS/Scorched
-					HidesIndicators = [1,2,3]
+					HidesIndicators = [1,2]
 				}
 
 				// Turned off.
@@ -1763,16 +1814,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						File = &/INDICATORS/PowerOff
 						Size = [1, 1]
 					}
-				}
-
-				// Resetting from overclock
-				{
-					Toggle = &~/Part/^/0/OVERCLOCK_OPERATIONAL
-					AtlasSprite : /INDICATORS/OverclockReset
-					{
-						Size = [1, 1]
-					}
-					HidesIndicators = [3]
 				}
 
 				// Out of power.
@@ -1804,7 +1845,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = StatProvider
 			Stat = HeatGeneration
-			OperationalToggle = OverclockModeToggle
+			OperationalToggle = ModularOverclockModeToggle
 			ValueFrom = HeatGenerationValue
 		}
 	}
@@ -1815,8 +1856,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 		RecPower = (&../StatsByCategory/0/Stats/PowerUsageContinuous) + 0.5
 		RecCrew = (&RecPower) * 4
-		
-		// Add HP and penetration resistance for when buffing Bubble Shields?
 	}
 	
 	StatsByCategory
