@@ -19,14 +19,6 @@ BubbleResistance
 {
 	CombineMode = Add
 }
-BubbleRadius
-{
-	CombineMode = Add
-}
-BubbleRadiusBase
-{
-	CombineMode = Add
-}
 
 BubbleResistanceBonus
 {
@@ -40,7 +32,12 @@ BubbleResistanceBonus
 	ShowIconTextForZeroValue = false
 }
 
-BubbleRadiusBonus
+BubbleRadius
+{
+	CombineMode = Add
+}
+
+BubbleRadiusBase
 {
 	CombineMode = Add
 	Exponent = 0.8
@@ -53,6 +50,18 @@ BubbleRadiusBonus
 	ShowIconTextForZeroValue = false
 */
 }
+BubbleRadiusOverclock
+{
+	CombineMode = Add
+	Exponent = 1
+	Multiplier = 20%
+	BaseValue = 100%
+}
+BubbleRadiusFinal
+{
+	CombineMod = Add
+}
+
 
 ShieldOverload {}
 

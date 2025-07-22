@@ -31,7 +31,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeByRotation = false
 	MaxHealth = 10000
 	TypeCategories = [defense, uses_power, bubble_shield]
-	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleResistance, BubbleResistanceBonus, BubbleRadius, BubbleRadiusBonus, BubbleRadiusBase, BubbleCapacityReversed]
+	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacityReversed, BubbleResistance, BubbleResistanceBonus, BubbleRadius, BubbleRadiusBase, BubbleRadiusOverclock, BubbleRadiusFinal]
 	PenetrationRectType = Normal
 	AllowedDoorLocations
 	[
@@ -736,37 +736,21 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		// Self Buffs
 		
-		BaseValue_Radius_Imput
-		{
-			Type = BuffableValue
-			Value = { BaseValue=0; BuffType=BubbleRadius; BuffMode=Add; }
-		}
-		BaseValue_Radius_Exponent
-		{
-			Type = StaticValue
-			Value = 0.8
-		}
-		BaseValue_Radius
-		{
-			Type = ValueOperation
-			Operator = Power
-			ValueOne = BaseValue_Radius_Imput
-			ValueTwo = BaseValue_Radius_Exponent
-		}
 		BuffProvider_Radius
 		{
 			Type = SelfBuffProvider
 			ChainsFromBuffType = BubbleRadius
 			BuffType = BubbleRadiusBase
-			BuffAmount = 1
-			BuffMultiplier = BaseValue_Radius
+			BuffAmount = { BaseValue=0; BuffType=BubbleRadius; BuffMode=Add; }
 		}
 		
+		BuffProvider_RadiusOverclocked :	BuffProvider_Radius	{ BuffType = BubbleRadiusOverclock }
+				
 		ValueLerp_Radius0
 		{
 			Type = ValueLerp
 			InputValue = Value0
-			OutputRange = [ {BaseValue = 0, BuffType = BubbleRadiusBase; BuffMode = Add}, {BaseValue = 0, BuffType = BubbleRadius; BuffMode = Add}]
+			OutputRange = [ {BaseValue = 0, BuffType = BubbleRadiusBase; BuffMode = Add}, {BaseValue = 0, BuffType = BubbleRadiusOverclock; BuffMode = Add}]
 		}
 		ValueLerp_Radius1 :	ValueLerp_Radius0	{ InputValue = Value1 }
 		
@@ -832,7 +816,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = SelfBuffProvider
 			ChainsFromBuffType = BubbleRadius
-			BuffType = BubbleRadiusBonus
+			BuffType = BubbleRadiusFinal
 			BuffAmount = 1
 			BuffMultiplier = ValueLerp_RadiusFinal
 		}
@@ -895,7 +879,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				[
 					{
 						Type = Buff
-						BuffType = BubbleRadiusBonus
+						BuffType = BubbleRadiusFinal
 						ModificationMode = Multiply
 					}
 				]
