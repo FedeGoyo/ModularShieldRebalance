@@ -12,6 +12,10 @@ STATS
 {
 	POWER_DRAIN = 50	// Total
 	POWER_CAPACITY = 2000	// Total
+	POWER_RESUPPLY_THRESHOLD = 50%
+	SMALL_SEGMENTS = 4
+	LARGE_SEGMENTS = 6
+	TOTAL_BATTERIES = 12	
 }
 
 Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
@@ -258,7 +262,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = ResourceStorage
 			ResourceType = battery
-			MaxResources = "round( (&~/STATS/POWER_CAPACITY) / 12, 0)"
+			MaxResources = "round((&~/STATS/POWER_CAPACITY) / (&~/STATS/TOTAL_BATTERIES), 0)"
 			DrainOnFtlJump = true
 			IsDrainable = False
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
@@ -401,15 +405,65 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
 		
-		BatteryConsumer
+		Base_Small :				
 		{
-			Type = ResourceConsumer
-			ResourceType = battery
-			Storage = BatteryStorage
-			DefaultPriority = &/PRIORITIES/Defense_Supply
-			ResupplyThreshold = "round( (&~/STATS/POWER_CAPACITY) / 12, 0) * 2"
-			OperationalToggle = PowerToggle
-		}		
+			Type = MultiToggle
+			Toggles = [IsSmall, {Toggle=IsOverclocked; Invert=true}]
+			Mode = All
+		}
+		Overclock_Small :	Base_Small	{ Toggles = [IsSmall, IsOverclocked] }
+		Base_Large :		Base_Small	{ Toggles = [IsLarge, {Toggle=IsOverclocked; Invert=true}] }
+		Overclock_Large :	Base_Small	{ Toggles = [IsLarge, IsOverclocked] }
+		
+		ToggledBatteryStorage_Alone
+		{
+			Type = ToggledComponents
+			Toggle = IsAlone
+			Components
+			{
+				BatteryConsumer
+				{
+					Type = ResourceConsumer
+					ResourceType = battery
+					Storage = BatteryStorage
+					DefaultPriority = &/PRIORITIES/Defense_Supply
+					ResupplyThreshold = 500
+					OperationalToggle = PowerToggle
+				}	
+			}
+		}
+		ToggledBatteryStorage_Small :	ToggledBatteryStorage_Alone
+		{
+			Toggle = Base_Small
+			Components :	^/0/Components
+			{
+				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "round((&~/Part/Components/Base_BatteryStorage_1/MaxResources) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/SMALL_SEGMENTS) * (&~/STATS/POWER_RESUPPLY_THRESHOLD), 0)" }
+			}
+		}
+		ToggledBatteryStorage_Large :	ToggledBatteryStorage_Alone
+		{
+			Toggle = Base_Large
+			Components :	^/0/Components
+			{
+				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "round((&~/Part/Components/Base_BatteryStorage_1/MaxResources) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/LARGE_SEGMENTS) * (&~/STATS/POWER_RESUPPLY_THRESHOLD), 0)" }
+			}
+		}
+		Overclock_ToggledBatteryStorage_Small :	ToggledBatteryStorage_Alone
+		{
+			Toggle = Overclock_Small
+			Components :	^/0/Components
+			{
+				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "round(((&~/Part/Components/Base_BatteryStorage_1/MaxResources) + (&~/Part/Components/Overclock_ToggledBatteryStorage/Components/Overclock_BatteryStorage_1/MaxResources)) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/SMALL_SEGMENTS) * (&~/STATS/POWER_RESUPPLY_THRESHOLD), 0)" }
+			}
+		}
+		Overclock_ToggledBatteryStorage_Large :	ToggledBatteryStorage_Alone
+		{
+			Toggle = Overclock_Large
+			Components :	^/0/Components
+			{
+				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "round(((&~/Part/Components/Base_BatteryStorage_1/MaxResources) + (&~/Part/Components/Overclock_ToggledBatteryStorage/Components/Overclock_BatteryStorage_1/MaxResources)) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/LARGE_SEGMENTS) * (&~/STATS/POWER_RESUPPLY_THRESHOLD), 0)" }
+			}
+		}
 		
 		ModularBatteryStorage_SmallFront
 		{
