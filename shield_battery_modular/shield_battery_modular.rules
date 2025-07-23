@@ -945,7 +945,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		BuffProvider_BubbleRadius_LeftChained :		BuffProvider_BubbleRadius_LeftSelf
 		{
 			BuffAmount = { BaseValue=0; BuffType=BubbleRadius; BuffMode=Add; }
-			BuffMultiplier = BubbleRadiusStateValue_SelfMin
+			BuffMultiplier = BubbleRadiusStateValue
 		}
 		
 		// End Modular
