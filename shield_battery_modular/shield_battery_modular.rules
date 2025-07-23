@@ -465,6 +465,8 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			}
 		}
 		
+		// Start Modular Battery
+		
 		ModularBatteryStorage_SmallFront
 		{
 			Type = MultiResourceStorage
@@ -858,7 +860,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			Mode = All
 		}
 		HasEnergy_Large :	HasEnergy_Small	{ Toggles = [IsLarge, HasEnergy_LargeFront, HasEnergy_LargeFrontRight, HasEnergy_LargeBackRight, HasEnergy_LargeBack, HasEnergy_LargeBackLeft, HasEnergy_LargeFrontLeft] }
-		HasEnergy_Alone : HasEnergy_Small	{ Toggles = [BatteryStorage, IsAlone] }
+		HasEnergy_Alone :	HasEnergy_Small	{ Toggles = [BatteryStorage, IsAlone] }
 		
 		HasEnergy	// Out of power Toggle
 		{
@@ -877,7 +879,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			OperationalToggle = IsShieldConnected_Right
 			BuffArea = [2, 0, 1, 1]
 		}
-		BuffProvider_BubbleResistanceLeft :	BuffProvider_BubbleResistanceRight
+		BuffProvider_BubbleResistance_Left :	BuffProvider_BubbleResistance_Right
 		{
 			OperationalToggle = IsShieldConnected_Left
 			BuffArea = [-1, 0, 1, 1]
@@ -885,7 +887,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		
 		// Start Radius Bonus
 		
-		Kebechet_TINY_ToggleRadius
+		ToggleRadius
 		{
 			Type = UIToggle
 			ToggleID = "Kebechet_ToggleID_Radius"
@@ -920,7 +922,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			Mode = Min
 		}
 		
-		BuffProvider_BubbleRadiusRight_Self
+		BuffProvider_BubbleRadius_RightSelf
 		{
 			Type = AreaBuffProvider
 			BuffType = BubbleRadius
@@ -929,17 +931,18 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			OperationalToggle = IsShieldConnected_Right
 			BuffArea = [2, 0, 1, 1]
 		}
-		BuffProvider_BubbleRadiusRight_Chained : BuffProvider_BubbleRadiusRight_Self
-		{
-			BuffAmount = { BaseValue=0; BuffType=BubbleRadius; BuffMode=Add; }
-			BuffMultiplier = BubbleRadiusStateValue
-		}
-		BuffProvider_BubbleRadiusLeft_Self :		BuffProvider_BubbleRadiusRight_Self
+		BuffProvider_BubbleRadius_LeftSelf :		BuffProvider_BubbleRadius_RightSelf
 		{
 			OperationalToggle = IsShieldConnected_Left
 			BuffArea = [-1, 0, 1, 1]
 		}
-		BuffProvider_BubbleRadiusLeft_Chained :		BuffProvider_BubbleRadiusLeft_Self
+		
+		BuffProvider_BubbleRadius_RightChained : 	BuffProvider_BubbleRadius_RightSelf
+		{
+			BuffAmount = { BaseValue=0; BuffType=BubbleRadius; BuffMode=Add; }
+			BuffMultiplier = BubbleRadiusStateValue
+		}
+		BuffProvider_BubbleRadius_LeftChained :		BuffProvider_BubbleRadius_LeftSelf
 		{
 			BuffAmount = { BaseValue=0; BuffType=BubbleRadius; BuffMode=Add; }
 			BuffMultiplier = BubbleRadiusStateValue_SelfMin
