@@ -173,7 +173,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 					{
 						Category = bubble_shield
 					}
-					ComponentID = PowerToggle	// Maybe another type of component would have been better such as ComponentPresenceToggleRules or a DistanceThreshold
+					ComponentID = CanOperate	// Maybe another type of component would have been better such as ComponentPresenceToggleRules or a DistanceThreshold
 				}
 				{
 					PartCriteria
@@ -896,7 +896,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		IsBonusRadiusOperational
 		{
 			Type = MultiToggle
-			Toggles = [PowerToggle, Kebechet_TINY_ToggleRadius, ScorchedToggle]
+			Toggles = [CanOperate, ToggleRadius]
 			Mode = All
 		}
 		BubbleRadiusStateValue
