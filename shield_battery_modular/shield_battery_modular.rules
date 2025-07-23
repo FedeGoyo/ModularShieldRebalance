@@ -1893,6 +1893,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		Stats
 		{
 			PowerCapacity = (&~/Part/Stats/PowerCapacity) * (&~/OVERCLOCK/CAPACITY_FACTOR)
+			HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND)
 		}
 		StatsByCategory
 		[
@@ -1911,6 +1912,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 				{
 					ShieldHPBonus = (&~/Part/StatsByCategory/1/Stats/ShieldHPBonus) * (&~/OVERCLOCK/CAPACITY_FACTOR) / (&<../shield_sts_modular/shield_sts_modular.rules>/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
 					ShieldPenResBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/OverclockResistanceBonus/Value)
+					HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
 				}
 			}
 			{
@@ -1919,6 +1921,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 				{
 					ShieldHPBonus = (&~/Part/StatsByCategory/2/Stats/ShieldHPBonus) * (&~/OVERCLOCK/CAPACITY_FACTOR) / (&<../shield_stl_modular/shield_stl_modular.rules>/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
 					ShieldPenResBonus = (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/OverclockResistanceBonus/Value)
+					HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
 				}
 			}
 		]
