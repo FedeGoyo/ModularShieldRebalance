@@ -2,8 +2,13 @@ OVERCLOCK : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/OVERCL
 {
 	EXTENDED : ^/0/EXTENDED
 	{
-		ARC_LINERADIUS_FACTOR = 105%
-	}	
+		LINE_RADIUS_FACTOR = (6 * (7.5 * 150% -1.5) / (7.5 - 1.5) + 79) / 85
+		LINE_ARC_FACTOR = 188.01%
+	}
+	REINFORCED : ^/0/REINFORCED
+	{
+		LINE_ARC_FACTOR = 59.18%
+	}
 }
 
 STATS
@@ -35,7 +40,7 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 	ID = cosmoteer.shield_gen_small
 	OtherIDs = [shield_generator, swefpifh.Kebechet_GenSmall_ModularShield]
 	IsBuildable = true
-	ReceivableBuffs : ^/0/ReceivableBuffs [ ShieldOverclockExtendedLine, ShieldLine ]
+	ReceivableBuffs : ^/0/ReceivableBuffs [ ShieldOverclockExtendedLineRadius, ShieldOverclockExtendedLineArc, ShieldOverclockReinforcedLineArc ]
 	EditorIcon
 	{
 		Texture
@@ -194,13 +199,6 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 		
 		// Starts Rotation for Arcs
 		
-		ToggleAngle_Arc
-		{
-			Type = MultiToggle
-			Toggles = [ ToggleAngle_Arc_Left, ToggleAngle_Arc_Front, ToggleAngle_Arc_Right ]
-			Mode = Any
-		}
-		
 		RotationTween_Arc_LeftToFront
 		{
 			Type = ValueTween
@@ -246,7 +244,7 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 		{
 			Type = TransformLerp
 			ValueFrom = RotationTween_Arc_LeftToFront
-			Location = [1.5, 1.5]
+			Location = [1, 1.5]
 			StartRotation = &~/STATS/ARC_LEFT_ROTATION
 			EndRotation = &~/STATS/ARC_FRONT_ROTATION
 		}
@@ -259,47 +257,54 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			EndRotation = (&~/STATS/ARC_RIGHT_ROTATION) - (&~/STATS/ARC_FRONT_ROTATION)
 		}
 		
-		// Starts Rotation for Lines
+		// Start Buffs for Arcs
 		
-		ToggleAngle_Line
+		ToggleAngle_Arc
 		{
 			Type = MultiToggle
-			Toggles = [ ToggleAngle_Line_Left, ToggleAngle_Line_Front, ToggleAngle_Line_Right ]
+			Toggles = [ ToggleAngle_Arc_Left, ToggleAngle_Arc_Front, ToggleAngle_Arc_Right ]
 			Mode = Any
 		}
-		LineModeRawValue
+		
+		Overclock_ExtendedModeToggle_Arc
+		{
+			Type = MultiToggle
+			Toggles = [Overclock_ExtendedModeToggle, ToggleAngle_Arc]
+			Mode = All
+		}
+		Overclock_ReinforcedModeToggle_Arc :	Overclock_ExtendedModeToggle_Arc	{ Toggles = [Overclock_ReinforcedModeToggle, ToggleAngle_Arc] }
+		
+		Overclock_ExtendedModeRawValue_Arc
 		{
 			Type = ValueTween
-			IsOnToggle = ToggleAngle_Line
+			IsOnToggle = Overclock_ExtendedModeToggle_Arc
 			OnTweenDuration = &~/OVERCLOCK/MODE_SWITCH_TIME
 			OffTweenDuration = &OnTweenDuration
 		}
-		Overclock_ExtendedLineModeValue
+		Overclock_ReinforcedModeRawValue_Arc : Overclock_ExtendedModeRawValue_Arc	{ IsOnToggle = Overclock_ReinforcedModeToggle_Arc }
+		
+		Overclock_ExtendedModeValue_Arc
 		{
 			Type = MultiValue
-			Values = [ Overclock_ExtendedModeRawValue, OverclockStateValue, LineModeRawValue ]
+			Values = [ Overclock_ExtendedModeRawValue_Arc, OverclockStateValue ]
 			Mode = Min
 		}
-		Overclock_ExtendedLineModeBuff
+		Overclock_ReinforcedModeValue_Arc : Overclock_ExtendedModeValue_Arc
 		{
-			Type = SelfBuffProvider
-			OperationalToggle = IsOverclocked
-			BuffType = ShieldOverclockExtendedLine
-			BuffMultiplier = Overclock_ExtendedLineModeValue
+			Values = [ Overclock_ReinforcedModeRawValue_Arc, OverclockStateValue ]
 		}
 		
-		LineModeRawValue2 : LineModeRawValue	// If the arc and line change were more combined, this could be used to buff the radius gradually to change from arc to line
+		Overclock_ExtendedModeBuff : ^/0/Overclock_ExtendedModeBuff
 		{
-			OnTweenDuration = 0
-			OffTweenDuration = &OnTweenDuration
+			BuffMultiplier = Overclock_ExtendedModeValue_Arc
 		}
-		LineModeBuff
+		Overclock_ReinforcedModeBuff : Overclock_ExtendedModeBuff
 		{
-			Type = SelfBuffProvider
-			OperationalToggle = IsOperational
-			BuffType = ShieldLine
-			BuffMultiplier = LineModeRawValue2
+			BuffType = ShieldOverclockReinforced
+			BuffMultiplier = Overclock_ReinforcedModeValue_Arc
 		}
+		
+		// Starts Rotation for Lines
 		
 		RotationTween_Line_LeftToFront
 		{
@@ -362,15 +367,77 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			EndRotation = (&~/STATS/LINE_RIGHT_ROTATION) - (&~/STATS/LINE_FRONT_ROTATION)
 		}
 		
+		// Start Buffs for Lines
+		
+		ToggleAngle_Line
+		{
+			Type = MultiToggle
+			Toggles = [ ToggleAngle_Line_Left, ToggleAngle_Line_Front, ToggleAngle_Line_Right ]
+			Mode = Any
+		}
+		
+		Overclock_ExtendedModeToggle_Line
+		{
+			Type = MultiToggle
+			Toggles = [Overclock_ExtendedModeToggle, ToggleAngle_Line]
+			Mode = All
+		}
+		Overclock_ExtendedModeRawValue_Line
+		{
+			Type = ValueTween
+			IsOnToggle = Overclock_ExtendedModeToggle_Line
+			OnTweenDuration = &~/OVERCLOCK/MODE_SWITCH_TIME
+			OffTweenDuration = &OnTweenDuration
+		}
+		
+		Overclock_ReinforcedModeToggle_Line :	Overclock_ExtendedModeToggle_Line
+		{
+			Toggles = [Overclock_ReinforcedModeToggle, ToggleAngle_Line]
+		}
+		Overclock_ReinforcedModeRawValue_Line : Overclock_ExtendedModeRawValue
+		{
+			IsOnToggle = Overclock_ReinforcedModeToggle_Line
+		}
+		
+		Overclock_ExtendedModeValue_Line
+		{
+			Type = MultiValue
+			Values = [ Overclock_ExtendedModeRawValue_Line, OverclockStateValue ]
+			Mode = Min
+		}
+		Overclock_ReinforcedModeValue_Line : Overclock_ExtendedModeValue
+		{
+			Values = [ Overclock_ReinforcedModeRawValue_Line, OverclockStateValue ]
+		}
+		Overclock_ExtendedModeBuff_Line_Radius
+		{
+			Type = SelfBuffProvider
+			OperationalToggle = IsOverclocked
+			BuffType = ShieldOverclockExtendedLineRadius
+			BuffMultiplier = Overclock_ExtendedModeValue_Line
+		}
+		Overclock_ExtendedModeBuff_Line_Arc
+		{
+			Type = SelfBuffProvider
+			OperationalToggle = IsOverclocked
+			BuffType = ShieldOverclockExtendedLineArc
+			BuffMultiplier = Overclock_ExtendedModeValue_Line
+		}
+		Overclock_ReinforcedModeBuff_Line : Overclock_ExtendedModeBuff_Line_Arc
+		{
+			BuffType = ShieldOverclockReinforcedLineArc
+			BuffMultiplier = Overclock_ReinforcedModeValue_Line
+		}
+		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// ARCSHIELD ORIGINAL - START //////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		ArcShield : ^/0/ArcShield
+		ArcShield : ^/0/ArcShield	// Just here to make colors inherite from it
 		{
 			OperationalToggle = IsOperationalProxy
-			Location = [0, 0]	// Takes from Transform_Line_Rotation_FrontToRight
-			Rotation = 0d	// Takes from Transform_Line_Rotation_FrontToRight
+			Location = [0, 0]	// Takes from Transform_Arc_Rotation_FrontToRight
+			Rotation = 0d	// Takes from Transform_Arc_Rotation_FrontToRight
 			ChainedTo = Transform_Arc_Rotation_FrontToRight
 			Radius : ^/0/Radius
 			{
@@ -383,20 +450,6 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 						ModificationMode = Multiply
 						RemapFrom = [0, 1]
 						RemapTo = [1, &~/OVERCLOCK/EXTENDED/ARC_RADIUS_FACTOR ]
-					}
-					{
-						Type = BuffRemap
-						BuffType = ShieldOverclockExtendedLine
-						ModificationMode = Multiply
-						RemapFrom = [0, 1]
-						RemapTo = [1, (1 / 1.5) * (&<shield_gen_small_modular.rules>/OVERCLOCK/EXTENDED/ARC_LINERADIUS_FACTOR)]
-					}
-					{
-						Type = BuffRemap
-						BuffType = ShieldLine
-						ModificationMode = Multiply
-						RemapFrom = [0, 1]
-						RemapTo = [1, 85 / 7.5]
 					}
 				]
 			}
@@ -418,13 +471,6 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 						ModificationMode = Multiply
 						RemapFrom = [0, 1]
 						RemapTo = [1, &~/OVERCLOCK/REINFORCED/ARC_FACTOR ]
-					}
-					{
-						Type = BuffRemap
-						BuffType = ShieldLine
-						ModificationMode = Divide
-						RemapFrom = [0, 1]
-						RemapTo = [1, 90 / 7.15 ]
 					}
 				]
 			}
@@ -449,7 +495,66 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			]
 		}
 		
-		EmitterEffect : ^/0/EmitterEffect
+		LineShield : ArcShield	// Just here to make colors inherite from it
+		{
+			ChainedTo = Transform_Line_Rotation_FrontToRight
+			Radius
+			{
+				BaseValue = 85
+				Modifiers
+				[
+					{
+						Type = BuffRemap
+						BuffType = ShieldOverclockExtendedLineRadius
+						ModificationMode = Multiply
+						RemapFrom = [0, 1]
+			 			RemapTo = [1, &~/OVERCLOCK/EXTENDED/LINE_RADIUS_FACTOR]
+					}
+				]
+			}
+			Arc
+			{
+				BaseValue = 7.15d
+				Modifiers
+				[
+					{
+						Type = BuffRemap
+						BuffType = ShieldOverclockExtendedLineArc
+						ModificationMode = Multiply
+						RemapFrom = [0, 1]
+						RemapTo = [1, &~/OVERCLOCK/EXTENDED/LINE_ARC_FACTOR ]
+					}
+					{
+						Type = BuffRemap
+						BuffType = ShieldOverclockReinforcedLineArc
+						ModificationMode = Multiply
+						RemapFrom = [0, 1]
+						RemapTo = [1, &~/OVERCLOCK/REINFORCED/LINE_ARC_FACTOR ]
+					}
+				]
+			}
+						
+			ShieldMediaEffects
+			[
+				: &../^/0/ShieldMediaEffects/0
+				{
+					Radius = &../../Radius
+					Arc = &../../Arc
+				}
+				: &../^/0/ShieldMediaEffects/1 {}
+			]
+			HitMediaEffects
+			[
+				: &../^/0/HitMediaEffects/0
+				{
+					Radius = &../../Radius
+					Arc = 2d
+				}
+				: &../^/0/HitMediaEffects/1 {}
+			]
+		}
+		
+		EmitterEffect : ^/0/EmitterEffect	// Just here to make colors inherite from it
 		{
 			OperationalToggle = IsOperationalProxy
 			Location = [&../../^/0/ArcShield/Location/0 , (&../../^/0/ArcShield/Location/1) - (&../^/0/Location/0)]	// The location is switched cause it is rotated

@@ -68,5 +68,6 @@ ShieldOverload
 	BaseValue = 100%
 }
 
-ShieldOverclockExtendedLine {}
-ShieldLine {}
+ShieldOverclockExtendedLineRadius {}
+ShieldOverclockExtendedLineArc {}
+ShieldOverclockReinforcedLineArc {}

@@ -28,7 +28,6 @@ Components
 			GENS_ArcShield : &<../shield_gen_small_modular.rules>/Part/Components/ArcShield
 			{
 				OperationalToggle = IsOperational
-				ChainedTo = Transform_Arc_Rotation_FrontToRight
 				ShieldMediaEffects
 				[
 					: &../^/0/ShieldMediaEffects/0
@@ -97,7 +96,82 @@ Components
 		Toggle = Toggle_Purple_Line_On
 		Components : &../ToggleComponents_Shield_Purple_Arc_On/Components
 		{
-			GENS_ArcShield : ^/0/GENS_ArcShield	{ ChainedTo = Transform_Line_Rotation_FrontToRight }
+			GENS_ArcShield : &<../shield_gen_small_modular.rules>/Part/Components/LineShield
+			{
+				OperationalToggle = IsOperational
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1 {}
+				]
+				HitMediaEffects
+				[
+					: &../^/0/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Purple/HitMediaEffects, ^/0/ArcSprite	{}
+					}
+					: &../^/0/HitMediaEffects/1 {}
+				]
+			}
+			
+			GENS_OverloadEffect : ^/0/GENS_OverloadEffect
+			{
+				ContinuousEffects
+				[
+					: ../^/0/ContinuousEffects/0
+					{
+						Radius = &../../../GENS_ArcShield/Radius
+						Arc = &../../../GENS_ArcShield/Arc
+					}
+				]
+			}
+			GENS_Overclock_ExtendedEffect : ^/0/GENS_Overclock_ExtendedEffect
+			{
+				ContinuousEffects
+				[
+					: ../^/0/ContinuousEffects/0
+					{
+						Radius = &../../../GENS_ArcShield/Radius
+						Arc = &../../../GENS_ArcShield/Arc
+					}
+				]
+			}
+			GENS_Overclock_Overload_EffectExtended : ^/0/GENS_Overclock_Overload_EffectExtended
+			{
+				ContinuousEffects
+				[
+					: ../^/0/ContinuousEffects/0
+					{
+						Radius = &../../../GENS_ArcShield/Radius
+						Arc = &../../../GENS_ArcShield/Arc
+					}
+				]
+			}
+			GENS_Overclock_ReinforcedEffect : ^/0/GENS_Overclock_ReinforcedEffect
+			{
+				ContinuousEffects
+				[
+					: ../^/0/ContinuousEffects/0
+					{
+						Radius = &../../../GENS_ArcShield/Radius
+						Arc = &../../../GENS_ArcShield/Arc
+					}
+				]
+			}
+			GENS_Overclock_OverloadEffect_Reinforced : ^/0/GENS_Overclock_OverloadEffect_Reinforced
+			{
+				ContinuousEffects
+				[
+					: ../^/0/ContinuousEffects/0
+					{
+						Radius = &../../../GENS_ArcShield/Radius
+						Arc = &../../../GENS_ArcShield/Arc
+					}
+				]
+			}
 		}
 	}
 
@@ -126,9 +200,19 @@ Components
 		Type = ToggledComponents
 		Toggle = Toggle_Purple_Line_Off
 		IncludeInBlueprints = false
-		Components  : &../ToggleComponents_Shield_Purple_Arc_Off/Components
+		Components =
 		{
-			GENS_ArcShield : ^/0/GENS_ArcShield	{ ChainedTo = Transform_Line_Rotation_FrontToRight }
+			GENS_ArcShield : &../../ToggleComponents_Shield_Purple_Line_On/Components/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1 {}
+				]
+			}
 		}
 	}
 	
