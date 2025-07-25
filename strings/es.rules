@@ -46,36 +46,52 @@ PartToggles
 	btt_Kebechet_Colours_Yellow = "Amarillo"
 	btt_Kebechet_Colours_Green = "Verde"
 	
-	btt_Kebechet_GENS_Angle90LeftArc = "<b>Arco Izquierdo</b>\n\n"\
+	btt_Kebechet_GENS_Angle90LeftArc = "<b>Arco Izquierdo</b>\n"\
 										"<white>Distancia del escudo:</white> <good>6</good> <gray>metros</gray>\n"\
 										"<white>Arco del escudo:</white> <good>90º</good>\n"\
-										"<white>Arco (Sobrecargado):</white> <good>45º</good>\n"\
-										"<white>Rotación del escudo:</white> <good>-27.5º</good>"
-	btt_Kebechet_GENS_Angle90FrontArc = "<b>Arco Frontal</b>\n\n"\
+										"<white>Rotación del escudo:</white> <good>-27.5º</good>\n\n"\
+										"<b>Sobrecargado</b>\n"\
+										"<white>(Reforzado) Arco:</white> <good>49.5º</good>\n"\
+										"<white>(Extendido) Arco:</white> <good>135º</good>\n"\
+										"<white>(Extendido) Distancia:</white> <good>9.75</good> <gray>metros</gray>"
+	btt_Kebechet_GENS_Angle90FrontArc = "<b>Arco Frontal</b>\n"\
 										"<white>Distancia del escudo:</white> <good>6</good> <gray>metros</gray>\n"\
 										"<white>Arco del escudo:</white> <good>90º</good>\n"\
-										"<white>Arco (Sobrecargado):</white> <good>45º</good>\n"\
-										"<white>Rotación del escudo:</white> <good>0º</good>"
-	btt_Kebechet_GENS_Angle90RightArc = "<b>Arco Derecho</b>\n\n"\
+										"<white>Rotación del escudo:</white> <good>0º</good>\n\n"\
+										"<b>Sobrecargado</b>\n"\
+										"<white>(Reforzado) Arco:</white> <good>49.5º</good>\n"\
+										"<white>(Extendido) Arco:</white> <good>135º</good>\n"\
+										"<white>(Extendido) Distancia:</white> <good>9.75</good> <gray>metros</gray>"
+	btt_Kebechet_GENS_Angle90RightArc = "<b>Arco Derecho</b>\n"\
 										"<white>Distancia del escudo:</white> <good>6</good> <gray>metros</gray>\n"\
 										"<white>Arco del escudo:</white> <good>90º</good>\n"\
-										"<white>Arco (Sobrecargado):</white> <good>45º</good>\n"\
-										"<white>Rotación del escudo:</white> <good>+27.5º</good>"
-	btt_Kebechet_GENS_Angle22LeftLine = "<b>Linea Izquierda</b>\n\n"\
-										"<white>Distancia del escudo:</white> <good>5.5</good> <gray>metros</gray>\n"\
+										"<white>Rotación del escudo:</white> <good>+27.5º</good>\n\n"\
+										"<b>Sobrecargado</b>\n"\
+										"<white>(Reforzado) Arco:</white> <good>49.5º</good>\n"\
+										"<white>(Extendido) Arco:</white> <good>135º</good>\n"\
+										"<white>(Extendido) Distancia:</white> <good>9.75</good> <gray>metros</gray>"
+	btt_Kebechet_GENS_Angle22LeftLine = "<b>Linea Izquierda</b>\n"\
+										"<white>Distancia del escudo:</white> <good>5</good> <gray>metros</gray>\n"\
 										"<white>Longitud del escudo:</white> <good>10.6</good> <gray>metros</gray>\n"\
-										"<white>Longitud (Sobrecargado):</white> <good>10.6</good> <gray>metros</gray>\n"\
-										"<white>Ángulo del escudo:</white> <good>-19.7º</good>"
-	btt_Kebechet_GENS_Angle90FrontLine = "<b>Linea Frontral</b>\n\n"\
-										"<white>Distancia del escudo:</white> <good>5.5</good> <gray>metros</gray>\n"\
+										"<white>Ángulo del escudo:</white> <good>-19.7º</good>\n\n"\
+										"<b>Sobrecargado</b>\n"\
+										"<white>(Reforzado) Longitud:</white> <good>6.28</good> <gray>metros</gray>\n"\
+										"<white>(Extendido) Longitud:</white> <good>20.78</good> <gray>metros</gray>\n"\
+										"<white>(Extendido) Distancia:</white> <good>8.75</good> <gray>metros</gray>"
+	btt_Kebechet_GENS_Angle90FrontLine = "<b>Linea Frontral</b>\n"\
+										"<white>Distancia del escudo:</white> <good>5</good> <gray>metros</gray>\n"\
 										"<white>Longitud del escudo:</white> <good>10.6</good> <gray>metros</gray>\n"\
-										"<white>Longitud (Sobrecargado):</white> <good>10.6</good> <gray>metros</gray>\n"\
-										"<white>Ángulo del escudo:</white> <good>0º</good>"
-	btt_Kebechet_GENS_Angle22RightLine = "<b>Linea Derecha</b>\n\n"\
-										"<white>Distancia del escudo:</white> <good>5.5</good> <gray>metros</gray>\n"\
+										"<white>Ángulo del escudo:</white> <good>0º</good>\n\n"\
+										"<b>Sobrecargado</b>\n"\
+										"<white>(Reforzado) Longitud:</white> <good>6.28</good> <gray>metros</gray>\n"\
+										"<white>(Extendido) Longitud:</white> <good>20.78</good> <gray>metros</gray>\n"\
+	btt_Kebechet_GENS_Angle22RightLine = "<b>Linea Derecha</b>\n"\
+										"<white>Distancia del escudo:</white> <good>5</good> <gray>metros</gray>\n"\
 										"<white>Longitud del escudo:</white> <good>10.6</good> <gray>metros</gray>\n"\
-										"<white>Longitud (Sobrecargado):</white> <good>10.6</good> <gray>metros</gray>\n"\
-										"<white>Ángulo del escudo:</white> <good>+19.7º</good>"
+										"<white>Ángulo del escudo:</white> <good>+19.7º</good>\n\n"\
+										"<b>Sobrecargado</b>\n"\
+										"<white>(Reforzado) Longitud:</white> <good>6.28</good> <gray>metros</gray>\n"\
+										"<white>(Extendido) Longitud:</white> <good>20.78</good> <gray>metros</gray>\n"\
 	
 	btt_Kebechet_GENL_Angle90LeftArc = "<b>Arco Izquierdo</b>\n\n"\
 										"<white>Rotación del escudo:</white> <good>-50º</good>"
