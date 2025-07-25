@@ -675,7 +675,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			Type = ResourceConverter
 			OperationalToggle = IsOperationalProxy_BubbleSmallFront
 			FromStorage = CombinedBatteryStorage_SmallFront
-			FromQuantity = "round( (&~/STATS/POWER_DRAIN) / 4, 0)"
+			FromQuantity = "round( (&~/STATS/POWER_DRAIN) / (&~/STATS/SMALL_SEGMENTS), 0)"
 			MinFromQuantityForConversion = 1
 			Interval = 1
 		}
@@ -698,7 +698,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		{
 			OperationalToggle = IsOperationalProxy_BubbleLargeFront
 			FromStorage = CombinedBatteryStorage_LargeFront
-			FromQuantity = "round( (&~/STATS/POWER_DRAIN) / 6, 0)"
+			FromQuantity = "round( (&~/STATS/POWER_DRAIN) / (&~/STATS/LARGE_SEGMENTS), 0)"
 		}
 		PowerDrain_LargeFrontRight :	PowerDrain_LargeFront
 		{
