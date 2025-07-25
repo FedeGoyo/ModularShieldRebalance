@@ -363,7 +363,7 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			ChainedTo = Transform_Line_Rotation_LeftToFront
 			StartLocation = [0, 0]
 			StartRotation = 0d
-			EndLocation = [(&~/STATS/LINE_FRONT_LOCATION/1) - (&~/STATS/LINE_RIGHT_LOCATION/1), (&~/STATS/LINE_RIGHT_LOCATION/0) - (&~/STATS/LINE_FRONT_LOCATION/0)] // It is rotated to the right. Therefore X and Y are switched, and also Y is also reflected			EndRotation = (&~/STATS/LINE_RIGHT_ROTATION) - (&~/STATS/LINE_FRONT_ROTATION)
+			EndLocation = [(&~/STATS/LINE_FRONT_LOCATION/1) - (&~/STATS/LINE_RIGHT_LOCATION/1), (&~/STATS/LINE_RIGHT_LOCATION/0) - (&~/STATS/LINE_FRONT_LOCATION/0)] // It is rotated to the right. Therefore X and Y are switched, and also Y is also reflected
 			EndRotation = (&~/STATS/LINE_RIGHT_ROTATION) - (&~/STATS/LINE_FRONT_ROTATION)
 		}
 		
