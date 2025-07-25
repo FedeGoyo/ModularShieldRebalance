@@ -8,23 +8,31 @@ Parts
 	KebechetTINYmodularShieldBatteryIcon = "Batería de Escudo"
 	KebechetTINYmodularShieldBatteryDesc = "Componente opcional situado junto a un Escudo de Burbuja Pequeño o Grande, o a otra batería. Cada batería aumenta la resistencia del escudo, la resistencia a la penetración y su radio.\n"\
 											"Para conectar varias baterías, colóquelas una al lado de la otra. Para conectarlas a un Escudo de Burbuja Pequeño, colóquelas de modo que solo una pieza toque el generador. Para conectarlas a un Escudo de Burbuja Grande, haga lo mismo, pero no en las esquinas del generador."
+	KebechetTINYmodularShieldBatteryOverclock = "Módulo de Batería de Escudo Sobrecargado"
+	KebechetTINYmodularShieldBatteryOverclockDesc = "Mejora la eficiencia de los Escudos de Burbuja más grandes y aumenta la resistencia y la resistencia a la penetración. Además, duplica la capacidad de energía del Módulo de Batería de Escudo. Produce calor residual cuando el Escudo de Burbuja es impactado."
 											
 	KebechetTINYmodularShield = "Generador de Escudo Diminuto"
 	KebechetTINYmodularShieldIcon = "Escudo Diminuto"
 	KebechetTINYmodularShieldDesc = 	"Proyecta un diminuto escudo de energía defensivo frontal por fuera de la nave que bloquea la mayoría del fuego entrante. Vulnerable a disruptores y EMP.\n"\
 										"La tecnología empleada lo hace resistente a la penetración incluso cuando no está a plena capacidad. Sin embargo, esta tecnología limita su pequeño alcance y resistencia, por lo que ha sido reforzado para resistir impactos directos, convirtiendolo en adecuado para su uso en los bordes de la nave.\n"\
+	KebechetTINYmodularShieldOverclock = "Generador de Escudo Diminuto Sobrecargado"
+	KebechetTINYmodularShieldOverclockDesc =  "Activa un dinamo que regenera energía lentamente, lo que permite que el Generador de Escudos Diminuto proteja de ataques de menor daño sin recibir baterías. Produce calor residual al ser impactado."
 
 	KebechetSTSmodularShield = "Pequeño Generador de Escudo de Burbuja"
 	KebechetSTSmodularShieldIcon = "Pequeño Escudo de Burbuja"
 	KebechetSTSmodularShieldDesc = 	"Proyecta un pequeño escudo de energía defensiva en un círculo fuera de la nave, bloqueando la mayoría de los disparos entrantes. Vulnerable a disruptores y EMP.\n\n"\
 									"El escudo de burbuja está dividido en 4 segmentos con resistencia y energía independientes. Puede ser complementado con uno o más Módulos de Batería de Escudo.\n\n"\
 									"El escudo de energía se puede proyectar a través de la propia nave, permitiendo que el generador de escudo pequeño de burbuja se incorpore al interior protegido de la nave."
+	KebechetSTSmodularShieldOverclock = "Pequeño Generador de Escudo de Burbuja Sobrecargado"
+	KebechetSTSmodularShieldOverclockDesc = "El escudo de energía gira más lento, pero se vuelve más fuerte y pierde menos energía por impacto. Produce calor residual al ser impactado."
 
 	KebechetSTLmodularShield = "Grande Generador de Escudo de Burbuja"
 	KebechetSTLmodularShieldIcon = "Grande Escudo de Burbuja"
 	KebechetSTLmodularShieldDesc = 	"Proyecta un gran escudo de energía defensiva en un círculo fuera de la nave, bloqueando la mayoría de los disparos entrantes. Vulnerable a disruptores y EMP.\n\n"\
 									"El escudo de burbuja está dividido en 6 segmentos con resistencia y energía independientes. Puede ser complementado con uno o más Módulos de Batería de Escudo.\n\n"\
 									"El escudo de energía se puede proyectar a través de la propia nave, permitiendo que el generador de escudo grande de burbuja se incorpore al interior protegido de la nave."
+	KebechetSTLmodularShieldOverclock = "Grande Generador de Escudo de Burbuja"
+	KebechetSTLmodularShieldOverclockDesc = "El escudo de energía gira más lento, pero se vuelve más fuerte y pierde menos energía por impacto. Produce calor residual al ser impactado."
 }
 
 PartToggles

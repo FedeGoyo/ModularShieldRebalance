@@ -7,23 +7,31 @@ Parts
 	KebechetTINYmodularShieldBatteryIcon = "Shield Battery"
 	KebechetTINYmodularShieldBatteryDesc = "An optional component placed adjacent to a Small or Large Bubble Shield, or another battery. Each battery increases the shield's strength, penetration resistance and radius.\n"\
 											"To connect multiple batteries place them side by side. To connect to a Small Bubble Shield place it so that only one tile touches the generator. To connect to a Large Bubble Shield do the same but not at the generator's corners."
+	KebechetTINYmodularShieldBatteryOverclock = "Overclocked hield Battery Module"
+	KebechetTINYmodularShieldBatteryOverclockDesc = "Improves the efficiency of larger Bubble Shields and increases the strength and penetration resistance. Also, doubles the power capacity of the Shield Battery Module. Produces waste heat when Bubble Shield is hit."
 
 	KebechetTINYmodularShield = "Tiny Shield Generator"
 	KebechetTINYmodularShieldIcon = "Tiny Shield"
 	KebechetTINYmodularShieldDesc = 	"Projects a tiny frontal defensive energy shield outside the ship, blocking most incoming fire. Vulnerable to Disruptors and EMPs.\n"\
 										"The technology used makes it resistant to penetration even when it is not at full capacity. However, such technology limits its tiny range and strength, for which it has been reinforced to stand direct impacts, making it suitable to be used at the ship's edges.\n"\
+	KebechetTINYmodularShieldOverclock = "Overclocked Tiny Shield Generator"
+	KebechetTINYmodularShieldOverclockDesc = "Turns on a dynamo that slowly regenerates power, allowing the Tiny Shield Generator to protect from low-damage attacks without ever receiving batteries. Produces waste heat when hit."
 
 	KebechetSTSmodularShield = "Small Bubble Shield Generator"
 	KebechetSTSmodularShieldIcon = "Small Bubble Shield"
 	KebechetSTSmodularShieldDesc = 	"Projects a small defensive energy shield in a circle outside the ship, blocking most incoming fire. Vulnerable to Disruptors and EMPs.\n\n"\
 									"The bubble shield is divided into 4 segments with separate resistance and power. Can be paired with one or more Shield Battery Modules.\n\n"\
 									"The energy shield can be projected through the ship itself, allowing the Small Bubble Shield Generator to be built within the ship's protected interior."
+	KebechetSTSmodularShieldOverclock = "Overclocked Small Bubble Shield Generator"
+	KebechetSTSmodularShieldOverclockDesc = "The energy shield rotates slower but becomes stronger and loses less power per hit. Produces waste heat when hit."
 									
 	KebechetSTLmodularShield = "Large Bubble Shield Generator"
 	KebechetSTLmodularShieldIcon = "Large Bubble Shield"
 	KebechetSTLmodularShieldDesc = 	"Projects a large defensive energy shield in a circle outside the ship, blocking most incoming fire. Vulnerable to Disruptors and EMPs.\n\n"\
 									"The bubble shield is divided into 6 segments with separate resistance and power. Can be paired with one or more Shield Battery Modules.\n\n"\
 									"The energy shield can be projected through the ship itself, allowing the Large Bubble Shield Generator to be built within the ship's protected interior."
+	KebechetSTLmodularShieldOverclock = "Overclocked Large Bubble Shield Generator"
+	KebechetSTLmodularShieldOverclockDesc = "The energy shield rotates slower but becomes stronger and loses less power per hit. Produces waste heat when hit."
 }
 
 PartToggles
