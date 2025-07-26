@@ -1,5 +1,6 @@
 PartStats
 [
+	// Bubble Shields
 	{
 		ID = ShieldRadius
 		FormatKey = "Stats/ShieldRadiusFmT"
@@ -12,14 +13,17 @@ PartStats
 		ID = ShieldSegments
 		FormatKey = "Stats/ShieldSegmentsFmt"
 	}
+	// Flat Shields
 	{
 		ID = ShieldLength
 		FormatKey = "Stats/ShieldLengthFmT"
 	}
+	// Tiny Shield
 	{
 		ID = ShieldRegen
 		FormatKey = "Stats/ShieldRegenFmT"
 	}
+	// Modular Shield Batteries
 	{
 		ID = ShieldRadiusMult
 		FormatKey = "Stats/ShieldRadiusMultFmT"
@@ -35,5 +39,9 @@ PartStats
 	{
 		ID = ShieldPenResBonus
 		FormatKey = "Stats/ShieldPenResBonusFmT"
+	}
+	{
+		ID = ShieldRotation
+		FormatKey = "Stats/ShieldRotationFmt"
 	}
 ]

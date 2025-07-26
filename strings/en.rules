@@ -125,6 +125,7 @@ Stats
 	ShieldRadiusExpFmT = "<white>Shield Radius Exponent:</white> <good>{0:n0}</good>"
 	ShieldHPBonusFmT = "<white>Shield Strength Bonus:</white> <good>+{0:n0}</good>"
 	ShieldPenResBonusFmT = "<white>Shield Pen. Res. Bonus:</white> <good>-{0:n0}</good> <gray>meters</gray>"
+	ShieldRotationFmt =" <white>Shield Rotation Speed Reduction:</white> <good>-{0:n0}%</good>"
 	
 	BubbleNotes = "<gray>NOTE: Shield Strength, Penetration Resistance and Radius are increased with each additional Modular Shield Battery.</gray>"
 }

@@ -62,6 +62,16 @@ BubbleRadiusFinal
 	CombineMod = Add
 }
 
+BubbleRotation
+{
+	CombineMode = Add
+}
+BubbleRotationPenalty
+{
+	CombineMode = Add
+	BaseValue = 100%
+	Multiplier = 10%
+}
 
 ShieldOverload
 {

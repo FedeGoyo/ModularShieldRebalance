@@ -30,7 +30,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeByRotation = false
 	MaxHealth = 5000
 	TypeCategories = [defense, uses_power, bubble_shield]
-	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacityReversed, BubbleResistance, BubbleResistanceBonus, BubbleRadius, BubbleRadiusBase, BubbleRadiusOverclock, BubbleRadiusFinal]
+	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacityReversed, BubbleResistance, BubbleResistanceBonus, BubbleRadius, BubbleRadiusBase, BubbleRadiusOverclock, BubbleRadiusFinal, BubbleRotation, BubbleRotationPenalty]
 	PenetrationRectType = Normal
 	// ExplosiveDamageAbsorption = 50%
 	IsRotateable = false
@@ -603,6 +603,11 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						RemapFrom = [0, 1]
 						RemapTo = [1, &~/OVERCLOCK/ROTATION_SPEED_FACTOR]
 					}
+					{
+						Type = Buff
+						BuffType = BubbleRotationPenalty
+						ModificationMode = Divide
+					}
 				]
 			}
 			AccumulationTriggers
@@ -620,6 +625,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Type = ThresholdTrigger
 			AmountFrom = RotationTime
 			MinAmount = 3
+		}
+		
+		BuffProvider_Rotation
+		{
+			Type = SelfBuffProvider
+			ChainsFromBuffType = BubbleRotation
+			BuffType = BubbleRotationPenalty
+			BuffAmount = { BaseValue=0; BuffType=BubbleRotation; BuffMode=Add; }
 		}
 			
 		One	{ Type = StaticValue; Value = -1 }
