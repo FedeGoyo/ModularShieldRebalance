@@ -684,6 +684,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 		ValueLerp_Radius1 :	ValueLerp_Radius0	{ InputValue = Value1 }
 		
+		// All the Update and Value below is to make the ValueLerp update when the Buffs changes. Otherwise, if the buffs changes the OutputRange won't be refreshed.
+		
 		UpdateTimer
 		{
 			Type = Timer
