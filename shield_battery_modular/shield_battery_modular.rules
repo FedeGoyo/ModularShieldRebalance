@@ -23,7 +23,6 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 	IconNameKey = "Parts/KebechetTINYmodularShieldBatteryIcon"
 	DescriptionKey = "Parts/KebechetTINYmodularShieldBatteryDesc"
 	ID = enderluck.ModularShieldBattery
-	EditorGroup = "Defenses"
 	EditorParentParts = [ "swefpifh.Kebechet_STS_modularShield", "swefpifh.Kebechet_STL_modularShield" ] 
 	Resources
 	[

@@ -118,7 +118,7 @@ Stats
 	// Flat Shields
 	ShieldLengthFmT = "<white>Longitud del escudo:</white> <good>{0:n0}</good> <gray>metros</gray>"
 	// Tiny Shield
-	ShieldRegenFmT = "<white>Regeneración del escudo:</white> <good>{0:n0}</good> <gray>resistencia/s</gray>"
+	ShieldRegenFmT = "<white>Regeneración del escudo:</white> <good>{0:n0}</good> <gray>a</gray> <good>{1:n0}</good> <gray>resistencia/s</gray>"
 	// Modular Shield Battery
 	ShieldRadiusMultFmT = "<white>Multiplicador del radio del escudo:</white> <good>{0:n0}%</good>"
 	ShieldRadiusExpFmT = "<white>Exponente del radio del escudo:</white> <good>{0:n0}</good>"
