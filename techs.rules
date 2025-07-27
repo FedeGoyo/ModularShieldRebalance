@@ -10,4 +10,49 @@ Techs
 		PartsUnlocked = [ &<shield_tiny_modular/shield_tiny_modular.rules>/Part/ID ]
 		Cost = 500
 	}
+	
+	// Overclocks...
+
+	{
+		ID = swefpifh.Kebechet_TINY_modularShield-overclock
+		NameKey = "Parts/KebechetTINYmodularShieldOverclock"
+		DescriptionKey = "Parts/KebechetTINYmodularShieldOverclockDesc"
+		Icon = &<shield_tiny_modular/shield_tiny_modular.rules>/Part/EditorIcon
+		SecondaryIcon = &<./Data/modes/career/techs.rules>/OverclockIcon
+		EditorGroup = &<shield_tiny_modular/shield_tiny_modular.rules>/Part/EditorGroup
+		ToggleChoicesUnlocked
+		[
+			{ PartID=swefpifh.Kebechet_TINY_modularShield; ToggleID=thermal_overclock; Mode=1; }
+		]
+		Cost = 10000
+		Prerequisites = [swefpifh.Kebechet_TINY_modularShield, cosmoteer.heat_management]
+	}
+	{
+		ID = swefpifh.Kebechet_STS_modularShield-overclock
+		NameKey = "Parts/KebechetSTSmodularShieldOverclock"
+		DescriptionKey = "Parts/KebechetSTSmodularShieldOverclockDesc"
+		Icon = &<shield_sts_modular/shield_sts_modular.rules>/Part/EditorIcon
+		SecondaryIcon = &<./Data/modes/career/techs.rules>/OverclockIcon
+		EditorGroup = &<shield_sts_modular/shield_sts_modular.rules>/Part/EditorGroup
+		ToggleChoicesUnlocked
+		[
+			{ PartID=swefpifh.Kebechet_STS_modularShield; ToggleID=thermal_overclock; Mode=1; }
+		]
+		Cost = 100000
+		Prerequisites = [swefpifh.Kebechet_STS_modularShield, cosmoteer.heat_management]
+	}
+	{
+		ID = swefpifh.Kebechet_STL_modularShield-overclock
+		NameKey = "Parts/KebechetSTLmodularShieldOverclock"
+		DescriptionKey = "Parts/KebechetSTLmodularShieldOverclockDesc"
+		Icon = &<shield_stl_modular/shield_stl_modular.rules>/Part/EditorIcon
+		SecondaryIcon = &<./Data/modes/career/techs.rules>/OverclockIcon
+		EditorGroup = &<shield_stl_modular/shield_stl_modular.rules>/Part/EditorGroup
+		ToggleChoicesUnlocked
+		[
+			{ PartID=swefpifh.Kebechet_STL_modularShield; ToggleID=thermal_overclock; Mode=1; }
+		]
+		Cost = 300000
+		Prerequisites = [swefpifh.Kebechet_STL_modularShield, cosmoteer.heat_management]
+	}
 ]

@@ -14,7 +14,7 @@ Parts
 	KebechetTINYmodularShield = "Generador de Escudo Diminuto"
 	KebechetTINYmodularShieldIcon = "Escudo Diminuto"
 	KebechetTINYmodularShieldDesc = 	"Proyecta un diminuto escudo de energía defensivo frontal por fuera de la nave que bloquea la mayoría del fuego entrante. Vulnerable a disruptores y EMP.\n"\
-										"La tecnología empleada lo hace resistente a la penetración incluso cuando no está a plena capacidad. Sin embargo, esta tecnología limita su pequeño alcance y resistencia, por lo que ha sido reforzado para resistir impactos directos, convirtiendolo en adecuado para su uso en los bordes de la nave.\n"\
+										"La tecnología empleada lo hace resistente a la penetración incluso cuando no está a plena capacidad. Sin embargo, esta tecnología limita su pequeño alcance y resistencia, por lo que ha sido reforzado para resistir impactos directos, convirtiendolo en adecuado para su uso en los bordes de la nave."
 	KebechetTINYmodularShieldOverclock = "Generador de Escudo Diminuto Sobrecargado"
 	KebechetTINYmodularShieldOverclockDesc =  "Activa un dinamo que regenera energía lentamente, lo que permite que el Generador de Escudos Diminuto proteja de ataques de menor daño sin recibir baterías. Produce calor residual al ser impactado."
 

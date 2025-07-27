@@ -13,7 +13,7 @@ Parts
 	KebechetTINYmodularShield = "Tiny Shield Generator"
 	KebechetTINYmodularShieldIcon = "Tiny Shield"
 	KebechetTINYmodularShieldDesc = 	"Projects a tiny frontal defensive energy shield outside the ship, blocking most incoming fire. Vulnerable to Disruptors and EMPs.\n"\
-										"The technology used makes it resistant to penetration even when it is not at full capacity. However, such technology limits its tiny range and strength, for which it has been reinforced to stand direct impacts, making it suitable to be used at the ship's edges.\n"\
+										"The technology used makes it resistant to penetration even when it is not at full capacity. However, such technology limits its tiny range and strength, for which it has been reinforced to stand direct impacts, making it suitable to be used at the ship's edges."
 	KebechetTINYmodularShieldOverclock = "Overclocked Tiny Shield Generator"
 	KebechetTINYmodularShieldOverclockDesc = "Turns on a dynamo that slowly regenerates power, allowing the Tiny Shield Generator to protect from low-damage attacks without ever receiving batteries. Produces waste heat when hit."
 
