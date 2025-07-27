@@ -885,6 +885,44 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		
 		// Start Radius Bonus
 		
+		BubbleStateValue_Self_SmallFront
+		{
+			Type = ValueTween
+			IsOnToggle = CombinedBatteryStorage_SmallFront
+			OnValue = 1 / (&~/STATS/SMALL_SEGMENTS)
+			OnTweenDuration = 1;
+			OffTweenDuration = 5;
+		}
+		BubbleStateValue_Self_SmallRight :		BubbleStateValue_Self_SmallFront	{ IsOnToggle = CombinedBatteryStorage_SmallRight }
+		BubbleStateValue_Self_SmallBack :		BubbleStateValue_Self_SmallFront	{ IsOnToggle = CombinedBatteryStorage_SmallBack }
+		BubbleStateValue_Self_SmallLeft :		BubbleStateValue_Self_SmallFront	{ IsOnToggle = CombinedBatteryStorage_SmallLeft }
+		BubbleStateValue_Self_LargeFront :		BubbleStateValue_Self_SmallFront
+		{
+			OnValue = 1 / (&~/STATS/LARGE_SEGMENTS)
+			IsOnToggle = CombinedBatteryStorage_LargeFront
+		}
+		BubbleStateValue_Self_LargeFrontRight :	BubbleStateValue_Self_LargeFront	{ IsOnToggle = CombinedBatteryStorage_LargeFrontRight }
+		BubbleStateValue_Self_LargeBackRight :	BubbleStateValue_Self_LargeFront	{ IsOnToggle = CombinedBatteryStorage_LargeBackRight }
+		BubbleStateValue_Self_LargeBack :		BubbleStateValue_Self_LargeFront	{ IsOnToggle = CombinedBatteryStorage_LargeBack }
+		BubbleStateValue_Self_LargeBackLeft :	BubbleStateValue_Self_LargeFront	{ IsOnToggle = CombinedBatteryStorage_LargeBackLeft }
+		BubbleStateValue_Self_LargeFrontLeft :	BubbleStateValue_Self_LargeFront	{ IsOnToggle = CombinedBatteryStorage_LargeFrontLeft }
+		
+		BubbleStateValue_Self_Small
+		{
+			Type = MultiValue
+			Values = [BubbleStateValue_Self_SmallFront, BubbleStateValue_Self_SmallRight, BubbleStateValue_Self_SmallBack, BubbleStateValue_Self_SmallLeft]
+			Mode = Add
+		}
+		BubbleStateValue_Self_Large :	BubbleStateValue_Self_Small	{ Values = [BubbleStateValue_Self_LargeFront, BubbleStateValue_Self_LargeFrontRight, BubbleStateValue_Self_LargeBackRight, BubbleStateValue_Self_LargeBack, BubbleStateValue_Self_LargeBackLeft, BubbleStateValue_Self_LargeFrontLeft] }
+		
+		BubbleStateValue_Self_Selector
+		{
+			Type = ToggleValueSelector
+			Toggle = IsSmall
+			ToggleOnValue = BubbleStateValue_Self_Small
+			ToggleOffValue = BubbleStateValue_Self_Large	// If it IsAlone it won't be giving the buff to anybody so no problem
+		}
+		
 		ToggleRadius
 		{
 			Type = UIToggle
@@ -908,48 +946,10 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			OffTweenDuration = 0.1;
 		}
 		
-		BubbleRadiusStateValue_Self_SmallFront
-		{
-			Type = ValueTween
-			IsOnToggle = CombinedBatteryStorage_SmallFront
-			OnValue = 1 / (&~/STATS/SMALL_SEGMENTS)
-			OnTweenDuration = 1;
-			OffTweenDuration = 5;
-		}
-		BubbleRadiusStateValue_Self_SmallRight :		BubbleRadiusStateValue_Self_SmallFront	{ IsOnToggle = CombinedBatteryStorage_SmallRight }
-		BubbleRadiusStateValue_Self_SmallBack :			BubbleRadiusStateValue_Self_SmallFront	{ IsOnToggle = CombinedBatteryStorage_SmallBack }
-		BubbleRadiusStateValue_Self_SmallLeft :			BubbleRadiusStateValue_Self_SmallFront	{ IsOnToggle = CombinedBatteryStorage_SmallLeft }
-		BubbleRadiusStateValue_Self_LargeFront :		BubbleRadiusStateValue_Self_SmallFront
-		{
-			OnValue = 1 / (&~/STATS/LARGE_SEGMENTS)
-			IsOnToggle = CombinedBatteryStorage_LargeFront
-		}
-		BubbleRadiusStateValue_Self_LargeFrontRight :	BubbleRadiusStateValue_Self_LargeFront	{ IsOnToggle = CombinedBatteryStorage_LargeFrontRight }
-		BubbleRadiusStateValue_Self_LargeBackRight :	BubbleRadiusStateValue_Self_LargeFront	{ IsOnToggle = CombinedBatteryStorage_LargeBackRight }
-		BubbleRadiusStateValue_Self_LargeBack :			BubbleRadiusStateValue_Self_LargeFront	{ IsOnToggle = CombinedBatteryStorage_LargeBack }
-		BubbleRadiusStateValue_Self_LargeBackLeft :		BubbleRadiusStateValue_Self_LargeFront	{ IsOnToggle = CombinedBatteryStorage_LargeBackLeft }
-		BubbleRadiusStateValue_Self_LargeFrontLeft :	BubbleRadiusStateValue_Self_LargeFront	{ IsOnToggle = CombinedBatteryStorage_LargeFrontLeft }
-		
-		BubbleRadiusStateValue_Self_Small
-		{
-			Type = MultiValue
-			Values = [BubbleRadiusStateValue_Self_SmallFront, BubbleRadiusStateValue_Self_SmallRight, BubbleRadiusStateValue_Self_SmallBack, BubbleRadiusStateValue_Self_SmallLeft]
-			Mode = Add
-		}
-		BubbleRadiusStateValue_Self_Large :	BubbleRadiusStateValue_Self_Small	{ Values = [BubbleRadiusStateValue_Self_LargeFront, BubbleRadiusStateValue_Self_LargeFrontRight, BubbleRadiusStateValue_Self_LargeBackRight, BubbleRadiusStateValue_Self_LargeBack, BubbleRadiusStateValue_Self_LargeBackLeft, BubbleRadiusStateValue_Self_LargeFrontLeft] }
-		
-		BubbleRadiusStateValue_Self_Selector
-		{
-			Type = ToggleValueSelector
-			Toggle = IsSmall
-			ToggleOnValue = BubbleRadiusStateValue_Self_Small
-			ToggleOffValue = BubbleRadiusStateValue_Self_Large	// If it IsAlone it won't be giving the buff to anybody so no problem
-		}		
-		
 		BubbleRadiusStateValue_SelfMin
 		{
 			Type = MultiValue
-			Values = [ BubbleRadiusStateValue, BubbleRadiusStateValue_Self_Selector ]
+			Values = [ BubbleRadiusStateValue, BubbleStateValue_Self_Selector ]
 			Mode = Min
 		}
 		
@@ -979,30 +979,55 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			BuffMultiplier = BubbleRadiusStateValue
 		}
 		
-		// Start Rotation Bonus
+		// Start Rotation Penalty
+		
+		IsBonusRotationOperational
+		{
+			Type = MultiToggle
+			Toggles = [CanOperate, IsOverclocked]
+			Mode = All
+		}
 		
 		BubbleRotationStateValue
 		{
 			Type = ValueTween
-			IsOnToggle = IsOverclocked
+			IsOnToggle = IsBonusRotationOperational
 			StartingValue = 0
 			OnTweenDuration = 1;
 			OffTweenDuration = 0.1;
+		}
+		
+		BubbleRotationStateValue_SelfMin
+		{
+			Type = MultiValue
+			Values = [ BubbleRotationStateValue, BubbleStateValue_Self_Selector ]
+			Mode = Min
 		}
 		
 		BuffProvider_BubbleRotation_Right
 		{
 			Type = AreaBuffProvider
 			BuffType = BubbleRotation
-			BuffAmount = { BaseValue=1; BuffType=BubbleRotation; BuffMode=Add; }
-			BuffMultiplier = BubbleRotationStateValue
+			BuffAmount = 1
+			BuffMultiplier = BubbleRotationStateValue_SelfMin
 			OperationalToggle = IsShieldConnected_Right
 			BuffArea = [2, 0, 1, 1]
 		}
-		BuffProvider_BubbleRotation_Left :		BuffProvider_BubbleRotation_Right
+		BuffProvider_BubbleRotation_Left :			BuffProvider_BubbleRotation_Right
 		{
 			OperationalToggle = IsShieldConnected_Left
 			BuffArea = [-1, 0, 1, 1]
+		}
+		
+		BuffProvider_BubbleRotation_RightChained : 	BuffProvider_BubbleRotation_Right
+		{
+			BuffAmount = 1
+			BuffMultiplier = BubbleRotationStateValue
+		}
+		BuffProvider_BubbleRotation_LeftChained :	BuffProvider_BubbleRotation_Left
+		{
+			BuffAmount = { BaseValue=0; BuffType=BubbleRotation; BuffMode=Add; }
+			BuffMultiplier = BubbleRotationStateValue
 		}
 		
 		// End Modular
