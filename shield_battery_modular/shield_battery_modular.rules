@@ -1055,8 +1055,8 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		ModularOverclockStateValueProxy
 		{
 			Type = ValueProxy
-			ComponentID = BubbleSize
-			Mode = CanOperateProxy
+			ComponentID = ModularOverclockStateValue
+			ProxyToggle = CanOperateProxy
 		}
 		IsOverclocked
 		{
@@ -1093,16 +1093,22 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			ViaBuffs
 			{
 				OutgoingBuffProviders = [BuffProvider_BubbleCapacityReversedRight, BuffProvider_BubbleCapacityReversedLeft]
-				ComponentIDs = [ Overclock_BubbleArcShieldProxy, Overclock_ArcShieldProxy ]
+				ComponentIDs = [ Overclock_BubbleArcShieldProxyModular, Overclock_ArcShieldProxy ]
 			}
 		}
-		Overclock_BubbleArcShieldProxyProxy	// For Modular, to prevent using it while disabled
+		Overclock_BubbleArcShieldProxyModular	// For Modular, to prevent using it while disabled
 		{
 			Type = TriggerProxy
 			ComponentID = Overclock_BubbleArcShieldProxy
-			ProxyToggle = IsOverclocked
+			ProxyToggle = CanOperateProxy
 		}
-		
+		Overclock_BubbleArcShieldProxySelf	// To prevent generating heat while not being operative
+		{
+			Type = TriggerProxy
+			ComponentID = Overclock_BubbleArcShieldProxy
+			ProxyToggle = IsOperationalOverclocked
+		}
+				
 		BubbleOverloadValue
 		{
 			Type = MultiValue
@@ -1126,7 +1132,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			Type = ResourceChange
 			ResourceStorage = HeatDistributionStorage
 			// Provides the post-resistance damage value as EffectScale
-			Trigger = Overclock_BubbleArcShieldProxyProxy
+			Trigger = Overclock_BubbleArcShieldProxySelf
 			Amount
 			{
 				BaseValue = 1 // "round((&~/OVERCLOCK/HEAT_PER_DAMAGE) * (&~/HEAT_TO_RESOURCE), 0)"
