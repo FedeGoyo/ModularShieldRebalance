@@ -25,11 +25,12 @@ BubbleResistanceBonus
 	CombineMode = Add
 	Multiplier = 1
 	BaseValue = 0
-
+/*	// The numbers get bugged
 	IconTextFormatKey = "BuildBox/BuffResistanceFmt"
 	IconTextMultiply = 1
 	IconTextAdd = 0
 	ShowIconTextForZeroValue = false
+	*/
 }
 
 BubbleRadius
