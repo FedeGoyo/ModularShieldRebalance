@@ -39,7 +39,7 @@ Actions
 	}
 	{
 		Action = Overrides
-		OverrideIn = "<modes/career/techs.rules>/Techs/15"
+		OverrideIn = "<modes/career/techs.rules>/Techs/19"
 		CreateIfNotExisting = true
 		Overrides	// Modify Small Shield Generator Tech, fix part unlock and icon
 		{
@@ -51,7 +51,7 @@ Actions
 	}
 	{
 		Action = Overrides
-		OverrideIn = "<modes/career/techs.rules>/Techs/16"
+		OverrideIn = "<modes/career/techs.rules>/Techs/20"
 		Overrides	// Fixed Large Shield Generator Tech, part unlock and icon
 		{
 			PartsUnlocked = [&<shield_gen_large_modular/shield_gen_large_modular.rules>/Part/ID]
@@ -61,24 +61,19 @@ Actions
 	{
 		Action = Overrides
 		OverrideIn = "<modes/career/techs.rules>/Techs/10"
-		Overrides	// Fixed Mine Launcher Tech, part unlock and icon
+		Overrides	// Fixed HE Missile Launcher Tech, part unlock and icon
 		{
-			EditorIcon = "&<./Data/ships/terran/missile_launcher/mine/missile_launcher_mine.rules>/EditorIcon"
+			EditorIcon = "&<./Data/ships/terran/missile_launcher/he/missile_launcher_he.rules>/EditorIcon"	// Using Icon crashes
 			PartsUnlocked = [&<./Data/ships/terran/missile_launcher/missile_launcher.rules>/Part/ID]
 		}
 	}
 	{
 		Action = Overrides
 		OverrideIn = "<modes/career/techs.rules>/Techs/11"
-		Overrides	// Fixed Railgun Tech, parts unlock and icon
+		Overrides	// Fixed EMP Missile Launcher, parts unlock and icon
 		{
-			EditorIcon = "&<./Data/ships/terran/railgun_launcher/railgun_launcher.rules>/Part/EditorIcon"
-			PartsUnlocked
-			[
-				&<./Data/ships/terran/railgun_loader/railgun_loader.rules>/Part/ID
-				&<./Data/ships/terran/railgun_accelerator/railgun_accelerator.rules>/Part/ID
-				&<./Data/ships/terran/railgun_launcher/railgun_launcher.rules>/Part/ID
-			]
+			EditorIcon = "&<./Data/ships/terran/missile_launcher/emp/missile_launcher_emp.rules>/EditorIcon"	// Using Icon crashes
+			PartsUnlocked = [&<./Data/ships/terran/missile_launcher/missile_launcher.rules>/Part/ID]
 		}
 	}
 	
