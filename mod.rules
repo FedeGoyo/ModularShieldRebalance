@@ -60,19 +60,19 @@ Actions
 	}
 	{
 		Action = Overrides
-		OverrideIn = "<modes/career/techs.rules>/Techs/10"
+		OverrideIn = "<modes/career/techs.rules>/Techs/11"
 		Overrides	// Fixed HE Missile Launcher Tech, part unlock and icon
 		{
-			EditorIcon = "&<./Data/ships/terran/missile_launcher/he/missile_launcher_he.rules>/EditorIcon"	// Using Icon crashes
+			Icon = &<./Data/ships/terran/missile_launcher/he/missile_launcher_he.rules>/EditorIcon
 			PartsUnlocked = [&<./Data/ships/terran/missile_launcher/missile_launcher.rules>/Part/ID]
 		}
 	}
 	{
 		Action = Overrides
-		OverrideIn = "<modes/career/techs.rules>/Techs/11"
+		OverrideIn = "<modes/career/techs.rules>/Techs/12"
 		Overrides	// Fixed EMP Missile Launcher, parts unlock and icon
 		{
-			EditorIcon = "&<./Data/ships/terran/missile_launcher/emp/missile_launcher_emp.rules>/EditorIcon"	// Using Icon crashes
+			Icon = &<./Data/ships/terran/missile_launcher/emp/missile_launcher_emp.rules>/EditorIcon
 			PartsUnlocked = [&<./Data/ships/terran/missile_launcher/missile_launcher.rules>/Part/ID]
 		}
 	}
