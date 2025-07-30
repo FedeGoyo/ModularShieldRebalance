@@ -1295,36 +1295,36 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		Overclock_ArcShieldProxy
 		{
 			Type = MultiTrigger
-			Triggers = [Overclock_ArcShieldProxy_Front, Overclock_ArcShieldProxy_FrontRight, Overclock_ArcShieldProxy_BackRight, Overclock_ArcShieldProxy_Back, Overclock_ArcShieldProxy_BackLeft, Overclock_ArcShieldProxy_FrontLeft]
+			Triggers = [Overclock_ArcShieldProxy_LargeFront, Overclock_ArcShieldProxy_LargeFrontRight, Overclock_ArcShieldProxy_LargeBackRight, Overclock_ArcShieldProxy_LargeBack, Overclock_ArcShieldProxy_LargeBackLeft, Overclock_ArcShieldProxy_LargeFrontLeft]
 		}
 		
-		Overclock_ArcShieldProxy_Front
+		Overclock_ArcShieldProxy_LargeFront
 		{
 			Type = TriggerProxy
 			ComponentID = ArcShield_Front
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldProxy_FrontRight :	Overclock_ArcShieldProxy_Front
+		Overclock_ArcShieldProxy_LargeFrontRight :	Overclock_ArcShieldProxy_LargeFront
 		{
 			ComponentID = ArcShield_FrontRight
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldProxy_BackRight :	Overclock_ArcShieldProxy_Front
+		Overclock_ArcShieldProxy_LargeBackRight :	Overclock_ArcShieldProxy_LargeFront
 		{
 			ComponentID = ArcShield_BackRight
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldProxy_Back :	Overclock_ArcShieldProxy_Front
+		Overclock_ArcShieldProxy_LargeBack :	Overclock_ArcShieldProxy_LargeFront
 		{
 			ComponentID = ArcShield_Back
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldProxy_BackLeft :	Overclock_ArcShieldProxy_Front
+		Overclock_ArcShieldProxy_LargeBackLeft :	Overclock_ArcShieldProxy_LargeFront
 		{
 			ComponentID = ArcShield_BackLeft
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldProxy_FrontLeft :	Overclock_ArcShieldProxy_Front
+		Overclock_ArcShieldProxy_LargeFrontLeft :	Overclock_ArcShieldProxy_LargeFront
 		{
 			ComponentID = ArcShield_FrontLeft
 			ProxyToggle = IsOperationalOverclocked

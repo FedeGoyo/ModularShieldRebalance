@@ -1,6 +1,6 @@
 OVERCLOCK
 {
-	HEAT_PER_SECOND = 10
+	HEAT_PER_SECOND = 12	//	Total, divided by segments
 	HEAT_PER_DAMAGE = 0.02
 	CAPACITY_FACTOR = 200%
 	POWER_DRAIN_FACTOR = 200%
@@ -1102,38 +1102,142 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		HeatDistributionStorage : <./Data/ships/terran/base_part_terran_overclock.rules>/Part/Components/HeatDistributionStorage {}	// Is HEAT_TARGET_STORAGE
 		NetworkHeatInput : <./Data/ships/terran/base_part_terran_overclock.rules>/Part/Components/NetworkHeatInput {}	// Is HEAT_NETWORK_INPUT
 		
-		OverclockHeatProducer
+		// Heat Producer per Second
+		
+		IsOperationalOverclocked_SmallFront
+		{
+			Type = MultiToggle
+			Toggles = [ IsOperational_BubbleSmallFront, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_SmallFront ]
+			Mode = All
+		}
+		IsOperationalOverclocked_SmallRight :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleSmallRight, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_SmallRight ] }
+		IsOperationalOverclocked_SmallBack :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleSmallBack, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_SmallBack ] }
+		IsOperationalOverclocked_SmallLeft :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleSmallLeft, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_SmallLeft ] }
+		IsOperationalOverclocked_LargeFront :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeFront, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_LargeFront ] }
+		IsOperationalOverclocked_LargeFrontRight :	IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeFrontRight, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_LargeFrontRight ] }
+		IsOperationalOverclocked_LargeBackRight :	IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeBackRight, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_LargeBackRight ] }
+		IsOperationalOverclocked_LargeBack :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeBack, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_LargeBack ] }
+		IsOperationalOverclocked_LargeBackLeft :	IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeBackLeft, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_LargeBackLeft ] }
+		IsOperationalOverclocked_LargeFrontLeft :	IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeFrontLeft, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_LargeFrontLeft ] }
+		
+		OverclockHeatProducer_SmallFront
 		{
 			Type = ResourceConverter
-			OperationalToggle = IsOperationalOverclocked
-			HEAT_PER_INTERVAL = ceil((&~/OVERCLOCK/HEAT_PER_SECOND) * (&Interval))
+			OperationalToggle = IsOperationalOverclocked_SmallFront
+			HEAT_PER_INTERVAL = ceil((&~/OVERCLOCK/HEAT_PER_SECOND) * (&Interval)) / (&~/STATS/TOTAL_BATTERIES) * (&~/STATS/SMALL_SEGMENTS)
 			ToQuantity = (&HEAT_PER_INTERVAL) * (&~/HEAT_TO_RESOURCE)
 			ToStorage = HeatDistributionStorage
 			Interval = 0.5
 		}
+		OverclockHeatProducer_SmallRight :		OverclockHeatProducer_SmallFront	{ OperationalToggle = IsOperationalOverclocked_SmallRight }
+		OverclockHeatProducer_SmallBack :		OverclockHeatProducer_SmallFront	{ OperationalToggle = IsOperationalOverclocked_SmallBack }
+		OverclockHeatProducer_SmallLeft :		OverclockHeatProducer_SmallFront	{ OperationalToggle = IsOperationalOverclocked_SmallLeft }
+		OverclockHeatProducer_LargeFront :		OverclockHeatProducer_SmallFront
+		{
+			OperationalToggle = IsOperationalOverclocked_LargeFront
+			HEAT_PER_INTERVAL = ceil((&~/OVERCLOCK/HEAT_PER_SECOND) * (&Interval)) / (&~/STATS/TOTAL_BATTERIES) * (&~/STATS/LARGE_SEGMENTS)
+		}
+		OverclockHeatProducer_LargeFrontRight :	OverclockHeatProducer_LargeFront	{ OperationalToggle = IsOperationalOverclocked_LargeFrontRight }
+		OverclockHeatProducer_LargeBackRight :	OverclockHeatProducer_LargeFront	{ OperationalToggle = IsOperationalOverclocked_LargeBackRight }
+		OverclockHeatProducer_LargeBack :		OverclockHeatProducer_LargeFront	{ OperationalToggle = IsOperationalOverclocked_LargeBack }
+		OverclockHeatProducer_LargeBackLeft :	OverclockHeatProducer_LargeFront	{ OperationalToggle = IsOperationalOverclocked_LargeBackLeft }
+		OverclockHeatProducer_LargeFrontLeft :	OverclockHeatProducer_LargeFront	{ OperationalToggle = IsOperationalOverclocked_LargeFrontLeft }
 		
-		Overclock_BubbleArcShieldProxy
+		// Heat Producer when being hit
+		
+		Overclock_BubbleArcShieldProxy_SmallFront
 		{
 			Type = MultiTrigger
 			ViaBuffs
 			{
 				OutgoingBuffProviders = [BuffProvider_BubbleCapacityReversedRight, BuffProvider_BubbleCapacityReversedLeft]
-				ComponentIDs = [ Overclock_BubbleArcShieldProxyModular, Overclock_ArcShieldProxy ]
+				ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_SmallFront, Overclock_ArcShieldProxy_SmallFront ]
 			}
 		}
-		Overclock_BubbleArcShieldProxyModular	// For Modular, to prevent using it while disabled
+		Overclock_BubbleArcShieldProxy_SmallRight :			Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_SmallRight, Overclock_ArcShieldProxy_SmallRight ] }
+		Overclock_BubbleArcShieldProxy_SmallBack :			Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_SmallBack, Overclock_ArcShieldProxy_SmallBack ] }
+		Overclock_BubbleArcShieldProxy_SmallLeft :			Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_SmallLeft, Overclock_ArcShieldProxy_SmallLeft ] }
+		Overclock_BubbleArcShieldProxy_LargeFront :			Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeFront, Overclock_ArcShieldProxy_LargeFront ] }
+		Overclock_BubbleArcShieldProxy_LargeFrontRight :	Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeFrontRight, Overclock_ArcShieldProxy_LargeFrontRight ] }
+		Overclock_BubbleArcShieldProxy_LargeBackRight :		Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeBackRight, Overclock_ArcShieldProxy_LargeBackRight ] }
+		Overclock_BubbleArcShieldProxy_LargeBack :			Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeBack, Overclock_ArcShieldProxy_LargeBack ] }
+		Overclock_BubbleArcShieldProxy_LargeBackLeft :		Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeBackLeft, Overclock_ArcShieldProxy_LargeBackLeft ] }
+		Overclock_BubbleArcShieldProxy_LargeFrontLeft :		Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeFrontLeft, Overclock_ArcShieldProxy_LargeFrontLeft ] }
+		
+		Overclock_BubbleArcShieldProxyModular_SmallFront	// For Modular, to prevent using it while disabled
 		{
 			Type = TriggerProxy
-			ComponentID = Overclock_BubbleArcShieldProxy
+			ComponentID = Overclock_BubbleArcShieldProxy_SmallFront
 			ProxyToggle = CanOperateProxy
 		}
-		Overclock_BubbleArcShieldProxySelf	// To prevent generating heat while not being operative
+		Overclock_BubbleArcShieldProxyModular_SmallRight :		Overclock_BubbleArcShieldProxyModular_SmallFront	{ ComponentID = Overclock_BubbleArcShieldProxy_SmallRight }
+		Overclock_BubbleArcShieldProxyModular_SmallBack :		Overclock_BubbleArcShieldProxyModular_SmallFront	{ ComponentID = Overclock_BubbleArcShieldProxy_SmallBack }
+		Overclock_BubbleArcShieldProxyModular_SmallLeft :		Overclock_BubbleArcShieldProxyModular_SmallFront	{ ComponentID = Overclock_BubbleArcShieldProxy_SmallLeft }
+		Overclock_BubbleArcShieldProxyModular_LargeFront :		Overclock_BubbleArcShieldProxyModular_SmallFront	{ ComponentID = Overclock_BubbleArcShieldProxy_LargeFront }
+		Overclock_BubbleArcShieldProxyModular_LargeFrontRight :	Overclock_BubbleArcShieldProxyModular_SmallFront	{ ComponentID = Overclock_BubbleArcShieldProxy_LargeFrontRight }
+		Overclock_BubbleArcShieldProxyModular_LargeBackRight :	Overclock_BubbleArcShieldProxyModular_SmallFront	{ ComponentID = Overclock_BubbleArcShieldProxy_LargeBackRight }
+		Overclock_BubbleArcShieldProxyModular_LargeBack :		Overclock_BubbleArcShieldProxyModular_SmallFront	{ ComponentID = Overclock_BubbleArcShieldProxy_LargeBack }
+		Overclock_BubbleArcShieldProxyModular_LargeBackLeft :	Overclock_BubbleArcShieldProxyModular_SmallFront	{ ComponentID = Overclock_BubbleArcShieldProxy_LargeBackLeft }
+		Overclock_BubbleArcShieldProxyModular_LargeFrontLeft :	Overclock_BubbleArcShieldProxyModular_SmallFront	{ ComponentID = Overclock_BubbleArcShieldProxy_LargeFrontLeft }
+		
+		Overclock_BubbleArcShieldProxySelf_SmallFront	// To prevent generating heat while not being operative
 		{
 			Type = TriggerProxy
-			ComponentID = Overclock_BubbleArcShieldProxy
-			ProxyToggle = IsOperationalOverclocked
+			ComponentID = Overclock_BubbleArcShieldProxy_SmallFront
+			ProxyToggle = IsOperationalOverclocked_SmallFront
 		}
-				
+		Overclock_BubbleArcShieldProxySelf_SmallRight :		Overclock_BubbleArcShieldProxySelf_SmallFront
+		{
+			ComponentID = Overclock_BubbleArcShieldProxy_SmallRight
+			ProxyToggle = IsOperationalOverclocked_SmallRight
+		}
+		Overclock_BubbleArcShieldProxySelf_SmallBack :		Overclock_BubbleArcShieldProxySelf_SmallFront
+		{
+			ComponentID = Overclock_BubbleArcShieldProxy_SmallBack
+			ProxyToggle = IsOperationalOverclocked_SmallBack
+		}
+		Overclock_BubbleArcShieldProxySelf_SmallLeft :		Overclock_BubbleArcShieldProxySelf_SmallFront
+		{
+			ComponentID = Overclock_BubbleArcShieldProxy_SmallLeft
+			ProxyToggle = IsOperationalOverclocked_SmallLeft
+		}
+		Overclock_BubbleArcShieldProxySelf_LargeFront :		Overclock_BubbleArcShieldProxySelf_SmallFront
+		{
+			ComponentID = Overclock_BubbleArcShieldProxy_LargeFront
+			ProxyToggle = IsOperationalOverclocked_LargeFront
+		}
+		Overclock_BubbleArcShieldProxySelf_LargeFrontRight :	Overclock_BubbleArcShieldProxySelf_SmallFront
+		{
+			ComponentID = Overclock_BubbleArcShieldProxy_LargeFrontRight
+			ProxyToggle = IsOperationalOverclocked_LargeFrontRight
+		}
+		Overclock_BubbleArcShieldProxySelf_LargeBackRight :	Overclock_BubbleArcShieldProxySelf_SmallFront
+		{
+			ComponentID = Overclock_BubbleArcShieldProxy_LargeBackRight
+			ProxyToggle = IsOperationalOverclocked_LargeBackRight
+		}
+		Overclock_BubbleArcShieldProxySelf_LargeBack :		Overclock_BubbleArcShieldProxySelf_SmallFront
+		{
+			ComponentID = Overclock_BubbleArcShieldProxy_LargeBack
+			ProxyToggle = IsOperationalOverclocked_LargeBack
+		}
+		Overclock_BubbleArcShieldProxySelf_LargeBackLeft :	Overclock_BubbleArcShieldProxySelf_SmallFront
+		{
+			ComponentID = Overclock_BubbleArcShieldProxy_LargeBackLeft
+			ProxyToggle = IsOperationalOverclocked_LargeBackLeft
+		}
+		Overclock_BubbleArcShieldProxySelf_LargeFrontLeft :	Overclock_BubbleArcShieldProxySelf_SmallFront
+		{
+			ComponentID = Overclock_BubbleArcShieldProxy_LargeFrontLeft
+			ProxyToggle = IsOperationalOverclocked_LargeFrontLeft
+		}
+		
+		Overclock_BubbleArcShieldProxySelf
+		{
+			Type = MultiTrigger
+			Triggers = [Overclock_BubbleArcShieldProxySelf_SmallFront, Overclock_BubbleArcShieldProxySelf_SmallRight, Overclock_BubbleArcShieldProxySelf_SmallBack, Overclock_BubbleArcShieldProxySelf_SmallLeft, Overclock_BubbleArcShieldProxySelf_LargeFront, Overclock_BubbleArcShieldProxySelf_LargeFrontRight, Overclock_BubbleArcShieldProxySelf_LargeBackRight, Overclock_BubbleArcShieldProxySelf_LargeBack, Overclock_BubbleArcShieldProxySelf_LargeBackLeft, Overclock_BubbleArcShieldProxySelf_LargeFrontLeft]
+		}
+
 		BubbleOverloadValue
 		{
 			Type = MultiValue
@@ -1160,7 +1264,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			Trigger = Overclock_BubbleArcShieldProxySelf
 			Amount
 			{
-				BaseValue = 1 // "round((&~/OVERCLOCK/HEAT_PER_DAMAGE) * (&~/HEAT_TO_RESOURCE), 0)"
+				BaseValue = "round((&~/OVERCLOCK/HEAT_PER_DAMAGE) * (&~/HEAT_TO_RESOURCE), 0)"
 				Modifiers
 				[
 					{
@@ -1170,12 +1274,18 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 					{
 						Type = Buff
 						BuffType = ShieldOverload
-//						BaseValue = 1
 						ModificationMode = Multiply
 					}
 				]
 			}
 		}
+		
+		
+		
+		
+		
+		
+		
 		
 		OverheatEffects : <./Data/ships/terran/base_part_terran_overclock.rules>/Part/Components/OverheatEffects
 		{

@@ -1218,26 +1218,26 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		Overclock_ArcShieldProxy
 		{
 			Type = MultiTrigger
-			Triggers = [Overclock_ArcShieldProxy_Front, Overclock_ArcShieldProxy_Right, Overclock_ArcShieldProxy_Back, Overclock_ArcShieldProxy_Left]
+			Triggers = [Overclock_ArcShieldProxy_SmallFront, Overclock_ArcShieldProxy_SmallRight, Overclock_ArcShieldProxy_SmallBack, Overclock_ArcShieldProxy_SmallLeft]
 		}
 		
-		Overclock_ArcShieldProxy_Front
+		Overclock_ArcShieldProxy_SmallFront
 		{
 			Type = TriggerProxy
 			ComponentID = ArcShield_Front
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldProxy_Right :	Overclock_ArcShieldProxy_Front
+		Overclock_ArcShieldProxy_SmallRight :		Overclock_ArcShieldProxy_SmallFront
 		{
 			ComponentID = ArcShield_Right
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldProxy_Back :		Overclock_ArcShieldProxy_Front
+		Overclock_ArcShieldProxy_SmallBack :		Overclock_ArcShieldProxy_SmallFront
 		{
 			ComponentID = ArcShield_Back
 			ProxyToggle = IsOperationalOverclocked
 		}
-		Overclock_ArcShieldProxy_Left :		Overclock_ArcShieldProxy_Front
+		Overclock_ArcShieldProxy_SmallLeft :		Overclock_ArcShieldProxy_SmallFront
 		{
 			ComponentID = ArcShield_Left
 			ProxyToggle = IsOperationalOverclocked
