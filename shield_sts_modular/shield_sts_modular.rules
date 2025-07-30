@@ -3,7 +3,7 @@ OVERCLOCK
 	DAMAGE_DRAIN_FACTOR = 1 / 200%
 	EMP_RESIST = 33%
 	ROTATION_SPEED_FACTOR = 2/3
-	HEAT_PER_SECOND = 30 // x4, use 15 if using the second ring
+	HEAT_PER_SECOND = 30	// For each segment
 	HEAT_PER_DAMAGE = 0.6
 }
 HEAT_TO_RESOURCE = &<./Data/statuses/heat/heat.rules>/STATUS_TO_RESOURCE_RATIO

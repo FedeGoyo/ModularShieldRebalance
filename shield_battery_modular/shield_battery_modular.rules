@@ -9,8 +9,8 @@ HEAT_TO_RESOURCE = &<./Data/statuses/heat/heat.rules>/STATUS_TO_RESOURCE_RATIO
 HEAT_TO_STATUS = &<./Data/statuses/heat/heat.rules>/RESOURCE_TO_STATUS_RATIO
 STATS
 {
-	POWER_DRAIN = 50	// Total
-	POWER_CAPACITY = 2000	// Total
+	POWER_DRAIN = 50	// Total, divided by segments
+	POWER_CAPACITY = 2000	// Total, divided by segments
 	POWER_RESUPPLY_THRESHOLD = 50%
 	SMALL_SEGMENTS = 4
 	LARGE_SEGMENTS = 6
@@ -262,8 +262,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			ResourceType = battery
 			MaxResources = "round((&~/STATS/POWER_CAPACITY) / (&~/STATS/TOTAL_BATTERIES), 0)"
 			DrainOnFtlJump = true
-			IsDrainable = False
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			IsDrainable = false
 		}
 		Base_BatteryStorage_2 :		Base_BatteryStorage_1	{}
 		Base_BatteryStorage_3 :		Base_BatteryStorage_1	{}
@@ -288,7 +287,8 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 					Type = ResourceStorage
 					ResourceType = battery
 					MaxResources = "ceil((&~/Part/Components/Base_BatteryStorage_1/MaxResources) * ((&~/OVERCLOCK/CAPACITY_FACTOR) - 1))"
-					IsDrainable = False
+					DrainOnFtlJump = true
+					IsDrainable = false
 				}
 				Overclock_BatteryStorage_2 :	Overclock_BatteryStorage_1	{}
 				Overclock_BatteryStorage_3 :	Overclock_BatteryStorage_1	{}
@@ -328,12 +328,9 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			Type = MultiResourceStorage
 			OperationalToggle = IsOperational
 			ResourceType = battery
-			IsDrainable = false
-			ProvideValueRange = 1
 			ResourceStorages = [Base_BatteryStorage_1, Base_BatteryStorage_2, Base_BatteryStorage_3]
 			AddMode = DistributeEvenly
 			RemoveMode = DistributeEvenly
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
 		CombinedBase_BatteryStorage_SmallRight :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_4, Base_BatteryStorage_5, Base_BatteryStorage_6] }
 		CombinedBase_BatteryStorage_SmallBack :			CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_7, Base_BatteryStorage_8, Base_BatteryStorage_9] }
@@ -361,12 +358,10 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			Type = MultiResourceStorage
 			OperationalToggle = IsOperational
 			ResourceType = battery
-			IsDrainable = false
 			ToggleOnResources = 1
 			ResourceStorages = [CombinedBase_BatteryStorage_SmallFront, CombinedOverclock_BatteryStorage_SmallFront]
 			AddMode = InOrder
 			RemoveMode = InReverseOrder
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
 		CombinedBatteryStorage_SmallRight :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_SmallRight, CombinedOverclock_BatteryStorage_SmallRight] }
 		CombinedBatteryStorage_SmallBack :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_SmallBack, CombinedOverclock_BatteryStorage_SmallBack] }
@@ -383,11 +378,9 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			Type = MultiResourceStorage
 			OperationalToggle = IsOperational
 			ResourceType = battery
-			IsDrainable = false
 			ResourceStorages = [Base_BatteryStorage_1, Base_BatteryStorage_2, Base_BatteryStorage_3, Base_BatteryStorage_4, Base_BatteryStorage_5, Base_BatteryStorage_6, Base_BatteryStorage_7, Base_BatteryStorage_8, Base_BatteryStorage_9, Base_BatteryStorage_10, Base_BatteryStorage_11, Base_BatteryStorage_12]
 			AddMode = DistributeEvenly
 			RemoveMode = DistributeEvenly
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 		}
 		CombinedOverclockBatteryStorage :	CombinedBaseBatteryStorage	{ ResourceStorages = [Overclock_BatteryStorageProxy_1, Overclock_BatteryStorageProxy_2, Overclock_BatteryStorageProxy_3, Overclock_BatteryStorageProxy_4, Overclock_BatteryStorageProxy_5, Overclock_BatteryStorageProxy_6, Overclock_BatteryStorageProxy_7, Overclock_BatteryStorageProxy_8, Overclock_BatteryStorageProxy_9, Overclock_BatteryStorageProxy_10, Overclock_BatteryStorageProxy_11, Overclock_BatteryStorageProxy_12] }
 		
@@ -1279,13 +1272,6 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 				]
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
 		
 		OverheatEffects : <./Data/ships/terran/base_part_terran_overclock.rules>/Part/Components/OverheatEffects
 		{

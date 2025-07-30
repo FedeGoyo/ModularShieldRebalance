@@ -315,29 +315,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					Arc = &~/Part/Components/ArcShield/Arc
 					ArcSprite : ^/0/ArcSprite
 					{
-/*						Texture
-						{
-							File = "./Data/ships/terran/shield_gen_small/shield_energy.png"
-//							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = 1
-						}
-						Shader = "shield.shader"
-						_waveTex
-						{
-							File = "./Data/ships/terran/shield_gen_small/shield_energy_wave.png"
-//							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = max
-						}
-						_maskTex
-						{
-							File = "./Data/ships/terran/shield_gen_small/shield_mask.png"
-//							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = 1
-						}
-						*/
 						_xScale = 1.5
 						Size = [0, 2]
 					}
@@ -353,7 +330,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					Arc = 1d
 					ArcSprite : ^/0/ArcSprite
 					{
-//						_waveAlpha = 12 // &<../colors.rules>/StatsCommon/HitMediaEffects_waveAlpha
 						Size = [0, 1.5]
 					}
 				}
@@ -726,7 +702,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Location = [1, 0]
 		}
 		
-		EmitterEffect : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/EmitterEffect   // No idea why it doesn't work
+		EmitterEffect : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/EmitterEffect
 		{
 			Location = [83.8, 0]
 			FactorMediaEffectsIntensityWith = ProxyBatteryStorage
