@@ -22,7 +22,9 @@ STATS
 	LINE_LEFT_ROTATION = -109.7d
 	LINE_FRONT_ROTATION = -90d
 	LINE_RIGHT_ROTATION = -70.3d
-		
+	
+	ARC_LOCATION = [1, 1.5]
+
 	LINE_LEFT_LOCATION = [27, 75]
 	LINE_FRONT_LOCATION = [1, 80]
 	LINE_RIGHT_LOCATION = [-25, 75]
@@ -244,7 +246,7 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 		{
 			Type = TransformLerp
 			ValueFrom = RotationTween_Arc_LeftToFront
-			Location = [1, 1.5]
+			Location = &~/STATS/ARC_LOCATION
 			StartRotation = &~/STATS/ARC_LEFT_ROTATION
 			EndRotation = &~/STATS/ARC_FRONT_ROTATION
 		}
@@ -475,6 +477,8 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 				]
 			}
 			
+			BlueprintArcSprite	{}
+
 			ShieldMediaEffects
 			[
 				: &../^/0/ShieldMediaEffects/0
@@ -553,7 +557,162 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 				: &../^/0/HitMediaEffects/1 {}
 			]
 		}
-		
+
+		Toggle_BlueprintArc_Arc_Front
+		{
+			Type = MultiToggle
+			Toggles = [ToggleAngle_Arc_Front, {Toggle=OverclockModeToggle, Invert=true}]
+			Mode = All
+		}
+		Toggle_BlueprintArc_Arc_Right :		Toggle_BlueprintArc_Arc_Front	{ Toggles = [ToggleAngle_Arc_Right, {Toggle=OverclockModeToggle, Invert=true}] }
+		Toggle_BlueprintArc_Arc_Left :		Toggle_BlueprintArc_Arc_Front	{ Toggles = [ToggleAngle_Arc_Left, {Toggle=OverclockModeToggle, Invert=true}] }
+		Toggle_BlueprintArc_Line_Front :	Toggle_BlueprintArc_Arc_Front	{ Toggles = [ToggleAngle_Line_Front, {Toggle=OverclockModeToggle, Invert=true}] }
+		Toggle_BlueprintArc_Line_Right :	Toggle_BlueprintArc_Arc_Front	{ Toggles = [ToggleAngle_Line_Right, {Toggle=OverclockModeToggle, Invert=true}] }
+		Toggle_BlueprintArc_Line_Left :		Toggle_BlueprintArc_Arc_Front	{ Toggles = [ToggleAngle_Line_Left, {Toggle=OverclockModeToggle, Invert=true}] }
+
+		BlueprintArc_Arc_Front
+		{
+			Type = ArcSprite
+			VisibilityToggle = Toggle_BlueprintArc_Arc_Front
+			Location = &~/STATS/ARC_LOCATION
+			Rotation = &~/STATS/ARC_FRONT_ROTATION
+			Radius = &../ArcShield/Radius/BaseValue
+			Arc = &../ArcShield/Arc/BaseValue
+			SpriteSegments = &../ArcShield/BlueprintArcSpriteSegments
+			Sprite : &../ArcShield/^/0/BlueprintArcSprite	{}
+		}
+		BlueprintArc_Arc_Right :	BlueprintArc_Arc_Front
+		{
+			VisibilityToggle = Toggle_BlueprintArc_Arc_Right
+			Rotation = &~/STATS/ARC_RIGHT_ROTATION
+		}
+		BlueprintArc_Arc_Left :		BlueprintArc_Arc_Front
+		{
+			VisibilityToggle = Toggle_BlueprintArc_Arc_Left
+			Rotation = &~/STATS/ARC_LEFT_ROTATION
+		}
+		BlueprintArc_Line_Front :	BlueprintArc_Arc_Front
+		{
+			VisibilityToggle = Toggle_BlueprintArc_Line_Front
+			Rotation = &~/STATS/LINE_FRONT_ROTATION
+			Location = &~/STATS/LINE_FRONT_LOCATION
+			Radius = &../LineShield/Radius/BaseValue
+			Arc = &../LineShield/Arc/BaseValue
+		}
+		BlueprintArc_Line_Right :	BlueprintArc_Line_Front
+		{
+			VisibilityToggle = Toggle_BlueprintArc_Line_Right
+			Rotation = &~/STATS/LINE_RIGHT_ROTATION
+			Location = &~/STATS/LINE_RIGHT_LOCATION
+		}
+		BlueprintArc_Line_Left :	BlueprintArc_Line_Front
+		{
+			VisibilityToggle = Toggle_BlueprintArc_Line_Left
+			Rotation = &~/STATS/LINE_LEFT_ROTATION
+			Location = &~/STATS/LINE_LEFT_LOCATION
+		}
+
+		Toggle_Overclock_ExtendedBlueprintArc_Front
+		{
+			Type = MultiToggle
+			Toggles = [ToggleAngle_Arc_Front, Overclock_ExtendedAndOverclockedModeToggle]
+			Mode = All
+		}
+		Toggle_Overclock_ExtendedBlueprintArc_Right :	Toggle_Overclock_ExtendedBlueprintArc_Front	{ Toggles = [ToggleAngle_Arc_Right, Overclock_ExtendedAndOverclockedModeToggle] }
+		Toggle_Overclock_ExtendedBlueprintArc_Left :	Toggle_Overclock_ExtendedBlueprintArc_Front	{ Toggles = [ToggleAngle_Arc_Left, Overclock_ExtendedAndOverclockedModeToggle] }
+		Toggle_Overclock_ExtendedBlueprintLine_Front :	Toggle_Overclock_ExtendedBlueprintArc_Front	{ Toggles = [ToggleAngle_Line_Front, Overclock_ExtendedAndOverclockedModeToggle] }
+		Toggle_Overclock_ExtendedBlueprintLine_Right :	Toggle_Overclock_ExtendedBlueprintArc_Front	{ Toggles = [ToggleAngle_Line_Right, Overclock_ExtendedAndOverclockedModeToggle] }
+		Toggle_Overclock_ExtendedBlueprintLine_Left :	Toggle_Overclock_ExtendedBlueprintArc_Front	{ Toggles = [ToggleAngle_Line_Left, Overclock_ExtendedAndOverclockedModeToggle] }
+
+		Overclock_ExtendedBlueprintArc :	BlueprintArc_Arc_Front	// Named like this to override the original
+		{
+			VisibilityToggle = Toggle_Overclock_ExtendedBlueprintArc_Front
+			Location = &~/STATS/ARC_LOCATION
+			Rotation = &~/STATS/ARC_FRONT_ROTATION
+			Radius = (&../ArcShield/Radius/BaseValue) * (&~/OVERCLOCK/EXTENDED/ARC_RADIUS_FACTOR)
+			Arc = (&../ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/EXTENDED/ARC_FACTOR)
+			Sprite : &<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_ExtendedBlueprintArc/Sprite	{}
+		}
+		Overclock_ExtendedBlueprintArc_Arc_Right :	Overclock_ExtendedBlueprintArc
+		{
+			VisibilityToggle = Toggle_Overclock_ExtendedBlueprintArc_Right
+			Rotation = &~/STATS/ARC_RIGHT_ROTATION
+		}
+		Overclock_ExtendedBlueprintArc_Arc_Left :	Overclock_ExtendedBlueprintArc
+		{
+			VisibilityToggle = Toggle_Overclock_ExtendedBlueprintArc_Left
+			Rotation = &~/STATS/ARC_LEFT_ROTATION
+		}
+		Overclock_ExtendedBlueprintArc_Line_Front :	Overclock_ExtendedBlueprintArc
+		{
+			VisibilityToggle = Toggle_Overclock_ExtendedBlueprintLine_Front
+			Rotation = &~/STATS/LINE_FRONT_ROTATION
+			Location = &~/STATS/LINE_FRONT_LOCATION
+			Radius = (&../LineShield/Radius/BaseValue) * (&~/OVERCLOCK/EXTENDED/LINE_RADIUS_FACTOR)
+			Arc = (&../LineShield/Arc/BaseValue) * (&~/OVERCLOCK/EXTENDED/LINE_ARC_FACTOR)
+		}
+		Overclock_ExtendedBlueprintArc_Line_Right :	Overclock_ExtendedBlueprintArc_Line_Front
+		{
+			VisibilityToggle = Toggle_Overclock_ExtendedBlueprintLine_Right
+			Rotation = &~/STATS/LINE_RIGHT_ROTATION
+			Location = &~/STATS/LINE_RIGHT_LOCATION
+		}
+		Overclock_ExtendedBlueprintArc_Line_Left :	Overclock_ExtendedBlueprintArc_Line_Front
+		{
+			VisibilityToggle = Toggle_Overclock_ExtendedBlueprintLine_Left
+			Rotation = &~/STATS/LINE_LEFT_ROTATION
+			Location = &~/STATS/LINE_LEFT_LOCATION
+		}
+
+		Toggle_Overclock_ReinforcedBlueprintArc_Front
+		{
+			Type = MultiToggle
+			Toggles = [ToggleAngle_Arc_Front, Overclock_ReinforcedAndOverclockedModeToggle]
+			Mode = All
+		}
+		Toggle_Overclock_ReinforcedBlueprintArc_Right :		Toggle_Overclock_ReinforcedBlueprintArc_Front	{ Toggles = [ToggleAngle_Arc_Right, Overclock_ReinforcedAndOverclockedModeToggle] }
+		Toggle_Overclock_ReinforcedBlueprintArc_Left :		Toggle_Overclock_ReinforcedBlueprintArc_Front	{ Toggles = [ToggleAngle_Arc_Left, Overclock_ReinforcedAndOverclockedModeToggle] }
+		Toggle_Overclock_ReinforcedBlueprintLine_Front :	Toggle_Overclock_ReinforcedBlueprintArc_Front	{ Toggles = [ToggleAngle_Line_Front, Overclock_ReinforcedAndOverclockedModeToggle] }
+		Toggle_Overclock_ReinforcedBlueprintLine_Right :	Toggle_Overclock_ReinforcedBlueprintArc_Front	{ Toggles = [ToggleAngle_Line_Right, Overclock_ReinforcedAndOverclockedModeToggle] }
+		Toggle_Overclock_ReinforcedBlueprintLine_Left :		Toggle_Overclock_ReinforcedBlueprintArc_Front	{ Toggles = [ToggleAngle_Line_Left, Overclock_ReinforcedAndOverclockedModeToggle] }
+
+		Overclock_ReinforcedBlueprintArc :	Overclock_ExtendedBlueprintArc	// Named like this to override the original
+		{
+			VisibilityToggle = Toggle_Overclock_ReinforcedBlueprintArc_Front
+			Arc = (&../ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/REINFORCED/ARC_FACTOR)
+			Sprite : &<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_ReinforcedBlueprintArc/Sprite	{}
+		}
+		Overclock_ReinforcedBlueprintArc_Arc_Right :	Overclock_ReinforcedBlueprintArc
+		{
+			VisibilityToggle = Toggle_Overclock_ReinforcedBlueprintArc_Right
+			Rotation = &~/STATS/ARC_RIGHT_ROTATION
+		}
+		Overclock_ReinforcedBlueprintArc_Arc_Left :	Overclock_ReinforcedBlueprintArc
+		{
+			VisibilityToggle = Toggle_Overclock_ReinforcedBlueprintArc_Left
+			Rotation = &~/STATS/ARC_LEFT_ROTATION
+		}
+		Overclock_ReinforcedBlueprintArc_Line_Front :	Overclock_ReinforcedBlueprintArc
+		{
+			VisibilityToggle = Toggle_Overclock_ReinforcedBlueprintLine_Front
+			Rotation = &~/STATS/LINE_FRONT_ROTATION
+			Location = &~/STATS/LINE_FRONT_LOCATION
+			Radius = &../LineShield/Radius/BaseValue
+			Arc = (&../LineShield/Arc/BaseValue) * (&~/OVERCLOCK/REINFORCED/LINE_ARC_FACTOR)
+		}
+		Overclock_ReinforcedBlueprintArc_Line_Right :	Overclock_ReinforcedBlueprintArc_Line_Front
+		{
+			VisibilityToggle = Toggle_Overclock_ReinforcedBlueprintLine_Right
+			Rotation = &~/STATS/LINE_RIGHT_ROTATION
+			Location = &~/STATS/LINE_RIGHT_LOCATION
+		}
+		Overclock_ReinforcedBlueprintArc_Line_Left :	Overclock_ReinforcedBlueprintArc_Line_Front
+		{
+			VisibilityToggle = Toggle_Overclock_ReinforcedBlueprintLine_Left
+			Rotation = &~/STATS/LINE_LEFT_ROTATION
+			Location = &~/STATS/LINE_LEFT_LOCATION
+		}
+
 		BaseEmitterEffect : ^/0/BaseEmitterEffect	// Just here to make colors inherite from it
 		{
 			OperationalToggle = IsOperationalProxy

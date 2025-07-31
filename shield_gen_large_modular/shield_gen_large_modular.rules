@@ -244,6 +244,64 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 			ChainedTo = TransformRotationFinal
 			Location = [0, 0]	// Takes from TransformRotationFinal
 			Rotation = 0d	// Takes from TransformRotationFinal
+			BlueprintArcSprite	{}
+		}
+
+		Toggle_BlueprintArc_Front
+		{
+			Type = MultiToggle
+			Toggles = [ToggleAngle_Arc_Front, {Toggle=OverclockModeToggle, Invert=true}]
+			Mode = All
+		}
+		Toggle_BlueprintArc_Right :	Toggle_BlueprintArc_Front	{ Toggles = [ToggleAngle_Arc_Right, {Toggle=OverclockModeToggle, Invert=true}] }
+		Toggle_BlueprintArc_Left :	Toggle_BlueprintArc_Front	{ Toggles = [ToggleAngle_Arc_Left, {Toggle=OverclockModeToggle, Invert=true}] }
+
+		BlueprintArc_Front
+		{
+			Type = ArcSprite
+			VisibilityToggle = Toggle_BlueprintArc_Front
+			Location = [&../../^/0/ArcShield/Location/0, &../../^/0/ArcShield/Location/1]
+			Rotation = &~/ROTATION/FRONT
+			Radius = &../ArcShield/Radius
+			Arc = &../ArcShield/Arc/BaseValue
+			SpriteSegments = &../ArcShield/BlueprintArcSpriteSegments
+			Sprite : &../ArcShield/^/0/BlueprintArcSprite	{}
+		}
+		BlueprintArc_Right :	BlueprintArc_Front
+		{
+			VisibilityToggle = Toggle_BlueprintArc_Right
+			Rotation = &~/ROTATION/RIGHT
+		}
+		BlueprintArc_Left :		BlueprintArc_Front
+		{
+			VisibilityToggle = Toggle_BlueprintArc_Left
+			Rotation = &~/ROTATION/LEFT
+		}
+
+		Toggle_Overclock_BlueprintArc_Front
+		{
+			Type = MultiToggle
+			Toggles = [ToggleAngle_Arc_Front, OverclockModeToggle]
+			Mode = All
+		}
+		Toggle_Overclock_BlueprintArc_Right :	Toggle_Overclock_BlueprintArc_Front	{ Toggles = [ToggleAngle_Arc_Right, OverclockModeToggle] }
+		Toggle_Overclock_BlueprintArc_Left :	Toggle_Overclock_BlueprintArc_Front	{ Toggles = [ToggleAngle_Arc_Left, OverclockModeToggle] }
+
+		Overclock_BlueprintArc :	BlueprintArc_Front	// Named like this to override the original
+		{
+			VisibilityToggle = Toggle_Overclock_BlueprintArc_Front
+			Arc = (&../ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/ARC_FACTOR)
+			Sprite : &<./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/Overclock_BlueprintArc/Sprite	{}
+		}
+		Overclock_BlueprintArc_Right :	Overclock_BlueprintArc
+		{
+			VisibilityToggle = Toggle_Overclock_BlueprintArc_Right
+			Rotation = &~/ROTATION/RIGHT
+		}
+		Overclock_BlueprintArc_Left :	Overclock_BlueprintArc
+		{
+			VisibilityToggle = Toggle_Overclock_BlueprintArc_Left
+			Rotation = &~/ROTATION/LEFT
 		}
 
 		BaseEmitterEffect : ^/0/BaseEmitterEffect
