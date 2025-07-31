@@ -730,20 +730,27 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			]
 		}
 
+		ArcShield_ChainProxy	// No idea if this is actually needed. Chaining it instead to ArcShield with IsOperationalProxy seems to also work normally.
+		{
+			Type = ChainableProxy
+			ComponentID = TINY_ArcShield
+		}
 		EmitterSoundEffects :	BaseEmitterEffect, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/EmitterSoundEffects
 		{
+			ChainedTo = ArcShield_ChainProxy
 			OperationalToggle = &^/1/OperationalToggle	// IsOperationalNonOverclocked
 			MediaEffects :	&^/1/MediaEffects	[]
 		}
 		Overclock_EmitterSoundEffects :	BaseEmitterEffect, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_EmitterSoundEffects
 		{
+			ChainedTo = ArcShield_ChainProxy
 			OperationalToggle = &^/1/OperationalToggle	// IsOperationalOverclocked
 			MediaEffects :	&^/1/MediaEffects	[]
 		}
 
 		ShieldOperationEffects :	<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ShieldOperationEffects
 		{
-			ChainedTo = ArcShield
+			ChainedTo = ArcShield_ChainProxy
 			Location = [&~/Part/Components/ArcShield/Radius, 0]
 		}
 		Overclock_StartEffects :	ShieldOperationEffects, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_ShieldReinforcedEffects

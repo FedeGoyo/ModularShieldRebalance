@@ -254,8 +254,36 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 			ChainedTo	// Normally chained to ArcShield, but we don't want it to rotate
 		}
 		
-		// Maybe I should make EmitterSoundEffects and Overclock_EmitterSoundEffects chain to something that is actually operational
-		// Maybe I should make ShieldOperationEffects and Overclock_StartEffects chain to something that is actually operational
+		ArcShield_ChainProxy	// No idea if this is actually needed. Chaining it instead to ArcShield with IsOperationalProxy seems to also work normally.
+		{
+			Type = ChainableProxy
+			ComponentID = GENL_ArcShield
+		}
+		EmitterSoundEffects : BaseEmitterEffect, <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/EmitterSoundEffects
+		{
+			ChainedTo = ArcShield_ChainProxy
+			OperationalToggle = &^/1/OperationalToggle	// IsOperationalNonOverclocked
+			MediaEffects :	&^/1/MediaEffects	[]
+		}
+		Overclock_EmitterSoundEffects : BaseEmitterEffect, <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/Overclock_EmitterSoundEffects
+		{
+			ChainedTo = ArcShield_ChainProxy
+			OperationalToggle = &^/1/OperationalToggle	// IsOperationalOverclocked
+			MediaEffects :	&^/1/MediaEffects	[]
+		}
+
+		ShieldOperationEffects : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ShieldOperationEffects
+		{
+			ChainedTo = ArcShield_ChainProxy
+			Location = [&~/Part/Components/ArcShield/Radius, 0]
+		}
+
+		Overclock_StartEffects : ShieldOperationEffects, <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/Overclock_StartEffects
+		{
+			Toggle = &^/1/Toggle	// IsOperationalOverclocked
+			ToggledOffMediaEffects
+			ToggledOnMediaEffects : &^/1/ToggledOnMediaEffects	[]
+		}
 		
 		Overclock_ArcShieldProxy
 		{
