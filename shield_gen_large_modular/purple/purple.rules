@@ -42,7 +42,7 @@ Components
 					: &../^/0/HitMediaEffects/1 {}
 				]
 			}
-			GENL_EmitterEffect : &<../shield_gen_large_modular.rules>/Part/Components/EmitterEffect
+			GENL_EmitterEffect : &<../shield_gen_large_modular.rules>/Part/Components/BaseEmitterEffect
 			{
 				OperationalToggle = IsOperational
 				MediaEffects
@@ -51,7 +51,6 @@ Components
 					{
 						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
-					: &../^/0/MediaEffects/1	{}
 				]
 			}
 			GENL_OverclockEffect : &<../shield_gen_large_modular.rules>/Part/Components/OverclockEffect

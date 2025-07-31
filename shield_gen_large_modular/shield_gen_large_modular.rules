@@ -246,7 +246,7 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 			Rotation = 0d	// Takes from TransformRotationFinal
 		}
 
-		EmitterEffect : ^/0/EmitterEffect
+		BaseEmitterEffect : ^/0/BaseEmitterEffect
 		{
 			OperationalToggle = IsOperationalProxy
 			Location = [&../../^/0/ArcShield/Location/0 , (&../../^/0/ArcShield/Location/1) - (&../^/0/Location/0)]	// The location is switched cause it is rotated
@@ -254,17 +254,8 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 			ChainedTo	// Normally chained to ArcShield, but we don't want it to rotate
 		}
 		
-		GENL_ArcShield_Proxy
-		{
-			Type = ChainableProxy
-			ComponentID = GENL_ArcShield
-		}
-		
-		ShieldOperationEffects : ^/0/ShieldOperationEffects
-		{
-			ChainedTo = GENL_ArcShield_Proxy
-			Location = [&~/Part/Components/ArcShield/Radius, 0]
-		}
+		// Maybe I should make EmitterSoundEffects and Overclock_EmitterSoundEffects chain to something that is actually operational
+		// Maybe I should make ShieldOperationEffects and Overclock_StartEffects chain to something that is actually operational
 		
 		Overclock_ArcShieldProxy
 		{

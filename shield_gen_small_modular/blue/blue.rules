@@ -47,7 +47,6 @@ Components
 					{
 						ArcSprite : &<../../colors.rules>/Color/Blue/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
-					: &../^/0/MediaEffects/1	{}
 				]
 			}
 		}

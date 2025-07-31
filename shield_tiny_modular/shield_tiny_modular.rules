@@ -315,9 +315,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					Arc = &~/Part/Components/ArcShield/Arc
 					ArcSprite : ^/0/ArcSprite
 					{
-						_xScale = 1.5
-						Size = [0, 2]
+						_xScale = 1
+						Size = [0, 1.2]
 					}
+					ArcSpriteSegments = 64
 				}
 				: &../^/0/ShieldMediaEffects/1	{}
 			]
@@ -702,9 +703,15 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Location = [1, 0]
 		}
 		
-		EmitterEffect : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/EmitterEffect
+		IsOperationalNonOverclocked
 		{
-			Location = [83.8, 0]
+			Type = MultiToggle
+			Toggles = [ IsOperational, { Toggle=IsOverclocked; Invert=true } ]
+			Mode = All
+		}
+		BaseEmitterEffect :	<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/BaseEmitterEffect
+		{
+			Location = [83.4, 0]	//83.8
 			FactorMediaEffectsIntensityWith = ProxyBatteryStorage
 			OperationalToggle =  IsOperationalProxy
 			MediaEffects
@@ -712,17 +719,39 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				: &../^/0/MediaEffects/0
 				{
 //					Radius = 2.2
-//					Arc = 90d
-				}
-
-				: &../^/0/MediaEffects/1
-				{
-					Volume = 0.1
+					Arc = 65d
+					ArcSprite :	&^/0/ArcSprite
+					{
+//						UVRect = [0, 1, 1, -1]
+						_xScale = 0.5
+						Size = [0, 0.5]
+					}
 				}
 			]
 		}
 
-		ShieldOperationEffects : &<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ShieldOperationEffects	{}
+		EmitterSoundEffects :	BaseEmitterEffect, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/EmitterSoundEffects
+		{
+			OperationalToggle = &^/1/OperationalToggle	// IsOperationalNonOverclocked
+			MediaEffects :	&^/1/MediaEffects	[]
+		}
+		Overclock_EmitterSoundEffects :	BaseEmitterEffect, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_EmitterSoundEffects
+		{
+			OperationalToggle = &^/1/OperationalToggle	// IsOperationalOverclocked
+			MediaEffects :	&^/1/MediaEffects	[]
+		}
+
+		ShieldOperationEffects :	<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ShieldOperationEffects
+		{
+			ChainedTo = ArcShield
+			Location = [&~/Part/Components/ArcShield/Radius, 0]
+		}
+		Overclock_StartEffects :	ShieldOperationEffects, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_ShieldReinforcedEffects
+		{
+			Toggle = IsOperationalOverclocked
+			ToggledOffMediaEffects
+			ToggledOnMediaEffects : &^/1/ToggledOnMediaEffects	[]
+		}
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -760,7 +789,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					]
 				}
 				
-				TINY_EmitterEffect : &~/Part/Components/EmitterEffect	// Doesn't work...
+				TINY_EmitterEffect : &~/Part/Components/BaseEmitterEffect
 				{
 					FactorMediaEffectsIntensityWith = BatteryStorage
 					OperationalToggle = IsOperational
@@ -770,7 +799,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						{
 							ArcSprite : &<../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 						}
-						: &../^/0/MediaEffects/1	{}
 					]
 				}
 				TINY_OverclockEffect : &~/Part/Components/OverclockEffect
@@ -855,7 +883,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						{
 							ArcSprite : &<../colors.rules>/Color/Blue/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 						}
-						: &../^/0/MediaEffects/1	{}
 					]
 				}
 			}
@@ -922,7 +949,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						{
 							ArcSprite : &<../colors.rules>/Color/Orange/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 						}
-						: &../^/0/MediaEffects/1	{}
 					]
 				}
 			}
@@ -989,7 +1015,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						{
 							ArcSprite : &<../colors.rules>/Color/Red/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 						}
-						: &../^/0/MediaEffects/1	{}
 					]
 				}
 			}
@@ -1056,7 +1081,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						{
 							ArcSprite : &<../colors.rules>/Color/Yellow/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 						}
-						: &../^/0/MediaEffects/1	{}
 					]
 				}
 			}
@@ -1123,7 +1147,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						{
 							ArcSprite : &<../colors.rules>/Color/Green/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 						}
-						: &../^/0/MediaEffects/1	{}
 					]
 				}
 			}

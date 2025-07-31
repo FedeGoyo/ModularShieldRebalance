@@ -45,7 +45,7 @@ Components
 					: &../^/0/HitMediaEffects/1 {}
 				]
 			}
-			GENS_EmitterEffect : &<../shield_gen_small_modular.rules>/Part/Components/EmitterEffect
+			GENS_EmitterEffect : &<../shield_gen_small_modular.rules>/Part/Components/BaseEmitterEffect
 			{
 				OperationalToggle = IsOperational
 				MediaEffects
@@ -54,7 +54,6 @@ Components
 					{
 						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
-					: &../^/0/MediaEffects/1	{}
 				]
 			}
 			GENS_OverloadEffect : &<../shield_gen_small_modular.rules>/Part/Components/OverloadEffect

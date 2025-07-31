@@ -1307,34 +1307,45 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Location = [0, 0]
 		}
 
-		EmitterEffect
+		BaseEmitterEffect :	<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/BaseEmitterEffect
 		{
-			Type = ContinuousEffects
-//			ChainedTo = ArcShield
+			ChainedTo	// Normally chained to ArcShield, but we don't want it to rotate
 			FactorMediaEffectsIntensityWith = CombinedBatteryStorage
 			MaxMediaEffectsZoom = 12
 			Location = [1 + 1.8, 1]
 			OperationalToggle = IsOperationalProxy
-			ParentToShip = true
 			MediaEffects
 			[
-				: <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/EmitterEffect/MediaEffects/0
+				: &../^/0/MediaEffects/0
 				{
 					Radius = 1.8
 					Arc = 360d
 				}
-				: <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/EmitterEffect/MediaEffects/1	{}
 			]
 		}
-
-		ShieldOperationEffects_Front :			<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ShieldOperationEffects
+		EmitterSoundEffects : BaseEmitterEffect, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/EmitterSoundEffects
 		{
-			Location = [&~/Part/Components/ArcShield/Radius/BaseValue, 0]
-			Toggle = IsOperational_SmallFront
+			OperationalToggle = &^/1/OperationalToggle	// IsOperationalNonOverclocked
+			MediaEffects :	&^/1/MediaEffects	[]
 		}
-		ShieldOperationEffects_Right :			ShieldOperationEffects_Front	{ Toggle = IsOperational_SmallRight }
-		ShieldOperationEffects_Back :			ShieldOperationEffects_Front	{ Toggle = IsOperational_SmallBack }
-		ShieldOperationEffects_Left :			ShieldOperationEffects_Front	{ Toggle = IsOperational_SmallLeft }
+		Overclock_EmitterSoundEffects : BaseEmitterEffect, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_EmitterSoundEffects
+		{
+			OperationalToggle = &^/1/OperationalToggle	// IsOperationalOverclocked
+			MediaEffects :	&^/1/MediaEffects	[]
+		}
+
+		ShieldOperationEffects :	<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ShieldOperationEffects
+		{
+			ChainedTo = ArcShield
+			Location = [&~/Part/Components/ArcShield/Radius/BaseValue, 0]
+		}
+
+		Overclock_StartEffects : ShieldOperationEffects, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_ShieldReinforcedEffects
+		{
+			Toggle = IsOperationalOverclocked
+			ToggledOffMediaEffects
+			ToggledOnMediaEffects : &^/1/ToggledOnMediaEffects	[]
+		}
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////

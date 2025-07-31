@@ -47,9 +47,9 @@ Components
 					{
 						ArcSprite : &<../../colors.rules>/Color/Green/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
-					: &../^/0/MediaEffects/1	{}
 				]
-			}		}
+			}
+		}
 	}
 
 	ToggleComponents_Shield_Green_Line_On

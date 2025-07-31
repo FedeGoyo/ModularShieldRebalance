@@ -79,7 +79,7 @@ Components
 			OverclockOverloadEffect_FrontLeft :	<../stats.rules>/Stats/OverclockOverloadEffect_FrontLeft, OverclockOverloadEffect_Front			{}
 
 			// Always
-			STL_EmitterEffect :	&<../shield_stl_modular.rules>/Part/Components/EmitterEffect
+			STL_EmitterEffect :	&<../shield_stl_modular.rules>/Part/Components/BaseEmitterEffect
 			{
 				OperationalToggle = IsOperational
 				MediaEffects
@@ -88,7 +88,6 @@ Components
 					{
 						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
-					: &../^/0/MediaEffects/1	{}
 				]
 			}
 		}
