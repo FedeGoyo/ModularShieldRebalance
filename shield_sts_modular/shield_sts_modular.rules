@@ -1334,18 +1334,56 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			MediaEffects :	&^/1/MediaEffects	[]
 		}
 
-		ShieldOperationEffects :	<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ShieldOperationEffects
+		ArcShield_ChainProxy_Front
 		{
-			ChainedTo = ArcShield
+			Type = ChainableProxy
+			ComponentID = ArcShield_Front
+		}
+		ArcShield_ChainProxy_Right :	ArcShield_ChainProxy_Front	{ ComponentID = ArcShield_Right }
+		ArcShield_ChainProxy_Back :		ArcShield_ChainProxy_Front	{ ComponentID = ArcShield_Back }
+		ArcShield_ChainProxy_Left :		ArcShield_ChainProxy_Front	{ ComponentID = ArcShield_Left }
+
+		ShieldOperationEffects_Front :	<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ShieldOperationEffects
+		{
+			ChainedTo = ArcShield_ChainProxy_Front
 			Location = [&~/Part/Components/ArcShield/Radius/BaseValue, 0]
+			Toggle = IsOperational_SmallFront
+		}
+		ShieldOperationEffects_Right :	ShieldOperationEffects_Front
+		{
+			ChainedTo = ArcShield_ChainProxy_Right
+			Toggle = IsOperational_SmallRight
+		}
+		ShieldOperationEffects_Back :	ShieldOperationEffects_Front
+		{
+			ChainedTo = ArcShield_ChainProxy_Back
+			Toggle = IsOperational_SmallBack
+		} 
+		ShieldOperationEffects_Left :	ShieldOperationEffects_Front
+		{
+			ChainedTo = ArcShield_ChainProxy_Left
+			Toggle = IsOperational_SmallLeft
 		}
 
-		Overclock_StartEffects : ShieldOperationEffects, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_ShieldReinforcedEffects
+		IsOperationalOverclocked_SmallFront
 		{
-			Toggle = IsOperationalOverclocked
+			Type = MultiToggle
+			Toggles = [IsOperational_SmallFront, IsOverclocked]
+			Mode = All
+		}
+		IsOperationalOverclocked_SmallRight :	IsOperationalOverclocked_SmallFront	{ Toggles = [IsOperational_SmallRight, IsOverclocked] }
+		IsOperationalOverclocked_SmallBack :	IsOperationalOverclocked_SmallFront	{ Toggles = [IsOperational_SmallBack, IsOverclocked] }
+		IsOperationalOverclocked_SmallLeft :	IsOperationalOverclocked_SmallFront	{ Toggles = [IsOperational_SmallLeft, IsOverclocked] }
+
+		Overclock_StartEffects_Front :	ShieldOperationEffects_Front, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_ShieldReinforcedEffects
+		{
+			Toggle = IsOperationalOverclocked_SmallFront
 			ToggledOffMediaEffects
 			ToggledOnMediaEffects : &^/1/ToggledOnMediaEffects	[]
 		}
+		Overclock_StartEffects_Right :	Overclock_StartEffects_Front	{ Toggle = IsOperationalOverclocked_SmallRight }
+		Overclock_StartEffects_Back :	Overclock_StartEffects_Front	{ Toggle = IsOperationalOverclocked_SmallBack }
+		Overclock_StartEffects_Left :	Overclock_StartEffects_Front	{ Toggle = IsOperationalOverclocked_SmallLeft }
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1421,17 +1421,72 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			MediaEffects :	&^/1/MediaEffects	[]
 		}
 
-		ShieldOperationEffects :	<./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ShieldOperationEffects
+		ArcShield_ChainProxy_Front
 		{
-			ChainedTo = ArcShield
-			Location = [&~/Part/Components/ArcShield/Radius/BaseValue, 0]
+			Type = ChainableProxy
+			ComponentID = ArcShield_Front
 		}
-		Overclock_StartEffects : ShieldOperationEffects, <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/Overclock_StartEffects
+		ArcShield_ChainProxy_FrontRight :	ArcShield_ChainProxy_Front	{ ComponentID = ArcShield_FrontRight }
+		ArcShield_ChainProxy_BackRight :	ArcShield_ChainProxy_Front	{ ComponentID = ArcShield_BackRight }
+		ArcShield_ChainProxy_Back :			ArcShield_ChainProxy_Front	{ ComponentID = ArcShield_Back }
+		ArcShield_ChainProxy_BackLeft :		ArcShield_ChainProxy_Front	{ ComponentID = ArcShield_BackLeft }
+		ArcShield_ChainProxy_FrontLeft :	ArcShield_ChainProxy_Front	{ ComponentID = ArcShield_FrontLeft }
+
+		ShieldOperationEffects_Front :			<./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ShieldOperationEffects
 		{
-			Toggle = &^/1/Toggle	// IsOperationalOverclocked
+			ChainedTo = ArcShield_ChainProxy_Front
+			Location = [&~/Part/Components/ArcShield/Radius/BaseValue, 0]
+			Toggle = IsOperational_LargeFront
+		}
+		ShieldOperationEffects_FrontRight :		ShieldOperationEffects_Front
+		{
+			ChainedTo = ArcShield_ChainProxy_FrontRight
+			Toggle = IsOperational_LargeFrontRight
+		}
+		ShieldOperationEffects_BackRight :		ShieldOperationEffects_Front
+		{
+			ChainedTo = ArcShield_ChainProxy_BackRight
+			Toggle = IsOperational_LargebackRight
+		}
+		ShieldOperationEffects_Back :			ShieldOperationEffects_Front
+		{
+			ChainedTo = ArcShield_ChainProxy_Back
+			Toggle = IsOperational_LargeBack
+		}
+		ShieldOperationEffects_BackLeft :		ShieldOperationEffects_Front
+		{
+			ChainedTo = ArcShield_ChainProxy_BackLeft
+			Toggle = IsOperational_LargeBackLeft
+		}
+		ShieldOperationEffects_FrontLeft :		ShieldOperationEffects_Front
+		{
+			ChainedTo = ArcShield_ChainProxy_FrontLeft
+			Toggle = IsOperational_LargeFrontLeft
+		}
+
+		IsOperationalOverclocked_LargeFront
+		{
+			Type = MultiToggle
+			Toggles = [IsOperational_LargeFront, IsOverclocked]
+			Mode = All
+		}
+		IsOperationalOverclocked_LargeFrontRight :	IsOperationalOverclocked_LargeFront	{ Toggles = [IsOperational_LargeFrontRight, IsOverclocked] }
+		IsOperationalOverclocked_LargeBackRight :	IsOperationalOverclocked_LargeFront	{ Toggles = [IsOperational_LargeBackRight, IsOverclocked] }
+		IsOperationalOverclocked_LargeBack :		IsOperationalOverclocked_LargeFront	{ Toggles = [IsOperational_LargeBack, IsOverclocked] }
+		IsOperationalOverclocked_LargeBackLeft :	IsOperationalOverclocked_LargeFront	{ Toggles = [IsOperational_LargeBackLeft, IsOverclocked] }
+		IsOperationalOverclocked_LargeFrontLeft :	IsOperationalOverclocked_LargeFront	{ Toggles = [IsOperational_LargeFrontLeft, IsOverclocked] }
+
+		Overclock_StartEffects_Front :	ShieldOperationEffects_Front, <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/Overclock_StartEffects
+		{
+			Toggle = IsOperationalOverclocked_LargeFront
 			ToggledOffMediaEffects
 			ToggledOnMediaEffects : &^/1/ToggledOnMediaEffects	[]
 		}
+		Overclock_StartEffects_FrontRight :	Overclock_StartEffects_Front	{ Toggle = IsOperationalOverclocked_LargeFrontRight }
+		Overclock_StartEffects_BackRight :	Overclock_StartEffects_Front	{ Toggle = IsOperationalOverclocked_LargeBackRight }
+		Overclock_StartEffects_Back :		Overclock_StartEffects_Front	{ Toggle = IsOperationalOverclocked_LargeBack }
+		Overclock_StartEffects_BackLeft :	Overclock_StartEffects_Front	{ Toggle = IsOperationalOverclocked_LargeBackLeft }
+		Overclock_StartEffects_FrontLeft :	Overclock_StartEffects_Front	{ Toggle = IsOperationalOverclocked_LargeFrontLeft }
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////
