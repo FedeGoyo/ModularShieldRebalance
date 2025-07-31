@@ -883,7 +883,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		// ARCSHIELD ORIGINAL - START //////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		ArcShield : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield	// _Blueprint_Front
+		ArcShield : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield
 		{
 			Radius
 			{
@@ -925,7 +925,9 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			}
 			Rotation = -90d
 			Location = [0, 0]
-			
+
+			BlueprintArcSprite	{}
+
 			ShieldMediaEffects
 			[
 				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield/ShieldMediaEffects/0
@@ -945,12 +947,31 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			]
 		}
 		
-		ArcShield_Blueprint_FrontRight :	ArcShield	{ Rotation = -30d }
-		ArcShield_Blueprint_BackRight :		ArcShield	{ Rotation = 30d }
-		ArcShield_Blueprint_Back :			ArcShield	{ Rotation = 90d }
-		ArcShield_Blueprint_BackLeft :		ArcShield	{ Rotation = 150d }
-		ArcShield_Blueprint_FrontLeft :		ArcShield	{ Rotation = 210d }
-		
+		OverclockModeToggle_Invert
+		{
+			Type = MultiToggle
+			Toggles = [OverclockModeToggle]
+			Invert = true
+			Mode = All
+		}
+
+		BlueprintArc_Front
+		{
+			Type = ArcSprite
+			VisibilityToggle = OverclockModeToggle_Invert
+			Location = [&../../TransformRotation1/Location/0, &../../TransformRotation1/Location/1]
+			Rotation = &<stats.rules>/Stats/ArcShield_Front/Rotation
+			Radius = &../ArcShield/Radius/BaseValue
+			Arc = &../ArcShield/Arc
+			SpriteSegments = &../ArcShield/BlueprintArcSpriteSegments
+			Sprite : &../ArcShield/^/0/BlueprintArcSprite	{}
+		}
+		BlueprintArc_FrontRight :	BlueprintArc_Front	{ Rotation = &<stats.rules>/Stats/ArcShield_FrontRight/Rotation }
+		BlueprintArc_BackRight :	BlueprintArc_Front	{ Rotation = &<stats.rules>/Stats/ArcShield_BackRight/Rotation }
+		BlueprintArc_Back :			BlueprintArc_Front	{ Rotation = &<stats.rules>/Stats/ArcShield_Back/Rotation }
+		BlueprintArc_BackLeft :		BlueprintArc_Front	{ Rotation = &<stats.rules>/Stats/ArcShield_BackLeft/Rotation }
+		BlueprintArc_FrontLeft :	BlueprintArc_Front	{ Rotation = &<stats.rules>/Stats/ArcShield_FrontLeft/Rotation }
+
 		OverclockTweenToggle
 		{
 			Type = ThresholdToggle
@@ -965,32 +986,16 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Mode = All
 		}
 		
-		Overclock_BlueprintArc	// Front
+		Overclock_BlueprintArc_Front :	BlueprintArc_Front
 		{
-			Type = ArcSprite
-			ChainedTo = ArcShield
-			Radius = (&../ArcShield/Radius/BaseValue)
-			Arc = 60d
-			SpriteSegments = (&../ArcShield/BlueprintArcSpriteSegments)
-			Sprite
-			{
-				Texture
-				{
-					File = "./Data/ships/terran/shield_gen_small/shield_energy_oc.png"
-					UVMode = Wrap
-					SampleMode = Linear
-					MipLevels = 1
-				}
-				Size = [0, 1.5]
-				Color = [255, 134, 36, 127]
-			}
+			VisibilityToggle = OverclockModeToggle
+			Sprite : &<./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/Overclock_BlueprintArc/Sprite	{}
 		}
-		
-		Overclock_BlueprintArc_FrontRight :	Overclock_BlueprintArc	{ ChainedTo = ArcShield_Blueprint_FrontRight }
-		Overclock_BlueprintArc_BackRight :	Overclock_BlueprintArc	{ ChainedTo = ArcShield_Blueprint_BackRight }
-		Overclock_BlueprintArc_Back :		Overclock_BlueprintArc	{ ChainedTo = ArcShield_Blueprint_Back }
-		Overclock_BlueprintArc_BackLeft :	Overclock_BlueprintArc	{ ChainedTo = ArcShield_Blueprint_BackLeft }
-		Overclock_BlueprintArc_FrontLeft :	Overclock_BlueprintArc	{ ChainedTo = ArcShield_Blueprint_FrontLeft }
+		Overclock_BlueprintArc_FrontRight :	Overclock_BlueprintArc_Front	{ Rotation = &<stats.rules>/Stats/ArcShield_FrontRight/Rotation }
+		Overclock_BlueprintArc_BackRight :	Overclock_BlueprintArc_Front	{ Rotation = &<stats.rules>/Stats/ArcShield_BackRight/Rotation }
+		Overclock_BlueprintArc_Back :		Overclock_BlueprintArc_Front	{ Rotation = &<stats.rules>/Stats/ArcShield_Back/Rotation }
+		Overclock_BlueprintArc_BackLeft :	Overclock_BlueprintArc_Front	{ Rotation = &<stats.rules>/Stats/ArcShield_BackLeft/Rotation }
+		Overclock_BlueprintArc_FrontLeft :	Overclock_BlueprintArc_Front	{ Rotation = &<stats.rules>/Stats/ArcShield_FrontLeft/Rotation }
 		
 		OverclockEffect
 		{
