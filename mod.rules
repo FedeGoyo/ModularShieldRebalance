@@ -1,12 +1,13 @@
 ID = swefpifh.SpecialShield.enderluck
 Name = "Modular Bubble Shield Rebalance"
-Version = 1.0.6
-CompatibleGameVersions = ["0.27.1", "0.28.1"]
+Version = 2.0.0
+CompatibleGameVersions = ["0.30."]
 ModifiesMultiplayer = true
 Author = "Enderluck"
 Logo = "logo.png"
 
 Description = 	"This is a rebalance from [Beta] Modular+++ Shields v0.62b mod and therefore requires that mod to work.\n\n"\
+				"This includes Overclock!\n"\
 				"The changelog is available in the steam workshop.\n"\
 				"Also available in Spanish."
 
