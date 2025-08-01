@@ -2066,6 +2066,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 	SecondaryToolTip
 	{
 		TitleKey = "StatCategories/Overclocked"
+		DescriptionKey = "Parts/KebechetTINYmodularShieldBatteryOverclockDesc"
 		Stats
 		{
 			PowerCapacity = (&~/Part/Stats/PowerCapacity) * (&~/OVERCLOCK/CAPACITY_FACTOR)
