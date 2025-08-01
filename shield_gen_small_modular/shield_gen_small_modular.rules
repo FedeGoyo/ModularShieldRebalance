@@ -441,62 +441,7 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			Location = [0, 0]	// Takes from Transform_Arc_Rotation_FrontToRight
 			Rotation = 0d	// Takes from Transform_Arc_Rotation_FrontToRight
 			ChainedTo = Transform_Arc_Rotation_FrontToRight
-			Radius : ^/0/Radius
-			{
-				BaseValue = 7.5
-				Modifiers
-				[
-					{
-						Type = BuffRemap
-						BuffType = ShieldOverclockExtended
-						ModificationMode = Multiply
-						RemapFrom = [0, 1]
-						RemapTo = [1, &~/OVERCLOCK/EXTENDED/ARC_RADIUS_FACTOR ]
-					}
-				]
-			}
-			Arc : ^/0/Arc
-			{
-				BaseValue = 90d
-				Modifiers
-				[
-					{
-						Type = BuffRemap
-						BuffType = ShieldOverclockExtended
-						ModificationMode = Multiply
-						RemapFrom = [0, 1]
-						RemapTo = [1, &~/OVERCLOCK/EXTENDED/ARC_FACTOR ]
-					}
-					{
-						Type = BuffRemap
-						BuffType = ShieldOverclockReinforced
-						ModificationMode = Multiply
-						RemapFrom = [0, 1]
-						RemapTo = [1, &~/OVERCLOCK/REINFORCED/ARC_FACTOR ]
-					}
-				]
-			}
-			
 			BlueprintArcSprite	{}
-
-			ShieldMediaEffects
-			[
-				: &../^/0/ShieldMediaEffects/0
-				{
-					Radius = &../../Radius
-					Arc = &../../Arc
-				}
-				: &../^/0/ShieldMediaEffects/1 {}
-			]
-			HitMediaEffects
-			[
-				: &../^/0/HitMediaEffects/0
-				{
-					Radius = &../../Radius
-					Arc = 2d
-				}
-				: &../^/0/HitMediaEffects/1 {}
-			]
 		}
 		
 		LineShield : ArcShield	// Just here to make colors inherite from it
