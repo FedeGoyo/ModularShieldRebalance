@@ -128,6 +128,8 @@ Stats
 	ShieldRotationFmt = "<white>Shield Rotation Speed Reduction:</white> <good>-{0:n0}%</good>"
 	
 	BubbleNotes = "<gray>NOTE: Shield Strength, Penetration Resistance and Radius are increased with each additional Modular Shield Battery.</gray>"
+	ModularBatteryNotes = "<gray>NOTE: Shield Radius Multiplier and Power Use are based on the energy levels of the battery.</gray>"
+	ModularBatteryOverclockNotes = "<gray>NOTE: Shield Rotation Speed Reduction, Shield Radius Multiplier, Power Use and Heat Generation are based on the energy levels of the battery.</gray>"
 }
 
 StatCategories
