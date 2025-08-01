@@ -926,10 +926,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 
 		OverclockEffect :	&<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_ReinforcedEffect
 		{
-			Shield = ArcShield
-			ChainedTo = ArcShield
-			FactorMediaEffectsIntensityWith = BatteryStorage
-			OperationalToggle = OverclockedEffectToggle
+			OperationalToggle = IsOperationalProxy
 			ContinuousEffects
 			[
 				: ../^/0/ContinuousEffects/0
@@ -981,11 +978,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		OverloadEffect :	&<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/OverloadEffect
 		{
-			Shield = ArcShield
-			ChainedTo = ArcShield
-			FactorMediaEffectsIntensityWith = BatteryStorage
-			FactorRedVertexColorWith = OverloadValue
-			OperationalToggle = IsOperationalOverloaded
+			OperationalToggle = IsOperationalProxy
 			ContinuousEffects
 			[
 				: ../^/0/ContinuousEffects/0
@@ -998,11 +991,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		OverclockOverloadEffect :	&<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_OverloadEffect_Extended
 		{
-			Shield = ArcShield
-			ChainedTo = ArcShield
-			FactorMediaEffectsIntensityWith = BatteryStorage
-			FactorRedVertexColorWith = OverloadValue
-			OperationalToggle = IsOperationalOverclockedOverloaded
+			OperationalToggle = IsOperationalProxy
 			ContinuousEffects
 			[
 				: ../^/0/ContinuousEffects/0
