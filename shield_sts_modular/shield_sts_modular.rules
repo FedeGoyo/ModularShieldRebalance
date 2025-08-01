@@ -769,12 +769,12 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		BaseResistanceBonus
 		{
 			Type = StaticValue
-			Value = 2000 / 0.4 / 600 / 4
+			Value = 2
 		}
 		OverclockResistanceBonus
 		{
 			Type = StaticValue
-			Value = 4000 / 0.4 / 600 / 4
+			Value = 4
 		}
 		BuffProvider_Overclock_Resistance
 		{
@@ -832,7 +832,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Arc = 90d
 			ChainedTo = TransformRotationFinal
 			OperationalToggle = IsOperationalProxy
-			PenetrationResistance = [ { BaseValue= 8.33; BuffType=BubbleResistanceBonus; BuffMode=Add; }, 0]
+			PenetrationResistance = [ { BaseValue= 10; BuffType=BubbleResistanceBonus; BuffMode=Add; }, 0]
 			DrainResourcesFrom = ProxyBatteryStorage
 			ResourceDrainPerDamage
 			{
