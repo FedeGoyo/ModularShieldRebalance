@@ -924,63 +924,18 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		Overclock_BlueprintArc_Back :	Overclock_BlueprintArc_Front	{ Rotation = &<stats.rules>/Stats/ArcShield_Back/Rotation }
 		Overclock_BlueprintArc_Left :	Overclock_BlueprintArc_Front	{ Rotation = &<stats.rules>/Stats/ArcShield_Left/Rotation }
 
-		OverclockEffect
+		OverclockEffect :	&<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_ReinforcedEffect
 		{
-			Type = ShieldArcsMimic
 			Shield = ArcShield
 			ChainedTo = ArcShield
 			FactorMediaEffectsIntensityWith = BatteryStorage
-			MimicFadeInStartTime = false
 			OperationalToggle = OverclockedEffectToggle
 			ContinuousEffects
 			[
+				: ../^/0/ContinuousEffects/0
 				{
-					Type = ArcShield
 					Radius = &~/Part/Components/ArcShield/Radius
 					Arc = &~/Part/Components/ArcShield/Arc
-					FadeInTime = .25
-					FadeOutTime = .25
-					FadeFromScale = 1.025
-					ArcSprite
-					{
-						Texture
-						{
-							File = "./Data/ships/terran/shield_gen_small/shield_energy_oc.png"
-							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = 1
-						}
-						Shader = "shield.shader"
-						_waveTex
-						{
-							File = "./Data/ships/terran/shield_gen_small/shield_energy_wave.png"
-							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = max
-						}
-						_maskTex
-						{
-							File = "./Data/ships/terran/shield_gen_small/shield_mask_oc.png"
-							SampleMode = Linear
-							MipLevels = 1
-						}
-						_waveSpeed = 1
-						_waveAlpha = 1
-						_waveCurveInterval = .5
-						_waveCurveMagnitude = .35
-						_waveCurveUOffsetPerSecond = .2
-						_fullPowerColor1 = [203, 80, 33, 127]
-						_lowPowerColor1 = [255, 0, 0, 127]
-						_fullPowerColor2 = [255, 134, 36, 255]
-						_lowPowerColor2 = [255, 50, 0, 127]
-						_lowPowerThicknessExponent = .6
-						_xScale = 1
-						_hexDamageIntensity = 0.8
-						TargetBlendMode = Add
-						Size = [0, 1.5]
-					}
-					ArcSpriteSegments = 64
-					Bucket = Lower1
 				}
 			]
 		}
@@ -1010,7 +965,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			MinAmount = 0.01
 		}
 		
-		
 		IsOperationalOverloaded
 		{
 			Type = MultiToggle
@@ -1025,9 +979,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Mode = All
 		}
 		
-		OverloadEffect
+		OverloadEffect :	&<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/OverloadEffect
 		{
-			Type = ShieldArcsMimic
 			Shield = ArcShield
 			ChainedTo = ArcShield
 			FactorMediaEffectsIntensityWith = BatteryStorage
@@ -1035,71 +988,16 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OperationalToggle = IsOperationalOverloaded
 			ContinuousEffects
 			[
+				: ../^/0/ContinuousEffects/0
 				{
-					Type = ArcShield
 					Radius = &~/Part/Components/ArcShield/Radius
 					Arc = &~/Part/Components/ArcShield/Arc
-					FadeInTime = 0.5
-					FadeOutTime = 0.5
-					FadeFromScale = .8
-					ArcAngleAffectsUVs = true
-					UPerNinetyDegrees = 1
-					ArcSprite
-					{
-						Texture
-						{
-							File = "./Data/ships/terran/shield_gen_small/shield_overload.png"
-							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = 1
-						}
-						Shader = "shield_overload.shader"
-						_noiseTex1
-						{
-							File = "./Data/statuses/fire/particles/fire_noise.png"
-							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = max
-						}
-						_noiseTex2
-						{
-							File = "./Data/statuses/fire/particles/fire_noise.png"
-							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = max
-						}
-						_baseShieldTex
-						{
-							File = "./Data/ships/terran/shield_gen_small/shield_mask.png"
-							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = 1
-						}
-						_waveSpeed = 1
-						_waveAlpha = 1
-						_waveCurveInterval = .5
-						_waveCurveMagnitude = .35
-						_waveCurveUOffsetPerSecond = .2
-						
-						_color1 = [255, 0, 255 * 0.31, 0]
-						_color2 = [255, 255 * 0.41, 0, 0]
-						_maxGreen = 0.9
-						
-						_xScale = 1
-						_gradientXWidth = 1.05
-						_hexDamageIntensity = 0.8
-						TargetBlendMode = Add
-						Size = [0, 1.5]
-					}
-					ArcSpriteSegments = 64
-					Bucket = Lower1
 				}
 			]
 		}
 		
-		OverclockOverloadEffect
+		OverclockOverloadEffect :	&<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_OverloadEffect_Extended
 		{
-			Type = ShieldArcsMimic
 			Shield = ArcShield
 			ChainedTo = ArcShield
 			FactorMediaEffectsIntensityWith = BatteryStorage
@@ -1107,61 +1005,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			OperationalToggle = IsOperationalOverclockedOverloaded
 			ContinuousEffects
 			[
+				: ../^/0/ContinuousEffects/0
 				{
-					Type = ArcShield
 					Radius = &~/Part/Components/ArcShield/Radius
 					Arc = &~/Part/Components/ArcShield/Arc
-					FadeInTime = .25
-					FadeOutTime = .25
-					FadeFromScale = 1.025
-					ArcSprite
-					{
-						Texture
-						{
-							File = "./Data/ships/terran/shield_gen_small/shield_overload_oc.png"
-							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = 1
-						}
-						Shader = "./Data/ships/terran/shield_gen_small/shield_overload.shader"
-						_noiseTex1
-						{
-							File = "./Data/statuses/fire/particles/fire_noise.png"
-							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = max
-						}
-						_noiseTex2
-						{
-							File = "./Data/statuses/fire/particles/fire_noise.png"
-							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = max
-						}
-						_baseShieldTex
-						{
-							File = "./Data/ships/terran/shield_gen_small/shield_mask_oc.png"
-							UVMode = Wrap
-							SampleMode = Linear
-							MipLevels = 1
-						}
-						_waveSpeed = 1
-						_waveAlpha = 1
-						_waveCurveInterval = .5
-						_waveCurveMagnitude = .35
-						_waveCurveUOffsetPerSecond = .2
-						
-						_color1 = [255, 0, 255 * 0.31, 0]
-						_color2 = [255, 255 * 0.41, 0, 0]
-						_maxGreen = 0.9
-						
-						_xScale = 1.2
-						_hexDamageIntensity = 0.8
-						TargetBlendMode = Add
-						Size = [0, 1.5]
-					}
-					ArcSpriteSegments = 64
-					Bucket = Lower1
 				}
 			]
 		}
