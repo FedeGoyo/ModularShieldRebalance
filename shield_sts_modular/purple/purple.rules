@@ -58,7 +58,7 @@ Components
 			{
 				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
 			}
-			OverclockEffect_Right :	<../stats.rules>/Stats/OverclockEffect_Right, OverclockEffect_Front	{}
+			OverclockEffect_Right :		<../stats.rules>/Stats/OverclockEffect_Right, OverclockEffect_Front	{}
 			OverclockEffect_Back :		<../stats.rules>/Stats/OverclockEffect_Back, OverclockEffect_Front	{}
 			OverclockEffect_Left :		<../stats.rules>/Stats/OverclockEffect_Left, OverclockEffect_Front	{}
 			
@@ -66,7 +66,7 @@ Components
 			{
 				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
 			}
-			OverclockOverloadEffect_Right :	<../stats.rules>/Stats/OverclockOverloadEffect_Right, OverclockOverloadEffect_Front	{}
+			OverclockOverloadEffect_Right :		<../stats.rules>/Stats/OverclockOverloadEffect_Right, OverclockOverloadEffect_Front	{}
 			OverclockOverloadEffect_Back :		<../stats.rules>/Stats/OverclockOverloadEffect_Back, OverclockOverloadEffect_Front	{}
 			OverclockOverloadEffect_Left :		<../stats.rules>/Stats/OverclockOverloadEffect_Left, OverclockOverloadEffect_Front	{}
 			

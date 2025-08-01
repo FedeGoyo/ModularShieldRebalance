@@ -63,20 +63,20 @@ Components
 				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
 			}
 			OverclockEffect_FrontRight :	<../stats.rules>/Stats/OverclockEffect_FrontRight, OverclockEffect_Front	{}
-			OverclockEffect_BackRight :	<../stats.rules>/Stats/OverclockEffect_BackRight, OverclockEffect_Front			{}
+			OverclockEffect_BackRight :		<../stats.rules>/Stats/OverclockEffect_BackRight, OverclockEffect_Front			{}
 			OverclockEffect_Back :			<../stats.rules>/Stats/OverclockEffect_Back, OverclockEffect_Front			{}
 			OverclockEffect_BackLeft :		<../stats.rules>/Stats/OverclockEffect_BackLeft, OverclockEffect_Front		{}
-			OverclockEffect_FrontLeft :	<../stats.rules>/Stats/OverclockEffect_FrontLeft, OverclockEffect_Front			{}
+			OverclockEffect_FrontLeft :		<../stats.rules>/Stats/OverclockEffect_FrontLeft, OverclockEffect_Front			{}
 			
 			OverclockOverloadEffect_Front :		<../stats.rules>/Stats/OverclockOverloadEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverclockOverloadEffect
 			{
 				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
 			}
 			OverclockOverloadEffect_FrontRight :	<../stats.rules>/Stats/OverclockOverloadEffect_FrontRight, OverclockOverloadEffect_Front	{}
-			OverclockOverloadEffect_BackRight :	<../stats.rules>/Stats/OverclockOverloadEffect_BackRight, OverclockOverloadEffect_Front			{}
+			OverclockOverloadEffect_BackRight :		<../stats.rules>/Stats/OverclockOverloadEffect_BackRight, OverclockOverloadEffect_Front			{}
 			OverclockOverloadEffect_Back :			<../stats.rules>/Stats/OverclockOverloadEffect_Back, OverclockOverloadEffect_Front			{}
 			OverclockOverloadEffect_BackLeft :		<../stats.rules>/Stats/OverclockOverloadEffect_BackLeft, OverclockOverloadEffect_Front		{}
-			OverclockOverloadEffect_FrontLeft :	<../stats.rules>/Stats/OverclockOverloadEffect_FrontLeft, OverclockOverloadEffect_Front			{}
+			OverclockOverloadEffect_FrontLeft :		<../stats.rules>/Stats/OverclockOverloadEffect_FrontLeft, OverclockOverloadEffect_Front			{}
 
 			// Always
 			STL_EmitterEffect :	&<../shield_stl_modular.rules>/Part/Components/BaseEmitterEffect
