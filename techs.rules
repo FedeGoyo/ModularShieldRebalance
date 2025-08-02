@@ -11,6 +11,18 @@ Techs
 		Cost = 500
 	}
 	
+	// Shield Battery Module
+	{
+		ID = enderluck.ModularShieldBattery
+		NameKey = &<shield_battery_modular/shield_battery_modular.rules>/Part/NameKey
+		DescriptionKey = &<shield_battery_modular/shield_battery_modular.rules>/Part/DescriptionKey
+		Icon = &<shield_battery_modular/shield_battery_modular.rules>/Part/EditorIcon
+		EditorGroup = &<shield_sts_modular/shield_sts_modular.rules>/Part/EditorGroup
+		PartsUnlocked = [ &<shield_battery_modular/shield_battery_modular.rules>/Part/ID ]
+		Cost = 3000
+		Prerequisites = [swefpifh.Kebechet_STS_modularShield]
+	}
+
 	// Overclocks...
 
 	{

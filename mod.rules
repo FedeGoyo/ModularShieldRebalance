@@ -169,11 +169,6 @@ Actions
 		}
 	}
 	{
-		Action = Add
-		AddTo = "<../../../workshop/content/799600/2907845781/techs.rules>/Techs/0/PartsUnlocked"
-		ToAdd = &<shield_battery_modular/shield_battery_modular.rules>/Part/ID	// Make Small Bubble Shield Generator Tech also unlock Modular Shield Battery
-	}
-	{
 		Action = Overrides
 		OverrideIn = "<../../../workshop/content/799600/2907845781/techs.rules>/Techs/1"
 		Overrides	// Modify Large Bubble Shield Generator Tech
