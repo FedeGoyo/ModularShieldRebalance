@@ -2040,7 +2040,6 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			NameKey = "StatCategories/ShieldBubbleBonus"
 			Stats
 			{
-				ShieldRadiusMult = (&<./Data/buffs/buffs.rules>/BubbleRadiusBase/Multiplier) * 100
 				ShieldRadiusExp = (&<./Data/buffs/buffs.rules>/BubbleRadiusBase/Exponent)
 				PowerUsageContinuous = (&~/STATS/POWER_DRAIN) / (&~/Part/Components/PowerDrain_SmallFront/Interval) / 1000
 			}
@@ -2051,6 +2050,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			{
 				ShieldHPBonus = (&~/Part/Components/Base_BatteryStorage_1/MaxResources) * 3 / (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
 				ShieldPenResBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/BaseResistanceBonus/Value)
+				ShieldRadiusBonus = (&<./Data/buffs/buffs.rules>/BubbleRadiusSmall/Multiplier)
 			}
 		}
 		{
@@ -2059,6 +2059,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			{
 				ShieldHPBonus = (&~/Part/Components/Base_BatteryStorage_1/MaxResources) * 2 / (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
 				ShieldPenResBonus = (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/BaseResistanceBonus/Value)
+				ShieldRadiusBonus = (&<./Data/buffs/buffs.rules>/BubbleRadiusLarge/Multiplier)
 			}
 		}
 	]
@@ -2078,7 +2079,6 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 				NameKey = "StatCategories/ShieldBubbleBonusOverclock"
 				Stats
 				{
-					ShieldRadiusMult = (&~/Part/StatsByCategory/0/Stats/ShieldRadiusMult)
 					ShieldRadiusExp = 1
 					ShieldRotation = (&<./Data/buffs/buffs.rules>/BubbleRotationPenalty/Multiplier) * 100
 					PowerUsageContinuous = (&~/Part/StatsByCategory/0/Stats/PowerUsageContinuous)

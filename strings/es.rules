@@ -120,15 +120,15 @@ Stats
 	// Tiny Shield
 	ShieldRegenFmT = "<white>Regeneración del escudo:</white> <good>{0:n0}</good> <gray>a</gray> <good>{1:n0}</good> <gray>resistencia/s</gray>"
 	// Modular Shield Battery
-	ShieldRadiusMultFmT = "<white>Multiplicador del radio del escudo:</white> <good>{0:n0}%</good>"
 	ShieldRadiusExpFmT = "<white>Exponente del radio del escudo:</white> <good>{0:n0}</good>"
+	ShieldRadiusBonusFmT = "<white>Bono de radio del escudo:</white> <good>+{0:0.#}</good> <gray>m</gray>"
 	ShieldHPBonusFmT = "<white>Bono de resistencia del escudo</white> <good>+{0:n0}</good>"
 	ShieldPenResBonusFmT = "<white>Bono de resistencia a la penetración del escudo:</white> <good>-{0:n0}</good> <gray>m</gray>"
 	ShieldRotationFmt = "<white>Reducción de velocidad de rotación del escudo:</white> <good>-{0:n0}%</good>"
 	
 	BubbleNotes = "<gray>NOTA: La resistencia del escudo, resistencia a la penetración y el radio se incrementan con cada Batería Modular de Escudo.</gray>"
-	ModularBatteryNotes = "<gray>NOTA: El multiplicador del radio del escudo y el uso de energía se basan en el nivel de energía de la batería.</gray>"
-	ModularBatteryOverclockNotes = "<gray>NOTA: La reducción de velocidad de rotación del escudo, el multiplicador del radio del escudo, el uso de energía y la generación de calor se basan en el nivel de energía de la batería.</gray>"
+	ModularBatteryNotes = "<gray>NOTA: El bono de radio del escudo y el uso de energía se basan en el nivel de energía de la batería.</gray>"
+	ModularBatteryOverclockNotes = "<gray>NOTA: La reducción de velocidad de rotación del escudo, el bono de radio del escudo, el uso de energía y la generación de calor se basan en el nivel de energía de la batería.</gray>"
 }
 
 StatCategories

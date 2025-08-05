@@ -25,8 +25,8 @@ PartStats
 	}
 	// Modular Shield Batteries
 	{
-		ID = ShieldRadiusMult
-		FormatKey = "Stats/ShieldRadiusMultFmT"
+		ID = ShieldRadiusBonus
+		FormatKey = "Stats/ShieldRadiusBonusFmT"
 	}
 	{
 		ID = ShieldRadiusExp

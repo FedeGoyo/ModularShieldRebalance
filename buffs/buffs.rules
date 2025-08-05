@@ -42,8 +42,6 @@ BubbleRadiusBase
 {
 	CombineMode = Add
 	Exponent = 0.8
-	Multiplier = 20%
-	BaseValue = 100%
 /*
 	IconTextFormatKey = "BuildBox/BuffRadiusFmt"
 	IconTextMultiply = 1
@@ -55,12 +53,17 @@ BubbleRadiusOverclock
 {
 	CombineMode = Add
 	Exponent = 1
-	Multiplier = 20%
-	BaseValue = 100%
 }
-BubbleRadiusFinal
+
+BubbleRadiusSmall
 {
 	CombineMod = Add
+	Multiplier = 1.5
+}
+BubbleRadiusLarge
+{
+	CombineMod = Add
+	Multiplier = 2
 }
 
 BubbleRotation
