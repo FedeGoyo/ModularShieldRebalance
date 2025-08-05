@@ -113,21 +113,21 @@ PartToggles
 Stats
 {
 	// Bubble Shield
-	ShieldRadiusFmt = "<white>Shield Radius:</white> <good>{0:n0}</good> <gray>meters</gray>"
-	ShieldSpeedFmt = "<white>Shield Rotation Speed:</white> <good>{0:0}°</good><gray>/sec</gray>"
-	ShieldSegmentsFmt = "<white>Shield Segments:</white> <good>{0:n0}</good>"
+	ShieldRadiusFmt = "<white>Shield Radius:</white> <good>{0:0.#}</good> <gray>meters</gray>"
+	ShieldSpeedFmt = "<white>Shield Rotation Speed:</white> <good>{0:0.#}°</good><gray>/sec</gray>"
+	ShieldSegmentsFmt = "<white>Shield Segments:</white> <good>{0:0}</good>"
 	// Flat Shields
-	ShieldLengthFmT = "<white>Shield Length:</white> <good>{0:n0}</good> <gray>meters</gray>"
+	ShieldLengthFmT = "<white>Shield Length:</white> <good>{0:0.#}</good> <gray>meters</gray>"
 	// Tiny Shield
 	ShieldRegenFmT = "<white>Shield Regen:</white> <good>{0:n0}</good> <gray>to</gray> <good>{1:n0}</good> <gray>strength/sec</gray>"
 	// Modular Shield Battery
-	ShieldRadiusExpFmT = "<white>Shield Radius Exponent:</white> <good>{0:n0}</good>"
 	ShieldRadiusBonusFmT = "<white>Shield Radius Bonus:</white> <good>+{0:0.#}</good> <gray>meters</gray>"
+	ShieldRadiusExpFmT = "<white>Shield Radius Exponent:</white> <good>{0:0.#}</good>"
 	ShieldHPBonusFmT = "<white>Shield Strength Bonus:</white> <good>+{0:n0}</good>"
-	ShieldPenResBonusFmT = "<white>Shield Pen. Res. Bonus:</white> <good>-{0:n0}</good> <gray>meters</gray>"
-	ShieldRotationFmt = "<white>Shield Rotation Speed Reduction:</white> <good>-{0:n0}%</good>"
+	ShieldPenResBonusFmT = "<white>Shield Pen. Res. Bonus:</white> <good>-{0:0.#}</good> <gray>meters</gray>"
+	ShieldRotationFmt = "<white>Shield Rotation Speed Reduction:</white> <good>-{0:0.#}%</good>"
 	
-	BubbleNotes = "<gray>NOTE: Shield Strength, Penetration Resistance and Radius are increased with each additional Modular Shield Battery.</gray>"
+	BubbleNotes = "<gray>NOTE: Shield Strength, Penetration Resistance and Radius are increased with each additional Shield Battery Module.</gray>"
 	ModularBatteryNotes = "<gray>NOTE: Shield Radius Bonus and Power Use are based on the energy levels of the battery.</gray>"
 	ModularBatteryOverclockNotes = "<gray>NOTE: Shield Rotation Speed Reduction, Shield Radius Bonus, Power Use and Heat Generation are based on the energy levels of the battery.</gray>"
 }

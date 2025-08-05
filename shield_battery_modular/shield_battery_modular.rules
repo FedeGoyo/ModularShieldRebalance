@@ -2071,7 +2071,6 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		Stats
 		{
 			PowerCapacity = (&~/Part/Stats/PowerCapacity) * (&~/OVERCLOCK/CAPACITY_FACTOR)
-			HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND)
 		}
 		StatsByCategory
 		[
@@ -2079,9 +2078,10 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 				NameKey = "StatCategories/ShieldBubbleBonusOverclock"
 				Stats
 				{
-					ShieldRadiusExp = 1
+					ShieldRadiusExp = (&<./Data/buffs/buffs.rules>/BubbleRadiusOverclock/Exponent)
 					ShieldRotation = (&<./Data/buffs/buffs.rules>/BubbleRotationPenalty/Multiplier) * 100
-					PowerUsageContinuous = (&~/Part/StatsByCategory/0/Stats/PowerUsageContinuous)
+//					PowerUsageContinuous = (&~/Part/StatsByCategory/0/Stats/PowerUsageContinuous)
+					HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND)
 				}
 			}
 			{
