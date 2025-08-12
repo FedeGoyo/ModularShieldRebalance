@@ -7,7 +7,7 @@ Parts
 	KebechetTINYmodularShieldBatteryIcon = "Shield Battery"
 	KebechetTINYmodularShieldBatteryDesc = "An optional component placed adjacent to a Small or Large Bubble Shield, or another battery. Each battery increases the shield's strength, penetration resistance and radius.\n"\
 											"To connect multiple batteries place them side by side. To connect to a Small Bubble Shield place it so that only one tile touches the generator. To connect to a Large Bubble Shield do the same but not at the generator's corners."
-	KebechetTINYmodularShieldBatteryOverclock = "Overclocked hield Battery Module"
+	KebechetTINYmodularShieldBatteryOverclock = "Overclocked Shield Battery Module"
 	KebechetTINYmodularShieldBatteryOverclockDesc = "Improves the efficiency of larger Bubble Shields and increases the strength and penetration resistance. Also, doubles the power capacity of the Shield Battery Module. Produces waste heat when Bubble Shield is hit."
 
 	KebechetTINYmodularShield = "Tiny Shield Generator"
