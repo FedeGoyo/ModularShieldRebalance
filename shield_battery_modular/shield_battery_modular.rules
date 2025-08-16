@@ -1079,15 +1079,42 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 				ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_SmallFront, Overclock_ArcShieldProxy_SmallFront ]
 			}
 		}
-		Overclock_BubbleArcShieldProxy_SmallRight :			Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_SmallRight, Overclock_ArcShieldProxy_SmallRight ] }
-		Overclock_BubbleArcShieldProxy_SmallBack :			Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_SmallBack, Overclock_ArcShieldProxy_SmallBack ] }
-		Overclock_BubbleArcShieldProxy_SmallLeft :			Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_SmallLeft, Overclock_ArcShieldProxy_SmallLeft ] }
-		Overclock_BubbleArcShieldProxy_LargeFront :			Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeFront, Overclock_ArcShieldProxy_LargeFront ] }
-		Overclock_BubbleArcShieldProxy_LargeFrontRight :	Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeFrontRight, Overclock_ArcShieldProxy_LargeFrontRight ] }
-		Overclock_BubbleArcShieldProxy_LargeBackRight :		Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeBackRight, Overclock_ArcShieldProxy_LargeBackRight ] }
-		Overclock_BubbleArcShieldProxy_LargeBack :			Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeBack, Overclock_ArcShieldProxy_LargeBack ] }
-		Overclock_BubbleArcShieldProxy_LargeBackLeft :		Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeBackLeft, Overclock_ArcShieldProxy_LargeBackLeft ] }
-		Overclock_BubbleArcShieldProxy_LargeFrontLeft :		Overclock_BubbleArcShieldProxy_SmallFront	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeFrontLeft, Overclock_ArcShieldProxy_LargeFrontLeft ] }
+		Overclock_BubbleArcShieldProxy_SmallRight :			Overclock_BubbleArcShieldProxy_SmallFront
+		{
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_SmallRight, Overclock_ArcShieldProxy_SmallRight ] }
+		}
+		Overclock_BubbleArcShieldProxy_SmallBack :			Overclock_BubbleArcShieldProxy_SmallFront
+		{
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_SmallBack, Overclock_ArcShieldProxy_SmallBack ] }
+		}
+		Overclock_BubbleArcShieldProxy_SmallLeft :			Overclock_BubbleArcShieldProxy_SmallFront
+		{
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_SmallLeft, Overclock_ArcShieldProxy_SmallLeft ] }
+		}
+		Overclock_BubbleArcShieldProxy_LargeFront :			Overclock_BubbleArcShieldProxy_SmallFront
+		{
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeFront, Overclock_ArcShieldProxy_LargeFront ] }
+		}
+		Overclock_BubbleArcShieldProxy_LargeFrontRight :	Overclock_BubbleArcShieldProxy_SmallFront
+		{
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeFrontRight, Overclock_ArcShieldProxy_LargeFrontRight ] }
+		}
+		Overclock_BubbleArcShieldProxy_LargeBackRight :		Overclock_BubbleArcShieldProxy_SmallFront
+		{
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeBackRight, Overclock_ArcShieldProxy_LargeBackRight ] }
+		}
+		Overclock_BubbleArcShieldProxy_LargeBack :			Overclock_BubbleArcShieldProxy_SmallFront
+		{
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeBack, Overclock_ArcShieldProxy_LargeBack ] }
+		}
+		Overclock_BubbleArcShieldProxy_LargeBackLeft :		Overclock_BubbleArcShieldProxy_SmallFront
+		{
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeBackLeft, Overclock_ArcShieldProxy_LargeBackLeft ] }
+		}
+		Overclock_BubbleArcShieldProxy_LargeFrontLeft :		Overclock_BubbleArcShieldProxy_SmallFront
+		{
+			ViaBuffs : ^/0/ViaBuffs	{ ComponentIDs = [ Overclock_BubbleArcShieldProxyModular_LargeFrontLeft, Overclock_ArcShieldProxy_LargeFrontLeft ] }
+		}
 		
 		Overclock_BubbleArcShieldProxyModular_SmallFront	// For Modular, to prevent using it while disabled
 		{
