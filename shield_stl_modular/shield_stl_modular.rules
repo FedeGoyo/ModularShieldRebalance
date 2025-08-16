@@ -1061,6 +1061,35 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		IsOperationalOverclocked_FrontLeft :	IsOperationalOverclocked_Front	{ Toggles = [IsOperational_LargeFrontLeft, IsOperationalOverclocked] }
 
 		// Overclock / Thermal network
+		
+		BuffProvider_HeatCollection_Top : BuffProvider_Top
+		{
+			BuffType = BubbleHeatCollector
+			OperationalToggle = IsOperationalOverclocked
+		}
+		BuffProvider_HeatCollection_Right : BuffProvider_Right
+		{
+			BuffType = BubbleHeatCollector
+			OperationalToggle = IsOperationalOverclocked
+		}
+		BuffProvider_HeatCollection_Bottom : BuffProvider_Bottom
+		{
+			BuffType = BubbleHeatCollector
+			OperationalToggle = IsOperationalOverclocked
+		}
+		BuffProvider_HeatCollection_Left : BuffProvider_Left
+		{
+			BuffType = BubbleHeatCollector
+			OperationalToggle = IsOperationalOverclocked
+		}
+		
+		BubbleHeatCollectionStorage
+		{
+			Type = ResourceStorageProxy
+			ResourceType = heat
+			ComponentID = &~/Part/^/0/HEAT_TARGET_STORAGE
+		}
+		
 		OverclockHeatProducer_Front
 		{
 			Type = ResourceConverter
