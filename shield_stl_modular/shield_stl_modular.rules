@@ -820,32 +820,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			BuffMultiplier = ValueLerp_RadiusFinal
 		}
 		
-		BaseResistanceBonus
-		{
-			Type = StaticValue
-			Value = 1.5
-		}
-		OverclockResistanceBonus
-		{
-			Type = StaticValue
-			Value = 3
-		}
-		BuffProvider_Overclock_Resistance
-		{
-			Type = SelfBuffProvider
-			OperationalToggle = IsOverclocked
-			BuffType = BubbleResistanceBonus
-			ChainsFromBuffType = BubbleResistance
-			BuffAmount = { BaseValue=0; BuffType=BubbleResistance; BuffMode=Add; }
-			BuffMultiplier = OverclockResistanceBonus
-		}
-		BuffProvider_Resistance :	BuffProvider_Overclock_Resistance
-		{
-			InvertOperationalToggle = true
-			BuffAmount = { BaseValue=0; BuffType=BubbleResistance; BuffMode=Add; }
-			BuffMultiplier = BaseResistanceBonus
-		}
-		
 		// Disable
 
 		IsOperationalProxy
@@ -886,7 +860,20 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Arc = 60d
 			ChainedTo = TransformRotationFinal
 			OperationalToggle = IsOperationalProxy
-			PenetrationResistance = [ { BaseValue= 20; BuffType=BubbleResistanceBonus; BuffMode=Add; }, 0]
+			MAXIMUM_RESISTANCE
+			{
+				BaseValue = 20
+				Modifiers
+				[
+					{
+						Type = ScaledBuff
+						BuffType = BubbleResistance
+						Scale = 1.5
+						ModificationMode = Add
+					}
+				]
+			}
+			PenetrationResistance = [&../MAXIMUM_RESISTANCE, 0]
 			BlockedByOperationalParts = false
 			DrainResourcesFrom = ProxyBatteryStorage
 			ResourceDrainPerDamage
