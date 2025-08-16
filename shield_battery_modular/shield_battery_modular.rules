@@ -2,7 +2,6 @@ OVERCLOCK
 {
 	HEAT_PER_SECOND = 12	//	Total, divided by segments
 	HEAT_PER_DAMAGE = 0.02
-	CAPACITY_FACTOR = 200%
 	POWER_DRAIN_FACTOR = 200%
 }
 HEAT_TO_RESOURCE = &<./Data/statuses/heat/heat.rules>/STATUS_TO_RESOURCE_RATIO
@@ -256,7 +255,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		
 		// Start Battery
 		
-		Base_BatteryStorage_1
+		BatteryStorage_1
 		{
 			Type = ResourceStorage
 			ResourceType = battery
@@ -264,148 +263,47 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			DrainOnFtlJump = true
 			IsDrainable = false
 		}
-		Base_BatteryStorage_2 :		Base_BatteryStorage_1	{}
-		Base_BatteryStorage_3 :		Base_BatteryStorage_1	{}
-		Base_BatteryStorage_4 :		Base_BatteryStorage_1	{}
-		Base_BatteryStorage_5 :		Base_BatteryStorage_1	{}
-		Base_BatteryStorage_6 :		Base_BatteryStorage_1	{}
-		Base_BatteryStorage_7 :		Base_BatteryStorage_1	{}
-		Base_BatteryStorage_8 :		Base_BatteryStorage_1	{}
-		Base_BatteryStorage_9 :		Base_BatteryStorage_1	{}
-		Base_BatteryStorage_10 :	Base_BatteryStorage_1	{}
-		Base_BatteryStorage_11 :	Base_BatteryStorage_1	{}
-		Base_BatteryStorage_12 :	Base_BatteryStorage_1	{}
-		
-		Overclock_ToggledBatteryStorage
-		{
-			Type = ToggledComponents
-			Toggle = IsOverclocked
-			Components
-			{
-				Overclock_BatteryStorage_1
-				{
-					Type = ResourceStorage
-					ResourceType = battery
-					MaxResources = "ceil((&~/Part/Components/Base_BatteryStorage_1/MaxResources) * ((&~/OVERCLOCK/CAPACITY_FACTOR) - 1))"
-					DrainOnFtlJump = true
-					IsDrainable = false
-				}
-				Overclock_BatteryStorage_2 :	Overclock_BatteryStorage_1	{}
-				Overclock_BatteryStorage_3 :	Overclock_BatteryStorage_1	{}
-				Overclock_BatteryStorage_4 :	Overclock_BatteryStorage_1	{}
-				Overclock_BatteryStorage_5 :	Overclock_BatteryStorage_1	{}
-				Overclock_BatteryStorage_6 :	Overclock_BatteryStorage_1	{}
-				Overclock_BatteryStorage_7 :	Overclock_BatteryStorage_1	{}
-				Overclock_BatteryStorage_8 :	Overclock_BatteryStorage_1	{}
-				Overclock_BatteryStorage_9 :	Overclock_BatteryStorage_1	{}
-				Overclock_BatteryStorage_10 :	Overclock_BatteryStorage_1	{}
-				Overclock_BatteryStorage_11 :	Overclock_BatteryStorage_1	{}
-				Overclock_BatteryStorage_12 :	Overclock_BatteryStorage_1	{}
-			}
-		}
-		
-		Overclock_BatteryStorageProxy_1
-		{
-			Type = ResourceStorageProxy
-			ResourceType = battery
-			ProxyToggle = IsOverclocked
-			ComponentID = Overclock_BatteryStorage_1
-		}
-		Overclock_BatteryStorageProxy_2 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_2 }
-		Overclock_BatteryStorageProxy_3 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_3 }
-		Overclock_BatteryStorageProxy_4 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_4 }
-		Overclock_BatteryStorageProxy_5 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_5 }
-		Overclock_BatteryStorageProxy_6 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_6 }
-		Overclock_BatteryStorageProxy_7 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_7 }
-		Overclock_BatteryStorageProxy_8 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_8 }
-		Overclock_BatteryStorageProxy_9 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_9 }
-		Overclock_BatteryStorageProxy_10 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_10 }
-		Overclock_BatteryStorageProxy_11 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_11 }
-		Overclock_BatteryStorageProxy_12 :	Overclock_BatteryStorageProxy_1	{ ComponentID = Overclock_BatteryStorage_12 }
-		
-		CombinedBase_BatteryStorage_SmallFront
-		{
-			Type = MultiResourceStorage
-			OperationalToggle = IsOperational
-			ResourceType = battery
-			ResourceStorages = [Base_BatteryStorage_1, Base_BatteryStorage_2, Base_BatteryStorage_3]
-			AddMode = DistributeEvenly
-			RemoveMode = DistributeEvenly
-		}
-		CombinedBase_BatteryStorage_SmallRight :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_4, Base_BatteryStorage_5, Base_BatteryStorage_6] }
-		CombinedBase_BatteryStorage_SmallBack :			CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_7, Base_BatteryStorage_8, Base_BatteryStorage_9] }
-		CombinedBase_BatteryStorage_SmallLeft :			CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_10, Base_BatteryStorage_11, Base_BatteryStorage_12] }
-		CombinedBase_BatteryStorage_LargeFront :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_1, Base_BatteryStorage_2] }
-		CombinedBase_BatteryStorage_LargeFrontRight :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_3, Base_BatteryStorage_4] }
-		CombinedBase_BatteryStorage_LargeBackRight :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_5, Base_BatteryStorage_6] }
-		CombinedBase_BatteryStorage_LargeBack :			CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_7, Base_BatteryStorage_8] }
-		CombinedBase_BatteryStorage_LargeBackLeft :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_9, Base_BatteryStorage_10] }
-		CombinedBase_BatteryStorage_LargeFrontLeft :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Base_BatteryStorage_11, Base_BatteryStorage_12] }
-		
-		CombinedOverclock_BatteryStorage_SmallFront	:		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_1, Overclock_BatteryStorageProxy_2, Overclock_BatteryStorageProxy_3] }
-		CombinedOverclock_BatteryStorage_SmallRight :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_4, Overclock_BatteryStorageProxy_5, Overclock_BatteryStorageProxy_6] }
-		CombinedOverclock_BatteryStorage_SmallBack :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_7, Overclock_BatteryStorageProxy_8, Overclock_BatteryStorageProxy_9] }
-		CombinedOverclock_BatteryStorage_SmallLeft :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_10, Overclock_BatteryStorageProxy_11, Overclock_BatteryStorageProxy_12] }
-		CombinedOverclock_BatteryStorage_LargeFront :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_1, Overclock_BatteryStorageProxy_2] }
-		CombinedOverclock_BatteryStorage_LargeFrontRight :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_3, Overclock_BatteryStorageProxy_4] }
-		CombinedOverclock_BatteryStorage_LargeBackRight :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_5, Overclock_BatteryStorageProxy_6] }
-		CombinedOverclock_BatteryStorage_LargeBack :		CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_7, Overclock_BatteryStorageProxy_8] }
-		CombinedOverclock_BatteryStorage_LargeBackLeft :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_9, Overclock_BatteryStorageProxy_10] }
-		CombinedOverclock_BatteryStorage_LargeFrontLeft :	CombinedBase_BatteryStorage_SmallFront	{ ResourceStorages = [Overclock_BatteryStorageProxy_11, Overclock_BatteryStorageProxy_12] }
+		BatteryStorage_2 :		BatteryStorage_1	{}
+		BatteryStorage_3 :		BatteryStorage_1	{}
+		BatteryStorage_4 :		BatteryStorage_1	{}
+		BatteryStorage_5 :		BatteryStorage_1	{}
+		BatteryStorage_6 :		BatteryStorage_1	{}
+		BatteryStorage_7 :		BatteryStorage_1	{}
+		BatteryStorage_8 :		BatteryStorage_1	{}
+		BatteryStorage_9 :		BatteryStorage_1	{}
+		BatteryStorage_10 :		BatteryStorage_1	{}
+		BatteryStorage_11 :		BatteryStorage_1	{}
+		BatteryStorage_12 :		BatteryStorage_1	{}
 		
 		CombinedBatteryStorage_SmallFront
 		{
 			Type = MultiResourceStorage
 			OperationalToggle = IsOperational
 			ResourceType = battery
-			ToggleOnResources = 1
-			ResourceStorages = [CombinedBase_BatteryStorage_SmallFront, CombinedOverclock_BatteryStorage_SmallFront]
-			AddMode = InOrder
-			RemoveMode = InReverseOrder
-		}
-		CombinedBatteryStorage_SmallRight :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_SmallRight, CombinedOverclock_BatteryStorage_SmallRight] }
-		CombinedBatteryStorage_SmallBack :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_SmallBack, CombinedOverclock_BatteryStorage_SmallBack] }
-		CombinedBatteryStorage_SmallLeft :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_SmallLeft, CombinedOverclock_BatteryStorage_SmallLeft] }
-		CombinedBatteryStorage_LargeFront :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_LargeFront, CombinedOverclock_BatteryStorage_LargeFront] }
-		CombinedBatteryStorage_LargeFrontRight :	CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_LargeFrontRight, CombinedOverclock_BatteryStorage_LargeFrontRight] }
-		CombinedBatteryStorage_LargeBackRight :		CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_LargeBackRight, CombinedOverclock_BatteryStorage_LargeBackRight] }
-		CombinedBatteryStorage_LargeBack :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_LargeBack, CombinedOverclock_BatteryStorage_LargeBack] }
-		CombinedBatteryStorage_LargeBackLeft :		CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_LargeBackLeft, CombinedOverclock_BatteryStorage_LargeBackLeft] }
-		CombinedBatteryStorage_LargeFrontLeft :		CombinedBatteryStorage_SmallFront	{ ResourceStorages = [CombinedBase_BatteryStorage_LargeFrontLeft, CombinedOverclock_BatteryStorage_LargeFrontLeft] }
-		
-		CombinedBaseBatteryStorage
-		{
-			Type = MultiResourceStorage
-			OperationalToggle = IsOperational
-			ResourceType = battery
-			ResourceStorages = [Base_BatteryStorage_1, Base_BatteryStorage_2, Base_BatteryStorage_3, Base_BatteryStorage_4, Base_BatteryStorage_5, Base_BatteryStorage_6, Base_BatteryStorage_7, Base_BatteryStorage_8, Base_BatteryStorage_9, Base_BatteryStorage_10, Base_BatteryStorage_11, Base_BatteryStorage_12]
+			ResourceStorages = [BatteryStorage_1, BatteryStorage_2, BatteryStorage_3]
 			AddMode = DistributeEvenly
 			RemoveMode = DistributeEvenly
 		}
-		CombinedOverclockBatteryStorage :	CombinedBaseBatteryStorage	{ ResourceStorages = [Overclock_BatteryStorageProxy_1, Overclock_BatteryStorageProxy_2, Overclock_BatteryStorageProxy_3, Overclock_BatteryStorageProxy_4, Overclock_BatteryStorageProxy_5, Overclock_BatteryStorageProxy_6, Overclock_BatteryStorageProxy_7, Overclock_BatteryStorageProxy_8, Overclock_BatteryStorageProxy_9, Overclock_BatteryStorageProxy_10, Overclock_BatteryStorageProxy_11, Overclock_BatteryStorageProxy_12] }
+		CombinedBatteryStorage_SmallRight :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_4, BatteryStorage_5, BatteryStorage_6] }
+		CombinedBatteryStorage_SmallBack :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_7, BatteryStorage_8, BatteryStorage_9] }
+		CombinedBatteryStorage_SmallLeft :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_10, BatteryStorage_11, BatteryStorage_12] }
+		CombinedBatteryStorage_LargeFront :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_1, BatteryStorage_2] }
+		CombinedBatteryStorage_LargeFrontRight :	CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_3, BatteryStorage_4] }
+		CombinedBatteryStorage_LargeBackRight :		CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_5, BatteryStorage_6] }
+		CombinedBatteryStorage_LargeBack :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_7, BatteryStorage_8] }
+		CombinedBatteryStorage_LargeBackLeft :		CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_9, BatteryStorage_10] }
+		CombinedBatteryStorage_LargeFrontLeft :		CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_11, BatteryStorage_12] }
 		
-		BatteryStorage	// CombinedBatteryStorage // Named like this for easier compatibility with other mods 
+		BatteryStorage // CombinedBatteryStorage // Named like this for easier compatibility with other mods
 		{
 			Type = MultiResourceStorage
 			OperationalToggle = IsOperational
 			ResourceType = battery
-			IsDrainable = true
-			ResourceStorages = [CombinedBaseBatteryStorage, CombinedOverclockBatteryStorage]
-			AddMode = InOrder
-			RemoveMode = InReverseOrder
-			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+			ResourceStorages = [BatteryStorage_1, BatteryStorage_2, BatteryStorage_3, BatteryStorage_4, BatteryStorage_5, BatteryStorage_6, BatteryStorage_7, BatteryStorage_8, BatteryStorage_9, BatteryStorage_10, BatteryStorage_11, BatteryStorage_12]
+			AddMode = DistributeEvenly
+			RemoveMode = DistributeEvenly
 		}
-		
-		Base_Small :				
-		{
-			Type = MultiToggle
-			Toggles = [IsSmall, {Toggle=IsOverclocked; Invert=true}]
-			Mode = All
-		}
-		Overclock_Small :	Base_Small	{ Toggles = [IsSmall, IsOverclocked] }
-		Base_Large :		Base_Small	{ Toggles = [IsLarge, {Toggle=IsOverclocked; Invert=true}] }
-		Overclock_Large :	Base_Small	{ Toggles = [IsLarge, IsOverclocked] }
-		
+				
 		ToggledBatteryStorage_Alone
 		{
 			Type = ToggledComponents
@@ -425,34 +323,18 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		}
 		ToggledBatteryStorage_Small :	ToggledBatteryStorage_Alone
 		{
-			Toggle = Base_Small
+			Toggle = IsSmall
 			Components :	^/0/Components
 			{
-				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "round((&~/Part/Components/Base_BatteryStorage_1/MaxResources) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/SMALL_SEGMENTS) * (&~/STATS/POWER_RESUPPLY_THRESHOLD), 0)" }
+				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "round((&~/Part/Components/BatteryStorage_1/MaxResources) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/SMALL_SEGMENTS) * (&~/STATS/POWER_RESUPPLY_THRESHOLD), 0)" }
 			}
 		}
 		ToggledBatteryStorage_Large :	ToggledBatteryStorage_Alone
 		{
-			Toggle = Base_Large
+			Toggle = IsLarge
 			Components :	^/0/Components
 			{
-				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "round((&~/Part/Components/Base_BatteryStorage_1/MaxResources) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/LARGE_SEGMENTS) * (&~/STATS/POWER_RESUPPLY_THRESHOLD), 0)" }
-			}
-		}
-		Overclock_ToggledBatteryStorage_Small :	ToggledBatteryStorage_Alone
-		{
-			Toggle = Overclock_Small
-			Components :	^/0/Components
-			{
-				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "round(((&~/Part/Components/Base_BatteryStorage_1/MaxResources) + (&~/Part/Components/Overclock_ToggledBatteryStorage/Components/Overclock_BatteryStorage_1/MaxResources)) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/SMALL_SEGMENTS) * (&~/STATS/POWER_RESUPPLY_THRESHOLD), 0)" }
-			}
-		}
-		Overclock_ToggledBatteryStorage_Large :	ToggledBatteryStorage_Alone
-		{
-			Toggle = Overclock_Large
-			Components :	^/0/Components
-			{
-				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "round(((&~/Part/Components/Base_BatteryStorage_1/MaxResources) + (&~/Part/Components/Overclock_ToggledBatteryStorage/Components/Overclock_BatteryStorage_1/MaxResources)) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/LARGE_SEGMENTS) * (&~/STATS/POWER_RESUPPLY_THRESHOLD), 0)" }
+				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "round((&~/Part/Components/BatteryStorage_1/MaxResources) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/LARGE_SEGMENTS) * (&~/STATS/POWER_RESUPPLY_THRESHOLD), 0)" }
 			}
 		}
 		
@@ -568,18 +450,18 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		IsOperational_ModularSelf_SmallFront
 		{
 			Type = MultiToggle
-			Toggles = [IsOperational_ModularReversed_SmallFront, CombinedBase_BatteryStorage_SmallFront]
+			Toggles = [IsOperational_ModularReversed_SmallFront, CombinedBatteryStorage_SmallFront]
 			Mode = All
 		}
-		IsOperational_ModularSelf_SmallRight :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_SmallRight, CombinedBase_BatteryStorage_SmallRight] }
-		IsOperational_ModularSelf_SmallBack :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_SmallBack, CombinedBase_BatteryStorage_SmallBack] }
-		IsOperational_ModularSelf_SmallLeft :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_SmallLeft, CombinedBase_BatteryStorage_SmallLeft] }
-		IsOperational_ModularSelf_LargeFront :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeFront, CombinedBase_BatteryStorage_LargeFront] }
-		IsOperational_ModularSelf_LargeFrontRight :	IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeFrontRight, CombinedBase_BatteryStorage_LargeFrontRight] }
-		IsOperational_ModularSelf_LargeBackRight :	IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeBackRight, CombinedBase_BatteryStorage_LargeBackRight] }
-		IsOperational_ModularSelf_LargeBack :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeBack, CombinedBase_BatteryStorage_LargeBack] }
-		IsOperational_ModularSelf_LargeBackLeft :	IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeBackLeft, CombinedBase_BatteryStorage_LargeBackLeft] }
-		IsOperational_ModularSelf_LargeFrontLeft :	IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeFrontLeft, CombinedBase_BatteryStorage_LargeFrontLeft] }
+		IsOperational_ModularSelf_SmallRight :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_SmallRight, CombinedBatteryStorage_SmallRight] }
+		IsOperational_ModularSelf_SmallBack :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_SmallBack, CombinedBatteryStorage_SmallBack] }
+		IsOperational_ModularSelf_SmallLeft :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_SmallLeft, CombinedBatteryStorage_SmallLeft] }
+		IsOperational_ModularSelf_LargeFront :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeFront, CombinedBatteryStorage_LargeFront] }
+		IsOperational_ModularSelf_LargeFrontRight :	IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeFrontRight, CombinedBatteryStorage_LargeFrontRight] }
+		IsOperational_ModularSelf_LargeBackRight :	IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeBackRight, CombinedBatteryStorage_LargeBackRight] }
+		IsOperational_ModularSelf_LargeBack :		IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeBack, CombinedBatteryStorage_LargeBack] }
+		IsOperational_ModularSelf_LargeBackLeft :	IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeBackLeft, CombinedBatteryStorage_LargeBackLeft] }
+		IsOperational_ModularSelf_LargeFrontLeft :	IsOperational_ModularSelf_SmallFront { Toggles = [IsOperational_ModularReversed_LargeFrontLeft, CombinedBatteryStorage_LargeFrontLeft] }
 		
 		IsOperational_ModularProxy_SmallFront
 		{
@@ -700,7 +582,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		PowerDrain_LargeBackRight :		PowerDrain_LargeFront
 		{
 			OperationalToggle = IsOperationalProxy_BubbleLargeBackRight
-			FromStorage = CombinedBase_BatteryStorage_LargeBackRight
+			FromStorage = CombinedBatteryStorage_LargeBackRight
 		}
 		PowerDrain_LargeBack :			PowerDrain_LargeFront
 		{
@@ -1100,18 +982,18 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		IsOperationalOverclocked_SmallFront
 		{
 			Type = MultiToggle
-			Toggles = [ IsOperational_BubbleSmallFront, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_SmallFront ]
+			Toggles = [ IsOperational_BubbleSmallFront, IsOverclocked, CanOperate, CombinedBatteryStorage_SmallFront ]
 			Mode = All
 		}
-		IsOperationalOverclocked_SmallRight :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleSmallRight, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_SmallRight ] }
-		IsOperationalOverclocked_SmallBack :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleSmallBack, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_SmallBack ] }
-		IsOperationalOverclocked_SmallLeft :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleSmallLeft, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_SmallLeft ] }
-		IsOperationalOverclocked_LargeFront :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeFront, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_LargeFront ] }
-		IsOperationalOverclocked_LargeFrontRight :	IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeFrontRight, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_LargeFrontRight ] }
-		IsOperationalOverclocked_LargeBackRight :	IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeBackRight, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_LargeBackRight ] }
-		IsOperationalOverclocked_LargeBack :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeBack, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_LargeBack ] }
-		IsOperationalOverclocked_LargeBackLeft :	IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeBackLeft, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_LargeBackLeft ] }
-		IsOperationalOverclocked_LargeFrontLeft :	IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeFrontLeft, IsOverclocked, CanOperate, CombinedBase_BatteryStorage_LargeFrontLeft ] }
+		IsOperationalOverclocked_SmallRight :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleSmallRight, IsOverclocked, CanOperate, CombinedBatteryStorage_SmallRight ] }
+		IsOperationalOverclocked_SmallBack :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleSmallBack, IsOverclocked, CanOperate, CombinedBatteryStorage_SmallBack ] }
+		IsOperationalOverclocked_SmallLeft :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleSmallLeft, IsOverclocked, CanOperate, CombinedBatteryStorage_SmallLeft ] }
+		IsOperationalOverclocked_LargeFront :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeFront, IsOverclocked, CanOperate, CombinedBatteryStorage_LargeFront ] }
+		IsOperationalOverclocked_LargeFrontRight :	IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeFrontRight, IsOverclocked, CanOperate, CombinedBatteryStorage_LargeFrontRight ] }
+		IsOperationalOverclocked_LargeBackRight :	IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeBackRight, IsOverclocked, CanOperate, CombinedBatteryStorage_LargeBackRight ] }
+		IsOperationalOverclocked_LargeBack :		IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeBack, IsOverclocked, CanOperate, CombinedBatteryStorage_LargeBack ] }
+		IsOperationalOverclocked_LargeBackLeft :	IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeBackLeft, IsOverclocked, CanOperate, CombinedBatteryStorage_LargeBackLeft ] }
+		IsOperationalOverclocked_LargeFrontLeft :	IsOperationalOverclocked_SmallFront	{ Toggles = [ IsOperational_BubbleLargeFrontLeft, IsOverclocked, CanOperate, CombinedBatteryStorage_LargeFrontLeft ] }
 		
 		OverclockHeatProducer_SmallFront
 		{
@@ -2048,7 +1930,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			NameKey = "StatCategories/ShieldSegmentSmallBonus"
 			Stats
 			{
-				ShieldHPBonus = (&~/Part/Components/Base_BatteryStorage_1/MaxResources) * 3 / (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
+				ShieldHPBonus = (&~/Part/Components/BatteryStorage_1/MaxResources) * 3 / (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
 				ShieldPenResBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/BaseResistanceBonus/Value)
 				ShieldRadiusBonus = (&<./Data/buffs/buffs.rules>/BubbleRadiusSmall/Multiplier)
 			}
@@ -2057,7 +1939,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			NameKey = "StatCategories/ShieldSegmentLargeBonus"
 			Stats
 			{
-				ShieldHPBonus = (&~/Part/Components/Base_BatteryStorage_1/MaxResources) * 2 / (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
+				ShieldHPBonus = (&~/Part/Components/BatteryStorage_1/MaxResources) * 2 / (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
 				ShieldPenResBonus = (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/BaseResistanceBonus/Value)
 				ShieldRadiusBonus = (&<./Data/buffs/buffs.rules>/BubbleRadiusLarge/Multiplier)
 			}
@@ -2068,10 +1950,6 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 	{
 		TitleKey = "StatCategories/Overclocked"
 		DescriptionKey = "Parts/KebechetTINYmodularShieldBatteryOverclockDesc"
-		Stats
-		{
-			PowerCapacity = (&~/Part/Stats/PowerCapacity) * (&~/OVERCLOCK/CAPACITY_FACTOR)
-		}
 		StatsByCategory
 		[
 			{
@@ -2088,7 +1966,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 				NameKey = "StatCategories/ShieldSegmentSmallBonusOverclock"
 				Stats
 				{
-					ShieldHPBonus = (&~/Part/StatsByCategory/1/Stats/ShieldHPBonus) * (&~/OVERCLOCK/CAPACITY_FACTOR) / (&<../shield_sts_modular/shield_sts_modular.rules>/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
+					ShieldHPBonus = (&~/Part/StatsByCategory/1/Stats/ShieldHPBonus) / (&<../shield_sts_modular/shield_sts_modular.rules>/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
 					ShieldPenResBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/OverclockResistanceBonus/Value)
 					HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
 				}
@@ -2097,7 +1975,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 				NameKey = "StatCategories/ShieldSegmentLargeBonusOverclock"
 				Stats
 				{
-					ShieldHPBonus = (&~/Part/StatsByCategory/2/Stats/ShieldHPBonus) * (&~/OVERCLOCK/CAPACITY_FACTOR) / (&<../shield_stl_modular/shield_stl_modular.rules>/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
+					ShieldHPBonus = (&~/Part/StatsByCategory/2/Stats/ShieldHPBonus) / (&<../shield_stl_modular/shield_stl_modular.rules>/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
 					ShieldPenResBonus = (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/OverclockResistanceBonus/Value)
 					HeatPerDamage = (&~/OVERCLOCK/HEAT_PER_DAMAGE)
 				}
