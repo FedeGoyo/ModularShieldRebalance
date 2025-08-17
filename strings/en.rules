@@ -5,15 +5,15 @@ Parts
 {
 	KebechetTINYmodularShieldBattery = "Shield Battery Module"
 	KebechetTINYmodularShieldBatteryIcon = "Shield Battery"
-	KebechetTINYmodularShieldBatteryDesc = "An optional component placed adjacent to a Small or Large Bubble Shield, or another battery. Each battery increases the shield's strength, penetration resistance and radius.\n"\
+	KebechetTINYmodularShieldBatteryDesc = "An optional component placed adjacent to a Small or Large Bubble Shield, or another battery. Each battery increases the shield's strength, penetration resistance and radius.\n\n"\
 											"To connect multiple batteries place them side by side. To connect to a Small Bubble Shield place it so that only one tile touches the generator. To connect to a Large Bubble Shield do the same but not at the generator's corners."
 	KebechetTINYmodularShieldBatteryOverclock = "Overclocked Shield Battery Module"
 	KebechetTINYmodularShieldBatteryOverclockDesc = "Improves the efficiency of larger Bubble Shields and increases the strength and penetration resistance. Also, doubles the power capacity of the Shield Battery Module. Produces waste heat when Bubble Shield is hit."
 
 	KebechetTINYmodularShield = "Tiny Shield Generator"
 	KebechetTINYmodularShieldIcon = "Tiny Shield"
-	KebechetTINYmodularShieldDesc = 	"Projects a tiny frontal defensive energy shield outside the ship, blocking most incoming fire. Vulnerable to Disruptors and EMPs.\n"\
-										"The technology used makes it resistant to penetration even when it is not at full capacity. However, such technology limits its tiny range and strength, for which it has been reinforced to stand direct impacts, making it suitable to be used at the ship's edges."
+	KebechetTINYmodularShieldDesc = "Projects a tiny frontal defensive energy shield outside the ship, blocking most incoming fire. Vulnerable to Disruptors and EMPs.\n\n"\
+									"The technology used makes it resistant to penetration even when it is not at full capacity. However, such technology limits its tiny range and strength, for which it has been reinforced to stand direct impacts, making it suitable to be used at the ship's edges."
 	KebechetTINYmodularShieldOverclock = "Overclocked Tiny Shield Generator"
 	KebechetTINYmodularShieldOverclockDesc = "Turns on a dynamo that slowly regenerates power, allowing the Tiny Shield Generator to protect from low-damage attacks without ever receiving batteries. Produces waste heat when hit."
 
@@ -102,11 +102,11 @@ PartToggles
 										"<white>(Extended) Length:</white> <good>20.78</good> <gray>meters</gray>\n"\
 										"<white>(Extended) Distance:</white> <good>8.75</good> <gray>meters</gray>"
 	
-	btt_Kebechet_GENL_Angle90LeftArc = "<b>Left Arc</b>\n\n"\
+	btt_Kebechet_GENL_Angle90LeftArc = "<b>Left Arc</b>\n"\
 										"<white>Shield Rotation:</white> <good>-50º</good>"
-	btt_Kebechet_GENL_Angle90FrontArc = "<b>Front Arc</b>\n\n"\
+	btt_Kebechet_GENL_Angle90FrontArc = "<b>Front Arc</b>\n"\
 										"<white>Shield Rotation:</white> <good>0º</good>"
-	btt_Kebechet_GENL_Angle90RightArc = "<b>Right Arc</b>\n\n"\
+	btt_Kebechet_GENL_Angle90RightArc = "<b>Right Arc</b>\n"\
 										"<white>Shield Rotation:</white> <good>+50º</good>"
 }
 
@@ -116,9 +116,8 @@ Stats
 	ShieldRadiusFmt = "<white>Shield Radius:</white> <good>{0:0.#}</good> <gray>meters</gray>"
 	ShieldSpeedFmt = "<white>Shield Rotation Speed:</white> <good>{0:0.#}°</good><gray>/sec</gray>"
 	ShieldSegmentsFmt = "<white>Shield Segments:</white> <good>{0:0}</good>"
-	// Flat Shields
-	ShieldLengthFmT = "<white>Shield Length:</white> <good>{0:0.#}</good> <gray>meters</gray>"
 	// Tiny Shield
+	ShieldLengthFmT = "<white>Shield Length:</white> <good>{0:0.#}</good> <gray>meters</gray>"
 	ShieldRegenFmT = "<white>Shield Regen:</white> <good>{0:n0}</good> <gray>to</gray> <good>{1:n0}</good> <gray>strength/sec</gray>"
 	// Modular Shield Battery
 	ShieldRadiusBonusFmT = "<white>Shield Radius Bonus:</white> <good>+{0:0.#}</good> <gray>meters</gray>"
@@ -126,7 +125,7 @@ Stats
 	ShieldHPBonusFmT = "<white>Shield Strength Bonus:</white> <good>+{0:n0}</good>"
 	ShieldPenResBonusFmT = "<white>Shield Pen. Res. Bonus:</white> <good>-{0:0.#}</good> <gray>meters</gray>"
 	ShieldRotationFmt = "<white>Shield Rotation Speed Reduction:</white> <good>-{0:0.#}%</good>"
-	
+	// Notes
 	BubbleNotes = "<gray>NOTE: Shield Strength, Penetration Resistance and Radius are increased with each additional Shield Battery Module.</gray>"
 	ModularBatteryNotes = "<gray>NOTE: Shield Radius Bonus and Power Use are based on the energy levels of the battery.</gray>"
 	ModularBatteryOverclockNotes = "<gray>NOTE: Shield Rotation Speed Reduction, Shield Radius Bonus, Power Use and Heat Generation are based on the energy levels of the battery.</gray>"
