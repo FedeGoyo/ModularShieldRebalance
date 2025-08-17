@@ -786,9 +786,13 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			{
 				ShieldHP = (&~/Part/Components/BatteryStorage/MaxResources) / (&~/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
 				ShieldPenResist = &~/Part/Components/ArcShield/PenetrationResistance/0
-//				ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue)
-//				ShieldDist = (&~/Part/Components/ArcShield/Radius) - (&~/Part/Components/ArcShield/Location/1)
 				PowerUsageContinuous = (&~/Part/Components/PowerDrain/FromQuantity) / (&~/Part/Components/PowerDrain/Interval) / 1000
+				ARC_ARC = deg(&~/Part/Components/ArcShield/Arc/BaseValue)
+				ARC_DISTANCE = (&~/Part/Components/ArcShield/Radius/BaseValue) - (&~/Part/Components/Transform_Arc_Rotation_LeftToFront/Location/1)
+				LINE_LENGTH = 10.6
+				LINE_DISTANCE = (&~/Part/Components/LineShield/Radius/BaseValue) - (&~/Part/Components/Transform_Line_Rotation_LeftToFront/EndLocation/1)
+				ShieldDistanceDouble = [&../ARC_DISTANCE, &../LINE_DISTANCE]
+				ShieldCoverageDouble = [&../ARC_ARC, &../LINE_LENGTH]
 			}
 		}
 	]
@@ -807,19 +811,25 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 				NameKey = "StatCategories/ShieldExtended"
 				Stats
 				{
-//					ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/EXTENDED/ARC_FACTOR)
-//					ShieldDist = (&~/Part/Components/ArcShield/Radius/BaseValue) * (&~/OVERCLOCK/EXTENDED/ARC_RADIUS_FACTOR)
 					HeatPerDamage = (&~/OVERCLOCK/EXTENDED/HEAT_PER_DAMAGE)
+					ARC_ARC = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/EXTENDED/ARC_FACTOR)
+					ARC_DISTANCE = (&~/Part/Components/ArcShield/Radius/BaseValue) * (&~/OVERCLOCK/EXTENDED/ARC_RADIUS_FACTOR) - (&~/Part/Components/Transform_Arc_Rotation_LeftToFront/Location/1)
+					LINE_LENGTH = 20.78
+					LINE_DISTANCE = (&~/Part/Components/LineShield/Radius/BaseValue) * (&~/OVERCLOCK/EXTENDED/LINE_RADIUS_FACTOR) - (&~/Part/Components/Transform_Line_Rotation_LeftToFront/EndLocation/1)
+					ShieldDistanceDouble = [&../ARC_DISTANCE, &../LINE_DISTANCE]
+					ShieldCoverageDouble = [&../ARC_ARC, &../LINE_LENGTH]
 				}
 			}
 			{
 				NameKey = "StatCategories/ShieldReinforced"
 				Stats
 				{
-//					ShieldArc = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/REINFORCED/ARC_FACTOR)
 					ShieldHP = (&~/Part/StatsByCategory/0/Stats/ShieldHP) / (&~/OVERCLOCK/REINFORCED/DAMAGE_DRAIN_FACTOR)
 					EMPResistPercentage = (&~/OVERCLOCK/REINFORCED/EMP_RESIST) * 100
 					HeatPerDamage = (&~/OVERCLOCK/REINFORCED/HEAT_PER_DAMAGE)
+					ARC_ARC = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/REINFORCED/ARC_FACTOR)
+					LINE_LENGTH = 6.28
+					ShieldCoverageDouble = [&../ARC_ARC, &../LINE_LENGTH]
 				}
 			}
 		]

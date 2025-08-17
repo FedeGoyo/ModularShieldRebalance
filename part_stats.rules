@@ -18,6 +18,14 @@ PartStats
 		ID = ShieldLength
 		FormatKey = "Stats/ShieldLengthFmT"
 	}
+	{
+		ID = ShieldDistanceDouble
+		FormatKey = "Stats/ShieldDistanceDoubleFmt"
+	}
+	{
+		ID = ShieldCoverageDouble
+		FormatKey = "Stats/ShieldCoverageDoubleFmt"
+	}
 	// Tiny Shield
 	{
 		ID = ShieldRegen
