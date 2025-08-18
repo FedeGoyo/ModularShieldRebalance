@@ -7,14 +7,14 @@ Parts
 	KebechetTINYmodularShieldBatteryIcon = "Batería de Escudo"
 	KebechetTINYmodularShieldBatteryDesc = "Componente opcional situado junto a un Escudo de Burbuja Pequeño o Grande, o a otra batería. Cada batería aumenta la resistencia del escudo, la resistencia a la penetración y su radio.\n\n"\
 											"Para conectar varias baterías, colóquelas una al lado de la otra. Para conectarlas a un Escudo de Burbuja Pequeño, colóquelas de modo que solo una pieza toque el generador. Para conectarlas a un Escudo de Burbuja Grande, haga lo mismo, pero no en las esquinas del generador."
-	KebechetTINYmodularShieldBatteryOverclock = "Módulo de Batería de Escudo Sobrecargado"
+	KebechetTINYmodularShieldBatteryOverclock = "Módulo de Batería de Escudo Sobreacelerado"
 	KebechetTINYmodularShieldBatteryOverclockDesc = "Mejora la eficiencia de los Escudos de Burbuja más grandes y aumenta la resistencia y la resistencia a la penetración. Además, duplica la capacidad de energía del Módulo de Batería de Escudo. Produce calor residual cuando el Escudo de Burbuja es impactado."
 											
 	KebechetTINYmodularShield = "Generador de Escudo Diminuto"
 	KebechetTINYmodularShieldIcon = "Escudo Diminuto"
 	KebechetTINYmodularShieldDesc = "Proyecta un diminuto escudo de energía defensivo frontal por fuera de la nave que bloquea la mayoría del fuego entrante. Vulnerable a disruptores y EMP.\n\n"\
 									"La tecnología empleada lo hace resistente a la penetración incluso cuando no está a plena capacidad. Sin embargo, esta tecnología limita su pequeño alcance y resistencia, por lo que ha sido reforzado para resistir impactos directos, convirtiendolo en adecuado para su uso en los bordes de la nave."
-	KebechetTINYmodularShieldOverclock = "Generador de Escudo Diminuto Sobrecargado"
+	KebechetTINYmodularShieldOverclock = "Generador de Escudo Diminuto Sobreacelerado"
 	KebechetTINYmodularShieldOverclockDesc =  "Activa un dinamo que regenera energía lentamente, lo que permite que el Generador de Escudos Diminuto proteja de ataques de menor daño sin recibir baterías. Produce calor residual al ser impactado."
 
 	KebechetSTSmodularShield = "Generador de Escudo de Burbuja Pequeño"
@@ -22,7 +22,7 @@ Parts
 	KebechetSTSmodularShieldDesc = 	"Proyecta un pequeño escudo de energía defensiva en un círculo fuera de la nave, bloqueando la mayoría de los disparos entrantes. Vulnerable a disruptores y EMP.\n\n"\
 									"El escudo de burbuja está dividido en 4 segmentos con resistencia y energía independientes. Puede ser complementado con uno o más Módulos de Batería de Escudo.\n\n"\
 									"El escudo de energía se puede proyectar a través de la propia nave, permitiendo que el generador de escudo pequeño de burbuja se incorpore al interior protegido de la nave."
-	KebechetSTSmodularShieldOverclock = "Pequeño Generador de Escudo de Burbuja Sobrecargado"
+	KebechetSTSmodularShieldOverclock = "Generador de Escudo de Burbuja Pequeño Sobreacelerado"
 	KebechetSTSmodularShieldOverclockDesc = "El escudo de energía gira más lento, pero se vuelve más fuerte y pierde menos energía por impacto. Produce calor residual al ser impactado."
 
 	KebechetSTLmodularShield = "Generador de Escudo de Burbuja Grande"
@@ -30,83 +30,56 @@ Parts
 	KebechetSTLmodularShieldDesc = 	"Proyecta un gran escudo de energía defensiva en un círculo fuera de la nave, bloqueando la mayoría de los disparos entrantes. Vulnerable a disruptores y EMP.\n\n"\
 									"El escudo de burbuja está dividido en 6 segmentos con resistencia y energía independientes. Puede ser complementado con uno o más Módulos de Batería de Escudo.\n\n"\
 									"El escudo de energía se puede proyectar a través de la propia nave, permitiendo que el generador de escudo grande de burbuja se incorpore al interior protegido de la nave."
-	KebechetSTLmodularShieldOverclock = "Grande Generador de Escudo de Burbuja"
+	KebechetSTLmodularShieldOverclock = "Generador de Escudo de Burbuja Grande Sobreacelerado"
 	KebechetSTLmodularShieldOverclockDesc = "El escudo de energía gira más lento, pero se vuelve más fuerte y pierde menos energía por impacto. Produce calor residual al ser impactado."
 }
 
 PartToggles
 {
-	btt_Kebechet_Display_On = "Visible"
-	btt_Kebechet_Display_Off = "Oculto"
+	btt_Kebechet_Display_On = "<b>Visibilidad del escudo: <good>Visible</good></b>\n"\
+								"Siempre muestra el efecto del escudo."
+	btt_Kebechet_Display_Off = "<b>Visibilidad del escudo: <good>Oculto</good></b>\n"\
+								"Solo muestra el efecto del escudo al ser impactado."
 	
-	btt_Kebechet_Radius_On = "<b>Expandir Radio</b>\n"\
-							"Expande el radio de escudos burbuja modulares.\n\n"\
-							"<white>Radio:</white> <good>+1</good> <gray>metros</gray>"
-	
-	btt_Kebechet_Radius_Off = "<b>No Expandir Radio</b>\n"\
+	btt_Kebechet_Radius_On = "<b>Bono de radio del escudo: <good>Activado</good></b>\n"\
+							"Expande el radio de escudos burbuja modulares."	
+	btt_Kebechet_Radius_Off = "<b>Bono de radio del escudo: <good>Desactivado</good></b>\n"\
 							"No expande el radio de escudos burbuja modulares."
 	
-	btt_Kebechet_Colours_Purple = "Purpura"
-	btt_Kebechet_Colours_Blue = "Azul"
-	btt_Kebechet_Colours_Orange = "Naranja"
-	btt_Kebechet_Colours_Red = "Rojo"
-	btt_Kebechet_Colours_Yellow = "Amarillo"
-	btt_Kebechet_Colours_Green = "Verde"
+	btt_Kebechet_Colours_Purple = "<b>Color del escudo: <good>Púrpura</good></b>"
+	btt_Kebechet_Colours_Blue =  "<b>Color del escudo: <good>Azul</good></b>"
+	btt_Kebechet_Colours_Orange =  "<b>Color del escudo: <good>Naranja</good></b>"
+	btt_Kebechet_Colours_Red =  "<b>Color del escudo: <good>Rojo</good></b>"
+	btt_Kebechet_Colours_Yellow =  "<b>Color del escudo: <good>Amarillo</good></b>"
+	btt_Kebechet_Colours_Green =  "<b>Color del escudo: <good>Verde</good></b>"
+	
 	btt_bubble_right = "<b>Rotación del escudo: <good>Derecha</good></b>"
 	btt_bubble_left = "<b>Rotación del escudo: <good>Izquierda</good></b>"
 	
-	btt_Kebechet_GENS_Angle90LeftArc = "<b>Arco Izquierdo</b>\n"\
-										"<white>Distancia del escudo:</white> <good>6</good> <gray>metros</gray>\n"\
-										"<white>Arco del escudo:</white> <good>90º</good>\n"\
-										"<white>Rotación del escudo:</white> <good>-27.5º</good>\n\n"\
-										"<b>Sobrecargado</b>\n"\
-										"<white>(Reforzado) Arco:</white> <good>49.5º</good>\n"\
-										"<white>(Extendido) Arco:</white> <good>135º</good>\n"\
-										"<white>(Extendido) Distancia:</white> <good>9.75</good> <gray>metros</gray>"
-	btt_Kebechet_GENS_Angle90FrontArc = "<b>Arco Frontal</b>\n"\
-										"<white>Distancia del escudo:</white> <good>6</good> <gray>metros</gray>\n"\
-										"<white>Arco del escudo:</white> <good>90º</good>\n"\
-										"<white>Rotación del escudo:</white> <good>0º</good>\n\n"\
-										"<b>Sobrecargado</b>\n"\
-										"<white>(Reforzado) Arco:</white> <good>49.5º</good>\n"\
-										"<white>(Extendido) Arco:</white> <good>135º</good>\n"\
-										"<white>(Extendido) Distancia:</white> <good>9.75</good> <gray>metros</gray>"
-	btt_Kebechet_GENS_Angle90RightArc = "<b>Arco Derecho</b>\n"\
-										"<white>Distancia del escudo:</white> <good>6</good> <gray>metros</gray>\n"\
-										"<white>Arco del escudo:</white> <good>90º</good>\n"\
-										"<white>Rotación del escudo:</white> <good>+27.5º</good>\n\n"\
-										"<b>Sobrecargado</b>\n"\
-										"<white>(Reforzado) Arco:</white> <good>49.5º</good>\n"\
-										"<white>(Extendido) Arco:</white> <good>135º</good>\n"\
-										"<white>(Extendido) Distancia:</white> <good>9.75</good> <gray>metros</gray>"
-	btt_Kebechet_GENS_Angle22LeftLine = "<b>Línea Izquierda</b>\n"\
-										"<white>Distancia del escudo:</white> <good>5</good> <gray>metros</gray>\n"\
-										"<white>Longitud del escudo:</white> <good>10.6</good> <gray>metros</gray>\n"\
-										"<white>Ángulo del escudo:</white> <good>-19.7º</good>\n\n"\
-										"<b>Sobrecargado</b>\n"\
-										"<white>(Reforzado) Longitud:</white> <good>6.28</good> <gray>metros</gray>\n"\
-										"<white>(Extendido) Longitud:</white> <good>20.78</good> <gray>metros</gray>\n"\
-										"<white>(Extendido) Distancia:</white> <good>8.75</good> <gray>metros</gray>"
-	btt_Kebechet_GENS_Angle90FrontLine = "<b>Línea Frontral</b>\n"\
-										"<white>Distancia del escudo:</white> <good>5</good> <gray>metros</gray>\n"\
-										"<white>Longitud del escudo:</white> <good>10.6</good> <gray>metros</gray>\n"\
-										"<white>Ángulo del escudo:</white> <good>0º</good>\n\n"\
-										"<b>Sobrecargado</b>\n"\
-										"<white>(Reforzado) Longitud:</white> <good>6.28</good> <gray>metros</gray>\n"\
-										"<white>(Extendido) Longitud:</white> <good>20.78</good> <gray>metros</gray>\n"\
-	btt_Kebechet_GENS_Angle22RightLine = "<b>Línea Derecha</b>\n"\
-										"<white>Distancia del escudo:</white> <good>5</good> <gray>metros</gray>\n"\
-										"<white>Longitud del escudo:</white> <good>10.6</good> <gray>metros</gray>\n"\
-										"<white>Ángulo del escudo:</white> <good>+19.7º</good>\n\n"\
-										"<b>Sobrecargado</b>\n"\
-										"<white>(Reforzado) Longitud:</white> <good>6.28</good> <gray>metros</gray>\n"\
-										"<white>(Extendido) Longitud:</white> <good>20.78</good> <gray>metros</gray>\n"\
-	
-	btt_Kebechet_GENL_Angle90LeftArc = "<b>Arco Izquierdo</b>\n"\
-										"<white>Rotación del escudo:</white> <good>-50º</good>"
-	btt_Kebechet_GENL_Angle90FrontArc = "<b>Arco Frontal</b>\n"\
+	btt_Kebechet_GENS_Angle90LeftArc = "<b>Configuración del escudo: <good>Arco Izquierdo</good></b>\n"\
+										"<white>Forma del escudo:</white> <good>Arco</good>\n"\
+										"<white>Rotación del escudo:</white> <good>-27.5º</good>"
+	btt_Kebechet_GENS_Angle90FrontArc = "<b>Configuración del escudo: <good>Arco Frontal</good></b>\n"\
+										"<white>Forma del escudo:</white> <good>Arco</good>\n"\
 										"<white>Rotación del escudo:</white> <good>0º</good>"
-	btt_Kebechet_GENL_Angle90RightArc = "<b>Arco Derecho</b>\n"\
+	btt_Kebechet_GENS_Angle90RightArc = "<b>Configuración del escudo: <good>Arco Derecho</good></b>\n"\
+										"<white>Forma del escudo:</white> <good>Arco</good>\n"\
+										"<white>Rotación del escudo:</white> <good>+27.5º</good>"
+	btt_Kebechet_GENS_Angle22LeftLine = "<b>Configuración del escudo: <good>Línea Izquierda</good></b>\n"\
+										"<white>Forma del escudo:</white> <good>Línea</good>\n"\
+										"<white>Ángulo del escudo:</white> <good>-19.7º</good>"
+	btt_Kebechet_GENS_Angle90FrontLine = "<b>Configuración del escudo: <good>Línea Frontal</good></b>\n"\
+										"<white>Forma del escudo:</white> <good>Línea</good>\n"\
+										"<white>Ángulo del escudo:</white> <good>0º</good>"
+	btt_Kebechet_GENS_Angle22RightLine = "<b>Configuración del escudo: <good>Línea Derecha</good></b>\n"\
+										"<white>Forma del escudo:</white> <good>Línea</good>\n"\
+										"<white>Ángulo del escudo:</white> <good>+19.7º</good>"
+	
+	btt_Kebechet_GENL_Angle90LeftArc = "<b>Orientación del escudo: <good>Izquierda</good></b>\n"\
+										"<white>Rotación del escudo:</white> <good>-50º</good>"
+	btt_Kebechet_GENL_Angle90FrontArc = "<b>Orientación del escudo: <good>Frontal</good></b>\n"\
+										"<white>Rotación del escudo:</white> <good>0º</good>"
+	btt_Kebechet_GENL_Angle90RightArc = "<b>Orientación del escudo: <good>Derecha</good></b>\n"\
 										"<white>Rotación del escudo:</white> <good>+50º</good>"
 }
 
@@ -136,18 +109,18 @@ Stats
 
 StatCategories
 {
-	ShieldTiny = "Escudo Diminuto"
-	ShieldBubbleSmall = "Escudo de Burbuja Pequeño"
-	ShieldBubbleLarge = "Escudo de Burbuja Grande"
-	ShieldSegmentSmall = "Segmento de Escudo Pequeño"
-	ShieldSegmentLarge = "Segmento de Escudo Grande"
+	ShieldTiny = "Escudo diminuto"
+	ShieldBubbleSmall = "Escudo de burbuja pequeño"
+	ShieldBubbleLarge = "Escudo de burbuja grande"
+	ShieldSegmentSmall = "Segmento de escudo pequeño"
+	ShieldSegmentLarge = "Segmento de escudo grande"
 	// Modular Shield Battery
-	ShieldBubbleBonus = "Bono al Escudo Burbuja"
-	ShieldBubbleBonusOverclock = "Bono al Escudo Burbuja (Overclocked)"
-	ShieldSegmentSmallBonus = "Bono a los Segmentos de Escudo Pequeño"
-	ShieldSegmentSmallBonusOverclock = ""Bono a los Segmentos de Escudo Pequeño" (Overclocked)"
-	ShieldSegmentLargeBonus = "Bono a los Segmentos de Escudo Grande"
-	ShieldSegmentLargeBonusOverclock = "Bono a los Segmentos de Escudo Grande (Overclocked)"
+	ShieldBubbleBonus = "Bono al escudo burbuja"
+	ShieldBubbleBonusOverclock = "Bono al escudo burbuja (sobreacelerado)"
+	ShieldSegmentSmallBonus = "Bono a los segmentos de escudo pequeño"
+	ShieldSegmentSmallBonusOverclock = "Bono a los segmentos de escudo pequeño (sobreacelerado)"
+	ShieldSegmentLargeBonus = "Bono a los segmentos de escudo grande"
+	ShieldSegmentLargeBonusOverclock = "Bono a los segmentos de escudo grande (sobreacelerado)"
 }
 
 StarterShips

@@ -36,79 +36,50 @@ Parts
 
 PartToggles
 {
-	btt_Kebechet_Display_On = "Visible"
-	btt_Kebechet_Display_Off = "Hidden"
+	btt_Kebechet_Display_On = "<b>Shield Visibility: <good>Visible</good></b>\n"\
+								"Always shows the shield effect."
+	btt_Kebechet_Display_Off = "<b>Shield Visibility: <good>Hidden</good></b>\n"\
+								"Only shows the shield on hit effect."
 	
-	btt_Kebechet_Radius_On = "<b>Expand Radius</b>\n"\
-							"Expands the radius of modular bubble shields.\n\n"\
-							"<white>Radius:</white> <good>+1</good><gray>m</gray>"
-	
-	btt_Kebechet_Radius_Off = "<b>Doesn't Expand Radius</b>\n"\
+	btt_Kebechet_Radius_On = "<b>Shield Bonus Radius: <good>On</good></b>\n"\
+							"Expands the radius of modular bubble shields."	
+	btt_Kebechet_Radius_Off = "<b>Shield Bonus Radius: <good>Off</good></b>\n"\
 							"Doesn't expand the radius of modular bubble shields."
 	
-	btt_Kebechet_Colours_Purple = "Purple"
-	btt_Kebechet_Colours_Blue = "Blue"
-	btt_Kebechet_Colours_Orange = "Orange"
-	btt_Kebechet_Colours_Red = "Red"
-	btt_Kebechet_Colours_Yellow = "Yellow"
-	btt_Kebechet_Colours_Green = "Green"
+	btt_Kebechet_Colours_Purple = "<b>Shield Color: <good>Purple</good></b>"
+	btt_Kebechet_Colours_Blue = "<b>Shield Color: <good>Blue</good></b>"
+	btt_Kebechet_Colours_Orange = "<b>Shield Color: <good>Orange</good></b>"
+	btt_Kebechet_Colours_Red = "<b>Shield Color: <good>Red</good></b>"
+	btt_Kebechet_Colours_Yellow = "<b>Shield Color: <good>Yellow</good></b>"
+	btt_Kebechet_Colours_Green = "<b>Shield Color: <good>Green</good></b>"
+	
 	btt_bubble_right = "<b>Shield Rotation: <good>Right</good></b>"
 	btt_bubble_left = "<b>Shield Rotation: <good>Left</good></b>"
 	
-	btt_Kebechet_GENS_Angle90LeftArc = "<b>Left Arc</b>\n"\
-										"<white>Shield Distance:</white> <good>6</good> <gray>meters</gray>\n"\
-										"<white>Shield Arc:</white> <good>90º</good>\n"\
-										"<white>Shield Rotation:</white> <good>-27.5º</good>\n\n"\
-										"<b>Overclocked</b>\n"\
-										"<white>(Reinforced) Arc:</white> <good>49.5º</good>\n"\
-										"<white>(Extended) Arc:</white> <good>135º</good>\n"\
-										"<white>(Extended) Distance:</white> <good>9.75</good> <gray>meters</gray>"
-	btt_Kebechet_GENS_Angle90FrontArc = "<b>Front Arc</b>\n"\
-										"<white>Shield Distance:</white> <good>6</good> <gray>meters</gray>\n"\
-										"<white>Shield Arc:</white> <good>90º</good>\n"\
-										"<white>Shield Rotation:</white> <good>0º</good>\n\n"\
-										"<b>Overclocked</b>\n"\
-										"<white>(Reinforced) Arc:</white> <good>49.5º</good>\n"\
-										"<white>(Extended) Arc:</white> <good>135º</good>\n"\
-										"<white>(Extended) Distance:</white> <good>9.75</good> <gray>meters</gray>"
-	btt_Kebechet_GENS_Angle90RightArc = "<b>Right Arc</b>\n"\
-										"<white>Shield Distance:</white> <good>6</good> <gray>meters</gray>\n"\
-										"<white>Shield Arc:</white> <good>90º</good>\n"\
-										"<white>Shield Rotation:</white> <good>+27.5º</good>\n\n"\
-										"<b>Overclocked</b>\n"\
-										"<white>(Reinforced) Arc:</white> <good>49.5º</good>\n"\
-										"<white>(Extended) Arc:</white> <good>135º</good>\n"\
-										"<white>(Extended) Distance:</white> <good>9.75</good> <gray>meters</gray>"
-	btt_Kebechet_GENS_Angle22LeftLine = "<b>Left Line</b>\n"\
-										"<white>Shield Distance:</white> <good>5</good> <gray>meters</gray>\n"\
-										"<white>Shield Length:</white> <good>10.6</good> <gray>meters</gray>\n"\
-										"<white>Shield Angle:</white> <good>-19.7º</good>\n\n"\
-										"<b>Overclocked</b>\n"\
-										"<white>(Reinforced) Length:</white> <good>6.28</good> <gray>meters</gray>\n"\
-										"<white>(Extended) Length:</white> <good>20.78</good> <gray>meters</gray>\n"\
-										"<white>(Extended) Distance:</white> <good>8.75</good> <gray>meters</gray>"
-	btt_Kebechet_GENS_Angle90FrontLine = "<b>Front Line</b>\n"\
-										"<white>Shield Distance:</white> <good>5</good> <gray>meters</gray>\n"\
-										"<white>Shield Length:</white> <good>10.6</good> <gray>meters</gray>\n"\
-										"<white>Shield Angle:</white> <good>0º</good>\n\n"\
-										"<b>Overclocked</b>\n"\
-										"<white>(Reinforced) Length:</white> <good>6.28</good> <gray>meters</gray>\n"\
-										"<white>(Extended) Length:</white> <good>20.78</good> <gray>meters</gray>\n"\
-										"<white>(Extended) Distance:</white> <good>8.75</good> <gray>meters</gray>"
-	btt_Kebechet_GENS_Angle22RightLine = "<b>Right Line</b>\n"\
-										"<white>Shield Distance:</white> <good>5</good> <gray>meters</gray>\n"\
-										"<white>Shield Length:</white> <good>10.6</good> <gray>meters</gray>\n"\
-										"<white>Shield Angle:</white> <good>+19.7º</good>\n\n"\
-										"<b>Overclocked</b>\n"\
-										"<white>(Reinforced) Length:</white> <good>6.28</good> <gray>meters</gray>\n"\
-										"<white>(Extended) Length:</white> <good>20.78</good> <gray>meters</gray>\n"\
-										"<white>(Extended) Distance:</white> <good>8.75</good> <gray>meters</gray>"
-	
-	btt_Kebechet_GENL_Angle90LeftArc = "<b>Left Arc</b>\n"\
-										"<white>Shield Rotation:</white> <good>-50º</good>"
-	btt_Kebechet_GENL_Angle90FrontArc = "<b>Front Arc</b>\n"\
+	btt_Kebechet_GENS_Angle90LeftArc = "<b>Shield Configuration: <good>Left Arc</good></b>\n"\
+										"<white>Shield Shape:</white> <good>Arc</good>\n"\
+										"<white>Shield Rotation:</white> <good>-27.5º</good>"
+	btt_Kebechet_GENS_Angle90FrontArc = "<b>Shield Configuration: <good>Front Arc</good></b>\n"\
+										"<white>Shield Shape:</white> <good>Arc</good>\n"\
 										"<white>Shield Rotation:</white> <good>0º</good>"
-	btt_Kebechet_GENL_Angle90RightArc = "<b>Right Arc</b>\n"\
+	btt_Kebechet_GENS_Angle90RightArc = "<b>Shield Configuration: <good>Right Arc</good></b>\n"\
+										"<white>Shield Shape:</white> <good>Arc</good>\n"\
+										"<white>Shield Rotation:</white> <good>+27.5º</good>"
+	btt_Kebechet_GENS_Angle22LeftLine = "<b>Shield Configuration: <good>Left Line</good></b>\n"\
+										"<white>Shield Shape:</white> <good>Line</good>\n"\
+										"<white>Shield Angle:</white> <good>-19.7º</good>"
+	btt_Kebechet_GENS_Angle90FrontLine = "<b>Shield Configuration: <good>Front Line</good></b>\n"\
+										"<white>Shield Shape:</white> <good>Line</good>\n"\
+										"<white>Shield Angle:</white> <good>0º</good>"
+	btt_Kebechet_GENS_Angle22RightLine = "<b>Shield Configuration: <good>Right Line</good></b>\n"\
+										"<white>Shield Shape:</white> <good>Line</good>\n"\
+										"<white>Shield Angle:</white> <good>+19.7º</good>"
+	
+	btt_Kebechet_GENL_Angle90LeftArc = "<b>Shield Orientation: <good>Left</good></b>\n"\
+										"<white>Shield Rotation:</white> <good>-50º</good>"
+	btt_Kebechet_GENL_Angle90FrontArc = "<b>Shield Orientation: <good>Front</good></b>\n"\
+										"<white>Shield Rotation:</white> <good>0º</good>"
+	btt_Kebechet_GENL_Angle90RightArc = "<b>Shield Orientation: <good>Right</good></b>\n"\
 										"<white>Shield Rotation:</white> <good>+50º</good>"
 }
 
