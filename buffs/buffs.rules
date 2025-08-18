@@ -68,11 +68,6 @@ BubbleRadiusLarge
 	Multiplier = 2
 }
 
-ShieldOverload
-{
-	BaseValue = 100%
-}
-
 ShieldOverclockExtendedLineRadius {}
 ShieldOverclockExtendedLineArc {}
 ShieldOverclockReinforcedLineArc {}
