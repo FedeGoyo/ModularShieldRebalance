@@ -1,0 +1,39 @@
+Bubble_Rotation
+{
+	ToggleID = "ToggleID_RingsDirection"
+	Style = CycledButton //Popout
+//	ShowInEditor = true
+	ShowWithShipCommands = true
+	Choices
+	[
+		{
+			ChoiceID = "cid_bubble_right"
+			ButtonToolTipKey = "PartToggles/btt_bubble_right"
+			Mode = 0
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ringRight.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		{
+			ChoiceID = "cid_bubble_left"
+			ButtonToolTipKey = "PartToggles/btt_bubble_left"
+			Mode = 1
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "ringLeft.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+	]
+}

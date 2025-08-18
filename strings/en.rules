@@ -52,6 +52,8 @@ PartToggles
 	btt_Kebechet_Colours_Red = "Red"
 	btt_Kebechet_Colours_Yellow = "Yellow"
 	btt_Kebechet_Colours_Green = "Green"
+	btt_bubble_right = "<b>Shield Rotation: <good>Right</good></b>"
+	btt_bubble_left = "<b>Shield Rotation: <good>Left</good></b>"
 	
 	btt_Kebechet_GENS_Angle90LeftArc = "<b>Left Arc</b>\n"\
 										"<white>Shield Distance:</white> <good>6</good> <gray>meters</gray>\n"\

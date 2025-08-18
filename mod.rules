@@ -110,6 +110,7 @@ Actions
 			&<gui/part_toggles_angles.rules>/Kebechet_GENS_Modular_Angle
 			&<gui/part_toggles_angles.rules>/Kebechet_GENL_Modular_Angle
 			&<gui/part_toggles_radius.rules>/Kebechet_Modular_Radius
+			&<gui/part_toggles_rotation.rules>/Bubble_Rotation
 		]
 	}
 	{

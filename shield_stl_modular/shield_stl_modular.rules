@@ -123,6 +123,28 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		ToggleDisplay_Off : ToggleDisplay_On	{ OnMode = 1 }
 
 		// -----------------------------------------------
+		// ROTATION TOGGLES -------------------------------
+		// -----------------------------------------------
+		
+		ToggleRotation
+		{
+			Type = UIToggle
+			ToggleID = "ToggleID_RingsDirection"
+			Default = 0
+			AlwaysAllowInBuildMode = true
+			RequiresCommand = false
+		}
+
+		ToggleRotation_Right
+		{
+			Type = ModeToggle
+			Mode = ToggleRotation
+			OnMode = 0
+		}
+
+		ToggleRotation_Left : ToggleRotation_Right	{ OnMode = 1 }
+		
+		// -----------------------------------------------
 		// PROXY -----------------------------------------
 		// -----------------------------------------------
 		
@@ -653,10 +675,11 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		RotationTime
 		{
 			Type = ValueAccumulator
-			AccumulatingToggle = IsOperational
+			OperationalToggle = IsOperational
+			AccumulatingToggle = ToggleRotation_Right
 			AccumulationRate
 			{
-				BaseValue = (&../../RotationReset/MinAmount) / 10
+				BaseValue = (&../MaxValue) / 10
 				Modifiers
 				[
 					{
@@ -673,21 +696,47 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					}
 				]
 			}
+			DissipationRate = &AccumulationRate
+			MinValue = 0
+			MaxValue = 3
 			AccumulationTriggers
 			[
 				{
-					Trigger = RotationReset
+					Trigger = RotationTrigger_Right
 					Value = 0
+					Operation = 2
+				}
+				{
+					Trigger = RotationTrigger_Left
+					Value = 3
 					Operation = 2
 				}
 			]
 		}
 		
-		RotationReset
+		RotationMaxReset
 		{
 			Type = ThresholdTrigger
 			AmountFrom = RotationTime
-			MinAmount = 3
+			MinAmount = &../RotationTime/MaxValue
+		}
+		RotationMinReset
+		{
+			Type = ThresholdTrigger
+			AmountFrom = RotationTime
+			MaxAmount = &../RotationTime/MinValue
+		}
+		
+		RotationTrigger_Right
+		{
+			Type = TriggerProxy
+			ComponentId = RotationMaxReset
+			ProxyToggle = ToggleRotation_Right
+		}
+		RotationTrigger_Left : 	RotationTrigger_Right
+		{
+			ComponentId = RotationMinReset
+			ProxyToggle = ToggleRotation_Left
 		}
 		
 		BuffProvider_Rotation
@@ -1732,7 +1781,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			Stats
 			{
 				ShieldRadius = (&~/Part/Components/ArcShield/Radius/BaseValue) - (&~/Part/Components/ArcShield/Location/1)
-				ROTATION_SECONDS = (&~/Part/Components/RotationReset/MinAmount) / (&~/Part/Components/RotationTime/AccumulationRate/BaseValue)
+				ROTATION_SECONDS = (&~/Part/Components/RotationTime/MaxValue) / (&~/Part/Components/RotationTime/AccumulationRate/BaseValue)
 				ShieldSpeed = 360 / (&ROTATION_SECONDS)
 				SHIELD_SEGMENTS = 6
 				PowerUsageContinuous = (&~/Part/Components/PowerDrain_Front/FromQuantity) / (&~/Part/Components/PowerDrain_Front/Interval) / 1000 * (&SHIELD_SEGMENTS)

@@ -52,6 +52,8 @@ PartToggles
 	btt_Kebechet_Colours_Red = "Rojo"
 	btt_Kebechet_Colours_Yellow = "Amarillo"
 	btt_Kebechet_Colours_Green = "Verde"
+	btt_bubble_right = "<b>Rotación del escudo: <good>Derecha</good></b>"
+	btt_bubble_left = "<b>Rotación del escudo: <good>Izquierda</good></b>"
 	
 	btt_Kebechet_GENS_Angle90LeftArc = "<b>Arco Izquierdo</b>\n"\
 										"<white>Distancia del escudo:</white> <good>6</good> <gray>metros</gray>\n"\
