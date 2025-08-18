@@ -68,17 +68,6 @@ BubbleRadiusLarge
 	Multiplier = 2
 }
 
-BubbleRotation
-{
-	CombineMode = Add
-}
-BubbleRotationPenalty
-{
-	CombineMode = Add
-	BaseValue = 100%
-	Multiplier = 10%
-}
-
 ShieldOverload
 {
 	BaseValue = 100%

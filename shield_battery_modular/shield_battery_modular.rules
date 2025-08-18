@@ -37,7 +37,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 	SelectionTypeByRotation = true
 	MaxHealth = 4000
 	TypeCategories = [defense, uses_power]
-	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacity, BubbleCapacityReversed, BubbleResistance, BubbleRadius, ShieldOverload, BubbleRotation, BubbleHeatCollector]
+	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacity, BubbleCapacityReversed, BubbleResistance, BubbleRadius, ShieldOverload, BubbleHeatCollector]
 	PenetrationRectType = Normal
 	// ProhibitLeft = 0
 	// ProhibitRight = 0
@@ -847,57 +847,6 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		{
 			BuffAmount = { BaseValue=0; BuffType=BubbleRadius; BuffMode=Add; }
 			BuffMultiplier = BubbleRadiusStateValue
-		}
-		
-		// Start Rotation Penalty
-		
-		IsBonusRotationOperational
-		{
-			Type = MultiToggle
-			Toggles = [CanOperate, IsOverclocked]
-			Mode = All
-		}
-		
-		BubbleRotationStateValue
-		{
-			Type = ValueTween
-			IsOnToggle = IsBonusRotationOperational
-			StartingValue = 0
-			OnTweenDuration = 1;
-			OffTweenDuration = 0.1;
-		}
-		
-		BubbleRotationStateValue_SelfMin
-		{
-			Type = MultiValue
-			Values = [ BubbleRotationStateValue, BubbleStateValue_Self_Selector ]
-			Mode = Min
-		}
-		
-		BuffProvider_BubbleRotation_Right
-		{
-			Type = AreaBuffProvider
-			BuffType = BubbleRotation
-			BuffAmount = 1
-			BuffMultiplier = BubbleRotationStateValue_SelfMin
-			OperationalToggle = IsShieldConnected_Right
-			BuffArea = [2, 0, 1, 1]
-		}
-		BuffProvider_BubbleRotation_Left :			BuffProvider_BubbleRotation_Right
-		{
-			OperationalToggle = IsShieldConnected_Left
-			BuffArea = [-1, 0, 1, 1]
-		}
-		
-		BuffProvider_BubbleRotation_RightChained : 	BuffProvider_BubbleRotation_Right
-		{
-			BuffAmount = 1
-			BuffMultiplier = BubbleRotationStateValue
-		}
-		BuffProvider_BubbleRotation_LeftChained :	BuffProvider_BubbleRotation_Left
-		{
-			BuffAmount = { BaseValue=0; BuffType=BubbleRotation; BuffMode=Add; }
-			BuffMultiplier = BubbleRotationStateValue
 		}
 		
 		// End Modular
@@ -2034,7 +1983,6 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 				Stats
 				{
 					ShieldRadiusExp = (&<./Data/buffs/buffs.rules>/BubbleRadiusOverclock/Exponent)
-					ShieldRotation = (&<./Data/buffs/buffs.rules>/BubbleRotationPenalty/Multiplier) * 100
 //					PowerUsageContinuous = (&~/Part/StatsByCategory/0/Stats/PowerUsageContinuous)
 					HeatGeneration = (&~/OVERCLOCK/HEAT_PER_SECOND)
 				}
