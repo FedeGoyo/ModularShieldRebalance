@@ -1807,6 +1807,8 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		}
 	]
 	
+	StatsNotesKey = "Stats/ModularBatteryNotes"
+	
 	SecondaryToolTip
 	{
 		TitleKey = "StatCategories/Overclocked"
@@ -1838,8 +1840,6 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			}
 		]
 
-	StatsNotesKey = "Stats/ModularBatteryOverclockNotes"
+		StatsNotesKey = "Stats/ModularBatteryOverclockNotes"
 	}
-
-	StatsNotesKey = "Stats/ModularBatteryNotes"
 }

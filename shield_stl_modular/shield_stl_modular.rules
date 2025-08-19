@@ -1786,6 +1786,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 	]
 	
+	StatsNotesKey = "Stats/BubbleNotes"
 	SecondaryToolTip
 	{
 		TitleKey = "StatCategories/Overclocked"
@@ -1811,7 +1812,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				}
 			}
 		]
+		
+		StatsNotesKey = "Stats/BubbleOverclockNotes"
 	}
-	
-	StatsNotesKey = "Stats/BubbleNotes"
 }

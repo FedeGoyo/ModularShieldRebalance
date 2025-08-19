@@ -101,7 +101,10 @@ Stats
 	ShieldHPBonusFmT = "<white>Bono de resistencia del escudo</white> <good>+{0:n0}</good>"
 	ShieldPenResBonusFmT = "<white>Bono de resistencia a la penetración del escudo:</white> <good>-{0:0.#}</good> <gray>m</gray>"
 	// Notes
-	BubbleNotes = "<gray>NOTA: La resistencia del escudo, resistencia a la penetración y el radio se incrementan con cada Módulo de Batería de Escudo.</gray>"
+	BubbleNotes = "<gray>NOTA: La resistencia del escudo, resistencia a la penetración y el radio se incrementan con cada Módulo de Batería de Escudo.</gray>\n"\
+				"<gray>NOTA 2: El uso de energía esta basado en el número de segmentos activos.</gray>"
+	BubbleOverclockNotes = "<gray>NOTA: La resistencia del escudo se incrementa con cada Módulo de Batería de Escudo.</gray>\n"\
+						"<gray>NOTA 2: El uso de energía y la generación de calor estan basados en el número de segmentos activos.</gray>"
 	ModularBatteryNotes = "<gray>NOTA: El bono de radio del escudo y el uso de energía se basan en el nivel de energía de la batería.</gray>"
 	ModularBatteryOverclockNotes = "<gray>NOTA: El bono de radio del escudo, el uso de energía y la generación de calor se basan en el nivel de energía de la batería.</gray>"
 }
