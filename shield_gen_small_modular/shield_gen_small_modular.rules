@@ -2,13 +2,45 @@ OVERCLOCK : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/OVERCL
 {
 	EXTENDED : ^/0/EXTENDED
 	{
-		LINE_RADIUS_FACTOR = (6 * (7.5 * 150% -1.5) / (7.5 - 1.5) + 79) / 85
-		LINE_ARC_FACTOR = 188.01%
+		LINE_RADIUS_FACTOR = (&LINE_RADIUS) / (&../LINE_RADIUS)
+		LINE_FACTOR = (&LINE_ARC) / (&../LINE_ARC)
+		
+		// Auxiliary calculations
+		DISTANCE_FACTOR = (&ARC_DISTANCE) / (&../ARC_DISTANCE)
+		LINE_DISTANCE = (&../LINE_DISTANCE) * (&DISTANCE_FACTOR)
+		LINE_RADIUS = (&LINE_DISTANCE) + (&~/STATS/LINE_FRONT_LOCATION/1)
+		
+		ARC_RADIUS = (&../ARC_RADIUS) * (&^/0/ARC_RADIUS_FACTOR)
+		ARC_DISTANCE = (&ARC_RADIUS) - (&~/STATS/ARC_LOCATION/1)
+		ARC_ARC = (&../ARC_ARC) * (&^/0/ARC_FACTOR)
+		ARC_CHORD = 2 * (&ARC_RADIUS) * sin( rad(&ARC_ARC) /2)
+		CHORD_FACTOR = (&ARC_CHORD) / (&../ARC_CHORD)
+		LINE_CHORD = (&../LINE_CHORD) * (&CHORD_FACTOR)
+		LINE_ARC = deg( asin( (&LINE_CHORD) /2 / (&../LINE_RADIUS) ) *2 )		
 	}
 	REINFORCED : ^/0/REINFORCED
 	{
-		LINE_ARC_FACTOR = 59.18%
+		LINE_FACTOR = (&LINE_ARC) / (&../LINE_ARC)
+		
+		// Auxiliary calculations
+		ARC_ARC = (&../ARC_ARC) * (&^/0/ARC_FACTOR)
+		ARC_CHORD = 2 * (&../ARC_RADIUS) * sin( rad(&ARC_ARC) /2)
+		CHORD_FACTOR = (&ARC_CHORD) / (&../ARC_CHORD)
+		LINE_CHORD = (&../LINE_CHORD) * (&CHORD_FACTOR)
+		LINE_ARC = deg( asin( (&LINE_CHORD) /2 / (&../LINE_RADIUS) ) *2 )
 	}
+	
+	// Auxiliary calculations
+	ARC_CHORD = 2 * (&ARC_RADIUS) * sin( rad( (&ARC_ARC) ) /2)
+	LINE_CHORD = 2 * (&LINE_RADIUS) * sin( rad( (&LINE_ARC) ) /2)
+	ARC_DISTANCE = (&ARC_RADIUS) - (&~/STATS/ARC_LOCATION/1)
+	LINE_DISTANCE = (&LINE_RADIUS) - (&~/STATS/LINE_FRONT_LOCATION/1)
+	
+	// Auxiliary references
+	ARC_RADIUS = (&~/Part/Components/ArcShield/Radius/BaseValue)
+	ARC_ARC = deg(&~/Part/Components/ArcShield/Arc/BaseValue)
+	LINE_RADIUS = (&~/Part/Components/LineShield/Radius/BaseValue)
+	LINE_ARC = deg(&~/Part/Components/LineShield/Arc/BaseValue)
 }
 
 STATS
@@ -28,7 +60,6 @@ STATS
 	LINE_LEFT_LOCATION = [27, 75]
 	LINE_FRONT_LOCATION = [1, 80]
 	LINE_RIGHT_LOCATION = [-25, 75]
-	
 }
 
 Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
@@ -471,14 +502,14 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 						BuffType = ShieldOverclockExtendedLineArc
 						ModificationMode = Multiply
 						RemapFrom = [0, 1]
-						RemapTo = [1, &~/OVERCLOCK/EXTENDED/LINE_ARC_FACTOR ]
+						RemapTo = [1, &~/OVERCLOCK/EXTENDED/LINE_FACTOR ]
 					}
 					{
 						Type = BuffRemap
 						BuffType = ShieldOverclockReinforcedLineArc
 						ModificationMode = Multiply
 						RemapFrom = [0, 1]
-						RemapTo = [1, &~/OVERCLOCK/REINFORCED/LINE_ARC_FACTOR ]
+						RemapTo = [1, &~/OVERCLOCK/REINFORCED/LINE_FACTOR ]
 					}
 				]
 			}
@@ -594,7 +625,7 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			Rotation = &~/STATS/LINE_FRONT_ROTATION
 			Location = &~/STATS/LINE_FRONT_LOCATION
 			Radius = (&../LineShield/Radius/BaseValue) * (&~/OVERCLOCK/EXTENDED/LINE_RADIUS_FACTOR)
-			Arc = (&../LineShield/Arc/BaseValue) * (&~/OVERCLOCK/EXTENDED/LINE_ARC_FACTOR)
+			Arc = (&../LineShield/Arc/BaseValue) * (&~/OVERCLOCK/EXTENDED/LINE_FACTOR)
 		}
 		Overclock_ExtendedBlueprintArc_Line_Right :	Overclock_ExtendedBlueprintArc_Line_Front
 		{
@@ -643,7 +674,7 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			Rotation = &~/STATS/LINE_FRONT_ROTATION
 			Location = &~/STATS/LINE_FRONT_LOCATION
 			Radius = &../LineShield/Radius/BaseValue
-			Arc = (&../LineShield/Arc/BaseValue) * (&~/OVERCLOCK/REINFORCED/LINE_ARC_FACTOR)
+			Arc = (&../LineShield/Arc/BaseValue) * (&~/OVERCLOCK/REINFORCED/LINE_FACTOR)
 		}
 		Overclock_ReinforcedBlueprintArc_Line_Right :	Overclock_ReinforcedBlueprintArc_Line_Front
 		{
@@ -789,10 +820,13 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 				PowerUsageContinuous = (&~/Part/Components/PowerDrain/FromQuantity) / (&~/Part/Components/PowerDrain/Interval) / 1000
 				ARC_ARC = deg(&~/Part/Components/ArcShield/Arc/BaseValue)
 				ARC_DISTANCE = (&~/Part/Components/ArcShield/Radius/BaseValue) - (&~/Part/Components/Transform_Arc_Rotation_LeftToFront/Location/1)
-				LINE_LENGTH = 10.6
+				LINE_CHORD = &~/OVERCLOCK/LINE_CHORD
 				LINE_DISTANCE = (&~/Part/Components/LineShield/Radius/BaseValue) - (&~/Part/Components/Transform_Line_Rotation_LeftToFront/EndLocation/1)
 				ShieldDistanceDouble = [&../ARC_DISTANCE, &../LINE_DISTANCE]
-				ShieldCoverageDouble = [&../ARC_ARC, &../LINE_LENGTH]
+				ShieldCoverageDouble = [&../ARC_ARC, &../LINE_CHORD]
+				
+//				DamageArea = (&~/OVERCLOCK/EXTENDED/ARC_CHORD) *100
+//				DamageAreaFalloff = (&~/OVERCLOCK/REINFORCED/ARC_CHORD) *100
 			}
 		}
 	]
@@ -814,10 +848,10 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 					HeatPerDamage = (&~/OVERCLOCK/EXTENDED/HEAT_PER_DAMAGE)
 					ARC_ARC = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/EXTENDED/ARC_FACTOR)
 					ARC_DISTANCE = (&~/Part/Components/ArcShield/Radius/BaseValue) * (&~/OVERCLOCK/EXTENDED/ARC_RADIUS_FACTOR) - (&~/Part/Components/Transform_Arc_Rotation_LeftToFront/Location/1)
-					LINE_LENGTH = 20.78
+					LINE_CHORD = &~/OVERCLOCK/EXTENDED/LINE_CHORD
 					LINE_DISTANCE = (&~/Part/Components/LineShield/Radius/BaseValue) * (&~/OVERCLOCK/EXTENDED/LINE_RADIUS_FACTOR) - (&~/Part/Components/Transform_Line_Rotation_LeftToFront/EndLocation/1)
 					ShieldDistanceDouble = [&../ARC_DISTANCE, &../LINE_DISTANCE]
-					ShieldCoverageDouble = [&../ARC_ARC, &../LINE_LENGTH]
+					ShieldCoverageDouble = [&../ARC_ARC, &../LINE_CHORD]
 				}
 			}
 			{
@@ -828,8 +862,8 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 					EMPResistPercentage = (&~/OVERCLOCK/REINFORCED/EMP_RESIST) * 100
 					HeatPerDamage = (&~/OVERCLOCK/REINFORCED/HEAT_PER_DAMAGE)
 					ARC_ARC = deg(&~/Part/Components/ArcShield/Arc/BaseValue) * (&~/OVERCLOCK/REINFORCED/ARC_FACTOR)
-					LINE_LENGTH = 6.28
-					ShieldCoverageDouble = [&../ARC_ARC, &../LINE_LENGTH]
+					LINE_CHORD = &~/OVERCLOCK/REINFORCED/LINE_CHORD
+					ShieldCoverageDouble = [&../ARC_ARC, &../LINE_CHORD]
 				}
 			}
 		]
