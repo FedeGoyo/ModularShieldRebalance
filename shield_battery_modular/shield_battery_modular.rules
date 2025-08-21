@@ -9,7 +9,6 @@ STATS
 {
 	POWER_DRAIN = 50	// Total, divided by segments
 	POWER_CAPACITY = 2000	// Total, divided by segments
-	POWER_RESUPPLY_THRESHOLD = 50%
 	SMALL_SEGMENTS = 4
 	LARGE_SEGMENTS = 6
 	TOTAL_BATTERIES = 12	
@@ -297,11 +296,45 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			AddMode = DistributeEvenly
 			RemoveMode = DistributeEvenly
 		}
-				
+		
+		SegmentDisable_Small
+		{
+			Type = MultiToggle
+			Toggles = [CombinedBatteryStorage_SmallFront, CombinedBatteryStorage_SmallRight, CombinedBatteryStorage_SmallBack, CombinedBatteryStorage_SmallLeft]
+			Invert = true
+			Mode = All
+		}
+		SegmentDisableProxy_Small
+		{
+			Type = ToggleProxy
+			ProxyToggle = IsSmall
+			ComponentID = SegmentDisable_Small
+		}
+		SegmentDisable_Large
+		{
+			Type = MultiToggle
+			Toggles = [CombinedBatteryStorage_LargeFront, CombinedBatteryStorage_LargeFrontRight, CombinedBatteryStorage_LargeBackRight, CombinedBatteryStorage_LargeBack, CombinedBatteryStorage_LargeBackLeft, CombinedBatteryStorage_LargeFrontLeft]
+			Invert = true
+			Mode = All
+		}
+		SegmentDisableProxy_Large
+		{
+			Type = ToggleProxy
+			ProxyToggle = IsLarge
+			ComponentID = SegmentDisable_Large
+		}
+		SegmentActive
+		{
+			Type = MultiToggle
+			Toggles = [SegmentDisableProxy_Small, SegmentDisableProxy_Large]
+			Invert = true
+			Mode = Any
+		}
+		
 		ToggledBatteryStorage_Alone
 		{
 			Type = ToggledComponents
-			Toggle = IsAlone
+			Toggle = SegmentActive
 			Components
 			{
 				BatteryConsumer
@@ -317,18 +350,18 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		}
 		ToggledBatteryStorage_Small :	ToggledBatteryStorage_Alone
 		{
-			Toggle = IsSmall
+			Toggle = SegmentDisableProxy_Small
 			Components :	^/0/Components
 			{
-				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "round((&~/Part/Components/BatteryStorage_1/MaxResources) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/SMALL_SEGMENTS) * (&~/STATS/POWER_RESUPPLY_THRESHOLD), 0)" }
+				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "floor((&~/Part/Components/BatteryStorage_1/MaxResources) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/SMALL_SEGMENTS))" }
 			}
 		}
 		ToggledBatteryStorage_Large :	ToggledBatteryStorage_Alone
 		{
-			Toggle = IsLarge
+			Toggle = SegmentDisableProxy_Large
 			Components :	^/0/Components
 			{
-				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "round((&~/Part/Components/BatteryStorage_1/MaxResources) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/LARGE_SEGMENTS) * (&~/STATS/POWER_RESUPPLY_THRESHOLD), 0)" }
+				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = "floor((&~/Part/Components/BatteryStorage_1/MaxResources) * (&~/STATS/TOTAL_BATTERIES) / (&~/STATS/LARGE_SEGMENTS))" }
 			}
 		}
 		
