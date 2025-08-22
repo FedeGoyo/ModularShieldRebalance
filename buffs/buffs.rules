@@ -60,12 +60,12 @@ BubbleRadiusOverclock
 BubbleRadiusSmall
 {
 	CombineMod = Add
-	Multiplier = 1.5
+	Multiplier = 2
 }
 BubbleRadiusLarge
 {
 	CombineMod = Add
-	Multiplier = 2
+	Multiplier = 3
 }
 
 ShieldOverclockExtendedLineRadius {}
