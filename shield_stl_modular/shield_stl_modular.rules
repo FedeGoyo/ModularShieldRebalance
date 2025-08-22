@@ -31,7 +31,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeByRotation = false
 	MaxHealth = 10000
 	TypeCategories = [defense, uses_power, bubble_shield]
-	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacityReversed, BubbleResistance, BubbleResistanceBonus, BubbleRadius, BubbleRadiusBase, BubbleRadiusOverclock, BubbleRadiusLarge]
+	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacityReversed, BubbleResistance, BubbleResistanceBonus, BubbleRadius, BubbleRadiusBase, BubbleRadiusOverclock, BubbleRadiusLarge, BubbleDrain]
 	PenetrationRectType = Normal
 	AllowedDoorLocations
 	[
@@ -583,12 +583,19 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ViaBuffs : ^/0/ViaBuffs	{ ComponentID = BatteryStorageProxy_LargeFrontLeft }
 		}
 		
+		BuffProvider_Drain
+		{
+			Type = SelfBuffProvider
+			BuffType = BubbleDrain
+			BuffAmount = {BaseValue = 0; BuffType = BubbleRadius; BuffMode = Add}
+		}
+				
 		PowerDrain_Front
 		{
 			Type = ResourceConverter
 			OperationalToggle = IsOperational_LargeFront
 			FromStorage = BatteryStorage_Front
-			FromQuantity = 50
+			FromQuantity = {BaseValue = 50; BuffType = BubbleDrain; BuffMode = Multiply}
 			MinFromQuantityForConversion = 1
 			Interval = 1
 		}
@@ -1771,7 +1778,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				ROTATION_SECONDS = (&~/Part/Components/RotationTime/MaxValue) / (&~/Part/Components/RotationTime/AccumulationRate/BaseValue)
 				ShieldSpeed = 360 / (&ROTATION_SECONDS)
 				SHIELD_SEGMENTS = 6
-				PowerUsageContinuous = (&~/Part/Components/PowerDrain_Front/FromQuantity) / (&~/Part/Components/PowerDrain_Front/Interval) / 1000 * (&SHIELD_SEGMENTS)
+				PowerUsageContinuous = (&~/Part/Components/PowerDrain_Front/FromQuantity/BaseValue) / (&~/Part/Components/PowerDrain_Front/Interval) / 1000 * (&SHIELD_SEGMENTS)
 			}
 		}
 		{

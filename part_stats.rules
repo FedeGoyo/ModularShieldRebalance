@@ -48,4 +48,8 @@ PartStats
 		ID = ShieldPenResBonus
 		FormatKey = "Stats/ShieldPenResBonusFmT"
 	}
+	{
+		ID = ShieldDrainBonus
+		FormatKey = "Stats/ShieldDrainBonusFmT"
+	}
 ]

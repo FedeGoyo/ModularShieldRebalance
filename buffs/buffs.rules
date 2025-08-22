@@ -68,6 +68,13 @@ BubbleRadiusLarge
 	Multiplier = 3
 }
 
+BubbleDrain
+{
+	CombineMode = Add
+	BaseValue = 1
+	Multiplier = 25%
+}
+
 ShieldOverclockExtendedLineRadius {}
 ShieldOverclockExtendedLineArc {}
 ShieldOverclockReinforcedLineArc {}
