@@ -589,7 +589,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = ResourceConverter
 			OperationalToggle = IsOperational_LargeFront
-			FromStorage = BatteryStorage_Front
+			FromStorage = CombinedBatteryStorage_Front
 			FromQuantity = {BaseValue = 50; BuffType = BubbleDrain; BuffMode = Multiply}
 			MinFromQuantityForConversion = 1
 			Interval = 1
@@ -597,27 +597,27 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		PowerDrain_FrontRight :	PowerDrain_Front
 		{
 			OperationalToggle = IsOperational_LargeFrontRight
-			FromStorage = BatteryStorage_FrontRight
+			FromStorage = CombinedBatteryStorage_FrontRight
 		}
 		PowerDrain_BackRight :	PowerDrain_Front
 		{
 			OperationalToggle = IsOperational_LargeBackRight
-			FromStorage = BatteryStorage_BackRight
+			FromStorage = CombinedBatteryStorage_BackRight
 		}
 		PowerDrain_Back :	PowerDrain_Front
 		{
 			OperationalToggle = IsOperational_LargeBack
-			FromStorage = BatteryStorage_Back
+			FromStorage = CombinedBatteryStorage_Back
 		}
 		PowerDrain_BackLeft :	PowerDrain_Front
 		{
 			OperationalToggle = IsOperational_LargeBackLeft
-			FromStorage = BatteryStorage_BackLeft
+			FromStorage = CombinedBatteryStorage_BackLeft
 		}
 		PowerDrain_FrontLeft :	PowerDrain_Front
 		{
 			OperationalToggle = IsOperational_LargeFrontLeft
-			FromStorage = BatteryStorage_FrontLeft
+			FromStorage = CombinedBatteryStorage_FrontLeft
 		}
 		
 		// Out of Power Toggle
