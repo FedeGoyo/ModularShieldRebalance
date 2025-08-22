@@ -18,9 +18,9 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	EditorGroup = "Defenses"
 	Resources
 	[
-		[steel, 120]
+		[steel, 136]
+		[coil2, 32]
 		[diamond, 3]
-		[processor, 4] 
 	]
 	AIValueFactor = 5
 	Size = [4, 4]
