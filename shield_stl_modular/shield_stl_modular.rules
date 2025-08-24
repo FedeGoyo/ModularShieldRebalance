@@ -293,14 +293,40 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
 			AddMode = DistributeEvenly
 		}
-		BatteryConsumer
+		
+		SegmentBroken
 		{
-			Type = ResourceConsumer
-			ResourceType = battery
-			Storage = CombinedBatteryStorage
-			DefaultPriority = &/PRIORITIES/Defense_Supply
-			ResupplyThreshold = 500
-			OperationalToggle = PowerToggle
+			Type = MultiToggle
+			Toggles = [BatteryStorage_Front, BatteryStorage_FrontRight, BatteryStorage_BackRight, BatteryStorage_Back, BatteryStorage_BackLeft, BatteryStorage_FrontLeft]
+			Mode = All
+			Invert = true
+		}
+
+		ToggledBatteryConsumer_Normal
+		{
+			Type = ToggledComponents
+			Toggle = SegmentBroken
+			Invert = true
+			Components
+			{
+				BatteryConsumer
+				{
+					Type = ResourceConsumer
+					ResourceType = battery
+					Storage = BatteryStorage
+					DefaultPriority = &/PRIORITIES/Defense_Supply
+					ResupplyThreshold = 500
+					OperationalToggle = PowerToggle
+				}	
+			}
+		}
+		ToggledBatteryConsumer_Broken :	ToggledBatteryConsumer_Normal
+		{
+			Invert = false
+			Components :	^/0/Components
+			{
+				BatteryConsumer :	^/0/BatteryConsumer	{ ResupplyThreshold = 1 }
+			}
 		}
 		
 		// All Segments Toggle
