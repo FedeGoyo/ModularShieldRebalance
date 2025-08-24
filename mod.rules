@@ -1,6 +1,6 @@
 ID = swefpifh.SpecialShield.enderluck
 Name = "Modular Bubble Shield Rebalance"
-Version = 2.1.0
+Version = 2.2.0
 CompatibleGameVersions = ["0.30.0"]
 ModifiesMultiplayer = true
 Author = "Enderluck"
