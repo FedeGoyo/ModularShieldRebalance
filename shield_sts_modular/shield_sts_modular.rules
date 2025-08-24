@@ -30,7 +30,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 	SelectionTypeByRotation = false
 	MaxHealth = 5000
 	TypeCategories = [defense, uses_power, bubble_shield]
-	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacityReversed, BubbleResistance, BubbleRadius, BubbleRadiusBase, BubbleRadiusOverclock, BubbleRadiusSmall, BubbleDrain]
+	ReceivableBuffs : ^/0/ReceivableBuffs [BubbleCapacityReversed, BubbleResistance, BubbleRadius, BubbleRadiusBase, BubbleRadiusOverclock, BubbleRadiusFinal, BubbleDrain]
 	PenetrationRectType = Normal
 	// ExplosiveDamageAbsorption = 50%
 	IsRotateable = false
@@ -790,8 +790,8 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = SelfBuffProvider
 			ChainsFromBuffType = BubbleRadius
-			BuffType = BubbleRadiusSmall
-			BuffAmount = 1
+			BuffType = BubbleRadiusFinal
+			BuffAmount = 1.5
 			BuffMultiplier = ValueLerp_RadiusFinal
 		}
 		
@@ -827,7 +827,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 				[
 					{
 						Type = Buff
-						BuffType = BubbleRadiusSmall
+						BuffType = BubbleRadiusFinal
 						ModificationMode = Add
 					}
 				]

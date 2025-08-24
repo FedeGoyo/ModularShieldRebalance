@@ -1734,7 +1734,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			{
 				ShieldHPBonus = (&~/Part/Components/BatteryStorage_1/MaxResources) * 3 / (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
 				ShieldPenResBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/PenetrationResistance/0/Modifiers/0/Scale)
-				ShieldRadiusBonus = (&<./Data/buffs/buffs.rules>/BubbleRadiusSmall/Multiplier)
+				ShieldRadiusBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/BuffProvider_Radius_Final/BuffAmount)
 			}
 		}
 		{
@@ -1743,7 +1743,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			{
 				ShieldHPBonus = (&~/Part/Components/BatteryStorage_1/MaxResources) * 2 / (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
 				ShieldPenResBonus = (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/ArcShield/PenetrationResistance/0/Modifiers/0/Scale)
-				ShieldRadiusBonus = (&<./Data/buffs/buffs.rules>/BubbleRadiusLarge/Multiplier)
+				ShieldRadiusBonus = (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/BuffProvider_Radius_Final/BuffAmount)
 			}
 		}
 	]

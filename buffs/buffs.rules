@@ -22,19 +22,6 @@ BubbleResistance
 	CombineMode = Add
 }
 
-BubbleResistanceBonus
-{
-	CombineMode = Add
-	Multiplier = 1
-	BaseValue = 0
-/*	// The numbers get bugged
-	IconTextFormatKey = "BuildBox/BuffResistanceFmt"
-	IconTextMultiply = 1
-	IconTextAdd = 0
-	ShowIconTextForZeroValue = false
-	*/
-}
-
 BubbleRadius
 {
 	CombineMode = Add
@@ -42,7 +29,6 @@ BubbleRadius
 
 BubbleRadiusBase
 {
-	CombineMode = Add
 	Exponent = 0.8
 /*
 	IconTextFormatKey = "BuildBox/BuffRadiusFmt"
@@ -51,30 +37,22 @@ BubbleRadiusBase
 	ShowIconTextForZeroValue = false
 */
 }
+
 BubbleRadiusOverclock
 {
-	CombineMode = Add
 	Exponent = 1
 }
 
-BubbleRadiusSmall
-{
-	CombineMod = Add
-	Multiplier = 2
-}
-BubbleRadiusLarge
-{
-	CombineMod = Add
-	Multiplier = 3
-}
+BubbleRadiusFinal {}
 
 BubbleDrain
 {
-	CombineMode = Add
 	BaseValue = 1
 	Multiplier = 25%
 }
 
 ShieldOverclockExtendedLineRadius {}
+
 ShieldOverclockExtendedLineArc {}
+
 ShieldOverclockReinforcedLineArc {}
