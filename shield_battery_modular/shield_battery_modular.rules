@@ -6,8 +6,7 @@ HEAT_TO_RESOURCE = &<./Data/statuses/heat/heat.rules>/STATUS_TO_RESOURCE_RATIO
 HEAT_TO_STATUS = &<./Data/statuses/heat/heat.rules>/RESOURCE_TO_STATUS_RATIO
 STATS
 {
-	POWER_DRAIN = 50	// Total, divided by segments
-	POWER_CAPACITY = 4000	// Total, divided by segments
+	POWER_CAPACITY_SEGMENTS = 1000
 	SMALL_SEGMENTS = 4
 	LARGE_SEGMENTS = 6
 	TOTAL_BATTERIES = 12	
@@ -109,7 +108,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		IsOperational
 		{
 			Type = MultiToggle
-			Toggles = [PowerToggle, BatteryStorage, ScorchedToggle]
+			Toggles = [PowerToggle, BatteryStorageProxy, ScorchedToggle]
 			Mode = All
 		}
 		
@@ -248,53 +247,90 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		
 		// Start Battery
 		
-		BatteryStorage_1
+		ToggleComponents_SmallBubble
 		{
-			Type = ResourceStorage
-			ResourceType = battery
-			MaxResources = "round((&~/STATS/POWER_CAPACITY) / (&~/STATS/TOTAL_BATTERIES), 0)"
-			DrainOnFtlJump = true
-			IsDrainable = false
+			Type = ToggledComponents
+			Toggle = IsSmall
+			Components
+			{
+				BatteryStorage_SmallBubble_1
+				{
+					Type = ResourceStorage
+					ResourceType = battery
+					MaxResources = &~/STATS/POWER_CAPACITY_SEGMENTS
+					DrainOnFtlJump = true
+					IsDrainable = false
+				}
+				BatteryStorage_SmallBubble_2 :	BatteryStorage_SmallBubble_1	{}
+				BatteryStorage_SmallBubble_3 :	BatteryStorage_SmallBubble_1	{}
+				BatteryStorage_SmallBubble_4 :	BatteryStorage_SmallBubble_1	{}
+				
+				BatteryStorage // CombinedBatteryStorage // Named like this for easier compatibility with other mods
+				{
+					Type = MultiResourceStorage
+					OperationalToggle = IsOperational
+					ResourceType = battery
+					ResourceStorages = [BatteryStorage_SmallBubble_1, BatteryStorage_SmallBubble_2, BatteryStorage_SmallBubble_3, BatteryStorage_SmallBubble_4]
+					AddMode = DistributeEvenly
+					RemoveMode = DistributeEvenly
+				}
+			}
 		}
-		BatteryStorage_2 :		BatteryStorage_1	{}
-		BatteryStorage_3 :		BatteryStorage_1	{}
-		BatteryStorage_4 :		BatteryStorage_1	{}
-		BatteryStorage_5 :		BatteryStorage_1	{}
-		BatteryStorage_6 :		BatteryStorage_1	{}
-		BatteryStorage_7 :		BatteryStorage_1	{}
-		BatteryStorage_8 :		BatteryStorage_1	{}
-		BatteryStorage_9 :		BatteryStorage_1	{}
-		BatteryStorage_10 :		BatteryStorage_1	{}
-		BatteryStorage_11 :		BatteryStorage_1	{}
-		BatteryStorage_12 :		BatteryStorage_1	{}
 		
+		ToggleComponents_LargeBubble
+		{
+			Type = ToggledComponents
+			Toggle = IsLarge
+			Components
+			{
+				BatteryStorage_LargeBubble_1
+				{
+					Type = ResourceStorage
+					ResourceType = battery
+					MaxResources = &~/STATS/POWER_CAPACITY_SEGMENTS
+					DrainOnFtlJump = true
+					IsDrainable = false
+				}
+				BatteryStorage_LargeBubble_2 :	BatteryStorage_LargeBubble_1	{}
+				BatteryStorage_LargeBubble_3 :	BatteryStorage_LargeBubble_1	{}
+				BatteryStorage_LargeBubble_4 :	BatteryStorage_LargeBubble_1	{}
+				BatteryStorage_LargeBubble_5 :	BatteryStorage_LargeBubble_1	{}
+				BatteryStorage_LargeBubble_6 :	BatteryStorage_LargeBubble_1	{}
+				
+				BatteryStorage // CombinedBatteryStorage // Named like this for easier compatibility with other mods
+				{
+					Type = MultiResourceStorage
+					OperationalToggle = IsOperational
+					ResourceType = battery
+					ResourceStorages = [BatteryStorage_LargeBubble_1, BatteryStorage_LargeBubble_2, BatteryStorage_LargeBubble_3, BatteryStorage_LargeBubble_4, BatteryStorage_LargeBubble_5, BatteryStorage_LargeBubble_6]
+					AddMode = DistributeEvenly
+					RemoveMode = DistributeEvenly
+				}
+			}
+		}
+		
+				
 		CombinedBatteryStorage_SmallFront
 		{
-			Type = MultiResourceStorage
-			OperationalToggle = IsOperational
+			Type = ResourceStorageProxy
 			ResourceType = battery
-			ResourceStorages = [BatteryStorage_1, BatteryStorage_2, BatteryStorage_3]
-			AddMode = DistributeEvenly
-			RemoveMode = DistributeEvenly
+			ComponentID = BatteryStorage_SmallBubble_1
 		}
-		CombinedBatteryStorage_SmallRight :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_4, BatteryStorage_5, BatteryStorage_6] }
-		CombinedBatteryStorage_SmallBack :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_7, BatteryStorage_8, BatteryStorage_9] }
-		CombinedBatteryStorage_SmallLeft :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_10, BatteryStorage_11, BatteryStorage_12] }
-		CombinedBatteryStorage_LargeFront :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_1, BatteryStorage_2] }
-		CombinedBatteryStorage_LargeFrontRight :	CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_3, BatteryStorage_4] }
-		CombinedBatteryStorage_LargeBackRight :		CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_5, BatteryStorage_6] }
-		CombinedBatteryStorage_LargeBack :			CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_7, BatteryStorage_8] }
-		CombinedBatteryStorage_LargeBackLeft :		CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_9, BatteryStorage_10] }
-		CombinedBatteryStorage_LargeFrontLeft :		CombinedBatteryStorage_SmallFront	{ ResourceStorages = [BatteryStorage_11, BatteryStorage_12] }
-		
-		BatteryStorage // CombinedBatteryStorage // Named like this for easier compatibility with other mods
+		CombinedBatteryStorage_SmallRight :			CombinedBatteryStorage_SmallFront	{ ComponentID = BatteryStorage_SmallBubble_2 }
+		CombinedBatteryStorage_SmallBack :			CombinedBatteryStorage_SmallFront	{ ComponentID = BatteryStorage_SmallBubble_3 }
+		CombinedBatteryStorage_SmallLeft :			CombinedBatteryStorage_SmallFront	{ ComponentID = BatteryStorage_SmallBubble_4 }
+		CombinedBatteryStorage_LargeFront :			CombinedBatteryStorage_SmallFront	{ ComponentID = BatteryStorage_LargeBubble_1 }
+		CombinedBatteryStorage_LargeFrontRight :	CombinedBatteryStorage_SmallFront	{ ComponentID = BatteryStorage_LargeBubble_2 }
+		CombinedBatteryStorage_LargeBackRight :		CombinedBatteryStorage_SmallFront	{ ComponentID = BatteryStorage_LargeBubble_3 }
+		CombinedBatteryStorage_LargeBack :			CombinedBatteryStorage_SmallFront	{ ComponentID = BatteryStorage_LargeBubble_4 }
+		CombinedBatteryStorage_LargeBackLeft :		CombinedBatteryStorage_SmallFront	{ ComponentID = BatteryStorage_LargeBubble_5 }
+		CombinedBatteryStorage_LargeFrontLeft :		CombinedBatteryStorage_SmallFront	{ ComponentID = BatteryStorage_LargeBubble_6 }
+				
+		BatteryStorageProxy
 		{
-			Type = MultiResourceStorage
-			OperationalToggle = IsOperational
+			Type = ResourceStorageProxy
 			ResourceType = battery
-			ResourceStorages = [BatteryStorage_1, BatteryStorage_2, BatteryStorage_3, BatteryStorage_4, BatteryStorage_5, BatteryStorage_6, BatteryStorage_7, BatteryStorage_8, BatteryStorage_9, BatteryStorage_10, BatteryStorage_11, BatteryStorage_12]
-			AddMode = DistributeEvenly
-			RemoveMode = DistributeEvenly
+			ComponentID = BatteryStorage
 		}
 		
 		SegmentBroken
@@ -315,7 +351,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 				{
 					Type = ResourceConsumer
 					ResourceType = battery
-					Storage = BatteryStorage
+					Storage = BatteryStorageProxy
 					DefaultPriority = &/PRIORITIES/Defense_Supply
 					ResupplyThreshold = 500
 					OperationalToggle = PowerToggle
@@ -605,7 +641,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			Mode = All
 		}
 		HasEnergy_Large :	HasEnergy_Small	{ Toggles = [IsLarge, HasEnergy_LargeFront, HasEnergy_LargeFrontRight, HasEnergy_LargeBackRight, HasEnergy_LargeBack, HasEnergy_LargeBackLeft, HasEnergy_LargeFrontLeft] }
-		HasEnergy_Alone :	HasEnergy_Small	{ Toggles = [BatteryStorage, IsAlone] }
+		HasEnergy_Alone :	HasEnergy_Small	{ Toggles = [BatteryStorageProxy, IsAlone] }
 		
 		HasEnergy	// Out of power Toggle
 		{
@@ -1607,7 +1643,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		{
 			Type = ResourceSprites
 			Location = [1, 0.5]
-			ResourceStorage = BatteryStorage
+			ResourceStorage = BatteryStorageProxy
 			Layer = "doodads_low"
 			ResourceLevels
 			[
@@ -1712,8 +1748,6 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 
 	Stats
 	{
-		PowerCapacity = (&~/STATS/POWER_CAPACITY) / 1000
-
 		RecPower = 0.5
 		RecCrew = (&RecPower) * 4
 	}
@@ -1732,7 +1766,8 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			NameKey = "StatCategories/ShieldSegmentSmallBonus"
 			Stats
 			{
-				ShieldHPBonus = (&~/Part/Components/BatteryStorage_1/MaxResources) * 3 / (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
+				PowerCapacity = (&~/STATS/POWER_CAPACITY_SEGMENTS) / 1000
+				ShieldHPBonus = (&~/STATS/POWER_CAPACITY_SEGMENTS) / (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
 				ShieldPenResBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/PenetrationResistance/0/Modifiers/0/Scale)
 				ShieldRadiusBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/BuffProvider_Radius_Final/BuffAmount)
 			}
@@ -1741,7 +1776,8 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			NameKey = "StatCategories/ShieldSegmentLargeBonus"
 			Stats
 			{
-				ShieldHPBonus = (&~/Part/Components/BatteryStorage_1/MaxResources) * 2 / (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
+				PowerCapacity = (&~/STATS/POWER_CAPACITY_SEGMENTS) / 1000
+				ShieldHPBonus = (&~/STATS/POWER_CAPACITY_SEGMENTS) / (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
 				ShieldPenResBonus = (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/ArcShield/PenetrationResistance/0/Modifiers/0/Scale)
 				ShieldRadiusBonus = (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/BuffProvider_Radius_Final/BuffAmount)
 			}
