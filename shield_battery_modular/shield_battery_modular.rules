@@ -1755,7 +1755,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 	StatsByCategory
 	[
 		{
-			NameKey = "StatCategories/ShieldBubbleBonus"
+			NameKey = "StatCategories/ShieldRadiusBonus"
 			Stats
 			{
 				ShieldRadiusExp = (&<./Data/buffs/buffs.rules>/BubbleRadiusBase/Exponent)
@@ -1763,23 +1763,18 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			}
 		}
 		{
-			NameKey = "StatCategories/ShieldSegmentSmallBonus"
+			NameKey = "StatCategories/ShieldBubbleBonus"
 			Stats
 			{
-				PowerCapacity = (&~/STATS/POWER_CAPACITY_SEGMENTS) / 1000
-				ShieldHPBonus = (&~/STATS/POWER_CAPACITY_SEGMENTS) / (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
-				ShieldPenResBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/PenetrationResistance/0/Modifiers/0/Scale)
-				ShieldRadiusBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/BuffProvider_Radius_Final/BuffAmount)
-			}
-		}
-		{
-			NameKey = "StatCategories/ShieldSegmentLargeBonus"
-			Stats
-			{
-				PowerCapacity = (&~/STATS/POWER_CAPACITY_SEGMENTS) / 1000
-				ShieldHPBonus = (&~/STATS/POWER_CAPACITY_SEGMENTS) / (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)
-				ShieldPenResBonus = (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/ArcShield/PenetrationResistance/0/Modifiers/0/Scale)
-				ShieldRadiusBonus = (&<../shield_stl_modular/shield_stl_modular.rules>/Part/Components/BuffProvider_Radius_Final/BuffAmount)
+				ShieldHPBonus = (&~/STATS/POWER_CAPACITY_SEGMENTS) / (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/ResourceDrainPerDamage/BaseValue)	// Same for large bubble
+				ShieldPenResBonus = (&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/ArcShield/PenetrationResistance/0/Modifiers/0/Scale)	// Same for large bubble
+				ShieldBubbleModule
+				[
+					(&~/STATS/POWER_CAPACITY_SEGMENTS) * (&~/STATS/SMALL_SEGMENTS) / 1000
+					(&~/STATS/POWER_CAPACITY_SEGMENTS) * (&~/STATS/LARGE_SEGMENTS) / 1000
+					(&<../shield_sts_modular/shield_sts_modular.rules>/Part/Components/BuffProvider_Radius_Final/BuffAmount)
+					(&<../shield_stL_modular/shield_stL_modular.rules>/Part/Components/BuffProvider_Radius_Final/BuffAmount)
+				]
 			}
 		}
 	]
@@ -1793,7 +1788,7 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		StatsByCategory
 		[
 			{
-				NameKey = "StatCategories/ShieldBubbleBonusOverclock"
+				NameKey = "StatCategories/ShieldRadiusBonusOverclock"
 				Stats
 				{
 					ShieldRadiusExp = (&<./Data/buffs/buffs.rules>/BubbleRadiusOverclock/Exponent)
@@ -1801,17 +1796,10 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 				}
 			}
 			{
-				NameKey = "StatCategories/ShieldSegmentSmallBonusOverclock"
+				NameKey = "StatCategories/ShieldBubbleBonusOverclock"
 				Stats
 				{
-					ShieldHPBonus = (&~/Part/StatsByCategory/1/Stats/ShieldHPBonus) / (&<../shield_sts_modular/shield_sts_modular.rules>/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
-				}
-			}
-			{
-				NameKey = "StatCategories/ShieldSegmentLargeBonusOverclock"
-				Stats
-				{
-					ShieldHPBonus = (&~/Part/StatsByCategory/2/Stats/ShieldHPBonus) / (&<../shield_stl_modular/shield_stl_modular.rules>/OVERCLOCK/DAMAGE_DRAIN_FACTOR)
+					ShieldHPBonus = (&~/Part/StatsByCategory/1/Stats/ShieldHPBonus) / (&<../shield_sts_modular/shield_sts_modular.rules>/OVERCLOCK/DAMAGE_DRAIN_FACTOR)	// Same for large bubble
 				}
 			}
 		]

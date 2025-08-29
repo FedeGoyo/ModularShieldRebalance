@@ -32,13 +32,17 @@ PartStats
 		FormatKey = "Stats/ShieldRegenFmT"
 	}
 	// Modular Shield Batteries
+/*	{
+		ID = ShieldRadiusExp
+		FormatKey = "Stats/ShieldRadiusExpFmT"
+	}*/
+	{
+		ID = ShieldDrainBonus
+		FormatKey = "Stats/ShieldDrainBonusFmT"
+	}
 	{
 		ID = ShieldRadiusBonus
 		FormatKey = "Stats/ShieldRadiusBonusFmT"
-	}
-	{
-		ID = ShieldRadiusExp
-		FormatKey = "Stats/ShieldRadiusExpFmT"
 	}
 	{
 		ID = ShieldHPBonus
@@ -49,7 +53,7 @@ PartStats
 		FormatKey = "Stats/ShieldPenResBonusFmT"
 	}
 	{
-		ID = ShieldDrainBonus
-		FormatKey = "Stats/ShieldDrainBonusFmT"
+		ID = ShieldBubbleModule
+		FormatKey = "Stats/ShieldBubbleModuleFmT"
 	}
 ]
