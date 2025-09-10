@@ -916,6 +916,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					}
 				}
 				: &../^/0/ShieldMediaEffects/1	{}
+				: &../^/0/ShieldMediaEffects/2	{}
 			]
 
 		}
@@ -1234,16 +1235,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					Arc = 360d
 				}
 			]
-		}
-		EmitterSoundEffects : BaseEmitterEffect, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/EmitterSoundEffects
-		{
-			OperationalToggle = &^/1/OperationalToggle	// IsOperationalNonOverclocked
-			MediaEffects :	&^/1/MediaEffects	[]
-		}
-		Overclock_EmitterSoundEffects : BaseEmitterEffect, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_EmitterSoundEffects
-		{
-			OperationalToggle = &^/1/OperationalToggle	// IsOperationalOverclocked
-			MediaEffects :	&^/1/MediaEffects	[]
 		}
 
 		ArcShield_ChainProxy_Front

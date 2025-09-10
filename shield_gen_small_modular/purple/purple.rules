@@ -34,7 +34,8 @@ Components
 					{
 						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
-					: &../^/0/ShieldMediaEffects/1 {}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
 				]
 				HitMediaEffects
 				[
@@ -104,7 +105,8 @@ Components
 					{
 						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
-					: &../^/0/ShieldMediaEffects/1 {}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
 				]
 				HitMediaEffects
 				[
@@ -188,7 +190,8 @@ Components
 					{
 						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
 					}
-					: &../^/0/ShieldMediaEffects/1 {}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
 				]
 			}
 		}
@@ -209,7 +212,8 @@ Components
 					{
 						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
 					}
-					: &../^/0/ShieldMediaEffects/1 {}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
 				]
 			}
 		}

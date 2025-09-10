@@ -981,6 +981,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					
 				}
 				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield/ShieldMediaEffects/1	{}
+				: <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ArcShield/ShieldMediaEffects/2	{}
 			]
 		}
 		
@@ -1316,16 +1317,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					Bucket = Upper1	// So that the emitter can project over the part
 				}
 			]
-		}
-		EmitterSoundEffects : BaseEmitterEffect, <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/EmitterSoundEffects
-		{
-			OperationalToggle = &^/1/OperationalToggle	// IsOperationalNonOverclocked
-			MediaEffects :	&^/1/MediaEffects	[]
-		}
-		Overclock_EmitterSoundEffects : BaseEmitterEffect, <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/Overclock_EmitterSoundEffects
-		{
-			OperationalToggle = &^/1/OperationalToggle	// IsOperationalOverclocked
-			MediaEffects :	&^/1/MediaEffects	[]
 		}
 
 		ArcShield_ChainProxy_Front

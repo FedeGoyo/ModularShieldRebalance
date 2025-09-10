@@ -317,18 +317,6 @@ Part : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part
 			Type = ChainableProxy
 			ComponentID = GENL_ArcShield
 		}
-		EmitterSoundEffects : BaseEmitterEffect, <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/EmitterSoundEffects
-		{
-			ChainedTo = ArcShield_ChainProxy
-			OperationalToggle = &^/1/OperationalToggle	// IsOperationalNonOverclocked
-			MediaEffects :	&^/1/MediaEffects	[]
-		}
-		Overclock_EmitterSoundEffects : BaseEmitterEffect, <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/Overclock_EmitterSoundEffects
-		{
-			ChainedTo = ArcShield_ChainProxy
-			OperationalToggle = &^/1/OperationalToggle	// IsOperationalOverclocked
-			MediaEffects :	&^/1/MediaEffects	[]
-		}
 
 		ShieldOperationEffects : <./Data/ships/terran/shield_gen_large/shield_gen_large.rules>/Part/Components/ShieldOperationEffects
 		{

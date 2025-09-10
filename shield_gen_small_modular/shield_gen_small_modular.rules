@@ -521,7 +521,8 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 					Radius = &../../Radius
 					Arc = &../../Arc
 				}
-				: &../^/0/ShieldMediaEffects/1 {}
+				: &../^/0/ShieldMediaEffects/1	{}
+				: &../^/0/ShieldMediaEffects/2	{}
 			]
 			HitMediaEffects
 			[
@@ -702,30 +703,20 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 			Type = ChainableProxy
 			ComponentID = GENS_ArcShield
 		}
-		EmitterSoundEffects : BaseEmitterEffect, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/EmitterSoundEffects
-		{
-			ChainedTo = ArcShield_ChainProxy
-			OperationalToggle = &^/1/OperationalToggle	// IsOperationalNonOverclocked
-			MediaEffects :	&^/1/MediaEffects	[]
-		}
-		Overclock_EmitterSoundEffects : BaseEmitterEffect, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_EmitterSoundEffects
-		{
-			ChainedTo = ArcShield_ChainProxy
-			OperationalToggle = &^/1/OperationalToggle	// IsOperationalOverclocked
-			MediaEffects :	&^/1/MediaEffects	[]
-		}
 
 		ShieldOperationEffects :	<./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/ShieldOperationEffects
 		{
 			ChainedTo = ArcShield_ChainProxy
 			Location = [&~/Part/Components/ArcShield/Radius/BaseValue, 0]
 		}
-
-		Overclock_StartEffects :	ShieldOperationEffects, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_ShieldReinforcedEffects
+		
+		Overclock_ShieldExtendedEffects : ShieldOperationEffects, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_ShieldExtendedEffects
 		{
-			Toggle = &^/1/Toggle	// IsOperationalOverclocked
-			ToggledOffMediaEffects
-			ToggledOnMediaEffects : &^/1/ToggledOnMediaEffects	[]
+			Toggle = &^/1/Toggle	// Overclock_ExtendingEffectToggle
+		}
+		Overclock_ShieldReinforcedEffects : ShieldOperationEffects, <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part/Components/Overclock_ShieldReinforcedEffects
+		{
+			Toggle = &^/1/Toggle	// Overclock_ReinforcingEffectToggle
 		}
 
 		Overclock_ArcShieldProxy

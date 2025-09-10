@@ -31,7 +31,8 @@ Components
 						Radius = &../../Radius
 						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
-					: &../^/1/ShieldMediaEffects/1 {}
+					: &../^/1/ShieldMediaEffects/1	{}
+					: &../^/1/ShieldMediaEffects/2	{}
 				]
 				HitMediaEffects
 				[
@@ -107,7 +108,8 @@ Components
 					{
 						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
 					}
-					: &../^/0/ShieldMediaEffects/1 {}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
 				]
 			}
 			ArcShield_FrontRight :	<../stats.rules>/Stats/ArcShield_FrontRight, ArcShield_Front	{}
