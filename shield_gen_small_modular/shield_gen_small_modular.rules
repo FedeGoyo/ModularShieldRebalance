@@ -520,6 +520,7 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 				{
 					Radius = &../../Radius
 					Arc = &../../Arc
+					UPerNinetyDegrees = 10
 				}
 				: &../^/0/ShieldMediaEffects/1	{}
 				: &../^/0/ShieldMediaEffects/2	{}
