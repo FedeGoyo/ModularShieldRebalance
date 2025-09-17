@@ -27,7 +27,6 @@ Actions
 			IsBuildable = false
 		}
 	}
-	// Vainila Tech Changes
 	{
 		Action = Overrides
 		OverrideIn = "<ships/terran/shield_gen_large/shield_gen_large.rules>/Part"
@@ -38,6 +37,7 @@ Actions
 			IsBuildable = false
 		}
 	}
+	// Vainila Tech Changes
 	{
 		Action = Overrides
 		OverrideIn = "<modes/career/techs.rules>/Techs/19"
