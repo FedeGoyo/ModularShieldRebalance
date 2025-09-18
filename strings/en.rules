@@ -81,6 +81,17 @@ PartToggles
 										"<white>Shield Rotation:</white> <good>0º</good>"
 	btt_Kebechet_GENL_Angle90RightArc = "<b>Shield Orientation: <good>Right</good></b>\n"\
 										"<white>Shield Rotation:</white> <good>+50º</good>"
+	
+	Enderluck_Colours_Default = "<b>Shield Color: <good>Default</good></b>"
+	Enderluck_Colours_Red = "<b>Shield Color: <good>Red</good></b>"
+	Enderluck_Colours_Orange = "<b>Shield Color: <good>Orange</good></b>"
+	Enderluck_Colours_Yellow = "<b>Shield Color: <good>Yellow</good></b>"
+	Enderluck_Colours_Green = "<b>Shield Color: <good>Green</good></b>"
+	Enderluck_Colours_Blue = "<b>Shield Color: <good>Blue</good></b>"
+	Enderluck_Colours_Cyan = "<b>Shield Color: <good>Cian</good></b>"
+	Enderluck_Colours_Purple = "<b>Shield Color: <good>Purple</good></b>"
+	Enderluck_Colours_Pink = "<b>Shield Color: <good>Pink</good></b>"
+//	Enderluck_Colours_White = "<b>Shield Color: <good>White</good></b>"
 }
 
 Stats

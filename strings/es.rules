@@ -81,6 +81,22 @@ PartToggles
 										"<white>Rotación del escudo:</white> <good>0º</good>"
 	btt_Kebechet_GENL_Angle90RightArc = "<b>Orientación del escudo: <good>Derecha</good></b>\n"\
 										"<white>Rotación del escudo:</white> <good>+50º</good>"
+	
+	Enderluck_Colours_Default = "<b>Color del escudo: <good>Defecto</good></b>"
+	Enderluck_Colours_Red = "<b>Color del escudo: <good>Rojo</good></b>"
+	Enderluck_Colours_Orange = "<b>Color del escudo: <good>Naranja</good></b>"
+	Enderluck_Colours_Yellow = "<b>Color del escudo: <good>Amarillo</good></b>"
+	Enderluck_Colours_Green = "<b>Color del escudo: <good>Verde</good></b>"
+	Enderluck_Colours_Blue = "<b>Color del escudo: <good>Azul</good></b>"
+	Enderluck_Colours_Cyan = "<b>Color del escudo: <good>Cian</good></b>"
+	Enderluck_Colours_Purple = "<b>Color del escudo: <good>Púrpura</good></b>"
+	Enderluck_Colours_Pink = "<b>Color del escudo: <good>Rosa</good></b>"
+//	Enderluck_Colours_White = "<b>Color del escudo: <good>Blanco</good></b>"	
+	
+	
+	
+										
+										
 }
 
 Stats

@@ -1,99 +1,152 @@
-Kebechet_Modular_Colours
+Enderluck_Modular_Colours
 {
-	ToggleID = "Kebechet_ToggleID_Colours"
+	ToggleID = "Enderluck_ToggleID_Colours"
 	Style = Popout
 	ShowInEditor = true
 	SortOrder = 3
 	Choices
 	[
 		{
-			ChoiceID = "cid_Kebechet_Colours_Purple"
+			ChoiceID = "Enderluck_Colours_Default"
 			Mode = 0
+			ButtonToolTipKey = "PartToggles/Enderluck_Colours_Default"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "hud_paint_default.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "Enderluck_Colours_Red"
+			Mode = 1
+			ButtonToolTipKey = "PartToggles/Enderluck_Colours_Red"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "hud_paint_red.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "Enderluck_Colours_Orange"
+			Mode = 2
+			ButtonToolTipKey = "PartToggles/Enderluck_Colours_Orange"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "hud_paint_orange.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "Enderluck_Colours_Yellow"
+			Mode = 3
+			ButtonToolTipKey = "PartToggles/Enderluck_Colours_Yellow"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "hud_paint_yellow.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "Enderluck_Colours_Green"
+			Mode = 4
+			ButtonToolTipKey = "PartToggles/Enderluck_Colours_Green"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "hud_paint_green.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "Enderluck_Colours_Blue"
+			Mode = 5
+			ButtonToolTipKey = "PartToggles/Enderluck_Colours_Blue"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "hud_paint_blue.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "Enderluck_Colours_Cyan"
+			Mode = 6
+			ButtonToolTipKey = "PartToggles/Enderluck_Colours_Cyan"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "hud_paint_cyan.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		{
+			ChoiceID = "Enderluck_Colours_Purple"
+			Mode = 7
 			ButtonToolTipKey = "PartToggles/btt_Kebechet_Colours_Purple"
 			ButtonSprite
 			{
 				Texture
 				{
-					File = "ssmColorPurple.png"
+					File = "hud_paint_purple.png"
 					MipLevels = 2
 					SampleMode = Linear
 				}
 			}
 		}
-
 		{
-			ChoiceID = "cid_Kebechet_Colours_Blue"
-			Mode = 1
-			ButtonToolTipKey = "PartToggles/btt_Kebechet_Colours_Blue"
+			ChoiceID = "Enderluck_Colours_Pink"
+			Mode = 8
+			ButtonToolTipKey = "PartToggles/Enderluck_Colours_Pink"
 			ButtonSprite
 			{
 				Texture
 				{
-					File = "ssmColorBlue.png"
+					File = "hud_paint_pink.png"
 					MipLevels = 2
 					SampleMode = Linear
 				}
 			}
 		}
-		
+		/*
 		{
-			ChoiceID = "cid_Kebechet_Colours_Orange"
-			Mode = 2
-			ButtonToolTipKey = "PartToggles/btt_Kebechet_Colours_Orange"
+			ChoiceID = "Enderluck_Colours_White"
+			Mode = 9
+			ButtonToolTipKey = "PartToggles/Enderluck_Colours_White"
 			ButtonSprite
 			{
 				Texture
 				{
-					File = "ssmColorOrange.png"
+					File = "hud_paint_white.png"
 					MipLevels = 2
 					SampleMode = Linear
 				}
 			}
 		}
-		
-		{
-			ChoiceID = "cid_Kebechet_Colours_Red"
-			Mode = 3
-			ButtonToolTipKey = "PartToggles/btt_Kebechet_Colours_Red"
-			ButtonSprite
-			{
-				Texture
-				{
-					File = "ssmColorRed.png"
-					MipLevels = 2
-					SampleMode = Linear
-				}
-			}
-		}
-		
-		{
-			ChoiceID = "cid_Kebechet_Colours_Yellow"
-			Mode = 4
-			ButtonToolTipKey = "PartToggles/btt_Kebechet_Colours_Yellow"
-			ButtonSprite
-			{
-				Texture
-				{
-					File = "ssmColorYellow.png"
-					MipLevels = 2
-					SampleMode = Linear
-				}
-			}
-		}
-
-		{
-			ChoiceID = "cid_Kebechet_Colours_Green"
-			Mode = 5
-			ButtonToolTipKey = "PartToggles/btt_Kebechet_Colours_Green"
-			ButtonSprite
-			{
-				Texture
-				{
-					File = "ssmColorGreen.png"
-					MipLevels = 2
-					SampleMode = Linear
-				}
-			}
-		}
+		*/
 	]
 }
