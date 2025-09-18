@@ -1,0 +1,217 @@
+Components
+{
+	// -------------------------------------------------------------------------------------------------------------------------
+	// TOGGLE START ------------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	Toggle_Default_On
+	{
+		Type = MultiToggle
+		Toggles = [ToggleColour_Default, ToggleDisplay_On]
+		Mode = All
+	}
+	Toggle_Default_Off : Toggle_Default_On	{ Toggles = [ToggleColour_Default, ToggleDisplay_Off] }
+
+	// -------------------------------------------------------------------------------------------------------------------------
+	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+	
+	ToggleComponents_Shield_Default_On
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Default_On
+		Components = 
+		{
+			ArcShield_Front :		<../stats.rules>/Stats/ArcShield_Front, &<../shield_stl_modular.rules>/Part/Components/ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/1/ShieldMediaEffects/0
+					{
+						Radius = &../../Radius
+						ArcSprite : &<../../colors.rules>/Color/Default/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+					: &../^/1/ShieldMediaEffects/1	{}
+					: &../^/1/ShieldMediaEffects/2	{}
+				]
+				HitMediaEffects
+				[
+					: &../^/1/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Default/HitMediaEffects, ^/0/ArcSprite	{}
+					}
+					: &../^/1/HitMediaEffects/1 {}
+				]
+			}
+			ArcShield_FrontRight :	<../stats.rules>/Stats/ArcShield_FrontRight, ArcShield_Front	{}
+			ArcShield_BackRight :	<../stats.rules>/Stats/ArcShield_BackRight, ArcShield_Front		{}
+			ArcShield_Back :		<../stats.rules>/Stats/ArcShield_Back, ArcShield_Front			{}
+			ArcShield_BackLeft :	<../stats.rules>/Stats/ArcShield_BackLeft, ArcShield_Front		{}
+			ArcShield_FrontLeft :	<../stats.rules>/Stats/ArcShield_FrontLeft, ArcShield_Front		{}
+			
+			OverloadEffect_Front :			<../stats.rules>/Stats/OverloadEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverloadEffect
+			{
+				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
+			}
+			OverloadEffect_FrontRight :	<../stats.rules>/Stats/OverloadEffect_FrontRight, OverloadEffect_Front			{}
+			OverloadEffect_BackRight :		<../stats.rules>/Stats/OverloadEffect_BackRight, OverloadEffect_Front		{}
+			OverloadEffect_Back :			<../stats.rules>/Stats/OverloadEffect_Back, OverloadEffect_Front			{}
+			OverloadEffect_BackLeft :		<../stats.rules>/Stats/OverloadEffect_BackLeft, OverloadEffect_Front		{}
+			OverloadEffect_FrontLeft :		<../stats.rules>/Stats/OverloadEffect_FrontLeft, OverloadEffect_Front		{}
+
+			OverclockEffect_Front :		<../stats.rules>/Stats/OverclockEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverclockEffect
+			{
+				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
+			}
+			OverclockEffect_FrontRight :	<../stats.rules>/Stats/OverclockEffect_FrontRight, OverclockEffect_Front	{}
+			OverclockEffect_BackRight :		<../stats.rules>/Stats/OverclockEffect_BackRight, OverclockEffect_Front			{}
+			OverclockEffect_Back :			<../stats.rules>/Stats/OverclockEffect_Back, OverclockEffect_Front			{}
+			OverclockEffect_BackLeft :		<../stats.rules>/Stats/OverclockEffect_BackLeft, OverclockEffect_Front		{}
+			OverclockEffect_FrontLeft :		<../stats.rules>/Stats/OverclockEffect_FrontLeft, OverclockEffect_Front			{}
+			
+			OverclockOverloadEffect_Front :		<../stats.rules>/Stats/OverclockOverloadEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverclockOverloadEffect
+			{
+				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
+			}
+			OverclockOverloadEffect_FrontRight :	<../stats.rules>/Stats/OverclockOverloadEffect_FrontRight, OverclockOverloadEffect_Front	{}
+			OverclockOverloadEffect_BackRight :		<../stats.rules>/Stats/OverclockOverloadEffect_BackRight, OverclockOverloadEffect_Front			{}
+			OverclockOverloadEffect_Back :			<../stats.rules>/Stats/OverclockOverloadEffect_Back, OverclockOverloadEffect_Front			{}
+			OverclockOverloadEffect_BackLeft :		<../stats.rules>/Stats/OverclockOverloadEffect_BackLeft, OverclockOverloadEffect_Front		{}
+			OverclockOverloadEffect_FrontLeft :		<../stats.rules>/Stats/OverclockOverloadEffect_FrontLeft, OverclockOverloadEffect_Front			{}
+
+			// Always
+			STL_EmitterEffect :	&<../shield_stl_modular.rules>/Part/Components/BaseEmitterEffect
+			{
+				OperationalToggle = IsOperational
+				MediaEffects
+				[
+					: &../^/0/MediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Default/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+				]
+			}
+		}
+	}
+	
+	ToggleComponents_Shield_Default_Off
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Default_Off
+		Components =
+		{
+			ArcShield_Front :		&../../ToggleComponents_Shield_Default_On/Components/ArcShield_Front
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Default/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
+				]
+			}
+			ArcShield_FrontRight :	<../stats.rules>/Stats/ArcShield_FrontRight, ArcShield_Front	{}
+			ArcShield_BackRight :	<../stats.rules>/Stats/ArcShield_BackRight, ArcShield_Front		{}
+			ArcShield_Back :		<../stats.rules>/Stats/ArcShield_Back, ArcShield_Front			{}
+			ArcShield_BackLeft :	<../stats.rules>/Stats/ArcShield_BackLeft, ArcShield_Front		{}
+			ArcShield_FrontLeft :	<../stats.rules>/Stats/ArcShield_FrontLeft, ArcShield_Front		{}
+		}
+	}
+	
+	// -------------------------------------------------------------------------------------------------------------------------
+	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+	
+	ToggleComponents_Graphics_Default
+	{
+		Type = ToggledComponents
+		Toggle = ToggleColour_Default
+		Components = 
+		{
+			K_Graphics : &<../shield_stl_modular.rules>/Part/Components/Graphics
+			{				
+				OperationalDoodad
+				{
+					Layer = "weapons"
+					Offset = [0, 0]
+					DamageLevels
+					[
+						{
+							AnimationFiles
+							[
+								"doodads_lightning1.png"
+								"doodads_lightning2.png"
+								"doodads_lightning3.png"
+								"doodads_lightning4.png"
+								"doodads_lightning5.png"
+								"doodads_lightning6.png"
+								"doodads_lightning7.png"
+								"doodads_lightning8.png"
+							]
+							Size = [1, 1]
+							AnimationInterval = 0.1
+						}
+						{
+							AnimationFiles
+							[
+								"doodads_lightning1.png"
+								"doodads_lightning2.png"
+								"doodads_lightning3.png"
+								"doodads_lightning4.png"
+								"doodads_lightning5.png"
+								"doodads_lightning6.png"
+								"doodads_lightning7.png"
+								"doodads_lightning8.png"
+							]
+							Size = [1, 1]
+							AnimationInterval = 0.1
+						}
+						{
+							AnimationFiles
+							[
+								"doodads_lightning1.png"
+								"doodads_lightning2.png"
+								"doodads_lightning3.png"
+								"doodads_lightning4.png"
+								"doodads_lightning5.png"
+								"doodads_lightning6.png"
+								"doodads_lightning7.png"
+								"doodads_lightning8.png"
+							]
+							Size = [1, 1]
+							AnimationInterval = 0.1
+						}
+					]
+				}
+				
+				OperationalLighting
+				{
+					Layer = "lights_add"
+					DamageLevels
+					[
+						{
+							File = "lights.png"
+							Size = [4, 4]
+						}
+					]
+				}
+				
+				OperationalRoofLighting
+				{
+					Layer = "roof_lights_fancy"
+					DamageLevels
+					[
+						{
+							File = "./Data/ships/common/light_blob.png"
+							Size = [3, 3]
+							Z = 1
+							VertexColor = [195*1.5, 60*1.5, 255*1.5, 100]
+						}
+					]
+				}
+			}
+		}
+	}
+}

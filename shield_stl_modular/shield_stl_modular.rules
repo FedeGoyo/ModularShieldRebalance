@@ -70,7 +70,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 		Size = [64, 64]
 	}
-	Components : ^/0/Components, <purple/purple.rules>/Components, <blue/blue.rules>/Components, <green/green.rules>/Components, <orange/orange.rules>/Components, <red/red.rules>/Components, <yellow/yellow.rules>/Components
+	Components : ^/0/Components, <default/default.rules>/Components, <red/red.rules>/Components, <orange/orange.rules>/Components, <yellow/yellow.rules>/Components, <green/green.rules>/Components, <blue/blue.rules>/Components, <cyan/cyan.rules>/Components, <purple/purple.rules>/Components, <pink/pink.rules>/Components
 	{
 
 		// --------------------------------- START TOGGLES
@@ -82,23 +82,26 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		ToggleColour
 		{
 			Type = UIToggle
-			ToggleID = "Kebechet_ToggleID_Colours"
+			ToggleID = "Enderluck_ToggleID_Colours"
 			Default = 0
 			AlwaysAllowInBuildMode = true
 			RequiresCommand = false
 		}
-		
-		ToggleColour_Purple
+				
+		ToggleColour_Default
 		{
 			Type = ModeToggle
 			Mode = ToggleColour
 			OnMode = 0
 		}
-		ToggleColour_Blue :		ToggleColour_Purple	{ OnMode = 1 }
-		ToggleColour_Orange :	ToggleColour_Purple	{ OnMode = 2 }
-		ToggleColour_Red :		ToggleColour_Purple	{ OnMode = 3 }
-		ToggleColour_Yellow :	ToggleColour_Purple	{ OnMode = 4 }
-		ToggleColour_Green :	ToggleColour_Purple	{ OnMode = 5 }
+		ToggleColour_Red :		ToggleColour_Default	{ OnMode = 1 }
+		ToggleColour_Orange :	ToggleColour_Default	{ OnMode = 2 }
+		ToggleColour_Yellow :	ToggleColour_Default	{ OnMode = 3 }
+		ToggleColour_Green :	ToggleColour_Default	{ OnMode = 4 }
+		ToggleColour_Blue :		ToggleColour_Default	{ OnMode = 5 }
+		ToggleColour_Cyan :		ToggleColour_Default	{ OnMode = 6 }
+		ToggleColour_Purple :	ToggleColour_Default	{ OnMode = 7 }
+		ToggleColour_Pink :		ToggleColour_Default	{ OnMode = 8 }
 
 		// -----------------------------------------------
 		// DISPLAY TOGGLES -------------------------------
@@ -143,34 +146,6 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 
 		ToggleRotation_Left : ToggleRotation_Right	{ OnMode = 1 }
-		
-		// -----------------------------------------------
-		// PROXY -----------------------------------------
-		// -----------------------------------------------
-		
-		ColoursProxy
-		{
-			Type = ToggleProxy
-			ComponentID = ColoursSet
-		}
-		ColoursSet
-		{
-			Type = MultiToggle
-			Toggles = [ToggleColour_Purple, ToggleColour_Blue, ToggleColour_Orange, ToggleColour_Red, ToggleColour_Yellow, ToggleColour_Green]
-			Mode = Any
-		}
-
-		DisplayProxy
-		{
-			Type = ToggleProxy
-			ComponentID = DisplaySet
-		}
-		DisplaySet
-		{
-			Type = MultiToggle
-			Toggles = [ToggleDisplay_Off, ToggleDisplay_On]
-			Mode = Any
-		}
 
 		// --------------------------------- END TOGGLES
 		
