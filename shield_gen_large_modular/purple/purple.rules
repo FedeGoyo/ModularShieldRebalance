@@ -1,30 +1,24 @@
 Components
 {
 	// -------------------------------------------------------------------------------------------------------------------------
-	// TOGGLE PURPLE START -----------------------------------------------------------------------------------------------------
+	// TOGGLE START -----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	Toggle_Purple_On
-	{
-		Type = MultiToggle
-		Toggles = [ToggleColour_Purple, ToggleDisplay_On]
-		Mode = All
-	}
-	Toggle_Purple_Off :	Toggle_Purple_On	{ Toggles = [ToggleColour_Purple, ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
+	Toggle_Purple_On :	<../default/default.rules>/Components/Toggle_default_On	{ Toggles = [ToggleColour_Purple, ToggleDisplay_On] }
+	Toggle_Purple_Off :	<../default/default.rules>/Components/Toggle_default_On	{ Toggles = [ToggleColour_Purple, ToggleDisplay_Off] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
-	// ARCSHIELD PURPLE START --------------------------------------------------------------------------------------------------
+	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
-	
+
 	ToggleComponents_Shield_Purple_On
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Purple_On
-		Components = 
-		{ 
-			GENL_ArcShield : &<../shield_gen_large_modular.rules>/Part/Components/ArcShield
+		Components : &<../default/default.rules>/Components/ToggleComponents_Shield_default_On/Components
+		{
+			GENL_ArcShield : ^/0/GENL_ArcShield
 			{
-				OperationalToggle = IsOperational
 				ShieldMediaEffects
 				[
 					: &../^/0/ShieldMediaEffects/0
@@ -43,9 +37,8 @@ Components
 					: &../^/0/HitMediaEffects/1 {}
 				]
 			}
-			GENL_EmitterEffect : &<../shield_gen_large_modular.rules>/Part/Components/BaseEmitterEffect
+			GENL_EmitterEffect : ^/0/GENL_EmitterEffect
 			{
-				OperationalToggle = IsOperational
 				MediaEffects
 				[
 					: &../^/0/MediaEffects/0
@@ -53,24 +46,6 @@ Components
 						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
 				]
-			}
-			GENL_OverclockEffect : &<../shield_gen_large_modular.rules>/Part/Components/OverclockEffect
-			{
-				OperationalToggle = OverclockedEffectToggle
-				Shield = GENL_ArcShield
-				ChainedTo = GENL_ArcShield
-			}
-			GENL_OverloadEffect : &<../shield_gen_large_modular.rules>/Part/Components/OverloadEffect
-			{
-				OperationalToggle = IsOperationalOverloaded
-				Shield = GENL_ArcShield
-				ChainedTo = GENL_ArcShield
-			}
-			GENL_OverclockOverloadEffect : &<../shield_gen_large_modular.rules>/Part/Components/OverclockOverloadEffect
-			{
-				OperationalToggle = IsOperationalOverclockedOverloaded
-				Shield = GENL_ArcShield
-				ChainedTo = GENL_ArcShield
 			}
 		}
 	}
@@ -95,9 +70,9 @@ Components
 			}
 		}
 	}
-	
+
 	// -------------------------------------------------------------------------------------------------------------------------
-	// GRAPHICS PURPLE START ---------------------------------------------------------------------------------------------------
+	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
 	ToggleComponents_Graphics_Purple
@@ -284,5 +259,4 @@ Components
 			}
 		}
 	}
-	
 }
