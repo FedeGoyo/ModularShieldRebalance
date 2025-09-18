@@ -4,8 +4,8 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	Toggle_Orange_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Orange, ToggleDisplay_On, ColoursProxy, DisplayProxy]  }
-	Toggle_Orange_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Orange, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
+	Toggle_Orange_On :	<../default/default.rules>/Components/Toggle_Default_On	{ Toggles = [ToggleColour_Orange, ToggleDisplay_On]  }
+	Toggle_Orange_Off :	<../default/default.rules>/Components/Toggle_Default_On	{ Toggles = [ToggleColour_Orange, ToggleDisplay_Off] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ Components
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Orange_On
-		Components : <../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_On/Components
+		Components : <../default/default.rules>/Components/ToggleComponents_Shield_Default_On/Components
 		{
 			ArcShield_Front :	^/0/ArcShield_Front
 			{
