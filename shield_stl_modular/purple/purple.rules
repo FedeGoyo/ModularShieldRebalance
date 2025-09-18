@@ -4,14 +4,9 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	Toggle_Purple_On
-	{
-		Type = MultiToggle
-		Toggles = [ToggleColour_Purple, ToggleDisplay_On]
-		Mode = All
-	}
-	Toggle_Purple_Off : Toggle_Purple_On	{ Toggles = [ToggleColour_Purple, ToggleDisplay_Off, ColoursProxy, DisplayProxy] }
-
+	Toggle_Purple_On :	<../default/default.rules>/Components/Toggle_Default_On	{ Toggles = [ToggleColour_Purple, ToggleDisplay_On]  }
+	Toggle_Purple_Off :	<../default/default.rules>/Components/Toggle_Default_On	{ Toggles = [ToggleColour_Purple, ToggleDisplay_Off] }
+	
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
@@ -20,27 +15,26 @@ Components
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Purple_On
-		Components = 
+		Components : <../default/default.rules>/Components/ToggleComponents_Shield_Default_On/Components
 		{
-			ArcShield_Front :		<../stats.rules>/Stats/ArcShield_Front, &<../shield_stl_modular.rules>/Part/Components/ArcShield
+			ArcShield_Front :		^/0/ArcShield_Front
 			{
 				ShieldMediaEffects
 				[
-					: &../^/1/ShieldMediaEffects/0
+					: &../^/0/ShieldMediaEffects/0
 					{
-						Radius = &../../Radius
 						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
-					: &../^/1/ShieldMediaEffects/1	{}
-					: &../^/1/ShieldMediaEffects/2	{}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
 				]
 				HitMediaEffects
 				[
-					: &../^/1/HitMediaEffects/0
+					: &../^/0/HitMediaEffects/0
 					{
 						ArcSprite : &<../../colors.rules>/Color/Purple/HitMediaEffects, ^/0/ArcSprite	{}
 					}
-					: &../^/1/HitMediaEffects/1 {}
+					: &../^/0/HitMediaEffects/1 {}
 				]
 			}
 			ArcShield_FrontRight :	<../stats.rules>/Stats/ArcShield_FrontRight, ArcShield_Front	{}
@@ -48,39 +42,9 @@ Components
 			ArcShield_Back :		<../stats.rules>/Stats/ArcShield_Back, ArcShield_Front			{}
 			ArcShield_BackLeft :	<../stats.rules>/Stats/ArcShield_BackLeft, ArcShield_Front		{}
 			ArcShield_FrontLeft :	<../stats.rules>/Stats/ArcShield_FrontLeft, ArcShield_Front		{}
-			
-			OverloadEffect_Front :			<../stats.rules>/Stats/OverloadEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverloadEffect
-			{
-				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
-			}
-			OverloadEffect_FrontRight :	<../stats.rules>/Stats/OverloadEffect_FrontRight, OverloadEffect_Front			{}
-			OverloadEffect_BackRight :		<../stats.rules>/Stats/OverloadEffect_BackRight, OverloadEffect_Front		{}
-			OverloadEffect_Back :			<../stats.rules>/Stats/OverloadEffect_Back, OverloadEffect_Front			{}
-			OverloadEffect_BackLeft :		<../stats.rules>/Stats/OverloadEffect_BackLeft, OverloadEffect_Front		{}
-			OverloadEffect_FrontLeft :		<../stats.rules>/Stats/OverloadEffect_FrontLeft, OverloadEffect_Front		{}
-
-			OverclockEffect_Front :		<../stats.rules>/Stats/OverclockEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverclockEffect
-			{
-				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
-			}
-			OverclockEffect_FrontRight :	<../stats.rules>/Stats/OverclockEffect_FrontRight, OverclockEffect_Front	{}
-			OverclockEffect_BackRight :		<../stats.rules>/Stats/OverclockEffect_BackRight, OverclockEffect_Front			{}
-			OverclockEffect_Back :			<../stats.rules>/Stats/OverclockEffect_Back, OverclockEffect_Front			{}
-			OverclockEffect_BackLeft :		<../stats.rules>/Stats/OverclockEffect_BackLeft, OverclockEffect_Front		{}
-			OverclockEffect_FrontLeft :		<../stats.rules>/Stats/OverclockEffect_FrontLeft, OverclockEffect_Front			{}
-			
-			OverclockOverloadEffect_Front :		<../stats.rules>/Stats/OverclockOverloadEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverclockOverloadEffect
-			{
-				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
-			}
-			OverclockOverloadEffect_FrontRight :	<../stats.rules>/Stats/OverclockOverloadEffect_FrontRight, OverclockOverloadEffect_Front	{}
-			OverclockOverloadEffect_BackRight :		<../stats.rules>/Stats/OverclockOverloadEffect_BackRight, OverclockOverloadEffect_Front			{}
-			OverclockOverloadEffect_Back :			<../stats.rules>/Stats/OverclockOverloadEffect_Back, OverclockOverloadEffect_Front			{}
-			OverclockOverloadEffect_BackLeft :		<../stats.rules>/Stats/OverclockOverloadEffect_BackLeft, OverclockOverloadEffect_Front		{}
-			OverclockOverloadEffect_FrontLeft :		<../stats.rules>/Stats/OverclockOverloadEffect_FrontLeft, OverclockOverloadEffect_Front			{}
 
 			// Always
-			STL_EmitterEffect :	&<../shield_stl_modular.rules>/Part/Components/BaseEmitterEffect
+			STL_EmitterEffect : ^/0/STL_EmitterEffect
 			{
 				OperationalToggle = IsOperational
 				MediaEffects
@@ -113,7 +77,7 @@ Components
 				]
 			}
 			ArcShield_FrontRight :	<../stats.rules>/Stats/ArcShield_FrontRight, ArcShield_Front	{}
-			ArcShield_BackRight :	<../stats.rules>/Stats/ArcShield_BackRight, ArcShield_Front		{}
+			ArcShield_BackRight :	<../stats.rules>/Stats/ArcShield_BackRight, ArcShield_Front	{}
 			ArcShield_Back :		<../stats.rules>/Stats/ArcShield_Back, ArcShield_Front			{}
 			ArcShield_BackLeft :	<../stats.rules>/Stats/ArcShield_BackLeft, ArcShield_Front		{}
 			ArcShield_FrontLeft :	<../stats.rules>/Stats/ArcShield_FrontLeft, ArcShield_Front		{}
@@ -213,5 +177,5 @@ Components
 				}
 			}
 		}
-	}
+	}	
 }
