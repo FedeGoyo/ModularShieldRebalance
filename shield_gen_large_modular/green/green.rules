@@ -4,8 +4,8 @@ Components
 	// TOGGLE START -----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	Toggle_Green_On :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Green, ToggleDisplay_On, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
-	Toggle_Green_Off :	<../purple/purple.rules>/Components/Toggle_Purple_On	{ Toggles = [ToggleColour_Green, ToggleDisplay_Off, Kebechet_GEN_Large_ColoursProxy, Kebechet_GEN_Large_DisplayProxy] }
+	Toggle_Green_On :	<../default/default.rules>/Components/Toggle_default_On	{ Toggles = [ToggleColour_Green, ToggleDisplay_On] }
+	Toggle_Green_Off :	<../default/default.rules>/Components/Toggle_default_On	{ Toggles = [ToggleColour_Green, ToggleDisplay_Off] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ Components
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Green_On
-		Components : &<../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_On/Components
+		Components : &<../default/default.rules>/Components/ToggleComponents_Shield_default_On/Components
 		{
 			GENL_ArcShield : ^/0/GENL_ArcShield
 			{
