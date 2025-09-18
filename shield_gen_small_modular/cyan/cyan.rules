@@ -1,0 +1,308 @@
+Components
+{
+	// -------------------------------------------------------------------------------------------------------------------------
+	// TOGGLE START ------------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	Toggle_Cyan_Arc_On :	<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Cyan, ToggleAngle_Arc, ToggleDisplay_On] }
+	Toggle_Cyan_Line_On :	<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Cyan, ToggleAngle_Line, ToggleDisplay_On] }
+
+	Toggle_Cyan_Arc_Off :	<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Cyan, ToggleAngle_Arc, ToggleDisplay_Off] }
+	Toggle_Cyan_Line_Off :	<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Cyan, ToggleAngle_Line, ToggleDisplay_Off] }
+
+	// -------------------------------------------------------------------------------------------------------------------------
+	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	ToggleComponents_Shield_Cyan_Arc_On
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Cyan_Arc_On
+		Components : &<../default/default.rules>/Components/ToggleComponents_Shield_default_Arc_On/Components
+		{
+			GENS_ArcShield : ^/0/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Cyan/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
+				]
+				HitMediaEffects
+				[
+					: &../^/0/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Cyan/HitMediaEffects, ^/0/ArcSprite	{}
+					}
+					: &../^/0/HitMediaEffects/1 {}
+				]
+			}
+			GENS_EmitterEffect : ^/0/GENS_EmitterEffect
+			{
+				MediaEffects
+				[
+					: &../^/0/MediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Cyan/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+				]
+			}
+		}
+	}
+
+	ToggleComponents_Shield_Cyan_Line_On
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Cyan_Line_On
+		Components : &../ToggleComponents_Shield_Cyan_Arc_On/Components
+		{
+			GENS_ArcShield : &<../shield_gen_small_modular.rules>/Part/Components/LineShield
+			{
+				OperationalToggle = IsOperational
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/default/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
+				]
+				HitMediaEffects
+				[
+					: &../^/0/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/default/HitMediaEffects, ^/0/ArcSprite	{}
+					}
+					: &../^/0/HitMediaEffects/1 {}
+				]
+			}
+			
+			GENS_OverloadEffect : ^/0/GENS_OverloadEffect
+			{
+				ContinuousEffects
+				[
+					: ../^/0/ContinuousEffects/0
+					{
+						Radius = &../../../GENS_ArcShield/Radius
+						Arc = &../../../GENS_ArcShield/Arc
+					}
+				]
+			}
+			GENS_Overclock_ExtendedEffect : ^/0/GENS_Overclock_ExtendedEffect
+			{
+				ContinuousEffects
+				[
+					: ../^/0/ContinuousEffects/0
+					{
+						Radius = &../../../GENS_ArcShield/Radius
+						Arc = &../../../GENS_ArcShield/Arc
+					}
+				]
+			}
+			GENS_Overclock_Overload_EffectExtended : ^/0/GENS_Overclock_Overload_EffectExtended
+			{
+				ContinuousEffects
+				[
+					: ../^/0/ContinuousEffects/0
+					{
+						Radius = &../../../GENS_ArcShield/Radius
+						Arc = &../../../GENS_ArcShield/Arc
+					}
+				]
+			}
+			GENS_Overclock_ReinforcedEffect : ^/0/GENS_Overclock_ReinforcedEffect
+			{
+				ContinuousEffects
+				[
+					: ../^/0/ContinuousEffects/0
+					{
+						Radius = &../../../GENS_ArcShield/Radius
+						Arc = &../../../GENS_ArcShield/Arc
+					}
+				]
+			}
+			GENS_Overclock_OverloadEffect_Reinforced : ^/0/GENS_Overclock_OverloadEffect_Reinforced
+			{
+				ContinuousEffects
+				[
+					: ../^/0/ContinuousEffects/0
+					{
+						Radius = &../../../GENS_ArcShield/Radius
+						Arc = &../../../GENS_ArcShield/Arc
+					}
+				]
+			}
+		}
+	}
+
+	ToggleComponents_Shield_Cyan_Arc_Off
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Cyan_Arc_Off
+		Components =
+		{
+			GENS_ArcShield : &../../ToggleComponents_Shield_Cyan_Arc_On/Components/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Cyan/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
+				]
+			}
+		}
+	}
+
+	ToggleComponents_Shield_Cyan_Line_Off
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Cyan_Line_Off
+		Components =
+		{
+			GENS_ArcShield : &../../ToggleComponents_Shield_Cyan_Line_On/Components/GENS_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Cyan/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
+				]
+			}
+		}
+	}
+	
+	// -------------------------------------------------------------------------------------------------------------------------
+	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	ToggleComponents_Graphics_Cyan
+	{
+		Type = ToggledComponents
+		Toggle = ToggleColour_Cyan
+		Components = 
+		{
+			K_Graphics : &<../shield_gen_small_modular.rules>/Part/Components/Graphics
+			{
+				OperationalDoodad : ^/0/OperationalDoodad
+				{
+					DamageLevels
+					[
+						: &../^/0/DamageLevels/0
+						{
+							AnimationFiles
+							[
+								"doodads_on1.png"
+								"doodads_on2.png"
+								"doodads_on3.png"
+								"doodads_on4.png"
+								"doodads_on5.png"
+								"doodads_on6.png"
+								"doodads_on7.png"
+								"doodads_on8.png"
+							]
+						}
+						: &../^/0/DamageLevels/1
+						{
+							AnimationFiles
+							[
+								"doodads_on1_33.png"
+								"doodads_on2_33.png"
+								"doodads_on3_33.png"
+								"doodads_on4_33.png"
+								"doodads_on5_33.png"
+								"doodads_on6_33.png"
+								"doodads_on7_33.png"
+								"doodads_on8_33.png"
+							]
+						}
+						: &../^/0/DamageLevels/2
+						{
+							AnimationFiles
+							[
+								"doodads_on1_66.png"
+								"doodads_on2_66.png"
+								"doodads_on3_66.png"
+								"doodads_on4_66.png"
+								"doodads_on5_66.png"
+								"doodads_on6_66.png"
+								"doodads_on7_66.png"
+								"doodads_on8_66.png"
+							]
+						}
+					]
+				}
+				OperationalLighting
+				{
+					Layer = "lights_add"
+					DamageLevels
+					[
+						{
+							File = "lights.png"
+							Size = [2, 3]
+						}
+					]
+				}
+				OperationalRoofDoodad
+				{
+					Layer = "roof_doodads"
+					DamageLevels
+					[
+						{
+							File = "roof_glows.png"
+							Size = [2, 3]
+						}
+						{
+							File = "roof_glows_33.png"
+							Size = [2, 3]
+						}
+						{
+							File = "roof_glows_66.png"
+							Size = [2, 3]
+						}
+					]
+				}
+			}
+			
+			K_BatterySprites : &<../shield_gen_small_modular.rules>/Part/Components/BatterySprites
+			{
+				ResourceLevels
+				[
+					{
+						File = "batteries1.png"
+						Size = [2, 1]
+					}
+					{
+						File = "batteries2.png"
+						Size = [2, 1]
+					}
+					{
+						File = "batteries3.png"
+						Size = [2, 1]
+					}
+					{
+						File = "batteries4.png"
+						Size = [2, 1]
+					}
+					{
+						File = "batteries5.png"
+						Size = [2, 1]
+					}
+					{
+						File = "batteries6.png"
+						Size = [2, 1]
+					}
+				]
+			}
+		}
+	}
+}

@@ -4,11 +4,11 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	Toggle_Yellow_Arc_On :		<../purple/purple.rules>/Components/Toggle_Purple_Arc_On	{ Toggles = [ToggleColour_Yellow, ToggleAngle_Arc, ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
-	Toggle_Yellow_Line_On :		<../purple/purple.rules>/Components/Toggle_Purple_Arc_On	{ Toggles = [ToggleColour_Yellow, ToggleAngle_Line, ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
+	Toggle_Yellow_Arc_On :		<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Yellow, ToggleAngle_Arc, ToggleDisplay_On] }
+	Toggle_Yellow_Line_On :		<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Yellow, ToggleAngle_Line, ToggleDisplay_On] }
 
-	Toggle_Yellow_Arc_Off :		<../purple/purple.rules>/Components/Toggle_Purple_Arc_On	{ Toggles = [ToggleColour_Yellow, ToggleAngle_Arc, ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
-	Toggle_Yellow_Line_Off :	<../purple/purple.rules>/Components/Toggle_Purple_Arc_On	{ Toggles = [ToggleColour_Yellow, ToggleAngle_Line, ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
+	Toggle_Yellow_Arc_Off :		<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Yellow, ToggleAngle_Arc, ToggleDisplay_Off] }
+	Toggle_Yellow_Line_Off :	<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Yellow, ToggleAngle_Line, ToggleDisplay_Off] }
 
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ Components
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Yellow_Arc_On
-		Components : &<../purple/purple.rules>/Components/ToggleComponents_Shield_Purple_Arc_On/Components
+		Components : &<../default/default.rules>/Components/ToggleComponents_Shield_default_Arc_On/Components
 		{
 			GENS_ArcShield : ^/0/GENS_ArcShield
 			{
@@ -66,7 +66,7 @@ Components
 				[
 					: &../^/0/ShieldMediaEffects/0
 					{
-						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						ArcSprite : &<../../colors.rules>/Color/default/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
 					: &../^/0/ShieldMediaEffects/1	{}
 					: &../^/0/ShieldMediaEffects/2	{}
@@ -75,7 +75,7 @@ Components
 				[
 					: &../^/0/HitMediaEffects/0
 					{
-						ArcSprite : &<../../colors.rules>/Color/Purple/HitMediaEffects, ^/0/ArcSprite	{}
+						ArcSprite : &<../../colors.rules>/Color/default/HitMediaEffects, ^/0/ArcSprite	{}
 					}
 					: &../^/0/HitMediaEffects/1 {}
 				]

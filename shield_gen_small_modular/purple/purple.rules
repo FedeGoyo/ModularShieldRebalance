@@ -4,30 +4,24 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	Toggle_Purple_Arc_On
-	{
-		Type = MultiToggle
-		Toggles = [ToggleColour_Purple, ToggleAngle_Arc, ToggleDisplay_On] 
-		Mode = All
-	}
-	Toggle_Purple_Line_On :		Toggle_Purple_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Line, ToggleDisplay_On, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
+	Toggle_Purple_Arc_On :		<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Arc, ToggleDisplay_On] }
+	Toggle_Purple_Line_On :		<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Line, ToggleDisplay_On] }
 
-	Toggle_Purple_Arc_Off :		Toggle_Purple_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Arc, ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
-	Toggle_Purple_Line_Off :	Toggle_Purple_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Line, ToggleDisplay_Off, Kebechet_GEN_Small_ColoursProxy, Kebechet_GEN_Small_DisplayProxy] }
-		
+	Toggle_Purple_Arc_Off :		<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Arc, ToggleDisplay_Off] }
+	Toggle_Purple_Line_Off :	<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Line, ToggleDisplay_Off] }
+
 	// -------------------------------------------------------------------------------------------------------------------------
 	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
-			
+
 	ToggleComponents_Shield_Purple_Arc_On
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Purple_Arc_On
-		Components = 
+		Components : &<../default/default.rules>/Components/ToggleComponents_Shield_default_Arc_On/Components
 		{
-			GENS_ArcShield : &<../shield_gen_small_modular.rules>/Part/Components/ArcShield
+			GENS_ArcShield : ^/0/GENS_ArcShield
 			{
-				OperationalToggle = IsOperational
 				ShieldMediaEffects
 				[
 					: &../^/0/ShieldMediaEffects/0
@@ -46,9 +40,8 @@ Components
 					: &../^/0/HitMediaEffects/1 {}
 				]
 			}
-			GENS_EmitterEffect : &<../shield_gen_small_modular.rules>/Part/Components/BaseEmitterEffect
+			GENS_EmitterEffect : ^/0/GENS_EmitterEffect
 			{
-				OperationalToggle = IsOperational
 				MediaEffects
 				[
 					: &../^/0/MediaEffects/0
@@ -56,36 +49,6 @@ Components
 						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
 				]
-			}
-			GENS_OverloadEffect : &<../shield_gen_small_modular.rules>/Part/Components/OverloadEffect
-			{
-				OperationalToggle = IsOperationalOverloaded
-				Shield = GENS_ArcShield
-				ChainedTo = GENS_ArcShield
-			}
-			GENS_Overclock_ExtendedEffect : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_ExtendedEffect
-			{
-				OperationalToggle = Overclock_ExtendedEffectToggle
-				Shield = GENS_ArcShield
-				ChainedTo = GENS_ArcShield
-			}
-			GENS_Overclock_Overload_EffectExtended : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_OverloadEffect_Extended
-			{
-				OperationalToggle = IsOperationalOverloaded_Extended
-				Shield = GENS_ArcShield
-				ChainedTo = GENS_ArcShield
-			}
-			GENS_Overclock_ReinforcedEffect : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_ReinforcedEffect
-			{
-				OperationalToggle = Overclock_ReinforcedEffectToggle
-				Shield = GENS_ArcShield
-				ChainedTo = GENS_ArcShield
-			}
-			GENS_Overclock_OverloadEffect_Reinforced : &<../shield_gen_small_modular.rules>/Part/Components/Overclock_OverloadEffect_Reinforced
-			{
-				OperationalToggle = IsOperationalOverloaded_Reinforced
-				Shield = GENS_ArcShield
-				ChainedTo = GENS_ArcShield
 			}
 		}
 	}
@@ -103,7 +66,7 @@ Components
 				[
 					: &../^/0/ShieldMediaEffects/0
 					{
-						ArcSprite : &<../../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						ArcSprite : &<../../colors.rules>/Color/default/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 					}
 					: &../^/0/ShieldMediaEffects/1	{}
 					: &../^/0/ShieldMediaEffects/2	{}
@@ -112,7 +75,7 @@ Components
 				[
 					: &../^/0/HitMediaEffects/0
 					{
-						ArcSprite : &<../../colors.rules>/Color/Purple/HitMediaEffects, ^/0/ArcSprite	{}
+						ArcSprite : &<../../colors.rules>/Color/default/HitMediaEffects, ^/0/ArcSprite	{}
 					}
 					: &../^/0/HitMediaEffects/1 {}
 				]
@@ -201,7 +164,6 @@ Components
 	{
 		Type = ToggledComponents
 		Toggle = Toggle_Purple_Line_Off
-		IncludeInBlueprints = false
 		Components =
 		{
 			GENS_ArcShield : &../../ToggleComponents_Shield_Purple_Line_On/Components/GENS_ArcShield
