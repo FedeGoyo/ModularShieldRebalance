@@ -64,24 +64,26 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		ToggleColour
 		{
 			Type = UIToggle
-			ToggleID = "Kebechet_ToggleID_Colours"
+			ToggleID = "Enderluck_ToggleID_Colours"
 			Default = 0
 			AlwaysAllowInBuildMode = true
 			RequiresCommand = false
 		}
-
-		ToggleColour_Purple
+				
+		ToggleColour_Default
 		{
 			Type = ModeToggle
 			Mode = ToggleColour
 			OnMode = 0
 		}
-
-		ToggleColour_Blue :		ToggleColour_Purple	{ OnMode = 1 }
-		ToggleColour_Orange :	ToggleColour_Purple	{ OnMode = 2 }
-		ToggleColour_Red :		ToggleColour_Purple	{ OnMode = 3 }
-		ToggleColour_Yellow :	ToggleColour_Purple	{ OnMode = 4 }
-		ToggleColour_Green :	ToggleColour_Purple	{ OnMode = 5 }
+		ToggleColour_Red :		ToggleColour_Default	{ OnMode = 1 }
+		ToggleColour_Orange :	ToggleColour_Default	{ OnMode = 2 }
+		ToggleColour_Yellow :	ToggleColour_Default	{ OnMode = 3 }
+		ToggleColour_Green :	ToggleColour_Default	{ OnMode = 4 }
+		ToggleColour_Blue :		ToggleColour_Default	{ OnMode = 5 }
+		ToggleColour_Cyan :		ToggleColour_Default	{ OnMode = 6 }
+		ToggleColour_Purple :	ToggleColour_Default	{ OnMode = 7 }
+		ToggleColour_Pink :		ToggleColour_Default	{ OnMode = 8 }
 
 		// -----------------------------------------------
 		// DISPLAY TOGGLES -------------------------------
@@ -106,62 +108,42 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		ToggleDisplay_Off : ToggleDisplay_On	{ OnMode = 1 }
 
 		// -----------------------------------------------
-		// PROXY -----------------------------------------
-		// -----------------------------------------------
-		
-		Kebechet_TINY_ColoursProxy
-		{
-			Type = ToggleProxy
-			ComponentID = Kebechet_TINY_ColoursSet
-		}
-		Kebechet_TINY_ColoursSet
-		{
-			Type = MultiToggle
-			Toggles = [ToggleColour_Purple, ToggleColour_Blue, ToggleColour_Orange, ToggleColour_Red, ToggleColour_Yellow, ToggleColour_Green]
-			Mode = Any
-		}
-		
-		Kebechet_TINY_DisplayProxy
-		{
-			Type = ToggleProxy
-			ComponentID = Kebechet_TINY_DisplaySet
-		}
-		Kebechet_TINY_DisplaySet
-		{
-			Type = MultiToggle
-			Toggles = [ToggleDisplay_Off, ToggleDisplay_On]
-			Mode = Any
-		}
-		
-		// -----------------------------------------------
 		// MULTI TOGGLES --------------------------------- // Kebechet_TINY_ColoursProxy, Kebechet_TINY_AngleProxy, Kebechet_TINY_DisplayProxy
 		// -----------------------------------------------
 
-		// ---------------- PURPLE -----------------------
+		// ---------------- Default ----------------------
 		
-		Toggle_Purple_On
+		Toggle_Default_On
 		{
 			Type = MultiToggle
-			Toggles = [ToggleColour_Purple, ToggleDisplay_On] 
+			Toggles = [ToggleColour_Default, ToggleDisplay_On] 
 			Mode = All
 		}
-
-		Toggle_Purple_Off :	Toggle_Purple_On	{ Toggles = [ToggleColour_Purple, ToggleDisplay_Off, Kebechet_TINY_ColoursProxy, Kebechet_TINY_DisplayProxy] }
-		// ---------------- BLUE ---------------------
-		Toggle_Blue_On :	Toggle_Purple_On	{ Toggles = [ToggleColour_Blue, ToggleDisplay_On, Kebechet_TINY_ColoursProxy, Kebechet_TINY_DisplayProxy] }
-		Toggle_Blue_Off :	Toggle_Purple_On	{ Toggles = [ToggleColour_Blue, ToggleDisplay_Off, Kebechet_TINY_ColoursProxy, Kebechet_TINY_DisplayProxy] }
-		// ---------------- Orange ---------------------
-		Toggle_Orange_On :	Toggle_Purple_On	{ Toggles = [ToggleColour_Orange, ToggleDisplay_On, Kebechet_TINY_ColoursProxy, Kebechet_TINY_DisplayProxy] }
-		Toggle_Orange_Off :	Toggle_Purple_On	{ Toggles = [ToggleColour_Orange, ToggleDisplay_Off, Kebechet_TINY_ColoursProxy, Kebechet_TINY_DisplayProxy] }
+		Toggle_Default_Off :	Toggle_Default_On	{ Toggles = [ToggleColour_Default, ToggleDisplay_Off] }
 		// ---------------- Red ---------------------
-		Toggle_Red_On :		Toggle_Purple_On	{ Toggles = [ToggleColour_Red, ToggleDisplay_On, Kebechet_TINY_ColoursProxy, Kebechet_TINY_DisplayProxy] }
-		Toggle_Red_Off :	Toggle_Purple_On	{ Toggles = [ToggleColour_Red, ToggleDisplay_Off, Kebechet_TINY_ColoursProxy, Kebechet_TINY_DisplayProxy] }
-		// ---------------- Yellow ---------------------
-		Toggle_Yellow_On :	Toggle_Purple_On	{ Toggles = [ToggleColour_Yellow, ToggleDisplay_On, Kebechet_TINY_ColoursProxy, Kebechet_TINY_DisplayProxy] }
-		Toggle_Yellow_Off :	Toggle_Purple_On	{ Toggles = [ToggleColour_Yellow, ToggleDisplay_Off, Kebechet_TINY_ColoursProxy, Kebechet_TINY_DisplayProxy] }
-		// ---------------- Green ---------------------
-		Toggle_Green_On :	Toggle_Purple_On	{ Toggles = [ToggleColour_Green, ToggleDisplay_On, Kebechet_TINY_ColoursProxy, Kebechet_TINY_DisplayProxy] }
-		Toggle_Green_Off :	Toggle_Purple_On	{ Toggles = [ToggleColour_Green, ToggleDisplay_Off, Kebechet_TINY_ColoursProxy, Kebechet_TINY_DisplayProxy] }
+		Toggle_Red_On :			Toggle_Default_On	{ Toggles = [ToggleColour_Red, ToggleDisplay_On] }
+		Toggle_Red_Off :		Toggle_Default_On	{ Toggles = [ToggleColour_Red, ToggleDisplay_Off] }
+		// ---------------- Orange ------------------
+		Toggle_Orange_On :		Toggle_Default_On	{ Toggles = [ToggleColour_Orange, ToggleDisplay_On] }
+		Toggle_Orange_Off :		Toggle_Default_On	{ Toggles = [ToggleColour_Orange, ToggleDisplay_Off] }
+		// ---------------- Yellow ------------------
+		Toggle_Yellow_On :		Toggle_Default_On	{ Toggles = [ToggleColour_Yellow, ToggleDisplay_On] }
+		Toggle_Yellow_Off :		Toggle_Default_On	{ Toggles = [ToggleColour_Yellow, ToggleDisplay_Off] }
+		// ---------------- Green -------------------
+		Toggle_Green_On :		Toggle_Default_On	{ Toggles = [ToggleColour_Green, ToggleDisplay_On] }
+		Toggle_Green_Off :		Toggle_Default_On	{ Toggles = [ToggleColour_Green, ToggleDisplay_Off] }
+		// ---------------- Blue --------------------
+		Toggle_Blue_On :		Toggle_Default_On	{ Toggles = [ToggleColour_Blue, ToggleDisplay_On] }
+		Toggle_Blue_Off :		Toggle_Default_On	{ Toggles = [ToggleColour_Blue, ToggleDisplay_Off] }
+		// ---------------- Cyan --------------------
+		Toggle_Cyan_On :		Toggle_Default_On	{ Toggles = [ToggleColour_Cyan, ToggleDisplay_On] }
+		Toggle_Cyan_Off :		Toggle_Default_On	{ Toggles = [ToggleColour_Cyan, ToggleDisplay_Off] }
+		// ---------------- Purple ------------------
+		Toggle_Purple_On :		Toggle_Default_On	{ Toggles = [ToggleColour_Purple, ToggleDisplay_On] }
+		Toggle_Purple_Off :		Toggle_Default_On	{ Toggles = [ToggleColour_Purple, ToggleDisplay_Off] }
+		// ---------------- Pink --------------------
+		Toggle_Pink_On :		Toggle_Default_On	{ Toggles = [ToggleColour_Pink, ToggleDisplay_On] }
+		Toggle_Pink_Off :		Toggle_Default_On	{ Toggles = [ToggleColour_Pink, ToggleDisplay_Off] }
 
 		// --------------------------------- END TOGGLES
 		
@@ -594,13 +576,13 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		
 		// -------------------------------------------------------------------------------------------------------------------------
-		// ARCSHIELD PURPLE START --------------------------------------------------------------------------------------------------
+		// ARCSHIELD DEFAULT START -------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 
-		ToggleComponents_Shield_Purple_On
+		ToggleComponents_Shield_Default_On
 		{
 			Type = ToggledComponents
-			Toggle = Toggle_Purple_On
+			Toggle = Toggle_Default_On
 			Components = 
 			{ 
 				TINY_ArcShield : &~/Part/Components/ArcShield
@@ -610,7 +592,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					[
 						: &../^/0/ShieldMediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Default/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 						}
 						: &../^/0/ShieldMediaEffects/1	{}
 						: &../^/0/ShieldMediaEffects/2	{}
@@ -619,7 +601,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					[
 						: &../^/0/HitMediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Purple/HitMediaEffects, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Default/HitMediaEffects, ^/0/ArcSprite	{}
 						}
 						: &../^/0/HitMediaEffects/1	{}
 					]
@@ -633,7 +615,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					[
 						: &../^/0/MediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Default/ShieldMediaEffect_On, ^/0/ArcSprite	{}
 						}
 					]
 				}
@@ -658,19 +640,19 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 			}
 		}
 		
-		ToggleComponents_Shield_Purple_Off
+		ToggleComponents_Shield_Default_Off
 		{
 			Type = ToggledComponents
-			Toggle = Toggle_Purple_Off
+			Toggle = Toggle_Default_Off
 			Components =
 			{
-				TINY_ArcShield : &../../ToggleComponents_Shield_Purple_On/Components/TINY_ArcShield
+				TINY_ArcShield : &../../ToggleComponents_Shield_Default_On/Components/TINY_ArcShield
 				{
 					ShieldMediaEffects
 					[
 						: &../^/0/ShieldMediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Default/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
 						}
 						: &../^/0/ShieldMediaEffects/1	{}
 						: &../^/0/ShieldMediaEffects/2	{}
@@ -680,143 +662,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 		
 		// -------------------------------------------------------------------------------------------------------------------------
-		// ARCSHIELD PURPLE END ----------------------------------------------------------------------------------------------------
-		// -------------------------------------------------------------------------------------------------------------------------
-		
-		// -------------------------------------------------------------------------------------------------------------------------
-		// ARCSHIELD BLUE START ----------------------------------------------------------------------------------------------------
-		// -------------------------------------------------------------------------------------------------------------------------
-		
-		ToggleComponents_Shield_Blue_On
-		{
-			Type = ToggledComponents
-			Toggle = Toggle_Blue_On
-			Components : &../ToggleComponents_Shield_Purple_On/Components
-			{
-				TINY_ArcShield : ^/0/TINY_ArcShield
-				{
-					ShieldMediaEffects
-					[
-						: &../^/0/ShieldMediaEffects/0
-						{
-							ArcSprite : &<../colors.rules>/Color/Blue/ShieldMediaEffect_On, ^/0/ArcSprite	{}
-						}
-						: &../^/0/ShieldMediaEffects/1	{}
-						: &../^/0/ShieldMediaEffects/2	{}
-					]
-					HitMediaEffects
-					[
-						: &../^/0/HitMediaEffects/0
-						{
-							ArcSprite : &<../colors.rules>/Color/Blue/HitMediaEffects, ^/0/ArcSprite	{}
-						}
-						: &../^/0/HitMediaEffects/1	{}
-					]
-				}
-				TINY_EmitterEffect : ^/0/TINY_EmitterEffect
-				{
-					MediaEffects
-					[
-						: &../^/0/MediaEffects/0
-						{
-							ArcSprite : &<../colors.rules>/Color/Blue/ShieldMediaEffect_On, ^/0/ArcSprite	{}
-						}
-					]
-				}
-			}
-		}
-		
-		ToggleComponents_Shield_Blue_Off
-		{
-			Type = ToggledComponents
-			Toggle = Toggle_Blue_Off
-			Components =
-			{
-				TINY_ArcShield : &../../ToggleComponents_Shield_Blue_On/Components/TINY_ArcShield
-				{
-					ShieldMediaEffects
-					[
-						: &../^/0/ShieldMediaEffects/0
-						{
-							ArcSprite : &<../colors.rules>/Color/Blue/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
-						}
-						: &../^/0/ShieldMediaEffects/1	{}
-						: &../^/0/ShieldMediaEffects/2	{}
-					]
-				}
-			}
-		}
-		
-		// -------------------------------------------------------------------------------------------------------------------------
-		// ARCSHIELD BLUE END ------------------------------------------------------------------------------------------------------
-		// -------------------------------------------------------------------------------------------------------------------------
-		
-		// -------------------------------------------------------------------------------------------------------------------------
-		// ARCSHIELD ORANGE START --------------------------------------------------------------------------------------------------
-		// -------------------------------------------------------------------------------------------------------------------------
-		
-		ToggleComponents_Shield_Orange_On
-		{
-			Type = ToggledComponents
-			Toggle = Toggle_Orange_On
-			Components : &../ToggleComponents_Shield_Purple_On/Components
-			{
-				TINY_ArcShield : ^/0/TINY_ArcShield
-				{
-					ShieldMediaEffects
-					[
-						: &../^/0/ShieldMediaEffects/0
-						{
-							ArcSprite : &<../colors.rules>/Color/Orange/ShieldMediaEffect_On, ^/0/ArcSprite	{}
-						}
-						: &../^/0/ShieldMediaEffects/1	{}
-						: &../^/0/ShieldMediaEffects/2	{}
-					]
-					HitMediaEffects
-					[
-						: &../^/0/HitMediaEffects/0
-						{
-							ArcSprite : &<../colors.rules>/Color/Orange/HitMediaEffects, ^/0/ArcSprite	{}
-						}
-						: &../^/0/HitMediaEffects/1	{}
-					]
-				}
-				TINY_EmitterEffect : ^/0/TINY_EmitterEffect
-				{
-					MediaEffects
-					[
-						: &../^/0/MediaEffects/0
-						{
-							ArcSprite : &<../colors.rules>/Color/Orange/ShieldMediaEffect_On, ^/0/ArcSprite	{}
-						}
-					]
-				}
-			}
-		}
-		
-		ToggleComponents_Shield_Orange_Off
-		{
-			Type = ToggledComponents
-			Toggle = Toggle_Orange_Off
-			Components =
-			{
-				TINY_ArcShield : &../../ToggleComponents_Shield_Orange_On/Components/TINY_ArcShield
-				{
-					ShieldMediaEffects
-					[
-						: &../^/0/ShieldMediaEffects/0
-						{
-							ArcSprite : &<../colors.rules>/Color/Orange/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
-						}
-						: &../^/0/ShieldMediaEffects/1	{}
-						: &../^/0/ShieldMediaEffects/2	{}
-					]
-				}
-			}
-		}
-		
-		// -------------------------------------------------------------------------------------------------------------------------
-		// ARCSHIELD ORANGE END ----------------------------------------------------------------------------------------------------
+		// ARCSHIELD DEFAULT END ---------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -827,7 +673,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = ToggledComponents
 			Toggle = Toggle_Red_On
-			Components : &../ToggleComponents_Shield_Purple_On/Components
+			Components : &../ToggleComponents_Shield_Default_On/Components
 			{
 				TINY_ArcShield : ^/0/TINY_ArcShield
 				{
@@ -888,6 +734,74 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		// -------------------------------------------------------------------------------------------------------------------------
 		
 		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD ORANGE START --------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Shield_Orange_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_On
+			Components : &../ToggleComponents_Shield_Default_On/Components
+			{
+				TINY_ArcShield : ^/0/TINY_ArcShield
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Orange/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1	{}
+						: &../^/0/ShieldMediaEffects/2	{}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Orange/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
+				}
+				TINY_EmitterEffect : ^/0/TINY_EmitterEffect
+				{
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Orange/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+					]
+				}
+			}
+		}
+		
+		ToggleComponents_Shield_Orange_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Orange_Off
+			Components =
+			{
+				TINY_ArcShield : &../../ToggleComponents_Shield_Orange_On/Components/TINY_ArcShield
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Orange/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1	{}
+						: &../^/0/ShieldMediaEffects/2	{}
+					]
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD ORANGE END ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
 		// ARCSHIELD YELLOW START --------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
@@ -895,7 +809,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = ToggledComponents
 			Toggle = Toggle_Yellow_On
-			Components : &../ToggleComponents_Shield_Purple_On/Components
+			Components : &../ToggleComponents_Shield_Default_On/Components
 			{
 				TINY_ArcShield : ^/0/TINY_ArcShield
 				{
@@ -963,7 +877,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		{
 			Type = ToggledComponents
 			Toggle = Toggle_Green_On
-			Components : &../ToggleComponents_Shield_Purple_On/Components
+			Components : &../ToggleComponents_Shield_Default_On/Components
 			{
 				TINY_ArcShield : ^/0/TINY_ArcShield
 				{
@@ -1021,6 +935,278 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		// -------------------------------------------------------------------------------------------------------------------------
 		// ARCSHIELD GREEN END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD PURPLE START --------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Shield_Purple_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_On
+			Components : &../ToggleComponents_Shield_Default_On/Components
+			{
+				TINY_ArcShield : ^/0/TINY_ArcShield
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1	{}
+						: &../^/0/ShieldMediaEffects/2	{}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Purple/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
+				}
+				TINY_EmitterEffect : ^/0/TINY_EmitterEffect
+				{
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Purple/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+					]
+				}
+			}
+		}
+		
+		ToggleComponents_Shield_Purple_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Purple_Off
+			Components =
+			{
+				TINY_ArcShield : &../../ToggleComponents_Shield_Purple_On/Components/TINY_ArcShield
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Purple/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1	{}
+						: &../^/0/ShieldMediaEffects/2	{}
+					]
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD PURPLE END ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD PINK START ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Shield_Pink_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Pink_On
+			Components : &../ToggleComponents_Shield_Default_On/Components
+			{
+				TINY_ArcShield : ^/0/TINY_ArcShield
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Pink/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1	{}
+						: &../^/0/ShieldMediaEffects/2	{}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Pink/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
+				}
+				TINY_EmitterEffect : ^/0/TINY_EmitterEffect
+				{
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Pink/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+					]
+				}
+			}
+		}
+		
+		ToggleComponents_Shield_Pink_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Pink_Off
+			Components =
+			{
+				TINY_ArcShield : &../../ToggleComponents_Shield_Pink_On/Components/TINY_ArcShield
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Pink/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1	{}
+						: &../^/0/ShieldMediaEffects/2	{}
+					]
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD PINK END ------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD BLUE START ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Shield_Blue_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_On
+			Components : &../ToggleComponents_Shield_Default_On/Components
+			{
+				TINY_ArcShield : ^/0/TINY_ArcShield
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Blue/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1	{}
+						: &../^/0/ShieldMediaEffects/2	{}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Blue/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
+				}
+				TINY_EmitterEffect : ^/0/TINY_EmitterEffect
+				{
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Blue/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+					]
+				}
+			}
+		}
+		
+		ToggleComponents_Shield_Blue_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Blue_Off
+			Components =
+			{
+				TINY_ArcShield : &../../ToggleComponents_Shield_Blue_On/Components/TINY_ArcShield
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Blue/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1	{}
+						: &../^/0/ShieldMediaEffects/2	{}
+					]
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD BLUE END ------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD CYAN START ----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Shield_Cyan_On
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Cyan_On
+			Components : &../ToggleComponents_Shield_Default_On/Components
+			{
+				TINY_ArcShield : ^/0/TINY_ArcShield
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Cyan/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1	{}
+						: &../^/0/ShieldMediaEffects/2	{}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Cyan/HitMediaEffects, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
+				}
+				TINY_EmitterEffect : ^/0/TINY_EmitterEffect
+				{
+					MediaEffects
+					[
+						: &../^/0/MediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Cyan/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+						}
+					]
+				}
+			}
+		}
+		
+		ToggleComponents_Shield_Cyan_Off
+		{
+			Type = ToggledComponents
+			Toggle = Toggle_Cyan_Off
+			Components =
+			{
+				TINY_ArcShield : &../../ToggleComponents_Shield_Cyan_On/Components/TINY_ArcShield
+				{
+					ShieldMediaEffects
+					[
+						: &../^/0/ShieldMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Cyan/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/ShieldMediaEffects/1	{}
+						: &../^/0/ShieldMediaEffects/2	{}
+					]
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// ARCSHIELD BLUE END ------------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
 		Shield_Doodad_Graphics
@@ -1148,17 +1334,17 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 		
 		// -------------------------------------------------------------------------------------------------------------------------
-		// GRAPHICS PURPLE START ---------------------------------------------------------------------------------------------------
+		// GRAPHICS DEFAULT START --------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
-		ToggleComponents_Graphics_Purple
+		ToggleComponents_Graphics_Default
 		{
 			Type = ToggledComponents
-			Toggle = ToggleColour_Purple
-			IncludeInBlueprints = false
+			Toggle = ToggleColour_Default
+			//IncludeInredprints = true
 			Components = 
 			{
-				K_Graphics_Purple : ~/Part/Components/Graphics
+				K_Graphics_Default : ~/Part/Components/Graphics
 				{				
 					OperationalDoodad
 					{
@@ -1169,13 +1355,13 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 							{
 								AnimationFiles
 								[
-									"purple/doodads_lightning1.png"
-									"purple/doodads_lightning2.png"
-									"purple/doodads_lightning3.png"
-									"purple/doodads_lightning4.png"
-									"purple/doodads_lightning5.png"
-									"purple/doodads_lightning6.png"
-									"purple/doodads_lightning7.png"
+									"default/doodads_lightning1.png"
+									"default/doodads_lightning2.png"
+									"default/doodads_lightning3.png"
+									"default/doodads_lightning4.png"
+									"default/doodads_lightning5.png"
+									"default/doodads_lightning6.png"
+									"default/doodads_lightning7.png"
 								]
 								Size = [2, 1]
 								AnimationInterval = 0.1
@@ -1183,13 +1369,13 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 							{
 								AnimationFiles
 								[
-									"purple/doodads_lightning1.png"
-									"purple/doodads_lightning2.png"
-									"purple/doodads_lightning3.png"
-									"purple/doodads_lightning4.png"
-									"purple/doodads_lightning5.png"
-									"purple/doodads_lightning6.png"
-									"purple/doodads_lightning7.png"
+									"default/doodads_lightning1.png"
+									"default/doodads_lightning2.png"
+									"default/doodads_lightning3.png"
+									"default/doodads_lightning4.png"
+									"default/doodads_lightning5.png"
+									"default/doodads_lightning6.png"
+									"default/doodads_lightning7.png"
 								]
 								Size = [2, 1]
 								AnimationInterval = 0.1
@@ -1197,13 +1383,13 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 							{
 								AnimationFiles
 								[
-									"purple/doodads_lightning1.png"
-									"purple/doodads_lightning2.png"
-									"purple/doodads_lightning3.png"
-									"purple/doodads_lightning4.png"
-									"purple/doodads_lightning5.png"
-									"purple/doodads_lightning6.png"
-									"purple/doodads_lightning7.png"
+									"default/doodads_lightning1.png"
+									"default/doodads_lightning2.png"
+									"default/doodads_lightning3.png"
+									"default/doodads_lightning4.png"
+									"default/doodads_lightning5.png"
+									"default/doodads_lightning6.png"
+									"default/doodads_lightning7.png"
 								]
 								Size = [2, 1]
 								AnimationInterval = 0.1
@@ -1217,14 +1403,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						DamageLevels
 						[
 							{
-								File = "purple/lights.png"
+								File = "default/lights.png"
 								Size = [2, 1]
 							}
 						]
 					}
 				}
 				
-				K_Dome_Emitter_Ext_Purple
+				K_Dome_Emitter_Ext_Default
 				{
 					Type = Graphics
 					Location = [1, 0.5]
@@ -1238,10 +1424,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 							{
 								AnimationFiles
 								[
-									"purple/dome_emitter_fx1.png"
-									"purple/dome_emitter_fx2.png"
-									"purple/dome_emitter_fx3.png"
-									"purple/dome_emitter_fx4.png"
+									"default/dome_emitter_fx1.png"
+									"default/dome_emitter_fx2.png"
+									"default/dome_emitter_fx3.png"
+									"default/dome_emitter_fx4.png"
 								]
 								Size = [2, 1]
 								//Z = 1
@@ -1250,10 +1436,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 							{
 								AnimationFiles
 								[
-									"purple/dome_emitter_fx1.png"
-									"purple/dome_emitter_fx2.png"
-									"purple/dome_emitter_fx3.png"
-									"purple/dome_emitter_fx4.png"
+									"default/dome_emitter_fx1.png"
+									"default/dome_emitter_fx2.png"
+									"default/dome_emitter_fx3.png"
+									"default/dome_emitter_fx4.png"
 								]
 								Size = [2, 1]
 								//Z = 1
@@ -1262,10 +1448,10 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 							{
 								AnimationFiles
 								[
-									"purple/dome_emitter_fx1.png"
-									"purple/dome_emitter_fx2.png"
-									"purple/dome_emitter_fx3.png"
-									"purple/dome_emitter_fx4.png"
+									"default/dome_emitter_fx1.png"
+									"default/dome_emitter_fx2.png"
+									"default/dome_emitter_fx3.png"
+									"default/dome_emitter_fx4.png"
 								]
 								Size = [2, 1]
 								//Z = 1
@@ -1280,337 +1466,19 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						DamageLevels
 						[
 							{
-								File = "purple/dome_emitter_off.png"
+								File = "default/dome_emitter_off.png"
 								NormalsFile = "dome_emitter_normals.png"
 								// Z = 1
 								Size = [2, 1]
 							}
 							{
-								File = "purple/dome_emitter_off.png"
+								File = "default/dome_emitter_off.png"
 								NormalsFile = "dome_emitter_normals.png"
 								// Z = 1
 								Size = [2, 1]
 							}
 							{
-								File = "purple/dome_emitter_off.png"
-								NormalsFile = "dome_emitter_normals.png"
-								// Z = 1
-								Size = [2, 1]
-							}
-						]
-					}
-				}
-			}
-		}
-		// -------------------------------------------------------------------------------------------------------------------------
-		// GRAPHICS PURPLE END -----------------------------------------------------------------------------------------------------
-		// -------------------------------------------------------------------------------------------------------------------------
-		
-		// -------------------------------------------------------------------------------------------------------------------------
-		// GRAPHICS BLUE START -----------------------------------------------------------------------------------------------------
-		// -------------------------------------------------------------------------------------------------------------------------
-		
-		ToggleComponents_Graphics_Blue
-		{
-			Type = ToggledComponents
-			Toggle = ToggleColour_Blue
-			IncludeInBlueprints = false
-			Components = 
-			{
-				K_Graphics_Blue : ~/Part/Components/Graphics
-				{				
-					OperationalDoodad
-					{
-						Layer = "weapons"
-						Offset = [0, 0]
-						DamageLevels
-						[
-							{
-								AnimationFiles
-								[
-									"blue/doodads_lightning1.png"
-									"blue/doodads_lightning2.png"
-									"blue/doodads_lightning3.png"
-									"blue/doodads_lightning4.png"
-									"blue/doodads_lightning5.png"
-									"blue/doodads_lightning6.png"
-									"blue/doodads_lightning7.png"
-								]
-								Size = [2, 1]
-								AnimationInterval = 0.1
-							}
-							{
-								AnimationFiles
-								[
-									"blue/doodads_lightning1.png"
-									"blue/doodads_lightning2.png"
-									"blue/doodads_lightning3.png"
-									"blue/doodads_lightning4.png"
-									"blue/doodads_lightning5.png"
-									"blue/doodads_lightning6.png"
-									"blue/doodads_lightning7.png"
-								]
-								Size = [2, 1]
-								AnimationInterval = 0.1
-							}
-							{
-								AnimationFiles
-								[
-									"blue/doodads_lightning1.png"
-									"blue/doodads_lightning2.png"
-									"blue/doodads_lightning3.png"
-									"blue/doodads_lightning4.png"
-									"blue/doodads_lightning5.png"
-									"blue/doodads_lightning6.png"
-									"blue/doodads_lightning7.png"
-								]
-								Size = [2, 1]
-								AnimationInterval = 0.1
-							}
-						]
-					}
-					
-					OperationalLighting
-					{
-						Layer = "lights_add"
-						DamageLevels
-						[
-							{
-								File = "blue/lights.png"
-								Size = [2, 1]
-							}
-						]
-					}
-				}
-				
-				K_Dome_Emitter_Ext_Blue
-				{
-					Type = Graphics
-					Location = [1, 0.5]
-					OperationalToggle = IsOperational
-					OperationalDoodad
-					{
-						Layer = "structure"
-						Offset = [0, -1.1]
-						DamageLevels
-						[
-							{
-								AnimationFiles
-								[
-									"blue/dome_emitter_fx1.png"
-									"blue/dome_emitter_fx2.png"
-									"blue/dome_emitter_fx3.png"
-									"blue/dome_emitter_fx4.png"
-								]
-								Size = [2, 1]
-								//Z = 1
-								AnimationInterval = 0.1
-							}
-							{
-								AnimationFiles
-								[
-									"blue/dome_emitter_fx1.png"
-									"blue/dome_emitter_fx2.png"
-									"blue/dome_emitter_fx3.png"
-									"blue/dome_emitter_fx4.png"
-								]
-								Size = [2, 1]
-								//Z = 1
-								AnimationInterval = 0.1
-							}
-							{
-								AnimationFiles
-								[
-									"blue/dome_emitter_fx1.png"
-									"blue/dome_emitter_fx2.png"
-									"blue/dome_emitter_fx3.png"
-									"blue/dome_emitter_fx4.png"
-								]
-								Size = [2, 1]
-								//Z = 1
-								AnimationInterval = 0.1
-							}
-						]
-					}
-					NonOperationalDoodad
-					{
-						Layer = "structure"
-						Offset = [0, -1.1]
-						DamageLevels
-						[
-							{
-								File = "blue/dome_emitter_off.png"
-								NormalsFile = "dome_emitter_normals.png"
-								// Z = 1
-								Size = [2, 1]
-							}
-							{
-								File = "blue/dome_emitter_off.png"
-								NormalsFile = "dome_emitter_normals.png"
-								// Z = 1
-								Size = [2, 1]
-							}
-							{
-								File = "blue/dome_emitter_off.png"
-								NormalsFile = "dome_emitter_normals.png"
-								// Z = 1
-								Size = [2, 1]
-							}
-						]
-					}
-				}
-			}
-		}
-		// -------------------------------------------------------------------------------------------------------------------------
-		// GRAPHICS BLUE END -------------------------------------------------------------------------------------------------------
-		// -------------------------------------------------------------------------------------------------------------------------
-		
-		// -------------------------------------------------------------------------------------------------------------------------
-		// GRAPHICS ORANGE START ---------------------------------------------------------------------------------------------------
-		// -------------------------------------------------------------------------------------------------------------------------
-		
-		ToggleComponents_Graphics_Orange
-		{
-			Type = ToggledComponents
-			Toggle = ToggleColour_Orange
-			//IncludeInorangeprints = true
-			Components = 
-			{
-				K_Graphics_Orange : ~/Part/Components/Graphics
-				{				
-					OperationalDoodad
-					{
-						Layer = "weapons"
-						Offset = [0, 0]
-						DamageLevels
-						[
-							{
-								AnimationFiles
-								[
-									"orange/doodads_lightning1.png"
-									"orange/doodads_lightning2.png"
-									"orange/doodads_lightning3.png"
-									"orange/doodads_lightning4.png"
-									"orange/doodads_lightning5.png"
-									"orange/doodads_lightning6.png"
-									"orange/doodads_lightning7.png"
-								]
-								Size = [2, 1]
-								AnimationInterval = 0.1
-							}
-							{
-								AnimationFiles
-								[
-									"orange/doodads_lightning1.png"
-									"orange/doodads_lightning2.png"
-									"orange/doodads_lightning3.png"
-									"orange/doodads_lightning4.png"
-									"orange/doodads_lightning5.png"
-									"orange/doodads_lightning6.png"
-									"orange/doodads_lightning7.png"
-								]
-								Size = [2, 1]
-								AnimationInterval = 0.1
-							}
-							{
-								AnimationFiles
-								[
-									"orange/doodads_lightning1.png"
-									"orange/doodads_lightning2.png"
-									"orange/doodads_lightning3.png"
-									"orange/doodads_lightning4.png"
-									"orange/doodads_lightning5.png"
-									"orange/doodads_lightning6.png"
-									"orange/doodads_lightning7.png"
-								]
-								Size = [2, 1]
-								AnimationInterval = 0.1
-							}
-						]
-					}
-					
-					OperationalLighting
-					{
-						Layer = "lights_add"
-						DamageLevels
-						[
-							{
-								File = "orange/lights.png"
-								Size = [2, 1]
-							}
-						]
-					}
-				}
-				
-				K_Dome_Emitter_Ext_Orange
-				{
-					Type = Graphics
-					Location = [1, 0.5]
-					OperationalToggle = IsOperational
-					OperationalDoodad
-					{
-						Layer = "structure"
-						Offset = [0, -1.1]
-						DamageLevels
-						[
-							{
-								AnimationFiles
-								[
-									"orange/dome_emitter_fx1.png"
-									"orange/dome_emitter_fx2.png"
-									"orange/dome_emitter_fx3.png"
-									"orange/dome_emitter_fx4.png"
-								]
-								Size = [2, 1]
-								//Z = 1
-								AnimationInterval = 0.1
-							}
-							{
-								AnimationFiles
-								[
-									"orange/dome_emitter_fx1.png"
-									"orange/dome_emitter_fx2.png"
-									"orange/dome_emitter_fx3.png"
-									"orange/dome_emitter_fx4.png"
-								]
-								Size = [2, 1]
-								//Z = 1
-								AnimationInterval = 0.1
-							}
-							{
-								AnimationFiles
-								[
-									"orange/dome_emitter_fx1.png"
-									"orange/dome_emitter_fx2.png"
-									"orange/dome_emitter_fx3.png"
-									"orange/dome_emitter_fx4.png"
-								]
-								Size = [2, 1]
-								//Z = 1
-								AnimationInterval = 0.1
-							}
-						]
-					}
-					NonOperationalDoodad
-					{
-						Layer = "structure"
-						Offset = [0, -1.1]
-						DamageLevels
-						[
-							{
-								File = "orange/dome_emitter_off.png"
-								NormalsFile = "dome_emitter_normals.png"
-								// Z = 1
-								Size = [2, 1]
-							}
-							{
-								File = "orange/dome_emitter_off.png"
-								NormalsFile = "dome_emitter_normals.png"
-								// Z = 1
-								Size = [2, 1]
-							}
-							{
-								File = "orange/dome_emitter_off.png"
+								File = "default/dome_emitter_off.png"
 								NormalsFile = "dome_emitter_normals.png"
 								// Z = 1
 								Size = [2, 1]
@@ -1622,7 +1490,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		}
 		
 		// -------------------------------------------------------------------------------------------------------------------------
-		// GRAPHICS ORANGE END -----------------------------------------------------------------------------------------------------
+		// GRAPHICS DEFAULT END ----------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -1783,6 +1651,166 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		// -------------------------------------------------------------------------------------------------------------------------
 		// GRAPHICS RED END --------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS ORANGE START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Graphics_Orange
+		{
+			Type = ToggledComponents
+			Toggle = ToggleColour_Orange
+			//IncludeInorangeprints = true
+			Components = 
+			{
+				K_Graphics_Orange : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"orange/doodads_lightning1.png"
+									"orange/doodads_lightning2.png"
+									"orange/doodads_lightning3.png"
+									"orange/doodads_lightning4.png"
+									"orange/doodads_lightning5.png"
+									"orange/doodads_lightning6.png"
+									"orange/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"orange/doodads_lightning1.png"
+									"orange/doodads_lightning2.png"
+									"orange/doodads_lightning3.png"
+									"orange/doodads_lightning4.png"
+									"orange/doodads_lightning5.png"
+									"orange/doodads_lightning6.png"
+									"orange/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"orange/doodads_lightning1.png"
+									"orange/doodads_lightning2.png"
+									"orange/doodads_lightning3.png"
+									"orange/doodads_lightning4.png"
+									"orange/doodads_lightning5.png"
+									"orange/doodads_lightning6.png"
+									"orange/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "orange/lights.png"
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+				
+				K_Dome_Emitter_Ext_Orange
+				{
+					Type = Graphics
+					Location = [1, 0.5]
+					OperationalToggle = IsOperational
+					OperationalDoodad
+					{
+						Layer = "structure"
+						Offset = [0, -1.1]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"orange/dome_emitter_fx1.png"
+									"orange/dome_emitter_fx2.png"
+									"orange/dome_emitter_fx3.png"
+									"orange/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"orange/dome_emitter_fx1.png"
+									"orange/dome_emitter_fx2.png"
+									"orange/dome_emitter_fx3.png"
+									"orange/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"orange/dome_emitter_fx1.png"
+									"orange/dome_emitter_fx2.png"
+									"orange/dome_emitter_fx3.png"
+									"orange/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					NonOperationalDoodad
+					{
+						Layer = "structure"
+						Offset = [0, -1.1]
+						DamageLevels
+						[
+							{
+								File = "orange/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+							{
+								File = "orange/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+							{
+								File = "orange/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+			}
+		}
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS ORANGE END -----------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -2091,6 +2119,642 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 		
 		// -------------------------------------------------------------------------------------------------------------------------
 		// GRAPHICS GREEN END ------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS BLUE START -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Graphics_Blue
+		{
+			Type = ToggledComponents
+			Toggle = ToggleColour_Blue
+			IncludeInBlueprints = false
+			Components = 
+			{
+				K_Graphics_Blue : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"blue/doodads_lightning1.png"
+									"blue/doodads_lightning2.png"
+									"blue/doodads_lightning3.png"
+									"blue/doodads_lightning4.png"
+									"blue/doodads_lightning5.png"
+									"blue/doodads_lightning6.png"
+									"blue/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"blue/doodads_lightning1.png"
+									"blue/doodads_lightning2.png"
+									"blue/doodads_lightning3.png"
+									"blue/doodads_lightning4.png"
+									"blue/doodads_lightning5.png"
+									"blue/doodads_lightning6.png"
+									"blue/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"blue/doodads_lightning1.png"
+									"blue/doodads_lightning2.png"
+									"blue/doodads_lightning3.png"
+									"blue/doodads_lightning4.png"
+									"blue/doodads_lightning5.png"
+									"blue/doodads_lightning6.png"
+									"blue/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "blue/lights.png"
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+				
+				K_Dome_Emitter_Ext_Blue
+				{
+					Type = Graphics
+					Location = [1, 0.5]
+					OperationalToggle = IsOperational
+					OperationalDoodad
+					{
+						Layer = "structure"
+						Offset = [0, -1.1]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"blue/dome_emitter_fx1.png"
+									"blue/dome_emitter_fx2.png"
+									"blue/dome_emitter_fx3.png"
+									"blue/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"blue/dome_emitter_fx1.png"
+									"blue/dome_emitter_fx2.png"
+									"blue/dome_emitter_fx3.png"
+									"blue/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"blue/dome_emitter_fx1.png"
+									"blue/dome_emitter_fx2.png"
+									"blue/dome_emitter_fx3.png"
+									"blue/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					NonOperationalDoodad
+					{
+						Layer = "structure"
+						Offset = [0, -1.1]
+						DamageLevels
+						[
+							{
+								File = "blue/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+							{
+								File = "blue/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+							{
+								File = "blue/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+			}
+		}
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS BLUE END -------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS CYAN START -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Graphics_Cyan
+		{
+			Type = ToggledComponents
+			Toggle = ToggleColour_Cyan
+			IncludeInBlueprints = false
+			Components = 
+			{
+				K_Graphics_Cyan : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"cyan/doodads_lightning1.png"
+									"cyan/doodads_lightning2.png"
+									"cyan/doodads_lightning3.png"
+									"cyan/doodads_lightning4.png"
+									"cyan/doodads_lightning5.png"
+									"cyan/doodads_lightning6.png"
+									"cyan/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"cyan/doodads_lightning1.png"
+									"cyan/doodads_lightning2.png"
+									"cyan/doodads_lightning3.png"
+									"cyan/doodads_lightning4.png"
+									"cyan/doodads_lightning5.png"
+									"cyan/doodads_lightning6.png"
+									"cyan/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"cyan/doodads_lightning1.png"
+									"cyan/doodads_lightning2.png"
+									"cyan/doodads_lightning3.png"
+									"cyan/doodads_lightning4.png"
+									"cyan/doodads_lightning5.png"
+									"cyan/doodads_lightning6.png"
+									"cyan/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "cyan/lights.png"
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+				
+				K_Dome_Emitter_Ext_Cyan
+				{
+					Type = Graphics
+					Location = [1, 0.5]
+					OperationalToggle = IsOperational
+					OperationalDoodad
+					{
+						Layer = "structure"
+						Offset = [0, -1.1]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"cyan/dome_emitter_fx1.png"
+									"cyan/dome_emitter_fx2.png"
+									"cyan/dome_emitter_fx3.png"
+									"cyan/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"cyan/dome_emitter_fx1.png"
+									"cyan/dome_emitter_fx2.png"
+									"cyan/dome_emitter_fx3.png"
+									"cyan/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"cyan/dome_emitter_fx1.png"
+									"cyan/dome_emitter_fx2.png"
+									"cyan/dome_emitter_fx3.png"
+									"cyan/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					NonOperationalDoodad
+					{
+						Layer = "structure"
+						Offset = [0, -1.1]
+						DamageLevels
+						[
+							{
+								File = "cyan/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+							{
+								File = "cyan/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+							{
+								File = "cyan/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+			}
+		}
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS CYAN END -------------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS PURPLE START ---------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Graphics_Purple
+		{
+			Type = ToggledComponents
+			Toggle = ToggleColour_Purple
+			IncludeInBlueprints = false
+			Components = 
+			{
+				K_Graphics_Purple : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"purple/doodads_lightning1.png"
+									"purple/doodads_lightning2.png"
+									"purple/doodads_lightning3.png"
+									"purple/doodads_lightning4.png"
+									"purple/doodads_lightning5.png"
+									"purple/doodads_lightning6.png"
+									"purple/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"purple/doodads_lightning1.png"
+									"purple/doodads_lightning2.png"
+									"purple/doodads_lightning3.png"
+									"purple/doodads_lightning4.png"
+									"purple/doodads_lightning5.png"
+									"purple/doodads_lightning6.png"
+									"purple/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"purple/doodads_lightning1.png"
+									"purple/doodads_lightning2.png"
+									"purple/doodads_lightning3.png"
+									"purple/doodads_lightning4.png"
+									"purple/doodads_lightning5.png"
+									"purple/doodads_lightning6.png"
+									"purple/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "purple/lights.png"
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+				
+				K_Dome_Emitter_Ext_Purple
+				{
+					Type = Graphics
+					Location = [1, 0.5]
+					OperationalToggle = IsOperational
+					OperationalDoodad
+					{
+						Layer = "structure"
+						Offset = [0, -1.1]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"purple/dome_emitter_fx1.png"
+									"purple/dome_emitter_fx2.png"
+									"purple/dome_emitter_fx3.png"
+									"purple/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"purple/dome_emitter_fx1.png"
+									"purple/dome_emitter_fx2.png"
+									"purple/dome_emitter_fx3.png"
+									"purple/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"purple/dome_emitter_fx1.png"
+									"purple/dome_emitter_fx2.png"
+									"purple/dome_emitter_fx3.png"
+									"purple/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					NonOperationalDoodad
+					{
+						Layer = "structure"
+						Offset = [0, -1.1]
+						DamageLevels
+						[
+							{
+								File = "purple/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+							{
+								File = "purple/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+							{
+								File = "purple/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+			}
+		}
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS PURPLE END -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS PINK START -----------------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------------------------------
+		
+		ToggleComponents_Graphics_Pink
+		{
+			Type = ToggledComponents
+			Toggle = ToggleColour_Pink
+			IncludeInBlueprints = false
+			Components = 
+			{
+				K_Graphics_Pink : ~/Part/Components/Graphics
+				{				
+					OperationalDoodad
+					{
+						Layer = "weapons"
+						Offset = [0, 0]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"pink/doodads_lightning1.png"
+									"pink/doodads_lightning2.png"
+									"pink/doodads_lightning3.png"
+									"pink/doodads_lightning4.png"
+									"pink/doodads_lightning5.png"
+									"pink/doodads_lightning6.png"
+									"pink/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"pink/doodads_lightning1.png"
+									"pink/doodads_lightning2.png"
+									"pink/doodads_lightning3.png"
+									"pink/doodads_lightning4.png"
+									"pink/doodads_lightning5.png"
+									"pink/doodads_lightning6.png"
+									"pink/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"pink/doodads_lightning1.png"
+									"pink/doodads_lightning2.png"
+									"pink/doodads_lightning3.png"
+									"pink/doodads_lightning4.png"
+									"pink/doodads_lightning5.png"
+									"pink/doodads_lightning6.png"
+									"pink/doodads_lightning7.png"
+								]
+								Size = [2, 1]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "pink/lights.png"
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+				
+				K_Dome_Emitter_Ext_Pink
+				{
+					Type = Graphics
+					Location = [1, 0.5]
+					OperationalToggle = IsOperational
+					OperationalDoodad
+					{
+						Layer = "structure"
+						Offset = [0, -1.1]
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"pink/dome_emitter_fx1.png"
+									"pink/dome_emitter_fx2.png"
+									"pink/dome_emitter_fx3.png"
+									"pink/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"pink/dome_emitter_fx1.png"
+									"pink/dome_emitter_fx2.png"
+									"pink/dome_emitter_fx3.png"
+									"pink/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+							{
+								AnimationFiles
+								[
+									"pink/dome_emitter_fx1.png"
+									"pink/dome_emitter_fx2.png"
+									"pink/dome_emitter_fx3.png"
+									"pink/dome_emitter_fx4.png"
+								]
+								Size = [2, 1]
+								//Z = 1
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					NonOperationalDoodad
+					{
+						Layer = "structure"
+						Offset = [0, -1.1]
+						DamageLevels
+						[
+							{
+								File = "pink/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+							{
+								File = "pink/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+							{
+								File = "pink/dome_emitter_off.png"
+								NormalsFile = "dome_emitter_normals.png"
+								// Z = 1
+								Size = [2, 1]
+							}
+						]
+					}
+				}
+			}
+		}
+		// -------------------------------------------------------------------------------------------------------------------------
+		// GRAPHICS PINK END -------------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------------------------
 		
 		BatterySprites
