@@ -4,7 +4,7 @@ Components
 	// TOGGLE START -----------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 	
-	Toggle_Red_On :		<../default/default.rules>/Components/Toggle_default_On	{ Toggles = [ToggleColour_Red, ToggleDisplay_On] }
+	Toggle_Red_On :	<../default/default.rules>/Components/Toggle_default_On	{ Toggles = [ToggleColour_Red, ToggleDisplay_On] }
 	Toggle_Red_Off :	<../default/default.rules>/Components/Toggle_default_On	{ Toggles = [ToggleColour_Red, ToggleDisplay_Off] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
@@ -81,9 +81,13 @@ Components
 		Toggle = ToggleColour_Red
 		Components = 
 		{
-			K_Graphics : &<../shield_gen_large_modular.rules>/Part/Components/Graphics
+			K_Graphics
 			{
-				OperationalDoodad : ^/0/OperationalDoodad
+				Type = Graphics
+				Location =	&<../shield_gen_large_modular.rules>/Part/Components/^/0/Graphics/Location
+				OperationalToggle = IsOperational
+				
+				OperationalDoodad : &<../shield_gen_large_modular.rules>/Part/Components/^/0/Graphics/OperationalDoodad
 				{
 					DamageLevels
 					[
@@ -167,6 +171,7 @@ Components
 			
 			K_BatterySprites : &<../shield_gen_large_modular.rules>/Part/Components/BatterySprites
 			{
+				ResourceStorage = BatteryStorage
 				ResourceLevels
 				[
 					{
