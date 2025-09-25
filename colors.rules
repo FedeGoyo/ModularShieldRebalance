@@ -1,20 +1,34 @@
 Color
 {
+	Colors
+	{
+		Gray = [50, 50, 50, 127]
+		Null = [0, 0, 0, 0]
+		Red = [240, 0, 0, 127]
+		Orange = [255, 125, 50, 127]
+		Yellow = [255, 255, 69, 127]
+		Green = [30, 220, 55, 127]
+		Blue = [20, 63, 168, 127]
+		Cyan = [63, 235, 255, 127]
+		Purple = [150, 0, 255, 127]
+		Pink = [255, 42, 169, 127]
+	}
+
 	Default
 	{
 		ShieldMediaEffect_On
 		{
 			_fullPowerColor1 = [54, 0, 91, 127]
-			_lowPowerColor1 = [50, 50, 50, 127]
+			_lowPowerColor1 = [54, 0, 91, 127]
 			_fullPowerColor2 = [0, 0, 255, 127]
-			_lowPowerColor2 = [50, 50, 50, 127]
+			_lowPowerColor2 = [255, 0, 0, 127]
 		}
 		ShieldMediaEffect_Off
 		{	
-			_fullPowerColor1 = [54, 0, 91, 0]
-			_lowPowerColor1 = [50, 50, 50, 0]
-			_fullPowerColor2 = [0, 0, 255, 0]
-			_lowPowerColor2 = [50, 50, 50, 0]
+			_fullPowerColor1 = &~/Color/Colors/Null
+			_lowPowerColor1 = &~/Color/Colors/Null
+			_fullPowerColor2 = &~/Color/Colors/Null
+			_lowPowerColor2 = &~/Color/Colors/Null
 		}
 		HitMediaEffects
 		{
@@ -28,196 +42,198 @@ Color
 	{
 		ShieldMediaEffect_On
 		{
-			_fullPowerColor1 = [54, 100, 91, 127]	// [110, 15, 15, 127]
-			_lowPowerColor1 = [50, 50, 50, 127]		// [110, 15, 15, 127]
-			_fullPowerColor2 = [240, 0, 0, 127]		// [250, 100, 100, 127]
-			_lowPowerColor2 = [50, 50, 50, 127]		// [250, 100, 100, 127]
+			_fullPowerColor1 = &~/Color/Colors/Purple
+			_lowPowerColor1 = &~/Color/Colors/Purple
+			_fullPowerColor2 = &~/Color/Colors/Red
+			_lowPowerColor2 = &~/Color/Colors/Gray
 		}
 		ShieldMediaEffect_Off
 		{	
-			_fullPowerColor1 = [54, 100, 91, 0]		// [110, 15, 15, 0]
-			_lowPowerColor1 = [50, 50, 50, 0]		// [110, 15, 15, 0]
-			_fullPowerColor2 = [240, 0, 0, 0]		// [250, 100, 100, 0]
-			_lowPowerColor2 = [50, 50, 50, 0]		// [250, 100, 100, 0]
+			_fullPowerColor1 = &~/Color/Colors/Null
+			_lowPowerColor1 = &~/Color/Colors/Null
+			_fullPowerColor2 = &~/Color/Colors/Null
+			_lowPowerColor2 = &~/Color/Colors/Null
 		}
 		HitMediaEffects
 		{
-			_fullPowerColor1 = [255, 0, 0, 127]
-			_lowPowerColor1 = [255, 0, 0, 200]
-			_fullPowerColor2 = [240, 100, 100, 127]
-			_lowPowerColor2 = [236, 150, 150, 180]
+			_fullPowerColor1 = &~/Color/Colors/Red
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Purple
+			_lowPowerColor2 = &~/Color/Colors/Purple
 		}
 	}
 	Orange
 	{
 		ShieldMediaEffect_On
 		{
-			_fullPowerColor1 = [54, 100, 91, 127]	// [110, 90, 15, 127]
-			_lowPowerColor1 = [50, 50, 50, 127]		// [110, 90, 15, 127]
-			_fullPowerColor2 = [255, 125, 50, 127]	// [250, 185, 40, 127]
-			_lowPowerColor2 = [50, 50, 50, 127]		// [255, 100, 100, 127]
+			_fullPowerColor1 = &~/Color/Colors/Purple
+			_lowPowerColor1 = &~/Color/Colors/Purple
+			_fullPowerColor2 = &~/Color/Colors/Orange
+			_lowPowerColor2 = &~/Color/Colors/Gray
 		}
 		ShieldMediaEffect_Off
 		{	
-			_fullPowerColor1 = [54, 100, 91, 0]		// [110, 90, 15, 0]
-			_lowPowerColor1 = [50, 50, 50, 0]		// [110, 90, 15, 0]
-			_fullPowerColor2 = [255, 125, 50, 0]	// [250, 185, 40, 0]
-			_lowPowerColor2 = [50, 50, 50, 0]		// [255, 100, 100, 0]
+			_fullPowerColor1 = &~/Color/Colors/Null
+			_lowPowerColor1 = &~/Color/Colors/Null
+			_fullPowerColor2 = &~/Color/Colors/Null
+			_lowPowerColor2 = &~/Color/Colors/Null
 		}
 		HitMediaEffects
 		{
-			_fullPowerColor1 = [255, 150, 0, 127]
-			_lowPowerColor1 = [255, 0, 0, 200]
-			_fullPowerColor2 = [240, 190, 100, 127]
-			_lowPowerColor2 = [210, 150, 236, 127]
+			_fullPowerColor1 = &~/Color/Colors/Orange
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Purple
+			_lowPowerColor2 = &~/Color/Colors/Purple
 		}
 	}
 	Yellow
 	{
 		ShieldMediaEffect_On
 		{
-			_fullPowerColor1 = [54, 100, 91, 127]	// [125, 120, 25, 127]
-			_lowPowerColor1 = [50, 50, 50, 127]		// [125, 120, 25, 127]
-			_fullPowerColor2 = [255, 225, 69, 127]	// [250, 245, 100, 127]
-			_lowPowerColor2 = [50, 50, 50, 127]		// [255, 100, 100, 127]
+			_fullPowerColor1 = &~/Color/Colors/Pink
+			_lowPowerColor1 = &~/Color/Colors/Pink
+			_fullPowerColor2 = &~/Color/Colors/Yellow
+			_lowPowerColor2 = &~/Color/Colors/Gray
 		}
 		ShieldMediaEffect_Off
 		{	
-			_fullPowerColor1 = [54, 100, 91, 0]		// [125, 120, 25, 0]
-			_lowPowerColor1 = [50, 50, 50, 0]		// [125, 120, 25, 0]
-			_fullPowerColor2 = [255, 225, 69, 0]	// [250, 245, 100, 0]
-			_lowPowerColor2 = [50, 50, 50, 0]		// [255, 100, 100, 0]
+			_fullPowerColor1 = &~/Color/Colors/Null
+			_lowPowerColor1 = &~/Color/Colors/Null
+			_fullPowerColor2 = &~/Color/Colors/Null
+			_lowPowerColor2 = &~/Color/Colors/Null
 		}
 		HitMediaEffects
 		{
-			_fullPowerColor1 = [255, 255, 0, 127]
-			_lowPowerColor1 = [255, 255, 0, 200]
-			_fullPowerColor2 = [235, 240, 100, 127]
-			_lowPowerColor2 = [236, 233, 150, 120]
+			_fullPowerColor1 = &~/Color/Colors/Yellow
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Pink
+			_lowPowerColor2 = &~/Color/Colors/Pink
 		}
 	}
 	Green
 	{
 		ShieldMediaEffect_On
 		{
-			_fullPowerColor1 = [54, 100, 91, 127]	// [30, 125, 25, 127]
-			_lowPowerColor1 = [50, 50, 50, 127]		// [30, 125, 25, 127]
-			_fullPowerColor2 = [30, 220, 55, 127]	// [135, 250, 100, 127]
-			_lowPowerColor2 = [50, 50, 50, 127]		// [255, 0, 0, 127]
+			_fullPowerColor1 = &~/Color/Colors/Red
+			_lowPowerColor1 = &~/Color/Colors/Red
+			_fullPowerColor2 = &~/Color/Colors/Green
+			_lowPowerColor2 = &~/Color/Colors/Gray
 		}
 		ShieldMediaEffect_Off
 		{	
-			_fullPowerColor1 = [54, 100, 91, 0]	// [30, 125, 25, 0]
-			_lowPowerColor1 = [50, 50, 50, 0]	// [30, 125, 25, 0]
-			_fullPowerColor2 = [30, 220, 55, 0]	// [135, 250, 100, 0]
-			_lowPowerColor2 = [50, 50, 50, 0]	// [255, 0, 0, 0]
+			_fullPowerColor1 = &~/Color/Colors/Null
+			_lowPowerColor1 = &~/Color/Colors/Null
+			_fullPowerColor2 = &~/Color/Colors/Null
+			_lowPowerColor2 = &~/Color/Colors/Null
 		}
 		HitMediaEffects
 		{
-			_fullPowerColor1 = [0, 255, 0, 127]
-			_lowPowerColor1 = [0, 255, 0, 127]
-			_fullPowerColor2 = [100, 240, 100, 127]
-			_lowPowerColor2 = [150, 233, 150, 180]
+			_fullPowerColor1 = &~/Color/Colors/Green
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Red
+			_lowPowerColor2 = &~/Color/Colors/Red
 		}
 	}
 	Blue
 	{
 		ShieldMediaEffect_On
 		{
-			_fullPowerColor1 = [54, 100, 91, 127]	// [0, 35, 90, 127]
-			_lowPowerColor1 = [50, 50, 50, 127]		// [0, 35, 90, 127]
-			_fullPowerColor2 = [20, 69, 169, 127]	// [40, 150, 250, 127]
-			_lowPowerColor2 = [50, 50, 50, 127]		// [255, 100, 100, 127]
+			_fullPowerColor1 = &~/Color/Colors/Green
+			_lowPowerColor1 = &~/Color/Colors/Green
+			_fullPowerColor2 = &~/Color/Colors/Blue
+			_lowPowerColor2 = &~/Color/Colors/Gray
 		}
 		ShieldMediaEffect_Off
 		{	
-			_fullPowerColor1 = [54, 100, 91, 0]		// [0, 35, 90, 0]
-			_lowPowerColor1 = [50, 50, 50, 0]		// [0, 35, 90, 0]
-			_fullPowerColor2 = [20, 69, 169, 0]		// [40, 150, 250, 0]
-			_lowPowerColor2 = [50, 50, 50, 0]		// [255, 100, 100, 0]
+			_fullPowerColor1 = &~/Color/Colors/Null
+			_lowPowerColor1 = &~/Color/Colors/Null
+			_fullPowerColor2 = &~/Color/Colors/Null
+			_lowPowerColor2 = &~/Color/Colors/Null
 		}
 		HitMediaEffects
 		{
-			_fullPowerColor1 = [0, 0, 255, 127]
-			_lowPowerColor1 = [255, 0, 0, 127]
-			_fullPowerColor2 = [100, 165, 238, 127]
-			_lowPowerColor2 = [210, 150, 236, 127]
+			_fullPowerColor1 = &~/Color/Colors/Blue
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Green
+			_lowPowerColor2 = &~/Color/Colors/Green
 		}
 	}
 	Cyan
 	{
 		ShieldMediaEffect_On
 		{
-			_fullPowerColor1 = [54, 100, 91, 127]
-			_lowPowerColor1 = [50, 50, 50, 127]
-			_fullPowerColor2 = [69, 235, 255, 127]
-			_lowPowerColor2 = [50, 50, 50, 127]
+			_fullPowerColor1 = &~/Color/Colors/Green
+			_lowPowerColor1 = &~/Color/Colors/Green
+			_fullPowerColor2 = &~/Color/Colors/Cyan
+			_lowPowerColor2 = &~/Color/Colors/Gray
 		}
 		ShieldMediaEffect_Off
 		{	
-			_fullPowerColor1 = [54, 100, 91, 0]
-			_lowPowerColor1 = [50, 50, 50, 0]
-			_fullPowerColor2 = [69, 235, 255, 0]
-			_lowPowerColor2 = [50, 50, 50, 0]
+			_fullPowerColor1 = &~/Color/Colors/Null
+			_lowPowerColor1 = &~/Color/Colors/Null
+			_fullPowerColor2 = &~/Color/Colors/Null
+			_lowPowerColor2 = &~/Color/Colors/Null
 		}
 		HitMediaEffects
 		{
-			_fullPowerColor1 = [0, 0, 255, 127]
-			_lowPowerColor1 = [255, 0, 0, 127]
-			_fullPowerColor2 = [100, 165, 238, 127]
-			_lowPowerColor2 = [210, 150, 236, 127]
+			_fullPowerColor1 = &~/Color/Colors/Cyan
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Green
+			_lowPowerColor2 = &~/Color/Colors/Green
 		}
 	}
 	Purple
 	{
 		ShieldMediaEffect_On
 		{
-			_fullPowerColor1 = [54, 100, 91, 127]	// [70, 40, 100, 127]
-			_lowPowerColor1 = [50, 50, 50, 127]		// [70, 40, 100, 127]
-			_fullPowerColor2 = [150, 0, 255, 127]	// [160, 50, 255, 127]
-			_lowPowerColor2 = [50, 50, 50, 127]		// [255, 100, 100, 127]
+			_fullPowerColor1 = &~/Color/Colors/Cyan
+			_lowPowerColor1 = &~/Color/Colors/Cyan
+			_fullPowerColor2 = &~/Color/Colors/Purple
+			_lowPowerColor2 = &~/Color/Colors/Gray
 		}
 		ShieldMediaEffect_Off
 		{	
-			_fullPowerColor1 = [54, 100, 91, 0]		// [70, 40, 100, 0]
-			_lowPowerColor1 = [50, 50, 50, 0]		// [70, 40, 100, 0]
-			_fullPowerColor2 = [150, 0, 255, 0]		// [160, 50, 255, 0]
-			_lowPowerColor2 = [50, 50, 50, 0]		// [255, 100, 100, 0]
+			_fullPowerColor1 = &~/Color/Colors/Null
+			_lowPowerColor1 = &~/Color/Colors/Null
+			_fullPowerColor2 = &~/Color/Colors/Null
+			_lowPowerColor2 = &~/Color/Colors/Null
 		}
 		HitMediaEffects
 		{
-			_fullPowerColor1 = [130, 80, 180, 127]
-			_lowPowerColor1 = [255, 0, 0, 127]
-			_fullPowerColor2 = [190, 150, 255, 127]
-			_lowPowerColor2 = [236, 150, 234, 127]
+			_fullPowerColor1 = &~/Color/Colors/Purple
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Cyan
+			_lowPowerColor2 = &~/Color/Colors/Cyan
 		}
 	}
 	Pink
 	{
 		ShieldMediaEffect_On
 		{
-			_fullPowerColor1 = [54, 100, 91, 127]
-			_lowPowerColor1 = [50, 50, 50, 127]
-			_fullPowerColor2 = [255, 42, 169, 127]
-			_lowPowerColor2 = [50, 50, 50, 127]
+			_fullPowerColor1 = &~/Color/Colors/Green
+			_lowPowerColor1 = &~/Color/Colors/Green
+			_fullPowerColor2 = &~/Color/Colors/Pink
+			_lowPowerColor2 = &~/Color/Colors/Gray
 		}
 		ShieldMediaEffect_Off
 		{	
-			_fullPowerColor1 = [54, 100, 91, 0]
-			_lowPowerColor1 = [50, 50, 50, 0]
-			_fullPowerColor2 = [255, 42, 169, 0]
-			_lowPowerColor2 = [50, 50, 50, 0]
+			_fullPowerColor1 = &~/Color/Colors/Null
+			_lowPowerColor1 = &~/Color/Colors/Null
+			_fullPowerColor2 = &~/Color/Colors/Null
+			_lowPowerColor2 = &~/Color/Colors/Null
 		}
 		HitMediaEffects
 		{
-			_fullPowerColor1 = [130, 80, 180, 127]
-			_lowPowerColor1 = [255, 0, 0, 127]
-			_fullPowerColor2 = [190, 150, 255, 127]
-			_lowPowerColor2 = [236, 150, 234, 127]
+			_fullPowerColor1 = &~/Color/Colors/Pink
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Green
+			_lowPowerColor2 = &~/Color/Colors/Green
 		}
 	}
 	White
-	{}	
+	{}
+	Black
+	{}
 }
 
 StatsCommon
