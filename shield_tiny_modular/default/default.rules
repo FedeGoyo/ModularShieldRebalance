@@ -1,0 +1,201 @@
+Components
+{
+	// -------------------------------------------------------------------------------------------------------------------------
+	// TOGGLE START ------------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+	
+	Toggle_Default_On
+	{
+		Type = MultiToggle
+		Toggles = [ToggleColour_Default, ToggleDisplay_On]
+		Mode = All
+	}
+	Toggle_Default_Off :	Toggle_Default_On	{ Toggles = [ToggleColour_Default, ToggleDisplay_Off] }
+	
+	// -------------------------------------------------------------------------------------------------------------------------
+	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+	
+	ToggleComponents_Shield_Default_On
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Default_On
+		Components = 
+		{ 
+			TINY_ArcShield : &<../shield_tiny_modular.rules>/Part/Components/ArcShield
+			{
+				OperationalToggle = IsOperational
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/default/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
+				]
+				HitMediaEffects
+				[
+					: &../^/0/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/default/HitMediaEffects_On, ^/0/ArcSprite	{}
+					}
+					: &../^/0/HitMediaEffects/1 {}
+				]
+			}
+			TINY_EmitterEffect : &<../shield_tiny_modular.rules>/Part/Components/BaseEmitterEffect
+			{
+				OperationalToggle = IsOperational
+				MediaEffects
+				[
+					: &../^/0/MediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/default/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+				]
+			}
+			TINY_OverclockEffect : &<../shield_tiny_modular.rules>/Part/Components/OverclockEffect
+			{
+				OperationalToggle = OverclockedEffectToggle
+				Shield = TINY_ArcShield
+				ChainedTo = TINY_ArcShield
+			}
+			TINY_OverloadEffect : &<../shield_tiny_modular.rules>/Part/Components/OverloadEffect
+			{
+				OperationalToggle = IsOperationalOverloaded
+				Shield = TINY_ArcShield
+				ChainedTo = TINY_ArcShield
+			}
+			TINY_OverclockOverloadEffect : &<../shield_tiny_modular.rules>/Part/Components/OverclockOverloadEffect
+			{
+				OperationalToggle = IsOperationalOverclockedOverloaded
+				Shield = TINY_ArcShield
+				ChainedTo = TINY_ArcShield
+			}
+		}
+	}
+
+	ToggleComponents_Shield_Default_Off
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Default_Off
+		Components =
+		{
+			TINY_ArcShield : &../../ToggleComponents_Shield_Default_On/Components/TINY_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/default/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
+				]
+				HitMediaEffects
+				[
+					: &../^/0/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/default/HitMediaEffects_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/HitMediaEffects/1 {}
+				]
+			}
+		}
+	}
+	
+	// -------------------------------------------------------------------------------------------------------------------------
+	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	ToggleComponents_Graphics_Default
+	{
+		Type = ToggledComponents
+		Toggle = ToggleColour_Default
+		Components = 
+		{
+			K_Graphics
+			{
+				Type = Graphics
+				Location =	&<../shield_tiny_modular.rules>/Part/Components/Graphics/Location
+				OperationalToggle = IsOperational
+				
+				OperationalDoodad
+				{
+					Layer = "weapons"
+					Offset = [0, 0]
+					DamageLevels
+					[
+						{
+							AnimationFiles
+							[
+								"doodads_lightning1.png"
+								"doodads_lightning2.png"
+								"doodads_lightning3.png"
+								"doodads_lightning4.png"
+								"doodads_lightning5.png"
+								"doodads_lightning6.png"
+								"doodads_lightning7.png"
+							]
+							Size = [2, 1]
+							AnimationInterval = 0.1
+						}
+					]
+				}
+				
+				OperationalLighting
+				{
+					Layer = "lights_add"
+					DamageLevels
+					[
+						{
+							File = "lights.png"
+							Size = [2, 1]
+						}
+					]
+				}
+			}
+			
+			K_Dome_Emitter_Ext_Default
+			{
+				Type = Graphics
+				Location = [1, 0.5]
+				OperationalToggle = IsOperational
+				OperationalDoodad
+				{
+					Layer = "structure"
+					Offset = [0, -1.1]
+					DamageLevels
+					[
+						{
+							AnimationFiles
+							[
+								"dome_emitter_fx1.png"
+								"dome_emitter_fx2.png"
+								"dome_emitter_fx3.png"
+								"dome_emitter_fx4.png"
+							]
+							Size = [2, 1]
+							//Z = 1
+							AnimationInterval = 0.1
+						}
+					]
+				}
+				NonOperationalDoodad
+				{
+					Layer = "structure"
+					Offset = [0, -1.1]
+					DamageLevels
+					[
+						{
+							File = "dome_emitter_off.png"
+							NormalsFile = "../dome_emitter_normals.png"
+							// Z = 1
+							Size = [2, 1]
+						}
+					]
+				}
+			}
+		}
+	}	
+}

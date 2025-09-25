@@ -1,0 +1,158 @@
+Components
+{
+	// -------------------------------------------------------------------------------------------------------------------------
+	// TOGGLE START -----------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+	
+	Toggle_Green_On :	<../default/default.rules>/Components/Toggle_default_On	{ Toggles = [ToggleColour_Green, ToggleDisplay_On] }
+	Toggle_Green_Off :	<../default/default.rules>/Components/Toggle_default_On	{ Toggles = [ToggleColour_Green, ToggleDisplay_Off] }
+	
+	// -------------------------------------------------------------------------------------------------------------------------
+	// ARCSHIELD START ---------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	ToggleComponents_Shield_Green_On
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Green_On
+		Components : &<../default/default.rules>/Components/ToggleComponents_Shield_default_On/Components
+		{
+			TINY_ArcShield : ^/0/TINY_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Green/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
+				]
+				HitMediaEffects
+				[
+					: &../^/0/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Green/HitMediaEffects_On, ^/0/ArcSprite	{}
+					}
+					: &../^/0/HitMediaEffects/1 {}
+				]
+			}
+			TINY_EmitterEffect : ^/0/TINY_EmitterEffect
+			{
+				MediaEffects
+				[
+					: &../^/0/MediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Green/ShieldMediaEffect_On, ^/0/ArcSprite	{}
+					}
+				]
+			}
+		}
+	}
+
+	ToggleComponents_Shield_Green_Off
+	{
+		Type = ToggledComponents
+		Toggle = Toggle_Green_Off
+		Components =
+		{
+			TINY_ArcShield : &../../ToggleComponents_Shield_Green_On/Components/TINY_ArcShield
+			{
+				ShieldMediaEffects
+				[
+					: &../^/0/ShieldMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Green/ShieldMediaEffect_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/ShieldMediaEffects/1	{}
+					: &../^/0/ShieldMediaEffects/2	{}
+				]
+				HitMediaEffects
+				[
+					: &../^/0/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Green/HitMediaEffects_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/HitMediaEffects/1 {}
+				]
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------------------------------
+	// GRAPHICS START ----------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	ToggleComponents_Graphics_Green
+	{
+		Type = ToggledComponents
+		Toggle = ToggleColour_Green
+		Components : &<../default/default.rules>/Components/ToggleComponents_Graphics_Default/Components
+		{
+			K_Graphics :	^/0/K_Graphics
+			{
+				OperationalDoodad :	^/0/OperationalDoodad
+				{
+					DamageLevels
+					[
+						: &../^/0/DamageLevels/0
+						{
+							AnimationFiles
+							[
+								"doodads_lightning1.png"
+								"doodads_lightning2.png"
+								"doodads_lightning3.png"
+								"doodads_lightning4.png"
+								"doodads_lightning5.png"
+								"doodads_lightning6.png"
+								"doodads_lightning7.png"
+							]
+						}
+					]
+				}
+				
+				OperationalLighting :	^/0/OperationalLighting
+				{
+					DamageLevels
+					[
+						{
+							File = "lights.png"
+							Size = [2, 1]
+						}
+					]
+				}
+			}
+			
+			K_Dome_Emitter_Ext_Green :	^/0/K_Dome_Emitter_Ext_Default
+			{
+				OperationalDoodad :	^/0/OperationalDoodad
+				{
+					DamageLevels
+					[
+						: &../^/0/DamageLevels/0
+						{
+							AnimationFiles
+							[
+								"dome_emitter_fx1.png"
+								"dome_emitter_fx2.png"
+								"dome_emitter_fx3.png"
+								"dome_emitter_fx4.png"
+							]
+						}
+					]
+				}
+				NonOperationalDoodad :	^/0/NonOperationalDoodad
+				{
+					DamageLevels
+					[
+						: &../^/0/DamageLevels/0
+						{
+							File = "dome_emitter_off.png"
+							NormalsFile = "../dome_emitter_normals.png"
+						}
+					]
+				}
+			}
+		}
+	}
+}
