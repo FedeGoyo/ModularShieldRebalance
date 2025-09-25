@@ -229,9 +229,13 @@ Components
 		Toggle = ToggleColour_Default
 		Components = 
 		{
-			K_Graphics : &<../shield_gen_small_modular.rules>/Part/Components/Graphics
+			K_Graphics
 			{
-				OperationalDoodad : ^/0/OperationalDoodad
+				Type = Graphics
+				Location =	&<../shield_gen_small_modular.rules>/Part/Components/^/0/Graphics/Location
+				OperationalToggle = IsOperational
+				
+				OperationalDoodad : &<../shield_gen_small_modular.rules>/Part/Components/^/0/Graphics/OperationalDoodad
 				{
 					DamageLevels
 					[
@@ -313,6 +317,7 @@ Components
 			
 			K_BatterySprites : &<../shield_gen_small_modular.rules>/Part/Components/BatterySprites
 			{
+				ResourceStorage = BatteryStorage
 				ResourceLevels
 				[
 					{

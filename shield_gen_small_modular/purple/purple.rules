@@ -4,10 +4,10 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	Toggle_Purple_Arc_On :		<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Arc, ToggleDisplay_On] }
-	Toggle_Purple_Line_On :		<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Line, ToggleDisplay_On] }
+	Toggle_Purple_Arc_On :	<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Arc, ToggleDisplay_On] }
+	Toggle_Purple_Line_On :	<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Line, ToggleDisplay_On] }
 
-	Toggle_Purple_Arc_Off :		<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Arc, ToggleDisplay_Off] }
+	Toggle_Purple_Arc_Off :	<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Arc, ToggleDisplay_Off] }
 	Toggle_Purple_Line_Off :	<../default/default.rules>/Components/Toggle_default_Arc_On	{ Toggles = [ToggleColour_Purple, ToggleAngle_Line, ToggleDisplay_Off] }
 
 	// -------------------------------------------------------------------------------------------------------------------------
@@ -191,9 +191,13 @@ Components
 		Toggle = ToggleColour_Purple
 		Components = 
 		{
-			K_Graphics : &<../shield_gen_small_modular.rules>/Part/Components/Graphics
+			K_Graphics
 			{
-				OperationalDoodad : ^/0/OperationalDoodad
+				Type = Graphics
+				Location =	&<../shield_gen_small_modular.rules>/Part/Components/^/0/Graphics/Location
+				OperationalToggle = IsOperational
+				
+				OperationalDoodad : &<../shield_gen_small_modular.rules>/Part/Components/^/0/Graphics/OperationalDoodad
 				{
 					DamageLevels
 					[
@@ -275,6 +279,7 @@ Components
 			
 			K_BatterySprites : &<../shield_gen_small_modular.rules>/Part/Components/BatterySprites
 			{
+				ResourceStorage = BatteryStorage
 				ResourceLevels
 				[
 					{

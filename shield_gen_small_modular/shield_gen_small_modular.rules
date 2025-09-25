@@ -754,6 +754,19 @@ Part : <./Data/ships/terran/shield_gen_small/shield_gen_small.rules>/Part
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// ARCSHIELD ORIGINAL - END ////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		Graphics
+		{
+			Type = Graphics
+			Location =	&../^/0/Graphics/Location
+			OperationalToggle = IsOperational
+			Floor :	../^/0/Graphics/Floor	{}
+			Walls :	../^/0/Graphics/Walls	{}
+			Roof :	../^/0/Graphics/Roof	{}
+			OperationalRoofLighting :	../^/0/Graphics/OperationalRoofLighting	{}
+		}
+
+		BatterySprites :	^/0/BatterySprites	{ ResourceStorage = ProxyBatteryStorage }
 	}
 
 	Stats 	// Make it inherit? Exactly same as Small Shield
