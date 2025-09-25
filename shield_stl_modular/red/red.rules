@@ -4,7 +4,7 @@ Components
 	// TOGGLE START ------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------------------------------------------------------------
 
-	Toggle_Red_On :		<../default/default.rules>/Components/Toggle_Default_On	{ Toggles = [ToggleColour_Red, ToggleDisplay_On]  }
+	Toggle_Red_On :	<../default/default.rules>/Components/Toggle_Default_On	{ Toggles = [ToggleColour_Red, ToggleDisplay_On]  }
 	Toggle_Red_Off :	<../default/default.rules>/Components/Toggle_Default_On	{ Toggles = [ToggleColour_Red, ToggleDisplay_Off] }
 	
 	// -------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ Components
 				[
 					: &../^/0/HitMediaEffects/0
 					{
-						ArcSprite : &<../../colors.rules>/Color/Red/HitMediaEffects, ^/0/ArcSprite	{}
+						ArcSprite : &<../../colors.rules>/Color/Red/HitMediaEffects_On, ^/0/ArcSprite	{}
 					}
 					: &../^/0/HitMediaEffects/1 {}
 				]
@@ -74,6 +74,14 @@ Components
 					}
 					: &../^/0/ShieldMediaEffects/1	{}
 					: &../^/0/ShieldMediaEffects/2	{}
+				]
+				HitMediaEffects
+				[
+					: &../^/0/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Red/HitMediaEffects_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/HitMediaEffects/1 {}
 				]
 			}
 			ArcShield_FrontRight :	<../stats.rules>/Stats/ArcShield_FrontRight, ArcShield_Front	{}

@@ -601,7 +601,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					[
 						: &../^/0/HitMediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Default/HitMediaEffects, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Default/HitMediaEffects_On, ^/0/ArcSprite	{}
 						}
 						: &../^/0/HitMediaEffects/1	{}
 					]
@@ -657,6 +657,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						: &../^/0/ShieldMediaEffects/1	{}
 						: &../^/0/ShieldMediaEffects/2	{}
 					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Default/HitMediaEffects_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
 				}
 			}
 		}
@@ -690,7 +698,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					[
 						: &../^/0/HitMediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Red/HitMediaEffects, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Red/HitMediaEffects_On, ^/0/ArcSprite	{}
 						}
 						: &../^/0/HitMediaEffects/1	{}
 					]
@@ -725,6 +733,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						: &../^/0/ShieldMediaEffects/1	{}
 						: &../^/0/ShieldMediaEffects/2	{}
 					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Red/HitMediaEffects_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
 				}
 			}
 		}
@@ -758,7 +774,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					[
 						: &../^/0/HitMediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Orange/HitMediaEffects, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Orange/HitMediaEffects_On, ^/0/ArcSprite	{}
 						}
 						: &../^/0/HitMediaEffects/1	{}
 					]
@@ -793,6 +809,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						: &../^/0/ShieldMediaEffects/1	{}
 						: &../^/0/ShieldMediaEffects/2	{}
 					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Orange/HitMediaEffects_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
 				}
 			}
 		}
@@ -826,7 +850,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					[
 						: &../^/0/HitMediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Yellow/HitMediaEffects, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Yellow/HitMediaEffects_On, ^/0/ArcSprite	{}
 						}
 						: &../^/0/HitMediaEffects/1	{}
 					]
@@ -861,6 +885,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						: &../^/0/ShieldMediaEffects/1	{}
 						: &../^/0/ShieldMediaEffects/2	{}
 					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Yellow/HitMediaEffects_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
 				}
 			}
 		}
@@ -894,7 +926,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					[
 						: &../^/0/HitMediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Green/HitMediaEffects, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Green/HitMediaEffects_On, ^/0/ArcSprite	{}
 						}
 						: &../^/0/HitMediaEffects/1	{}
 					]
@@ -929,6 +961,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						: &../^/0/ShieldMediaEffects/1	{}
 						: &../^/0/ShieldMediaEffects/2	{}
 					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Green/HitMediaEffects_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
 				}
 			}
 		}
@@ -962,7 +1002,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					[
 						: &../^/0/HitMediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Purple/HitMediaEffects, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Purple/HitMediaEffects_On, ^/0/ArcSprite	{}
 						}
 						: &../^/0/HitMediaEffects/1	{}
 					]
@@ -997,6 +1037,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						: &../^/0/ShieldMediaEffects/1	{}
 						: &../^/0/ShieldMediaEffects/2	{}
 					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Purple/HitMediaEffects_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
 				}
 			}
 		}
@@ -1030,7 +1078,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					[
 						: &../^/0/HitMediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Pink/HitMediaEffects, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Pink/HitMediaEffects_On, ^/0/ArcSprite	{}
 						}
 						: &../^/0/HitMediaEffects/1	{}
 					]
@@ -1065,6 +1113,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						: &../^/0/ShieldMediaEffects/1	{}
 						: &../^/0/ShieldMediaEffects/2	{}
 					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Pink/HitMediaEffects_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
 				}
 			}
 		}
@@ -1098,7 +1154,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					[
 						: &../^/0/HitMediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Blue/HitMediaEffects, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Blue/HitMediaEffects_On, ^/0/ArcSprite	{}
 						}
 						: &../^/0/HitMediaEffects/1	{}
 					]
@@ -1133,6 +1189,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						: &../^/0/ShieldMediaEffects/1	{}
 						: &../^/0/ShieldMediaEffects/2	{}
 					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Blue/HitMediaEffects_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
+					]
 				}
 			}
 		}
@@ -1166,7 +1230,7 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 					[
 						: &../^/0/HitMediaEffects/0
 						{
-							ArcSprite : &<../colors.rules>/Color/Cyan/HitMediaEffects, ^/0/ArcSprite	{}
+							ArcSprite : &<../colors.rules>/Color/Cyan/HitMediaEffects_On, ^/0/ArcSprite	{}
 						}
 						: &../^/0/HitMediaEffects/1	{}
 					]
@@ -1200,6 +1264,14 @@ Part : <./Data/ships/terran/base_part_terran_overclock.rules>/Part
 						}
 						: &../^/0/ShieldMediaEffects/1	{}
 						: &../^/0/ShieldMediaEffects/2	{}
+					]
+					HitMediaEffects
+					[
+						: &../^/0/HitMediaEffects/0
+						{
+							ArcSprite : &<../colors.rules>/Color/Cyan/HitMediaEffects_Off, ^/0/ArcSprite	{}
+						}
+						: &../^/0/HitMediaEffects/1	{}
 					]
 				}
 			}

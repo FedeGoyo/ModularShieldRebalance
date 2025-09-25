@@ -30,7 +30,14 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Null
 			_lowPowerColor2 = &~/Color/Colors/Null
 		}
-		HitMediaEffects
+		HitMediaEffects_On
+		{
+			_fullPowerColor1 = [0, 0, 255, 127]
+			_lowPowerColor1 = [255, 0, 0, 200]
+			_fullPowerColor2 = [154, 98, 238, 127]
+			_lowPowerColor2 = [236, 150, 234, 127]
+		}
+		HitMediaEffects_Off
 		{
 			_fullPowerColor1 = [0, 0, 255, 127]
 			_lowPowerColor1 = [255, 0, 0, 200]
@@ -54,12 +61,19 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Null
 			_lowPowerColor2 = &~/Color/Colors/Null
 		}
-		HitMediaEffects
+		HitMediaEffects_On
 		{
 			_fullPowerColor1 = &~/Color/Colors/Red
 			_lowPowerColor1 = &~/Color/Colors/Gray
 			_fullPowerColor2 = &~/Color/Colors/Purple
 			_lowPowerColor2 = &~/Color/Colors/Purple
+		}
+		HitMediaEffects_Off
+		{
+			_fullPowerColor1 = &~/Color/Colors/Purple
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Red
+			_lowPowerColor2 = &~/Color/Colors/Red
 		}
 	}
 	Orange
@@ -78,12 +92,19 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Null
 			_lowPowerColor2 = &~/Color/Colors/Null
 		}
-		HitMediaEffects
+		HitMediaEffects_On
 		{
 			_fullPowerColor1 = &~/Color/Colors/Orange
 			_lowPowerColor1 = &~/Color/Colors/Gray
 			_fullPowerColor2 = &~/Color/Colors/Purple
 			_lowPowerColor2 = &~/Color/Colors/Purple
+		}
+		HitMediaEffects_Off
+		{
+			_fullPowerColor1 = &~/Color/Colors/Purple
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Orange
+			_lowPowerColor2 = &~/Color/Colors/Orange
 		}
 	}
 	Yellow
@@ -102,12 +123,19 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Null
 			_lowPowerColor2 = &~/Color/Colors/Null
 		}
-		HitMediaEffects
+		HitMediaEffects_On
 		{
 			_fullPowerColor1 = &~/Color/Colors/Yellow
 			_lowPowerColor1 = &~/Color/Colors/Gray
 			_fullPowerColor2 = &~/Color/Colors/Pink
 			_lowPowerColor2 = &~/Color/Colors/Pink
+		}
+		HitMediaEffects_Off
+		{
+			_fullPowerColor1 = &~/Color/Colors/Pink
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Yellow
+			_lowPowerColor2 = &~/Color/Colors/Yellow
 		}
 	}
 	Green
@@ -126,12 +154,19 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Null
 			_lowPowerColor2 = &~/Color/Colors/Null
 		}
-		HitMediaEffects
+		HitMediaEffects_On
 		{
 			_fullPowerColor1 = &~/Color/Colors/Green
 			_lowPowerColor1 = &~/Color/Colors/Gray
 			_fullPowerColor2 = &~/Color/Colors/Red
 			_lowPowerColor2 = &~/Color/Colors/Red
+		}
+		HitMediaEffects_Off
+		{
+			_fullPowerColor1 = &~/Color/Colors/Red
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Green
+			_lowPowerColor2 = &~/Color/Colors/Green
 		}
 	}
 	Blue
@@ -150,12 +185,19 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Null
 			_lowPowerColor2 = &~/Color/Colors/Null
 		}
-		HitMediaEffects
+		HitMediaEffects_On
 		{
 			_fullPowerColor1 = &~/Color/Colors/Blue
 			_lowPowerColor1 = &~/Color/Colors/Gray
 			_fullPowerColor2 = &~/Color/Colors/Green
 			_lowPowerColor2 = &~/Color/Colors/Green
+		}
+		HitMediaEffects_Off
+		{
+			_fullPowerColor1 = &~/Color/Colors/Green
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Blue
+			_lowPowerColor2 = &~/Color/Colors/Blue
 		}
 	}
 	Cyan
@@ -174,12 +216,19 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Null
 			_lowPowerColor2 = &~/Color/Colors/Null
 		}
-		HitMediaEffects
+		HitMediaEffects_On
 		{
 			_fullPowerColor1 = &~/Color/Colors/Cyan
 			_lowPowerColor1 = &~/Color/Colors/Gray
 			_fullPowerColor2 = &~/Color/Colors/Green
 			_lowPowerColor2 = &~/Color/Colors/Green
+		}
+		HitMediaEffects_Off
+		{
+			_fullPowerColor1 = &~/Color/Colors/Green
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Cyan
+			_lowPowerColor2 = &~/Color/Colors/Cyan
 		}
 	}
 	Purple
@@ -198,12 +247,19 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Null
 			_lowPowerColor2 = &~/Color/Colors/Null
 		}
-		HitMediaEffects
+		HitMediaEffects_On
 		{
 			_fullPowerColor1 = &~/Color/Colors/Purple
 			_lowPowerColor1 = &~/Color/Colors/Gray
 			_fullPowerColor2 = &~/Color/Colors/Cyan
 			_lowPowerColor2 = &~/Color/Colors/Cyan
+		}
+		HitMediaEffects_Off
+		{
+			_fullPowerColor1 = &~/Color/Colors/Cyan
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Purple
+			_lowPowerColor2 = &~/Color/Colors/Purple
 		}
 	}
 	Pink
@@ -222,12 +278,19 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Null
 			_lowPowerColor2 = &~/Color/Colors/Null
 		}
-		HitMediaEffects
+		HitMediaEffects_On
 		{
 			_fullPowerColor1 = &~/Color/Colors/Pink
 			_lowPowerColor1 = &~/Color/Colors/Gray
 			_fullPowerColor2 = &~/Color/Colors/Green
 			_lowPowerColor2 = &~/Color/Colors/Green
+		}
+		HitMediaEffects_Off
+		{
+			_fullPowerColor1 = &~/Color/Colors/Green
+			_lowPowerColor1 = &~/Color/Colors/Gray
+			_fullPowerColor2 = &~/Color/Colors/Pink
+			_lowPowerColor2 = &~/Color/Colors/Pink
 		}
 	}
 	White

@@ -32,7 +32,7 @@ Components
 				[
 					: &../^/0/HitMediaEffects/0
 					{
-						ArcSprite : &<../../colors.rules>/Color/Cyan/HitMediaEffects, ^/0/ArcSprite	{}
+						ArcSprite : &<../../colors.rules>/Color/Cyan/HitMediaEffects_On, ^/0/ArcSprite	{}
 					}
 					: &../^/0/HitMediaEffects/1 {}
 				]
@@ -72,6 +72,14 @@ Components
 					}
 					: &../^/0/ShieldMediaEffects/1	{}
 					: &../^/0/ShieldMediaEffects/2	{}
+				]
+				HitMediaEffects
+				[
+					: &../^/0/HitMediaEffects/0
+					{
+						ArcSprite : &<../../colors.rules>/Color/Cyan/HitMediaEffects_Off, ^/0/ArcSprite	{}
+					}
+					: &../^/0/HitMediaEffects/1 {}
 				]
 			}
 			ArcShield_Right :	<../stats.rules>/Stats/ArcShield_Right, ArcShield_Front		{}
