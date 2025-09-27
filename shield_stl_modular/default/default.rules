@@ -59,7 +59,7 @@ Components
 			OverloadEffect_BackLeft :		<../stats.rules>/Stats/OverloadEffect_BackLeft, OverloadEffect_Front		{}
 			OverloadEffect_FrontLeft :		<../stats.rules>/Stats/OverloadEffect_FrontLeft, OverloadEffect_Front		{}
 
-			OverclockEffect_Front :		<../stats.rules>/Stats/OverclockEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverclockEffect
+			OverclockEffect_Front :			<../stats.rules>/Stats/OverclockEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverclockEffect
 			{
 				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
 			}
@@ -69,7 +69,7 @@ Components
 			OverclockEffect_BackLeft :		<../stats.rules>/Stats/OverclockEffect_BackLeft, OverclockEffect_Front		{}
 			OverclockEffect_FrontLeft :		<../stats.rules>/Stats/OverclockEffect_FrontLeft, OverclockEffect_Front			{}
 			
-			OverclockOverloadEffect_Front :		<../stats.rules>/Stats/OverclockOverloadEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverclockOverloadEffect
+			OverclockOverloadEffect_Front :			<../stats.rules>/Stats/OverclockOverloadEffect_Front, &<../shield_stl_modular.rules>/Part/Components/OverclockOverloadEffect
 			{
 				ContinuousEffects [ : &../^/1/ContinuousEffects/0 { Radius = &../../../ArcShield_Front/Radius } ]
 			}
@@ -138,44 +138,18 @@ Components
 		Toggle = ToggleColour_Default
 		Components = 
 		{
-			K_Graphics : &<../shield_stl_modular.rules>/Part/Components/Graphics
-			{				
+			K_Graphics
+			{
+				Type = Graphics
+				Location =	&<../shield_stl_modular.rules>/Part/Components/Graphics/Location
+				OperationalToggle = IsOperational
+				
 				OperationalDoodad
 				{
 					Layer = "weapons"
 					Offset = [0, 0]
 					DamageLevels
 					[
-						{
-							AnimationFiles
-							[
-								"doodads_lightning1.png"
-								"doodads_lightning2.png"
-								"doodads_lightning3.png"
-								"doodads_lightning4.png"
-								"doodads_lightning5.png"
-								"doodads_lightning6.png"
-								"doodads_lightning7.png"
-								"doodads_lightning8.png"
-							]
-							Size = [1, 1]
-							AnimationInterval = 0.1
-						}
-						{
-							AnimationFiles
-							[
-								"doodads_lightning1.png"
-								"doodads_lightning2.png"
-								"doodads_lightning3.png"
-								"doodads_lightning4.png"
-								"doodads_lightning5.png"
-								"doodads_lightning6.png"
-								"doodads_lightning7.png"
-								"doodads_lightning8.png"
-							]
-							Size = [1, 1]
-							AnimationInterval = 0.1
-						}
 						{
 							AnimationFiles
 							[
@@ -215,7 +189,7 @@ Components
 							File = "./Data/ships/common/light_blob.png"
 							Size = [3, 3]
 							Z = 1
-							VertexColor = [195*1.5, 60*1.5, 255*1.5, 100]
+							VertexColor = &<../../colors.rules>/Color/Default/VertexColor
 						}
 					]
 				}
