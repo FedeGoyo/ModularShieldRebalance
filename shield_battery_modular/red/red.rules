@@ -1,0 +1,44 @@
+Components
+{
+	ToggleComponents_Graphics_Red
+	{
+		Type = ToggledComponents
+		Toggle = ToggleColour_Red
+		Components : &<../default/default.rules>/Components/ToggleComponents_Graphics_Default/Components
+		{
+			K_Graphics :	^/0/K_Graphics
+			{
+				OperationalDoodad :	^/0/OperationalDoodad
+				{
+					DamageLevels
+					[
+						: &../^/0/DamageLevels/0
+						{
+							AnimationFiles
+							[
+								"doodads_lightning1.png"
+								"doodads_lightning2.png"
+								"doodads_lightning3.png"
+								"doodads_lightning4.png"
+								"doodads_lightning5.png"
+								"doodads_lightning6.png"
+								"doodads_lightning7.png"
+							]
+						}
+					]
+				}
+				
+				OperationalLighting :	^/0/OperationalLighting
+				{
+					DamageLevels
+					[
+						{
+							File = "lights.png"
+							Size = [2, 1]
+						}
+					]
+				}
+			}
+		}
+	}
+}
