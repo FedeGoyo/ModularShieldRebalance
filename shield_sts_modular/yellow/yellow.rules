@@ -96,16 +96,15 @@ Components
 	{
 		Type = ToggledComponents
 		Toggle = ToggleColour_Yellow
-		Components = 
+		Components : &<../default/default.rules>/Components/ToggleComponents_Graphics_Default/Components
 		{
-			K_Graphics : &<../shield_sts_modular.rules>/Part/Components/Graphics
+			K_Graphics :	^/0/K_Graphics
 			{				
-				OperationalDoodad
+				OperationalDoodad :	^/0/OperationalDoodad
 				{
-					Layer = "weapons"
-					Offset = [0, 0]
 					DamageLevels
 					[
+						: ../^/0/DamageLevels/0
 						{
 							AnimationFiles
 							[
@@ -118,45 +117,12 @@ Components
 								"doodads_lightning7.png"
 								"doodads_lightning8.png"
 							]
-							Size = [1, 1]
-							AnimationInterval = 0.1
-						}
-						{
-							AnimationFiles
-							[
-								"doodads_lightning1.png"
-								"doodads_lightning2.png"
-								"doodads_lightning3.png"
-								"doodads_lightning4.png"
-								"doodads_lightning5.png"
-								"doodads_lightning6.png"
-								"doodads_lightning7.png"
-								"doodads_lightning8.png"
-							]
-							Size = [1, 1]
-							AnimationInterval = 0.1
-						}
-						{
-							AnimationFiles
-							[
-								"doodads_lightning1.png"
-								"doodads_lightning2.png"
-								"doodads_lightning3.png"
-								"doodads_lightning4.png"
-								"doodads_lightning5.png"
-								"doodads_lightning6.png"
-								"doodads_lightning7.png"
-								"doodads_lightning8.png"
-							]
-							Size = [1, 1]
-							AnimationInterval = 0.1
 						}
 					]
 				}
 				
-				OperationalLighting
+				OperationalLighting :	^/0/OperationalLighting
 				{
-					Layer = "lights_add"
 					DamageLevels
 					[
 						{
@@ -166,17 +132,11 @@ Components
 					]
 				}
 				
-				OperationalRoofLighting
+				OperationalRoofLighting :	^/0/OperationalLighting
 				{
-					Layer = "roof_lights_fancy"
 					DamageLevels
 					[
-						{
-							File = "./Data/ships/common/light_blob.png"
-							Size = [3, 3]
-							Z = 1
-							VertexColor = [195*1.5, 60*1.5, 255*1.5, 100]
-						}
+						: ../^/0/DamageLevels/0	{ VertexColor = &<../../colors.rules>/Color/Yellow/VertexColor }
 					]
 				}
 			}
