@@ -1,0 +1,52 @@
+Components
+{
+	ToggleComponents_Graphics_Default
+	{
+		Type = ToggledComponents
+		Toggle = ToggleColour_Default
+		Components = 
+		{
+			K_Graphics
+			{
+				Type = Graphics
+				Location =	&<../shield_battery_modular.rules>/Part/Components/Graphics/Location	
+				OperationalToggle = IsOperational
+				
+				OperationalDoodad
+				{
+					Layer = "weapons"
+					Offset = [0, 0]
+					DamageLevels
+					[
+						{
+							AnimationFiles
+							[
+								"doodads_lightning1.png"
+								"doodads_lightning2.png"
+								"doodads_lightning3.png"
+								"doodads_lightning4.png"
+								"doodads_lightning5.png"
+								"doodads_lightning6.png"
+								"doodads_lightning7.png"
+							]
+							Size = [2, 1]
+							AnimationInterval = 0.1
+						}
+					]
+				}
+				
+				OperationalLighting
+				{
+					Layer = "lights_add"
+					DamageLevels
+					[
+						{
+							File = "lights.png"
+							Size = [2, 1]
+						}
+					]
+				}
+			}
+		}
+	}
+}
