@@ -38,6 +38,14 @@ Components
 						}
 					]
 				}
+				
+				OperationalRoofLighting :	^/0/OperationalRoofLighting
+				{
+					DamageLevels
+					[
+						: ../^/0/DamageLevels/0	{ VertexColor = &<../../colors.rules>/Color/Green/VertexColor }
+					]
+				}
 			}
 		}
 	}
