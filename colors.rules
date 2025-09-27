@@ -12,6 +12,9 @@ Color
 		Cyan = [63, 235, 255, 127]
 		Purple = [150, 0, 255, 127]
 		Pink = [255, 42, 169, 127]
+		
+		VertexColorIntensity = 1.5
+		VertexColorTransparency = 100
 	}
 
 	Default
@@ -44,6 +47,7 @@ Color
 			_fullPowerColor2 = [154, 98, 238, 127]
 			_lowPowerColor2 = [236, 150, 234, 127]
 		}
+		VertexColor = [(&~/Color/Default/ShieldMediaEffect_On/_fullPowerColor2/0) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Default/ShieldMediaEffect_On/_fullPowerColor2/1) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Default/ShieldMediaEffect_On/_fullPowerColor2/2) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/VertexColorTransparency)]
 	}
 	Red
 	{
@@ -75,6 +79,7 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Red
 			_lowPowerColor2 = &~/Color/Colors/Red
 		}
+		VertexColor = [(&~/Color/Colors/Red/0) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Red/1) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Red/2) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/VertexColorTransparency)]
 	}
 	Orange
 	{
@@ -106,6 +111,7 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Orange
 			_lowPowerColor2 = &~/Color/Colors/Orange
 		}
+		VertexColor = [(&~/Color/Colors/Orange/0) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Orange/1) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Orange/2) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/VertexColorTransparency)]
 	}
 	Yellow
 	{
@@ -137,6 +143,7 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Yellow
 			_lowPowerColor2 = &~/Color/Colors/Yellow
 		}
+		VertexColor = [(&~/Color/Colors/Yellow/0) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Yellow/1) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Yellow/2) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/VertexColorTransparency)]
 	}
 	Green
 	{
@@ -168,6 +175,7 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Green
 			_lowPowerColor2 = &~/Color/Colors/Green
 		}
+		VertexColor = [(&~/Color/Colors/Green/0) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Green/1) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Green/2) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/VertexColorTransparency)]
 	}
 	Blue
 	{
@@ -199,6 +207,7 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Blue
 			_lowPowerColor2 = &~/Color/Colors/Blue
 		}
+		VertexColor = [(&~/Color/Colors/Blue/0) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Blue/1) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Blue/2) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/VertexColorTransparency)]
 	}
 	Cyan
 	{
@@ -230,6 +239,7 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Cyan
 			_lowPowerColor2 = &~/Color/Colors/Cyan
 		}
+		VertexColor = [(&~/Color/Colors/Cyan/0) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Cyan/1) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Cyan/2) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/VertexColorTransparency)]
 	}
 	Purple
 	{
@@ -261,6 +271,7 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Purple
 			_lowPowerColor2 = &~/Color/Colors/Purple
 		}
+		VertexColor = [(&~/Color/Colors/Purple/0) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Purple/1) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Purple/2) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/VertexColorTransparency)]
 	}
 	Pink
 	{
@@ -292,6 +303,7 @@ Color
 			_fullPowerColor2 = &~/Color/Colors/Pink
 			_lowPowerColor2 = &~/Color/Colors/Pink
 		}
+		VertexColor = [(&~/Color/Colors/Pink/0) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Pink/1) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/Pink/2) * (&~/Color/Colors/VertexColorIntensity), (&~/Color/Colors/VertexColorTransparency)]
 	}
 	White
 	{}
