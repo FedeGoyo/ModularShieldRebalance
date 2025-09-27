@@ -132,7 +132,7 @@ Components
 					]
 				}
 				
-				OperationalRoofLighting :	^/0/OperationalLighting
+				OperationalRoofLighting :	^/0/OperationalRoofLighting
 				{
 					DamageLevels
 					[
