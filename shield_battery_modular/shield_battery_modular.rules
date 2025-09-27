@@ -65,19 +65,75 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		// COLOURS TOGGLES -------------------------------
 		// -----------------------------------------------
 
-		ToggleColour
+		ToggleColourComponent_Right
 		{
-			Type = UIToggle
-			ToggleID = "Kebechet_ToggleID_Colours"
-			Default = 0
-			AlwaysAllowInBuildMode = true
-			RequiresCommand = false
+			Type = ToggledComponents
+			Toggle = IsShieldConnected_Right
+			Components
+			{
+				ToggleColour
+				{
+					Type = ModeProxy
+					PartLocation = [3, 0]
+					ProxyableComponents
+					[
+						{
+							PartCriteria
+							{
+								Category = bubble_shield
+							}
+							ComponentID = ToggleColour
+						}
+						{
+							PartCriteria
+							{
+								ID = enderluck.ModularShieldBattery
+								Rot = 0
+							}
+							ComponentID = ToggleColour_Right
+						}
+						{
+							PartCriteria
+							{
+								ID = enderluck.ModularShieldBattery
+								Rot = 2
+							}
+							ComponentID = ToggleColour_Left
+						}
+					]
+				}
+			}
+		}		
+		ToggleColourComponent_Left :	ToggleColourComponent_Right
+		{
+			Type = ToggledComponents
+			Toggle = IsShieldConnected_Left
+			Components :	^/0/Components
+			{
+				ToggleColour :	^/0/ToggleColour
+				{
+					ToggleProxy = IsShieldConnected_RightInvertedProxy
+					PartLocation = [-1, 0]
+					ProxyableComponents
+					[
+						: ../^/0/ProxyableComponents/0	{}
+						: ../^/0/ProxyableComponents/1	{ ComponentID = ToggleColour_Left }
+						: ../^/0/ProxyableComponents/2	{ ComponentID = ToggleColour_Right }
+					]
+				}
+			}
+		}
+		
+		ToggleColourProxy
+		{
+			Type = ModeProxy
+			ComponentId = ToggleColour
 		}
 
 		ToggleColour_Default
 		{
 			Type = ModeToggle
-			Mode = ToggleColour
+			Mode = ToggleColourProxy
 			OnMode = 0
 		}
 		ToggleColour_Red :		ToggleColour_Default	{ OnMode = 1 }
