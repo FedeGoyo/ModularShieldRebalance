@@ -205,19 +205,15 @@ Components
 	{
 		Type = ToggledComponents
 		Toggle = ToggleColour_Blue
-		Components = 
+		Components : &<../default/default.rules>/Components/ToggleComponents_Graphics_Default/Components
 		{
-			K_Graphics
-			{
-				Type = Graphics
-				Location =	&<../shield_gen_small_modular.rules>/Part/Components/^/0/Graphics/Location
-				OperationalToggle = IsOperational
-				
-				OperationalDoodad : &<../shield_gen_small_modular.rules>/Part/Components/^/0/Graphics/OperationalDoodad
+			K_Graphics :	^/0/K_Graphics
+			{				
+				OperationalDoodad :	^/0/OperationalDoodad
 				{
 					DamageLevels
 					[
-						: &../^/0/DamageLevels/0
+						: ../^/0/DamageLevels/0
 						{
 							AnimationFiles
 							[
@@ -261,9 +257,8 @@ Components
 						}
 					]
 				}
-				OperationalLighting
+				OperationalLighting :	^/0/OperationalLighting
 				{
-					Layer = "lights_add"
 					DamageLevels
 					[
 						{
@@ -272,9 +267,8 @@ Components
 						}
 					]
 				}
-				OperationalRoofDoodad
+				OperationalRoofDoodad :	^/0/OperationalLighting
 				{
-					Layer = "roof_doodads"
 					DamageLevels
 					[
 						{
@@ -291,11 +285,17 @@ Components
 						}
 					]
 				}
+				OperationalRoofLighting :	^/0/OperationalLighting
+				{
+					DamageLevels
+					[
+						: ../^/0/DamageLevels/0	{ VertexColor = &<../../colors.rules>/Color/Blue/VertexColor }
+					]
+				}
 			}
 			
-			K_BatterySprites : &<../shield_gen_small_modular.rules>/Part/Components/BatterySprites
+			K_BatterySprites : ^/0/K_BatterySprites
 			{
-				ResourceStorage = BatteryStorage
 				ResourceLevels
 				[
 					{
