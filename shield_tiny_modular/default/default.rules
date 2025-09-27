@@ -154,6 +154,20 @@ Components
 						}
 					]
 				}
+				
+				OperationalRoofLighting
+				{
+					Layer = "roof_lights_fancy"
+					DamageLevels
+					[
+						{
+							File = "./Data/ships/common/light_blob.png"
+							Size = [1.5, 1.5]
+							Z = 1 // Controls the "height" of the light for the purposes of normal mapping. Set to -1 (or any negative number) to disable normal lighting for this light.
+							VertexColor = &<../../colors.rules>/Color/Default/VertexColor
+						}
+					]
+				}
 			}
 			
 			K_Dome_Emitter_Ext_Default
