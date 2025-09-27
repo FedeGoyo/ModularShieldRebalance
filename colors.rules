@@ -302,11 +302,11 @@ Color
 StatsCommon
 {	
 	// Shield_Doodad_Graphics (Rotation de l'axe)
-			DoodadAxe_RotSpeed_0DMG = 360d
-			DoodadAxe_RotSpeed_33DMG = 200d
-			DoodadAxe_RotSpeed_66DMG = 100d
-			
-			DoodadAxe2_RotSpeed_0DMG = -150d
-			DoodadAxe2_RotSpeed_33DMG = -80d
-			DoodadAxe2_RotSpeed_66DMG = -20d
+	DoodadAxe_RotSpeed_0DMG = 360d
+	DoodadAxe_RotSpeed_33DMG = 200d
+	DoodadAxe_RotSpeed_66DMG = 100d
+	
+	DoodadAxe2_RotSpeed_0DMG = -150d
+	DoodadAxe2_RotSpeed_33DMG = -80d
+	DoodadAxe2_RotSpeed_66DMG = -20d
 }
