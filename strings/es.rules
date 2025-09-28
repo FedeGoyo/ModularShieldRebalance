@@ -91,12 +91,7 @@ PartToggles
 	Enderluck_Colours_Cyan = "<b>Color del escudo: <good>Cian</good></b>"
 	Enderluck_Colours_Purple = "<b>Color del escudo: <good>Púrpura</good></b>"
 	Enderluck_Colours_Pink = "<b>Color del escudo: <good>Rosa</good></b>"
-//	Enderluck_Colours_White = "<b>Color del escudo: <good>Blanco</good></b>"	
-	
-	
-	
-										
-										
+//	Enderluck_Colours_White = "<b>Color del escudo: <good>Blanco</good></b>"							
 }
 
 Stats
