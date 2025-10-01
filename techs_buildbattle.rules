@@ -1,0 +1,93 @@
+Techs
+[	
+	// Tiny Shield Generator
+	{
+		ID = swefpifh.Kebechet_TINY_modularShield
+		NameKey = &<shield_tiny_modular/shield_tiny_modular.rules>/Part/NameKey
+		DescriptionKey = &<shield_tiny_modular/shield_tiny_modular.rules>/Part/DescriptionKey
+		Icon = &<shield_tiny_modular/shield_tiny_modular.rules>/Part/EditorIcon
+		Category = [defenses]
+		PartsUnlocked = [ &<shield_tiny_modular/shield_tiny_modular.rules>/Part/ID ]
+		Cost = 1000
+		FundsThresholdBeforeOffered = 0
+	}
+	// Small Bubble Shield Generator
+	{
+		ID = swefpifh.Kebechet_STS_modularShield
+		NameKey = &<shield_sts_modular/shield_sts_modular.rules>/Part/NameKey
+		DescriptionKey = &<shield_sts_modular/shield_sts_modular.rules>/Part/DescriptionKey
+		Icon = &<shield_sts_modular/shield_sts_modular.rules>/Part/EditorIcon
+		Category = [defenses]
+		PartsUnlocked
+		[
+			&<shield_sts_modular/shield_sts_modular.rules>/Part/ID
+			swefpifh.Kebechet_STS_modularShield
+		]
+		Cost = 5000
+		Prerequisites = [swefpifh.Kebechet_TINY_modularShield]
+		FundsThresholdBeforeOffered = 0
+	}
+	// Large Bubble Shield Generator
+	{
+		ID = swefpifh.Kebechet_STL_modularShield
+		NameKey = &<shield_stl_modular/shield_stl_modular.rules>/Part/NameKey
+		DescriptionKey = &<shield_stl_modular/shield_stl_modular.rules>/Part/DescriptionKey
+		Icon = &<shield_stl_modular/shield_stl_modular.rules>/Part/EditorIcon
+		Category = [defenses]
+		PartsUnlocked = [ &<shield_stl_modular/shield_stl_modular.rules>/Part/ID ]
+		Cost = 5000
+		Prerequisites = [swefpifh.Kebechet_STS_modularShield]
+		FundsThresholdBeforeOffered = 200000
+	}
+
+	// Overclocks...
+
+	{
+		ID = swefpifh.Kebechet_TINY_modularShield-overclock
+		NameKey = "Parts/KebechetTINYmodularShieldOverclock"
+		DescriptionKey = "Parts/KebechetTINYmodularShieldOverclockDesc"
+		Icon = &<shield_tiny_modular/shield_tiny_modular.rules>/Part/EditorIcon
+		SecondaryIcon = &<./Data/modes/career/techs.rules>/OverclockIcon
+		Category = [overclocks]
+		PartsUnlocked = &<./Data/modes/pvp/pvp_buildbattle/techs_buildbattle.rules>/ThermalParts
+		ToggleChoicesUnlocked
+		[
+			{ PartID=swefpifh.Kebechet_TINY_modularShield; ToggleID=thermal_overclock; Mode=1; }
+		]
+		Cost = 5000
+		FundsThresholdBeforeOffered = 0
+		Prerequisites = [swefpifh.Kebechet_TINY_modularShield]
+	}
+	{
+		ID = swefpifh.Kebechet_STS_modularShield-overclock
+		NameKey = "Parts/KebechetSTSmodularShieldOverclock"
+		DescriptionKey = "Parts/KebechetSTSmodularShieldOverclockDesc"
+		Icon = &<shield_sts_modular/shield_sts_modular.rules>/Part/EditorIcon
+		SecondaryIcon = &<./Data/modes/career/techs.rules>/OverclockIcon
+		Category = [overclocks]
+		PartsUnlocked = &<./Data/modes/pvp/pvp_buildbattle/techs_buildbattle.rules>/ThermalParts
+		ToggleChoicesUnlocked
+		[
+			{ PartID=swefpifh.Kebechet_STS_modularShield; ToggleID=thermal_overclock; Mode=1; }
+		]
+		Cost = 5000
+		FundsThresholdBeforeOffered = 0
+		Prerequisites = [swefpifh.Kebechet_STS_modularShield, cosmoteer.heat_management]
+	}
+	{
+		ID = swefpifh.Kebechet_STL_modularShield-overclock
+		NameKey = "Parts/KebechetSTLmodularShieldOverclock"
+		DescriptionKey = "Parts/KebechetSTLmodularShieldOverclockDesc"
+		Icon = &<shield_stl_modular/shield_stl_modular.rules>/Part/EditorIcon
+		SecondaryIcon = &<./Data/modes/career/techs.rules>/OverclockIcon
+		Category = [overclocks]
+		PartsUnlocked = &<./Data/modes/pvp/pvp_buildbattle/techs_buildbattle.rules>/ThermalParts
+		ToggleChoicesUnlocked
+		[
+			{ PartID=swefpifh.Kebechet_STL_modularShield; ToggleID=thermal_overclock; Mode=1; }
+		]
+		Cost = 5000
+		FundsThresholdBeforeOffered = 200000
+		Prerequisites = [swefpifh.Kebechet_STL_modularShield, cosmoteer.heat_management]
+	}
+]

@@ -37,7 +37,7 @@ Actions
 			IsBuildable = false
 		}
 	}
-	// Vainila Tech Changes
+	// Vainila Carrer Tech Changes
 	{
 		Action = Overrides
 		OverrideIn = "<modes/career/techs.rules>/Techs/19"
@@ -77,6 +77,34 @@ Actions
 			PartsUnlocked = [&<./Data/ships/terran/missile_launcher/missile_launcher.rules>/Part/ID]
 		}
 	}
+	// Vainila Build and Battle Tech Changes
+	{
+		Action = Overrides
+		OverrideIn = "<modes/pvp/pvp_buildbattle/techs_buildbattle.rules>/Techs/28"
+		CreateIfNotExisting = true
+		Overrides	// Modify Small Shield Generator Tech
+		{
+			Cost = 4000	// Reduce cost considering that Tiny Shield Generator is now a Prerequisite
+			Prerequisite = [&<shield_tiny_modular/shield_tiny_modular.rules>/Part/ID]
+			PartsUnlocked = [&<shield_gen_small_modular/shield_gen_small_modular.rules>/Part/ID]
+			Icon = &<shield_gen_small_modular/shield_gen_small_modular.rules>/Part/EditorIcon
+		}
+	}
+	{
+		Action = Replace
+		Replace = "<modes/pvp/pvp_buildbattle/techs_buildbattle.rules>/Techs/29/Icon"
+		With = &<shield_gen_small_modular/shield_gen_small_modular.rules>/Part/EditorIcon	// Modify Small Shield Generator Overclock Tech
+	}
+	{
+		Action = Replace
+		Replace = "<modes/pvp/pvp_buildbattle/techs_buildbattle.rules>/Techs/30/Icon"
+		With = &<shield_gen_large_modular/shield_gen_large_modular.rules>/Part/EditorIcon	// Modify Large Shield Generator Tech
+	}
+	{
+		Action = Replace
+		Replace = "<modes/pvp/pvp_buildbattle/techs_buildbattle.rules>/Techs/31/Icon"
+		With = &<shield_gen_large_modular/shield_gen_large_modular.rules>/Part/EditorIcon	// Modify Large Shield Generator Overclock Tech
+	}
 	
 	// New Stuff
 	{
@@ -93,7 +121,12 @@ Actions
 	{
 		Action = AddMany
 		AddTo = "<modes/career/techs.rules>/Techs"
-		ManyToAdd = &<techs.rules>/Techs	// Add Techs
+		ManyToAdd = &<techs.rules>/Techs	// Add Carrer Techs
+	}
+	{
+		Action = AddMany
+		AddTo = "<modes/pvp/pvp_buildbattle/techs_buildbattle.rules>/Techs"
+		ManyToAdd = &<techs_buildbattle.rules>/Techs	// Add Build and Battle Techs
 	}
 	{
 		Action = AddMany
