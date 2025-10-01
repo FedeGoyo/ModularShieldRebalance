@@ -1,6 +1,5 @@
 Techs
 [	
-	// Tiny Shield Generator
 	{	
 		ID = swefpifh.Kebechet_TINY_modularShield
 		NameKey = &<shield_tiny_modular/shield_tiny_modular.rules>/Part/NameKey
@@ -10,8 +9,6 @@ Techs
 		PartsUnlocked = [ &<shield_tiny_modular/shield_tiny_modular.rules>/Part/ID ]
 		Cost = 500
 	}
-	
-	// Shield Battery Module
 	{
 		ID = enderluck.ModularShieldBattery
 		NameKey = &<shield_battery_modular/shield_battery_modular.rules>/Part/NameKey
