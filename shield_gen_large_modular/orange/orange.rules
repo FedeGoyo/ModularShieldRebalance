@@ -90,7 +90,7 @@ Components
 		Components : &<../default/default.rules>/Components/ToggleComponents_Graphics_Default/Components
 		{
 			K_Graphics :	^/0/K_Graphics
-			{				
+			{
 				OperationalDoodad :	^/0/OperationalDoodad
 				{
 					DamageLevels
@@ -176,7 +176,7 @@ Components
 				}
 			}
 			
-			K_BatterySprites : &<../shield_gen_large_modular.rules>/Part/Components/BatterySprites
+			K_BatterySprites : ^/0/K_BatterySprites
 			{
 				ResourceLevels
 				[
