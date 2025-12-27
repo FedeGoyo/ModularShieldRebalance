@@ -1055,9 +1055,11 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		Port_TL : <./Data/ships/terran/base_part_terran_overclock.rules>/Part/BASE_THERMAL_PORT
 		{
 			OperationalToggle = ModularOverclockModeToggle
-			BlueprintOperationalToggle = &OperationalToggle
+			BlueprintOperationalToggle = BlueprintNetwork_IsOverclocked
 			Location = [0, 0]
 			Direction = Up
+			BlueprintRouteSource = BlueprintNetwork_IsOverclocked
+			BlueprintRouteEndpoint = BlueprintNetwork_IsOverclocked
 		}
 		Port_TR : Port_TL
 		{
@@ -1071,6 +1073,16 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 		Port_BR : Port_BL
 		{
 			Location = [1, 0]
+		}
+		
+		BlueprintNetwork_IsOverclocked
+		{
+			Type = NetworkToggleReceiver
+			Categories = [ overclock ]
+			Mode = Any
+			AllowUncategorized = false
+			IncludeInBlueprints = true
+			IncludeInPhysical = false
 		}
 
 		Shield_Doodad_Graphics
